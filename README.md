@@ -8,10 +8,16 @@ Screenshots
 -----------
 
 #### normal mode
+![normal](moonfly_normal.png)
 
 #### insert mode
+![insert](moonfly_insert.png)
+
+#### replace mode
+![replace](moonfly_replace.png)
 
 #### visual mode
+![visual](moonfly_visual.png)
 
 Dependency
 ----------

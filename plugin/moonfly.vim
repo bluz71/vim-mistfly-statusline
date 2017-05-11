@@ -132,9 +132,9 @@ let s:red         = "#ff5454"
 " red         = 1
 
 exec "highlight User1 ctermbg=4 guibg=" . s:blue . " ctermfg=234 guifg=" . s:grey234
-exec "highlight User2 ctermbg=7 guibg=" . s:orange . " ctermfg=234 guifg=" . s:grey234
+exec "highlight User2 ctermbg=3 guibg=" . s:khaki . " ctermfg=234 guifg=" . s:grey234
 exec "highlight User3 ctermbg=13 guibg=" . s:purple . " ctermfg=234 guifg=" . s:grey234
-exec "highlight User4 ctermbg=3 guibg=" . s:khaki . " ctermfg=234 guifg=" . s:grey234
+exec "highlight User4 ctermbg=7 guibg=" . s:orange . " ctermfg=234 guifg=" . s:grey234
 exec "highlight User5 ctermbg=9 guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
 exec "highlight User6 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10 guifg=" . s:emerald . " gui=none"
 exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white . " gui=none"
