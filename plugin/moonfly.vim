@@ -38,17 +38,17 @@ endfunction
 
 function! s:WindowFocus(mode)
     if a:mode == "Enter"
-        call StatusLine("normal")
+        call s:StatusLine("normal")
     elseif a:mode == "Leave"
-        call StatusLine("not-current")
+        call s:StatusLine("not-current")
     endif
 endfunction
 
 function! s:InsertMode(mode)
     if a:mode == "i"
-        call StatusLine("insert")
+        call s:StatusLine("insert")
     elseif a:mode == "r"
-        call StatusLine("replace")
+        call s:StatusLine("replace")
     else
         return
     endif
@@ -56,16 +56,16 @@ endfunction
 
 function! s:VisualMode()
     if mode()=~#"^[vV\<C-v>]"
-        call StatusLine("visual")
+        call s:StatusLine("visual")
         let g:normalMode = 0
     elseif g:normalMode == 0
-        call StatusLine("normal")
+        call s:StatusLine("normal")
         let g:normalMode = 1
     endif
 endfunction
 
 
-augroup vimMoonflyStatusLine
+augroup moonflyStatusLine
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * call s:WindowFocus("Enter")
     autocmd WinLeave,FilterWritePost * call s:WindowFocus("Leave")
@@ -96,6 +96,7 @@ let s:light_green = "#85dc85"
 let s:green       = "#8cc85f"
 let s:emerald     = "#42cf89"
 let s:blue        = "#80a0ff"
+let s:sky_blue    = "#87afff"
 let s:light_blue  = "#78c2ff"
 let s:turquoise   = "#7ee0ce"
 let s:purple      = "#ae81ff"
@@ -121,6 +122,7 @@ let s:red         = "#ff5454"
 " green       = 2
 " emerald     = 10
 " blue        = 4
+" sky_blue    = 111
 " light_blue  = 12
 " turquoise   = 6
 " purple      = 13
@@ -128,7 +130,6 @@ let s:red         = "#ff5454"
 " magenta     = 5
 " crimson     = 9
 " red         = 1
-
 
 exec "highlight User1 ctermbg=4 guibg=" . s:blue . " ctermfg=234 guifg=" . s:grey234
 exec "highlight User2 ctermbg=7 guibg=" . s:orange . " ctermfg=234 guifg=" . s:grey234
