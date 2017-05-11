@@ -65,7 +65,7 @@ function! s:VisualMode()
 endfunction
 
 
-augroup styleAndBehaviourCustomizations
+augroup vimMoonflyStatusLine
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * call s:WindowFocus("Enter")
     autocmd WinLeave,FilterWritePost * call s:WindowFocus("Leave")
