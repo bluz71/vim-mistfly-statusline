@@ -1,7 +1,7 @@
 moonfly statusline
 ==================
 
-*moonfly* statusline is a simple *statusline* for Vim and Neovim that uses
+*moonfly statusline* is a simple *statusline* for Vim and Neovim that uses
 [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors.
 
 Screenshots
@@ -21,8 +21,7 @@ First install [moonfly](https://github.com/bluz71/vim-moonfly-colors)
 Installation
 ------------
 
-Use your favoured plugin manager to install **bluz71/vim-moonfly-statusline**
-in your *vimrc* file.
+Use your favoured plugin manager to install **bluz71/vim-moonfly-statusline**.
 
 If using [vim-plug](https://github.com/junegunn/vim-plug) do the following:
 
