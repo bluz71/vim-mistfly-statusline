@@ -67,12 +67,12 @@ endfunction
 
 augroup styleAndBehaviourCustomizations
     autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * call WindowFocus("Enter")
-    autocmd WinLeave,FilterWritePost * call WindowFocus("Leave")
-    autocmd InsertEnter * call InsertMode(v:insertmode)
-    autocmd CursorMoved,CursorHold * call VisualMode()
+    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * call s:WindowFocus("Enter")
+    autocmd WinLeave,FilterWritePost * call s:WindowFocus("Leave")
+    autocmd InsertEnter * call s:InsertMode(v:insertmode)
+    autocmd CursorMoved,CursorHold * call s:VisualMode()
     if has("nvim")
-        autocmd TermOpen * call StatusLine("terminal")
+        autocmd TermOpen * call s:StatusLine("terminal")
     endif
 augroup END
 
