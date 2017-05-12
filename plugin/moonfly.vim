@@ -16,7 +16,7 @@ function! s:StatusLine(mode)
     elseif &buftype == "terminal" || a:mode == "terminal"
         setlocal statusline=%5*\ terminal\ 
     elseif &buftype == "help"
-        setlocal statusline=%5*\ help\ 
+        setlocal statusline=%1*\ help\ 
     elseif &buftype == "quickfix"
         setlocal statusline=%5*\ quickfix\ 
     elseif a:mode == "normal"
