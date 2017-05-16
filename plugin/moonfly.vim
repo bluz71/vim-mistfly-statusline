@@ -14,7 +14,7 @@ function! s:StatusLine(mode)
         return
     " All cases from here on relate to the status line of the active window.
     elseif &buftype == "terminal" || a:mode == "terminal"
-        setlocal statusline=%5*\ terminal\ 
+        setlocal statusline=%4*\ terminal\ 
     elseif &buftype == "help"
         setlocal statusline=%1*\ help\ 
     elseif &buftype == "quickfix"
@@ -132,10 +132,10 @@ let s:red         = "#ff5454"
 " red         = 1
 
 exec "highlight User1 ctermbg=4 guibg=" . s:blue . " ctermfg=234 guifg=" . s:grey234
-exec "highlight User2 ctermbg=3 guibg=" . s:khaki . " ctermfg=234 guifg=" . s:grey234
+exec "highlight User2 ctermbg=251 guibg=" . s:white . " ctermfg=234 guifg=" . s:grey234
 exec "highlight User3 ctermbg=13 guibg=" . s:purple . " ctermfg=234 guifg=" . s:grey234
-exec "highlight User4 ctermbg=7 guibg=" . s:orange . " ctermfg=234 guifg=" . s:grey234
-exec "highlight User5 ctermbg=9 guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
+exec "highlight User4 ctermbg=9 guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
+exec "highlight User5 ctermbg=8 guibg=" . s:coral . " ctermfg=234 guifg=" . s:grey234
 exec "highlight User6 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10 guifg=" . s:emerald . " gui=none"
 exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white . " gui=none"
 exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=111 guifg=" . s:sky_blue . " gui=none"
