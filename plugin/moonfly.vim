@@ -134,7 +134,7 @@ exec "highlight User2 ctermbg=251 guibg=" . s:white . " ctermfg=234 guifg=" . s:
 exec "highlight User3 ctermbg=13 guibg=" . s:purple . " ctermfg=234 guifg=" . s:grey234
 exec "highlight User4 ctermbg=9 guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
 exec "highlight User5 ctermbg=8 guibg=" . s:coral . " ctermfg=234 guifg=" . s:grey234
-exec "highlight User6 ctermbg=10 guibg=" . s:emerald . " ctermfg=234 guifg=" . s:grey234
+exec "highlight User6 ctermbg=14 guibg=" . s:light_green . " ctermfg=234 guifg=" . s:grey234
 exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10 guifg=" . s:emerald . " gui=none"
 exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white . " gui=none"
 exec "highlight User9 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4 guifg=" . s:blue . " gui=none"
