@@ -18,7 +18,7 @@ function! s:StatusLine(mode)
     elseif &buftype == "help"
         setlocal statusline=%1*\ help\ 
     elseif &buftype == "quickfix"
-        setlocal statusline=%5*\ quickfix\ 
+        setlocal statusline=%5*\ list\ 
     elseif a:mode == "normal"
         setlocal statusline=%1*\ normal\ 
     elseif a:mode == "insert"
