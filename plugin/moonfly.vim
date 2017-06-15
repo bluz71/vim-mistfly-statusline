@@ -14,7 +14,7 @@ function! s:StatusLine(mode)
         return
     " All cases from here on relate to the status line of the active window.
     elseif &buftype == "terminal" || a:mode == "terminal"
-        setlocal statusline=%2*\ terminal\ 
+        setlocal statusline=%6*\ terminal\ 
     elseif &buftype == "help"
         setlocal statusline=%1*\ help\ 
     elseif &buftype == "quickfix"
