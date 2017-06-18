@@ -3,6 +3,8 @@
 " URL:          github.com/bluz71/vim-moonfly-statusline
 " License:      MIT (https://opensource.org/licenses/MIT)
 
+let g:normalMode = 0
+
 function! s:StatusLine(mode)
     if &buftype == "nofile" || bufname("%") == "[BufExplorer]"
         " Don't set a custom status line for file explorers.
