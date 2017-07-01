@@ -33,7 +33,7 @@ let s:turquoise   = "#7ee0ce"  " turquoise   = 6
 let s:purple      = "#ae81ff"  " purple      = 13
 let s:violet      = "#e2637f"  " violet      = 15
 let s:magenta     = "#ce76e8"  " magenta     = 5
-let s:crimson     = "#fe3b7b"  " crimson     = 9
+let s:crimson     = "#f74782"  " crimson     = 9
 let s:red         = "#ff5454"  " red         = 1
 
 
@@ -99,15 +99,15 @@ function! s:VisualMode()
 endfunction
 
 function! s:UserColors()
-    exec "highlight User1 ctermbg=4 guibg=" . s:blue . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User2 ctermbg=251 guibg=" . s:white . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User3 ctermbg=13 guibg=" . s:purple . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User4 ctermbg=9 guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User5 ctermbg=8 guibg=" . s:coral . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User6 ctermbg=11 guibg=" . s:wheat . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10 guifg=" . s:emerald . " gui=none"
-    exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white . " gui=none"
-    exec "highlight User9 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4 guifg=" . s:blue . " gui=none"
+    exec "highlight User1 ctermbg=4 guibg="   . s:blue    . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User2 ctermbg=251 guibg=" . s:white   . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User3 ctermbg=13 guibg="  . s:purple  . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User4 ctermbg=9 guibg="   . s:crimson . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User5 ctermbg=8 guibg="   . s:coral   . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User6 ctermbg=11 guibg="  . s:wheat   . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10 guifg="  . s:emerald . " gui=none"
+    exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white   . " gui=none"
+    exec "highlight User9 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4 guifg="   . s:blue    . " gui=none"
 endfunction
 
 
