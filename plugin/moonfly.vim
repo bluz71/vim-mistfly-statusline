@@ -39,6 +39,20 @@ let s:magenta     = "#ce76e8" " magenta     = 5
 let s:crimson     = "#f74782" " crimson     = 9
 let s:red         = "#ff5454" " red         = 1
 
+" By default don't display Git branches using the U+E0A0 branch character.
+let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0)
+
+function MoonflyFugitiveBranch()
+    if !exists('g:loaded_fugitive') || !exists('b:git_dir')
+        return ''
+    endif
+
+    if g:moonflyWithGitBranchCharacter
+        return '[ '.fugitive#head().']'
+    else
+        return fugitive#statusline()
+    endif
+endfunction
 
 function! s:StatusLine(mode)
     if &buftype == "nofile" || bufname("%") == "[BufExplorer]"
@@ -67,7 +81,7 @@ function! s:StatusLine(mode)
     endif
 
     setlocal statusline+=%*\ %<%f\ %h%m%r
-    setlocal statusline+=%7*\ %{exists('g:loaded_fugitive')?fugitive#statusline():''}\ 
+    setlocal statusline+=%7*\ %{MoonflyFugitiveBranch()}\ 
     setlocal statusline+=%8*%=%-14.(%l,%c%V%)
     setlocal statusline+=%9*[%L]\ 
     setlocal statusline+=%8*%P 
