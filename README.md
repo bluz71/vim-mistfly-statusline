@@ -31,7 +31,7 @@ Use your favoured plugin manager to install **bluz71/vim-moonfly-statusline**.
 
 If using [vim-plug](https://github.com/junegunn/vim-plug) do the following:
 
-1. Add `'Plug bluz71/vim-moonfly-statusline'` to your *vimrc*
+1. Add `Plug 'bluz71/vim-moonfly-statusline'` to your *vimrc*
 2. Run `:PlugInstall`
 
 Options
