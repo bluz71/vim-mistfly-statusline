@@ -8,39 +8,22 @@ if exists("g:loaded_moonfly_statusline")
 endif
 let g:loaded_moonfly_statusline = 1
 
-let s:normal_mode = 1
-
-" The set of available moonfly colors (https://github.com/bluz71/vim-moonfly-colors)
-let s:black       = "#080808" " black       = 232
-let s:white       = "#c6c6c6" " white       = 251
-let s:grey0       = "#373c40" " grey0       = 0
-let s:grey249     = "#b2b2b2" " grey249     = 249
-let s:grey247     = "#9e9e9e" " grey247     = 247
-let s:grey237     = "#3a3a3a" " grey237     = 237
-let s:grey236     = "#303030" " grey236     = 236
-let s:grey235     = "#262626" " grey235     = 235
-let s:grey234     = "#1c1c1c" " grey234     = 234
-let s:grey233     = "#121212" " grey233     = 233
-let s:wheat       = "#cfcfb0" " wheat       = 11
-let s:khaki       = "#e3c78a" " khaki       = 3
-let s:orange      = "#de935f" " orange      = 7
-let s:coral       = "#f09479" " coral       = 8
-let s:light_green = "#85dc85" " light_green = 14
-let s:green       = "#8cc85f" " green       = 2
-let s:emerald     = "#42cf89" " emerald     = 10
-let s:blue        = "#80a0ff" " blue        = 4
-let s:blue69      = "#528bff" " blue69      = 69
-let s:blue111     = "#87afff" " blue111     = 111
-let s:light_blue  = "#78c2ff" " light_blue  = 12
-let s:turquoise   = "#7ee0ce" " turquoise   = 6
-let s:purple      = "#ae81ff" " purple      = 13
-let s:violet      = "#e2637f" " violet      = 15
-let s:magenta     = "#ce76e8" " magenta     = 5
-let s:crimson     = "#f74782" " crimson     = 9
-let s:red         = "#ff5454" " red         = 1
-
 " By default don't display Git branches using the U+E0A0 branch character.
 let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0)
+
+let s:normal_mode = 1
+let s:orig_updatetime = &updatetime
+
+" The set of available moonfly colors (https://github.com/bluz71/vim-moonfly-colors)
+let s:white   = "#c6c6c6" " white   = 251
+let s:grey236 = "#303030" " grey236 = 236
+let s:grey234 = "#1c1c1c" " grey234 = 234
+let s:wheat   = "#cfcfb0" " wheat   = 11
+let s:coral   = "#f09479" " coral   = 8
+let s:emerald = "#42cf89" " emerald = 10
+let s:blue    = "#80a0ff" " blue    = 4
+let s:purple  = "#ae81ff" " purple  = 13
+let s:crimson = "#f74782" " crimson = 9
 
 function MoonflyFugitiveBranch()
     if !exists('g:loaded_fugitive') || !exists('b:git_dir')
@@ -51,6 +34,22 @@ function MoonflyFugitiveBranch()
         return '[ '.fugitive#head().']'
     else
         return fugitive#statusline()
+    endif
+endfunction
+
+function! MoonflyTerminalMode()
+    let l:curr_mode = mode()
+
+    if (l:curr_mode ==# "t")
+        return "terminal"
+    elseif (l:curr_mode ==# "v")
+        return "visual"
+    elseif (l:curr_mode ==# "V")
+        return "v-line"
+    elseif (l:curr_mode ==# "\<C-v>")
+        return "v-rect"
+    else
+        return "normal"
     endif
 endfunction
 
@@ -65,19 +64,25 @@ function! s:StatusLine(mode)
         return
     " All cases from here on relate to the status line of the active window.
     elseif &buftype == "terminal" || a:mode == "terminal"
-        setlocal statusline=%6*\ terminal\ 
+        setlocal statusline=%6*\ %{MoonflyTerminalMode()}\ 
     elseif &buftype == "help"
         setlocal statusline=%1*\ help\ 
     elseif &buftype == "quickfix"
         setlocal statusline=%5*\ list\ 
     elseif a:mode == "normal"
         setlocal statusline=%1*\ normal\ 
+    elseif a:mode == "command"
+        setlocal statusline=%1*\ c-mode\ 
     elseif a:mode == "insert"
         setlocal statusline=%2*\ insert\ 
     elseif a:mode == "visual"
         setlocal statusline=%3*\ visual\ 
+    elseif a:mode == "v-line"
+        setlocal statusline=%3*\ v-line\ 
+    elseif a:mode == "v-rect"
+        setlocal statusline=%3*\ v-rect\ 
     elseif a:mode == "replace"
-        setlocal statusline=%4*\ replace\ 
+        setlocal statusline=%4*\ r-mode\ 
     endif
 
     setlocal statusline+=%*\ %<%f\ %h%m%r
@@ -106,39 +111,67 @@ function! s:InsertMode(mode)
 endfunction
 
 function! s:VisualMode()
-    if mode()=~#"^[vV\<C-v>]"
+    let l:curr_mode = mode()
+
+    if (l:curr_mode ==# "v")
         call s:StatusLine("visual")
         let s:normal_mode = 0
+        let &updatetime = 0
+    elseif (l:curr_mode ==# "V")
+        call s:StatusLine("v-line")
+        let s:normal_mode = 0
+        let &updatetime = 0
+    elseif (l:curr_mode ==# "\<C-v>")
+        call s:StatusLine("v-rect")
+        let s:normal_mode = 0
+        let &updatetime = 0
     elseif s:normal_mode == 0
+        " We are no longer in a visual mode.
         call s:StatusLine("normal")
         let s:normal_mode = 1
+        let &updatetime = s:orig_updatetime
     endif
 endfunction
 
-function! s:UserColors()
-    exec "highlight User1 ctermbg=4 guibg="   . s:blue    . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User2 ctermbg=251 guibg=" . s:white   . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User3 ctermbg=13 guibg="  . s:purple  . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User4 ctermbg=9 guibg="   . s:crimson . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User5 ctermbg=8 guibg="   . s:coral   . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User6 ctermbg=11 guibg="  . s:wheat   . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10 guifg="  . s:emerald . " gui=none"
-    exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white   . " gui=none"
-    exec "highlight User9 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4 guifg="   . s:blue    . " gui=none"
+function! s:CommandMode(mode)
+    if a:mode == "Enter"
+        call s:StatusLine("command")
+        redraw
+    elseif a:mode == "Leave"
+        call s:StatusLine("normal")
+    endif
 endfunction
-
 
 augroup moonflyStatusline
     autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter,InsertLeave * call s:WindowFocus("Enter")
-    autocmd WinLeave,FilterWritePost * call s:WindowFocus("Leave")
-    autocmd InsertEnter * call s:InsertMode(v:insertmode)
-    autocmd CursorMoved,CursorHold * call s:VisualMode()
-    if has("nvim")
-        autocmd TermOpen * call s:StatusLine("terminal")
+    autocmd VimEnter,WinEnter,BufWinEnter * call s:WindowFocus("Enter")
+    autocmd InsertLeave                   * call s:WindowFocus("Enter")
+    autocmd WinLeave,FilterWritePost      * call s:WindowFocus("Leave")
+    autocmd InsertEnter                   * call s:InsertMode(v:insertmode)
+    autocmd CursorMoved,CursorHold        * call s:VisualMode()
+    if exists('##TermOpen')
+        autocmd TermOpen                  * call s:StatusLine("terminal")
     endif
-    autocmd SourcePre * call s:UserColors()
+    if exists('##TerminalOpen')
+        autocmd TerminalOpen              * call s:StatusLine("terminal")
+    endif
+    if exists('##CmdlineEnter')
+        autocmd CmdlineEnter              * call s:CommandMode("Enter")
+        autocmd CmdlineLeave              * call s:CommandMode("Leave")
+    endif
+    autocmd SourcePre                     * call s:UserColors()
 augroup END
 
+function! s:UserColors()
+    exec "highlight User1 ctermbg=4   guibg=" . s:blue    . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User2 ctermbg=251 guibg=" . s:white   . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User3 ctermbg=13  guibg=" . s:purple  . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User4 ctermbg=9   guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User5 ctermbg=8   guibg=" . s:coral   . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User6 ctermbg=11  guibg=" . s:wheat   . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10  guifg=" . s:emerald . " gui=none"
+    exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white   . " gui=none"
+    exec "highlight User9 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4   guifg=" . s:blue    . " gui=none"
+endfunction
 
 call s:UserColors()
