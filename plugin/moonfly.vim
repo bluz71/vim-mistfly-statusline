@@ -53,13 +53,21 @@ function! MoonflyTerminalMode()
     endif
 endfunction
 
+function! MoonflyShortFilePath()
+    if &buftype == "terminal"
+        return expand('%:t')
+    else
+        return pathshorten(expand('%:f'))
+    endif
+endfunction
+
 function! s:StatusLine(mode)
     if &buftype == "nofile" || bufname("%") == "[BufExplorer]"
         " Don't set a custom status line for file explorers.
         return
     elseif a:mode == "not-current"
         " This is the status line for inactive windows.
-        setlocal statusline=\ %*%<%f\ %h%m%r
+        setlocal statusline=\ %*%<%{MoonflyShortFilePath()}\ %h%m%r
         setlocal statusline+=%*%=%-14.(%l,%c%V%)[%L]\ %P
         return
     " All cases from here on relate to the status line of the active window.
@@ -85,7 +93,7 @@ function! s:StatusLine(mode)
         setlocal statusline=%4*\ r-mode\ 
     endif
 
-    setlocal statusline+=%*\ %<%f\ %h%m%r
+    setlocal statusline+=%*\ %<%{MoonflyShortFilePath()}\ %h%m%r
     setlocal statusline+=%7*\ %{MoonflyFugitiveBranch()}\ 
     setlocal statusline+=%8*%=%-14.(%l,%c%V%)
     setlocal statusline+=%9*[%L]\ 
@@ -133,15 +141,6 @@ function! s:VisualMode()
     endif
 endfunction
 
-function! s:CommandMode(mode)
-    if a:mode == "Enter"
-        call s:StatusLine("command")
-        redraw
-    elseif a:mode == "Leave"
-        call s:StatusLine("normal")
-    endif
-endfunction
-
 augroup moonflyStatusline
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * call s:WindowFocus("Enter")
@@ -156,8 +155,8 @@ augroup moonflyStatusline
         autocmd TerminalOpen              * call s:StatusLine("terminal")
     endif
     if exists('##CmdlineEnter')
-        autocmd CmdlineEnter              * call s:CommandMode("Enter")
-        autocmd CmdlineLeave              * call s:CommandMode("Leave")
+        autocmd CmdlineEnter              * call s:StatusLine("command") | redraw
+        autocmd CmdlineLeave              * call s:StatusLine("normal")
     endif
     autocmd SourcePre                     * call s:UserColors()
 augroup END
