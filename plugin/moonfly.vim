@@ -41,7 +41,7 @@ function! MoonflyTerminalMode()
     let l:curr_mode = mode()
 
     if (l:curr_mode ==# "t")
-        return "terminal"
+        return "term"
     elseif (l:curr_mode ==# "v")
         return "visual"
     elseif (l:curr_mode ==# "V")
