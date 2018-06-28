@@ -11,7 +11,7 @@ let g:loaded_moonfly_statusline = 1
 " By default don't display Git branches using the U+E0A0 branch character.
 let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0)
 
-let s:normal_mode = 1
+let s:normal_mode     = 1
 let s:orig_updatetime = &updatetime
 
 " The set of available moonfly colors (https://github.com/bluz71/vim-moonfly-colors)
@@ -61,6 +61,51 @@ function! MoonflyShortFilePath()
     endif
 endfunction
 
+function! s:InsertMode(mode)
+    if a:mode == "i"
+        call s:StatusLine("insert")
+    elseif a:mode == "r"
+        call s:StatusLine("replace")
+    else
+        return
+    endif
+endfunction
+
+function! s:VisualMode()
+    let l:curr_mode = mode()
+
+    if (l:curr_mode ==# "v")
+        call s:StatusLine("visual")
+        let s:normal_mode = 0
+        let &updatetime = 0
+    elseif (l:curr_mode ==# "V")
+        call s:StatusLine("v-line")
+        let s:normal_mode = 0
+        let &updatetime = 0
+    elseif (l:curr_mode ==# "\<C-v>")
+        call s:StatusLine("v-rect")
+        let s:normal_mode = 0
+        let &updatetime = 0
+    elseif (l:curr_mode ==# "s")
+        call s:StatusLine("select")
+        let s:normal_mode = 0
+        let &updatetime = 0
+    elseif (l:curr_mode ==# "S")
+        call s:StatusLine("s-line")
+        let s:normal_mode = 0
+        let &updatetime = 0
+    elseif (l:curr_mode ==# "\<C-s>")
+        call s:StatusLine("s-rect")
+        let s:normal_mode = 0
+        let &updatetime = 0
+    elseif s:normal_mode == 0
+        " We are no longer in a visual mode.
+        call s:StatusLine("normal")
+        let s:normal_mode = 1
+        let &updatetime = s:orig_updatetime
+    endif
+endfunction
+
 function! s:StatusLine(mode)
     if &buftype == "nofile" || bufname("%") == "[BufExplorer]"
         " Don't set a custom status line for file explorers.
@@ -89,6 +134,12 @@ function! s:StatusLine(mode)
         setlocal statusline=%3*\ v-line\ 
     elseif a:mode == "v-rect"
         setlocal statusline=%3*\ v-rect\ 
+    elseif a:mode == "select"
+        setlocal statusline=%3*\ select\ 
+    elseif a:mode == "s-line"
+        setlocal statusline=%3*\ s-line\ 
+    elseif a:mode == "s-rect"
+        setlocal statusline=%3*\ s-rect\ 
     elseif a:mode == "replace"
         setlocal statusline=%4*\ r-mode\ 
     endif
@@ -100,52 +151,23 @@ function! s:StatusLine(mode)
     setlocal statusline+=%8*%P 
 endfunction
 
-function! s:WindowFocus(mode)
-    if a:mode == "Enter"
-        call s:StatusLine("normal")
-    elseif a:mode == "Leave"
-        call s:StatusLine("not-current")
-    endif
-endfunction
-
-function! s:InsertMode(mode)
-    if a:mode == "i"
-        call s:StatusLine("insert")
-    elseif a:mode == "r"
-        call s:StatusLine("replace")
-    else
-        return
-    endif
-endfunction
-
-function! s:VisualMode()
-    let l:curr_mode = mode()
-
-    if (l:curr_mode ==# "v")
-        call s:StatusLine("visual")
-        let s:normal_mode = 0
-        let &updatetime = 0
-    elseif (l:curr_mode ==# "V")
-        call s:StatusLine("v-line")
-        let s:normal_mode = 0
-        let &updatetime = 0
-    elseif (l:curr_mode ==# "\<C-v>")
-        call s:StatusLine("v-rect")
-        let s:normal_mode = 0
-        let &updatetime = 0
-    elseif s:normal_mode == 0
-        " We are no longer in a visual mode.
-        call s:StatusLine("normal")
-        let s:normal_mode = 1
-        let &updatetime = s:orig_updatetime
-    endif
+function! s:UserColors()
+    exec "highlight User1 ctermbg=4   guibg=" . s:blue    . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User2 ctermbg=251 guibg=" . s:white   . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User3 ctermbg=13  guibg=" . s:purple  . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User4 ctermbg=9   guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User5 ctermbg=8   guibg=" . s:coral   . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User6 ctermbg=11  guibg=" . s:wheat   . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10  guifg=" . s:emerald . " gui=none"
+    exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white   . " gui=none"
+    exec "highlight User9 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4   guifg=" . s:blue    . " gui=none"
 endfunction
 
 augroup moonflyStatusline
     autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter * call s:WindowFocus("Enter")
-    autocmd InsertLeave                   * call s:WindowFocus("Enter")
-    autocmd WinLeave,FilterWritePost      * call s:WindowFocus("Leave")
+    autocmd VimEnter,WinEnter,BufWinEnter * call s:StatusLine("normal")
+    autocmd InsertLeave                   * call s:StatusLine("normal")
+    autocmd WinLeave,FilterWritePost      * call s:StatusLine("not-current")
     autocmd InsertEnter                   * call s:InsertMode(v:insertmode)
     autocmd CursorMoved,CursorHold        * call s:VisualMode()
     if exists('##TermOpen')
@@ -160,17 +182,5 @@ augroup moonflyStatusline
     endif
     autocmd SourcePre                     * call s:UserColors()
 augroup END
-
-function! s:UserColors()
-    exec "highlight User1 ctermbg=4   guibg=" . s:blue    . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User2 ctermbg=251 guibg=" . s:white   . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User3 ctermbg=13  guibg=" . s:purple  . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User4 ctermbg=9   guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User5 ctermbg=8   guibg=" . s:coral   . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User6 ctermbg=11  guibg=" . s:wheat   . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10  guifg=" . s:emerald . " gui=none"
-    exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white   . " gui=none"
-    exec "highlight User9 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4   guifg=" . s:blue    . " gui=none"
-endfunction
 
 call s:UserColors()
