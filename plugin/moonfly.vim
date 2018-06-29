@@ -14,12 +14,10 @@ let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0
 let s:normal_mode     = 1
 let s:orig_updatetime = &updatetime
 
-" The set of available moonfly colors (https://github.com/bluz71/vim-moonfly-colors)
+" The moonfly colors (https://github.com/bluz71/vim-moonfly-colors)
 let s:white   = "#c6c6c6" " white   = 251
 let s:grey236 = "#303030" " grey236 = 236
 let s:grey234 = "#1c1c1c" " grey234 = 234
-let s:wheat   = "#cfcfb0" " wheat   = 11
-let s:coral   = "#f09479" " coral   = 8
 let s:emerald = "#42cf89" " emerald = 10
 let s:blue    = "#80a0ff" " blue    = 4
 let s:purple  = "#ae81ff" " purple  = 13
@@ -117,11 +115,11 @@ function! s:StatusLine(mode)
         return
     " All cases from here on relate to the status line of the active window.
     elseif &buftype == "terminal" || a:mode == "terminal"
-        setlocal statusline=%6*\ %{MoonflyTerminalMode()}\ 
+        setlocal statusline=%2*\ %{MoonflyTerminalMode()}\ 
     elseif &buftype == "help"
         setlocal statusline=%1*\ help\ 
     elseif &buftype == "quickfix"
-        setlocal statusline=%5*\ list\ 
+        setlocal statusline=%1*\ list\ 
     elseif a:mode == "normal"
         setlocal statusline=%1*\ normal\ 
     elseif a:mode == "command"
@@ -145,10 +143,10 @@ function! s:StatusLine(mode)
     endif
 
     setlocal statusline+=%*\ %<%{MoonflyShortFilePath()}\ %h%m%r
-    setlocal statusline+=%7*\ %{MoonflyFugitiveBranch()}\ 
-    setlocal statusline+=%8*%=%-14.(%l,%c%V%)
-    setlocal statusline+=%9*[%L]\ 
-    setlocal statusline+=%8*%P 
+    setlocal statusline+=%5*\ %{MoonflyFugitiveBranch()}\ 
+    setlocal statusline+=%6*%=%-14.(%l,%c%V%)
+    setlocal statusline+=%7*[%L]\ 
+    setlocal statusline+=%6*%P 
 endfunction
 
 function! s:UserColors()
@@ -156,11 +154,9 @@ function! s:UserColors()
     exec "highlight User2 ctermbg=251 guibg=" . s:white   . " ctermfg=234 guifg=" . s:grey234
     exec "highlight User3 ctermbg=13  guibg=" . s:purple  . " ctermfg=234 guifg=" . s:grey234
     exec "highlight User4 ctermbg=9   guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User5 ctermbg=8   guibg=" . s:coral   . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User6 ctermbg=11  guibg=" . s:wheat   . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10  guifg=" . s:emerald . " gui=none"
-    exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white   . " gui=none"
-    exec "highlight User9 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4   guifg=" . s:blue    . " gui=none"
+    exec "highlight User5 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10  guifg=" . s:emerald . " gui=none"
+    exec "highlight User6 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white   . " gui=none"
+    exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4   guifg=" . s:blue    . " gui=none"
 endfunction
 
 augroup moonflyStatusline
