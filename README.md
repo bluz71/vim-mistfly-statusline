@@ -7,17 +7,13 @@ moonfly statusline
 Screenshots
 -----------
 
-#### normal mode
-![normal](moonfly_normal.png)
+<img width="900" alt="normal" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_normal.png">
 
-#### insert mode
-![insert](moonfly_insert.png)
+<img width="900" alt="insert" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_insert.png">
 
-#### replace mode
-![replace](moonfly_replace.png)
+<img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_visual.png">
 
-#### visual mode
-![visual](moonfly_visual.png)
+The font in use is [Iosevka](https://github.com/be5invis/Iosevka).
 
 Dependency
 ----------
@@ -52,6 +48,8 @@ To display the Unicode Git branch character please add the following to your
 ```viml
 let g:moonflyWithGitBranchCharacter = 1
 ```
+
+The above screenshots are using the Git branch character.
 
 License
 -------
