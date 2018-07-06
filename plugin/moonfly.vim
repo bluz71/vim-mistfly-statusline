@@ -11,8 +11,19 @@ let g:loaded_moonfly_statusline = 1
 " By default don't display Git branches using the U+E0A0 branch character.
 let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0)
 
-let s:normal_mode     = 1
-let s:orig_updatetime = &updatetime
+let s:modes = {
+  \  "n":      ["%1*", " normal "],
+  \  "i":      ["%2*", " insert "],
+  \  "R":      ["%4*", " r-mode "],
+  \  "v":      ["%3*", " visual "],
+  \  "V":      ["%3*", " v-line "],
+  \  "\<C-v>": ["%3*", " v-rect "],
+  \  "c":      ["%1*", " c-mode "],
+  \  "s":      ["%3*", " select "],
+  \  "S":      ["%3*", " s-line "],
+  \  "\<C-s>": ["%3*", " s-rect "],
+  \  "t":      ["%2*", " term "],
+  \}
 
 " The moonfly colors (https://github.com/bluz71/vim-moonfly-colors)
 let s:white   = "#c6c6c6" " white   = 251
@@ -23,85 +34,47 @@ let s:blue    = "#80a0ff" " blue    = 4
 let s:purple  = "#ae81ff" " purple  = 13
 let s:crimson = "#f74782" " crimson = 9
 
-function MoonflyFugitiveBranch()
-    if !exists('g:loaded_fugitive') || !exists('b:git_dir')
-        return ''
+function! MoonflyModeColor(mode)
+  return get(s:modes, a:mode, "%*1")[0]
+endfunction
+
+function! MoonflyModeText(mode)
+  return get(s:modes, a:mode, " normal ")[1]
+endfunction
+
+function! MoonflyFugitiveBranch()
+    if !exists("g:loaded_fugitive") || !exists("b:git_dir")
+        return ""
     endif
 
     if g:moonflyWithGitBranchCharacter
-        return '[ '.fugitive#head().']'
+        return "[ " . fugitive#head() . "]"
     else
         return fugitive#statusline()
     endif
 endfunction
 
-function! MoonflyTerminalMode()
-    let l:curr_mode = mode()
-
-    if (l:curr_mode ==# "t")
-        return "term"
-    elseif (l:curr_mode ==# "v")
-        return "visual"
-    elseif (l:curr_mode ==# "V")
-        return "v-line"
-    elseif (l:curr_mode ==# "\<C-v>")
-        return "v-rect"
-    else
-        return "normal"
-    endif
-endfunction
-
 function! MoonflyShortFilePath()
     if &buftype == "terminal"
-        return expand('%:t')
+        return expand("%:t")
     else
-        return pathshorten(expand('%:f'))
+        return pathshorten(expand("%:f"))
     endif
 endfunction
 
-function! s:InsertMode(mode)
-    if a:mode == "i"
-        call s:StatusLine("insert")
-    elseif a:mode == "r"
-        call s:StatusLine("replace")
-    else
-        return
-    endif
-endfunction
+function! MoonflyStatusLine()
+    let l:statusline = ""
+    let l:mode = mode()
 
-function! s:VisualMode()
-    let l:curr_mode = mode()
+    let l:statusline  = MoonflyModeColor(l:mode)
+    let l:statusline .= MoonflyModeText(l:mode)
+    let l:statusline .= "%* %<%{MoonflyShortFilePath()} %h%m%r"
+    let l:statusline .= "%5* %{MoonflyFugitiveBranch()} "
+    let l:statusline .= "%6*%=%-14.(%l,%c%V%)"
+    let l:statusline .= "%7*[%L] "
+    let l:statusline .= "%6*%P "
 
-    if (l:curr_mode ==# "v")
-        call s:StatusLine("visual")
-        let s:normal_mode = 0
-        let &updatetime = 0
-    elseif (l:curr_mode ==# "V")
-        call s:StatusLine("v-line")
-        let s:normal_mode = 0
-        let &updatetime = 0
-    elseif (l:curr_mode ==# "\<C-v>")
-        call s:StatusLine("v-rect")
-        let s:normal_mode = 0
-        let &updatetime = 0
-    elseif (l:curr_mode ==# "s")
-        call s:StatusLine("select")
-        let s:normal_mode = 0
-        let &updatetime = 0
-    elseif (l:curr_mode ==# "S")
-        call s:StatusLine("s-line")
-        let s:normal_mode = 0
-        let &updatetime = 0
-    elseif (l:curr_mode ==# "\<C-s>")
-        call s:StatusLine("s-rect")
-        let s:normal_mode = 0
-        let &updatetime = 0
-    elseif s:normal_mode == 0
-        " We are no longer in a visual mode.
-        call s:StatusLine("normal")
-        let s:normal_mode = 1
-        let &updatetime = s:orig_updatetime
-    endif
+    return l:statusline
 endfunction
 
 function! s:StatusLine(mode)
@@ -109,44 +82,14 @@ function! s:StatusLine(mode)
         " Don't set a custom status line for file explorers.
         return
     elseif a:mode == "not-current"
-        " This is the status line for inactive windows.
+        " Status line for inactive windows.
         setlocal statusline=\ %*%<%{MoonflyShortFilePath()}\ %h%m%r
         setlocal statusline+=%*%=%-14.(%l,%c%V%)[%L]\ %P
         return
-    " All cases from here on relate to the status line of the active window.
-    elseif &buftype == "terminal" || a:mode == "terminal"
-        setlocal statusline=%2*\ %{MoonflyTerminalMode()}\ 
-    elseif &buftype == "help"
-        setlocal statusline=%1*\ help\ 
-    elseif &buftype == "quickfix"
-        setlocal statusline=%1*\ list\ 
-    elseif a:mode == "normal"
-        setlocal statusline=%1*\ normal\ 
-    elseif a:mode == "command"
-        setlocal statusline=%1*\ c-mode\ 
-    elseif a:mode == "insert"
-        setlocal statusline=%2*\ insert\ 
-    elseif a:mode == "visual"
-        setlocal statusline=%3*\ visual\ 
-    elseif a:mode == "v-line"
-        setlocal statusline=%3*\ v-line\ 
-    elseif a:mode == "v-rect"
-        setlocal statusline=%3*\ v-rect\ 
-    elseif a:mode == "select"
-        setlocal statusline=%3*\ select\ 
-    elseif a:mode == "s-line"
-        setlocal statusline=%3*\ s-line\ 
-    elseif a:mode == "s-rect"
-        setlocal statusline=%3*\ s-rect\ 
-    elseif a:mode == "replace"
-        setlocal statusline=%4*\ r-mode\ 
+    else
+        " Status line for the active window.
+        setlocal statusline=%!MoonflyStatusLine()
     endif
-
-    setlocal statusline+=%*\ %<%{MoonflyShortFilePath()}\ %h%m%r
-    setlocal statusline+=%5*\ %{MoonflyFugitiveBranch()}\ 
-    setlocal statusline+=%6*%=%-14.(%l,%c%V%)
-    setlocal statusline+=%7*[%L]\ 
-    setlocal statusline+=%6*%P 
 endfunction
 
 function! s:UserColors()
@@ -162,19 +105,9 @@ endfunction
 augroup moonflyStatusline
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter * call s:StatusLine("normal")
-    autocmd InsertLeave                   * call s:StatusLine("normal")
     autocmd WinLeave,FilterWritePost      * call s:StatusLine("not-current")
-    autocmd InsertEnter                   * call s:InsertMode(v:insertmode)
-    autocmd CursorMoved,CursorHold        * call s:VisualMode()
-    if exists('##TermOpen')
-        autocmd TermOpen                  * call s:StatusLine("terminal")
-    endif
-    if exists('##TerminalOpen')
-        autocmd TerminalOpen              * call s:StatusLine("terminal")
-    endif
-    if exists('##CmdlineEnter')
+    if exists("##CmdlineEnter")
         autocmd CmdlineEnter              * call s:StatusLine("command") | redraw
-        autocmd CmdlineLeave              * call s:StatusLine("normal")
     endif
     autocmd SourcePre                     * call s:UserColors()
 augroup END
