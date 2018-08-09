@@ -49,7 +49,7 @@ To display the Unicode Git branch character please add the following to your
 let g:moonflyWithGitBranchCharacter = 1
 ```
 
-The above screenshots are using the Git branch character.
+The above screenshots are displayed with the Git branch character.
 
 License
 -------
