@@ -11,6 +11,9 @@ let g:loaded_moonfly_statusline = 1
 " By default don't display Git branches using the U+E0A0 branch character.
 let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0)
 
+" By default always use moonfly colors and ignore any user-defined colors.
+let g:moonflyHonorUserDefinedColors = get(g:, "moonflyHonorUserDefinedColors", 0)
+
 let s:modes = {
   \  "n":      ["%1*", " normal "],
   \  "i":      ["%2*", " insert "],
@@ -93,6 +96,9 @@ function! s:StatusLine(mode)
 endfunction
 
 function! s:UserColors()
+    if g:moonflyHonorUserDefinedColors
+        return
+    endif
     exec "highlight User1 ctermbg=4   guibg=" . s:blue    . " ctermfg=234 guifg=" . s:grey234
     exec "highlight User2 ctermbg=251 guibg=" . s:white   . " ctermfg=234 guifg=" . s:grey234
     exec "highlight User3 ctermbg=13  guibg=" . s:purple  . " ctermfg=234 guifg=" . s:grey234
