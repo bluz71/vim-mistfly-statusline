@@ -33,6 +33,8 @@ If using [vim-plug](https://github.com/junegunn/vim-plug) do the following:
 Options
 -------
 
+### g:moonflyWithGitBranchCharacter
+
 The `g:moonflyWithGitBranchCharacter` option specifies whether to display Git
 branch details, via [vim-fugitive](https://github.com/tpope/vim-fugitive) if
 installed, using the Unicode Git branch character `U+E0A0`. By default Git
@@ -50,6 +52,27 @@ let g:moonflyWithGitBranchCharacter = 1
 ```
 
 The above screenshots are displayed with the Git branch character.
+
+### g:moonflyHonorUserDefinedColors
+
+The `g:g:moonflyHonorUserDefinedColors` option specifies whether user-defined
+colors should be used instead of the default colors from the moonfly scheme.
+
+```viml
+let g:moonflyHonorUserDefinedColors = 1
+```
+
+For example, these user-defined colors mimic Vim's default statusline colors:
+
+```viml
+highlight! link User1 StatusLine
+highlight! link User2 DiffAdd
+highlight! link User3 DiffChange
+highlight! link User4 DiffDelete
+highlight! link User5 StatusLine
+highlight! link User6 StatusLine
+highlight! link User7 StatusLine
+```
 
 License
 -------
