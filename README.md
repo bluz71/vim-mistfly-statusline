@@ -55,8 +55,9 @@ The above screenshots are displayed with the Git branch character.
 
 ### g:moonflyHonorUserDefinedColors
 
-The `g:g:moonflyHonorUserDefinedColors` option specifies whether user-defined
-colors should be used instead of the default colors from the moonfly scheme.
+The `g:moonflyHonorUserDefinedColors` option specifies whether user-defined
+colors should be used instead of the default colors from the moonfly color 
+scheme.
 
 ```viml
 let g:moonflyHonorUserDefinedColors = 1
