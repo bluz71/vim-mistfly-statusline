@@ -1,11 +1,9 @@
-moonfly statusline
-==================
+# moonfly statusline
 
-*moonfly statusline* is a simple *statusline* for Vim and Neovim that uses
+_moonfly statusline_ is a simple _statusline_ for Vim and Neovim that uses
 [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors.
 
-Screenshots
------------
+## Screenshots
 
 <img width="900" alt="normal" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_normal.png">
 
@@ -15,23 +13,20 @@ Screenshots
 
 The font in use is [Iosevka](https://github.com/be5invis/Iosevka).
 
-Dependency
-----------
+## Dependency
 
 First install [moonfly](https://github.com/bluz71/vim-moonfly-colors)
 
-Installation
-------------
+## Installation
 
 Use your favoured plugin manager to install **bluz71/vim-moonfly-statusline**.
 
 If using [vim-plug](https://github.com/junegunn/vim-plug) do the following:
 
-1. Add `Plug 'bluz71/vim-moonfly-statusline'` to your *vimrc*
+1. Add `Plug 'bluz71/vim-moonfly-statusline'` to your _vimrc_
 2. Run `:PlugInstall`
 
-Options
--------
+## Options
 
 ### g:moonflyWithGitBranchCharacter
 
@@ -45,7 +40,7 @@ such as [Fira Code](https://github.com/tonsky/FiraCode) and
 character.
 
 To display the Unicode Git branch character please add the following to your
-*vimrc*:
+_vimrc_:
 
 ```viml
 let g:moonflyWithGitBranchCharacter = 1
@@ -56,7 +51,7 @@ The above screenshots are displayed with the Git branch character.
 ### g:moonflyHonorUserDefinedColors
 
 The `g:moonflyHonorUserDefinedColors` option specifies whether user-defined
-colors should be used instead of the default colors from the moonfly color 
+colors should be used instead of the default colors from the moonfly color
 scheme.
 
 ```viml
@@ -75,7 +70,6 @@ highlight! link User6 StatusLine
 highlight! link User7 StatusLine
 ```
 
-License
--------
+## License
 
 [MIT](https://opensource.org/licenses/MIT)
