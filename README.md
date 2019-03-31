@@ -64,7 +64,7 @@ The above screenshots are displayed with the Git branch character.
 _moonfly statusline_ supports Tim Pope's
 [obsession](https://github.com/tpope/vim-obsession) plugin.
 
-The `g:moonflyWithObessionGeometricCharacters` options specifies whether to
+The `g:moonflyWithObessionGeometricCharacters` option specifies whether to
 display obsession details using Unicode geometric characters (`U+25A0` - Black
 Square & `U+25CF` - Black Circle). A modern font, such as
 [Iosevka](https://github.com/be5invis/Iosevka), will contain those Unicode
