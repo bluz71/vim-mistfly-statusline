@@ -111,12 +111,10 @@ endfunction
 
 augroup moonflyStatusline
     autocmd!
+    autocmd VimEnter,SourcePre            * call s:UserColors()
     autocmd VimEnter,WinEnter,BufWinEnter * call s:StatusLine("normal")
     autocmd WinLeave,FilterWritePost      * call s:StatusLine("not-current")
     if exists("##CmdlineEnter")
         autocmd CmdlineEnter              * call s:StatusLine("command") | redraw
     endif
-    autocmd SourcePre                     * call s:UserColors()
 augroup END
-
-call s:UserColors()
