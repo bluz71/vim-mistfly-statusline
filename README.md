@@ -17,6 +17,12 @@ The font in use is [Iosevka](https://github.com/be5invis/Iosevka).
 
 First install [moonfly](https://github.com/bluz71/vim-moonfly-colors)
 
+## Plugins supported
+
+-   [fugitive](https://github.com/tpope/vim-fugitive)
+
+-   [obsession](https://github.com/tpope/vim-obsession)
+
 ## Installation
 
 Use your favoured plugin manager to install **bluz71/vim-moonfly-statusline**.
@@ -30,14 +36,19 @@ If using [vim-plug](https://github.com/junegunn/vim-plug) do the following:
 
 ### g:moonflyWithGitBranchCharacter
 
+_moonfly statusline_ supports Tim Pope's
+[fugitive](https://github.com/tpope/vim-fugitive) plugin.
+
 The `g:moonflyWithGitBranchCharacter` option specifies whether to display Git
-branch details, via [vim-fugitive](https://github.com/tpope/vim-fugitive) if
-installed, using the Unicode Git branch character `U+E0A0`. By default Git
+branch details using the Unicode Git branch character `U+E0A0`. By default Git
 branches displayed in the `statusline` will not use that character since many
-monospace fonts will not contain that character. However, some modern fonts
-such as [Fira Code](https://github.com/tonsky/FiraCode) and
-[Ioveska](https://github.com/be5invis/Iosevka) do contain the Git branch
+monospace fonts will not contain it. However, some modern fonts, such as [Fira
+Code](https://github.com/tonsky/FiraCode) and
+[Iosevka](https://github.com/be5invis/Iosevka), do contain the Git branch
 character.
+
+If `g:moonflyWithGitBranchCharacter` is unset the default value from
+the fugitive plugin will be used.
 
 To display the Unicode Git branch character please add the following to your
 _vimrc_:
@@ -47,6 +58,27 @@ let g:moonflyWithGitBranchCharacter = 1
 ```
 
 The above screenshots are displayed with the Git branch character.
+
+### g:moonflyWithObessionGeometricCharacters
+
+_moonfly statusline_ supports Tim Pope's
+[obsession](https://github.com/tpope/vim-obsession) plugin.
+
+The `g:moonflyWithObessionGeometricCharacters` options specifies whether to
+display obsession details using Unicode geometric characters (`U+25A0` - Black
+Square & `U+25CF` - Black Circle). A modern font, such as
+[Iosevka](https://github.com/be5invis/Iosevka), will contain those Unicode
+geometric characters.
+
+If `g:moonflyWithObessionGeometricCharacters` is unset the default value from
+the obsession plugin will be used.
+
+To display the Unicode Git branch character please add the following to your
+_vimrc_:
+
+```viml
+let g:moonflyWithObessionGeometricCharacters = 1
+```
 
 ### g:moonflyHonorUserDefinedColors
 

@@ -11,6 +11,11 @@ let g:loaded_moonfly_statusline = 1
 " By default don't display Git branches using the U+E0A0 branch character.
 let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0)
 
+" By default don't use geometric shapes, U+25A0 - Black Square & U+25CF - Black
+" Circle, to indicate the obsession (https://github.com/tpope/vim-obsession)
+" status.
+let g:moonflyWithObessionGeometricCharacters = get(g:, "moonflyWithObessionGeometricCharacters", 0)
+
 " By default always use moonfly colors and ignore any user-defined colors.
 let g:moonflyHonorUserDefinedColors = get(g:, "moonflyHonorUserDefinedColors", 0)
 
@@ -57,6 +62,18 @@ function! MoonflyFugitiveBranch()
     endif
 endfunction
 
+function! MoonflyObsessionStatus()
+    if !exists("g:loaded_obsession")
+        return ""
+    endif
+
+    if g:moonflyWithObessionGeometricCharacters
+        return ObsessionStatus("[●] ", "[■] ")
+    else
+        return ObsessionStatus("[$] ", "[S] ")
+    endif
+endfunction
+
 function! MoonflyShortFilePath()
     if &buftype == "terminal"
         return expand("%:t")
@@ -73,8 +90,9 @@ function! MoonflyStatusLine()
     let l:statusline .= MoonflyModeText(l:mode)
     let l:statusline .= "%* %<%{MoonflyShortFilePath()} %h%m%r"
     let l:statusline .= "%5* %{MoonflyFugitiveBranch()} "
-    let l:statusline .= "%6*%=%-14.(%l,%c%V%)"
+    let l:statusline .= "%6*%=%-12.(%l,%c%V%)"
     let l:statusline .= "%7*[%L] "
+    let l:statusline .= "%8*%{MoonflyObsessionStatus()}"
     let l:statusline .= "%6*%P "
 
     return l:statusline
@@ -107,6 +125,7 @@ function! s:UserColors()
     exec "highlight User5 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10  guifg=" . s:emerald . " gui=none"
     exec "highlight User6 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white   . " gui=none"
     exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4   guifg=" . s:blue    . " gui=none"
+    exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=9   guifg=" . s:crimson . " gui=none"
 endfunction
 
 augroup moonflyStatusline
