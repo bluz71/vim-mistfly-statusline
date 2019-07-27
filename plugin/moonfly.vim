@@ -82,7 +82,7 @@ function! MoonflyShortFilePath()
     endif
 endfunction
 
-function! MoonflyStatusLine()
+function! MoonflyActiveStatusLine()
     let l:statusline = ""
     let l:mode = mode()
 
@@ -98,19 +98,40 @@ function! MoonflyStatusLine()
     return l:statusline
 endfunction
 
+function! MoonflyInactiveStatusLine()
+    let l:statusline = ""
+
+    let l:statusline  = " %*%<%{MoonflyShortFilePath()}\ %h%m%r"
+    let l:statusline .= "%*%=%-14.(%l,%c%V%)[%L]\ %P"
+
+    return l:statusline
+endfunction
+
 function! s:StatusLine(mode)
     if &buftype == "nofile" || bufname("%") == "[BufExplorer]"
         " Don't set a custom status line for file explorers.
         return
-    elseif a:mode == "not-current"
-        " Status line for inactive windows.
-        setlocal statusline=\ %*%<%{MoonflyShortFilePath()}\ %h%m%r
-        setlocal statusline+=%*%=%-14.(%l,%c%V%)[%L]\ %P
-        return
+    elseif a:mode == "inactive"
+        setlocal statusline=%!MoonflyInactiveStatusLine()
     else
-        " Status line for the active window.
-        setlocal statusline=%!MoonflyStatusLine()
+        setlocal statusline=%!MoonflyActiveStatusLine()
     endif
+endfunction
+
+" Iterate though the windows and update the statusline for all inactive windows.
+"
+" This is needed when starting Vim with multiple splits, for example 'vim -O
+" file1 file2', otherwise all 'statuslines will be rendered as if they are
+" active. Inactive statuslines are usually rendered via the WinLeave and
+" BufLeave events, but those events are not triggered when starting Vim.
+"
+" Note - https://jip.dev/posts/a-simpler-vim-statusline/#inactive-statuslines
+function! s:UpdateInactiveWindows()
+    for winnum in range(1, winnr('$'))
+        if winnum != winnr()
+            call setwinvar(winnum, '&statusline', '%!MoonflyInactiveStatusLine()')
+        endif
+    endfor
 endfunction
 
 function! s:UserColors()
@@ -130,10 +151,11 @@ endfunction
 
 augroup moonflyStatusline
     autocmd!
-    autocmd VimEnter,SourcePre            * call s:UserColors()
-    autocmd VimEnter,WinEnter,BufWinEnter * call s:StatusLine("normal")
-    autocmd WinLeave,FilterWritePost      * call s:StatusLine("not-current")
+    autocmd VimEnter              * call s:UpdateInactiveWindows()
+    autocmd ColorScheme,SourcePre * call s:UserColors()
+    autocmd WinEnter,BufWinEnter  * call s:StatusLine("active")
+    autocmd WinLeave              * call s:StatusLine("inactive")
     if exists("##CmdlineEnter")
-        autocmd CmdlineEnter              * call s:StatusLine("command") | redraw
+        autocmd CmdlineEnter      * call s:StatusLine("command") | redraw
     endif
 augroup END
