@@ -108,8 +108,9 @@ function! MoonflyInactiveStatusLine()
 endfunction
 
 function! s:StatusLine(mode)
-    if &buftype == "nofile" || bufname("%") == "[BufExplorer]"
-        " Don't set a custom status line for file explorers.
+    let l:bn = bufname("%)
+    if &buftype == "nofile" || l:bn == "[BufExplorer]" || l:bn == "undo_tree_2"
+        " Don't set a custom status line for special windows.
         return
     elseif a:mode == "inactive"
         setlocal statusline=%!MoonflyInactiveStatusLine()
