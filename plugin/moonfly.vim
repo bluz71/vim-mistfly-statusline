@@ -108,7 +108,7 @@ function! MoonflyInactiveStatusLine()
 endfunction
 
 function! s:StatusLine(mode)
-    let l:bn = bufname("%)
+    let l:bn = bufname("%")
     if &buftype == "nofile" || l:bn == "[BufExplorer]" || l:bn == "undo_tree_2"
         " Don't set a custom status line for special windows.
         return
