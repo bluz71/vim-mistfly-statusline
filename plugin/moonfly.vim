@@ -150,7 +150,7 @@ function! s:UserColors()
     exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=9   guifg=" . s:crimson . " gui=none"
 endfunction
 
-augroup moonflyStatusline
+augroup MoonflyStatuslineAutocmds
     autocmd!
     autocmd VimEnter              * call s:UpdateInactiveWindows()
     autocmd ColorScheme,SourcePre * call s:UserColors()
