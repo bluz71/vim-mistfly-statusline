@@ -1,9 +1,11 @@
-# moonfly statusline
+moonfly statusline
+==================
 
 _moonfly statusline_ is a simple _statusline_ for Vim and Neovim that uses
 [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors.
 
-## Screenshots
+Screenshots
+-----------
 
 <img width="900" alt="normal" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_normal.png">
 
@@ -13,17 +15,20 @@ _moonfly statusline_ is a simple _statusline_ for Vim and Neovim that uses
 
 The font in use is [Iosevka](https://github.com/be5invis/Iosevka).
 
-## Dependency
+Dependency
+----------
 
 First install [moonfly](https://github.com/bluz71/vim-moonfly-colors)
 
-## Plugins supported
+Plugins supported
+-----------------
 
 -   [fugitive](https://github.com/tpope/vim-fugitive)
 
 -   [obsession](https://github.com/tpope/vim-obsession)
 
-## Installation
+Installation
+------------
 
 Use your favoured plugin manager to install **bluz71/vim-moonfly-statusline**.
 
@@ -32,7 +37,8 @@ If using [vim-plug](https://github.com/junegunn/vim-plug) do the following:
 1. Add `Plug 'bluz71/vim-moonfly-statusline'` to your _vimrc_
 2. Run `:PlugInstall`
 
-## Options
+Options
+-------
 
 ### g:moonflyWithGitBranchCharacter
 
@@ -102,6 +108,7 @@ highlight! link User6 StatusLine
 highlight! link User7 StatusLine
 ```
 
-## License
+License
+-------
 
 [MIT](https://opensource.org/licenses/MIT)
