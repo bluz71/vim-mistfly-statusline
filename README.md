@@ -96,7 +96,7 @@ scheme.
 let g:moonflyHonorUserDefinedColors = 1
 ```
 
-For example, these user-defined colors mimic Vim's default statusline colors:
+For example, these user-defined colors mimic Vim's default status line colors:
 
 ```viml
 highlight! link User1 StatusLine
@@ -111,10 +111,10 @@ highlight! link User7 StatusLine
 ### g:moonflyDarkStatusLine
 
 The `g:moonflyDarkStatusLine` option specifies whether to display a dark or
-light colored statusline. By default, a dark statusline will be displayed to
+light colored status line. By default, a dark status line will be displayed to
 match the [moonfly](https://github.com/bluz71/vim-moonfly-colors) theme.
 
-To display a simpler light colored statusline please add the following to your
+To display a simpler light colored status line please add the following to your
 _vimrc_:
 
 ```viml

@@ -1,4 +1,4 @@
-" A simple Vim/Neovim statusline using moonfly colors.
+" A simple Vim/Neovim status line using moonfly colors.
 "
 " URL:          github.com/bluz71/vim-moonfly-statusline
 " License:      MIT (https://opensource.org/licenses/MIT)
@@ -19,7 +19,7 @@ let g:moonflyWithObessionGeometricCharacters = get(g:, "moonflyWithObessionGeome
 " By default always use moonfly colors and ignore any user-defined colors.
 let g:moonflyHonorUserDefinedColors = get(g:, "moonflyHonorUserDefinedColors", 0)
 
-" By default display a dark colored statusline.
+" By default display a dark colored status line.
 let g:moonflyDarkStatusLine = get(g:, "moonflyDarkStatusLine", 1)
 
 let s:modes = {
@@ -125,10 +125,11 @@ function! s:StatusLine(mode)
     endif
 endfunction
 
-" Iterate though the windows and update the statusline for all inactive windows.
+" Iterate though the windows and update the status line for all inactive
+" windows.
 "
 " This is needed when starting Vim with multiple splits, for example 'vim -O
-" file1 file2', otherwise all 'statuslines will be rendered as if they are
+" file1 file2', otherwise all 'status lines will be rendered as if they are
 " active. Inactive statuslines are usually rendered via the WinLeave and
 " BufLeave events, but those events are not triggered when starting Vim.
 "
