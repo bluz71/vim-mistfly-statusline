@@ -108,19 +108,6 @@ highlight! link User6 StatusLine
 highlight! link User7 StatusLine
 ```
 
-### g:moonflyDarkStatusLine
-
-The `g:moonflyDarkStatusLine` option specifies whether to display a dark or
-light colored status line. By default, a dark status line will be displayed to
-match the [moonfly](https://github.com/bluz71/vim-moonfly-colors) theme.
-
-To display a simpler light colored status line please add the following to your
-_vimrc_:
-
-```viml
-let g:moonflyDarkStatusLine = 0
-```
-
 License
 -------
 

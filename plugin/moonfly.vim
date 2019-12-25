@@ -19,9 +19,6 @@ let g:moonflyWithObessionGeometricCharacters = get(g:, "moonflyWithObessionGeome
 " By default always use moonfly colors and ignore any user-defined colors.
 let g:moonflyHonorUserDefinedColors = get(g:, "moonflyHonorUserDefinedColors", 0)
 
-" By default display a dark colored status line.
-let g:moonflyDarkStatusLine = get(g:, "moonflyDarkStatusLine", 1)
-
 let s:modes = {
   \  "n":      ["%1*", " normal "],
   \  "i":      ["%2*", " insert "],
@@ -37,12 +34,10 @@ let s:modes = {
   \}
 
 " The moonfly colors (https://github.com/bluz71/vim-moonfly-colors)
-let s:grey254 = "#e4e4e4" " grey254 = 254
 let s:white   = "#c6c6c6" " white   = 251
-let s:grey247 = "#9e9e9e" " grey247 = 247
-let s:grey241 = "#626262" " grey241 = 241
 let s:grey236 = "#303030" " grey236 = 236
 let s:grey234 = "#1c1c1c" " grey234 = 234
+let s:grey247 = "#9e9e9e" " grey247 = 247
 let s:emerald = "#42cf89" " emerald = 10
 let s:blue    = "#80a0ff" " blue    = 4
 let s:purple  = "#ae81ff" " purple  = 13
@@ -147,33 +142,20 @@ function! s:UserColors()
         return
     endif
 
-    if g:moonflyDarkStatusLine
-    " Default colors for a dark theme, such as
-    " [moonfly](https://github.com/bluz71/vim-moonfly-colors).
-        exec "highlight StatusLine ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white . " cterm=none gui=none"
-        exec "highlight StatusLineNC ctermbg=236 guibg=" . s:grey236 . " ctermfg=247 guifg=" . s:grey247 . " cterm=none gui=none"
-        exec "highlight User1 ctermbg=4   guibg=" . s:blue    . " ctermfg=234 guifg=" . s:grey234
-        exec "highlight User2 ctermbg=251 guibg=" . s:white   . " ctermfg=234 guifg=" . s:grey234
-        exec "highlight User3 ctermbg=13  guibg=" . s:purple  . " ctermfg=234 guifg=" . s:grey234
-        exec "highlight User4 ctermbg=9   guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
-        exec "highlight User5 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10  guifg=" . s:emerald . " gui=none"
-        exec "highlight User6 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white   . " gui=none"
-        exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4   guifg=" . s:blue    . " gui=none"
-        exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=9   guifg=" . s:crimson . " gui=none"
-    else
-    " Alternate colors for a light theme, such as
-    " [ayu](https://github.com/ayu-theme/ayu-vim).
-        exec "highlight StatusLine ctermbg=254 guibg=" . s:grey254 . " ctermfg=241 guifg=" . s:grey241 . " cterm=none gui=none"
-        exec "highlight StatusLineNC ctermbg=251 guibg=" . s:grey254 . " ctermfg=241 guifg=" . s:grey241 . " cterm=none gui=none"
-        exec "highlight User1 ctermbg=4   guibg=" . s:blue    . " ctermfg=236 guifg=" . s:grey236
-        exec "highlight User2 ctermbg=251 guibg=" . s:white   . " ctermfg=236 guifg=" . s:grey236
-        exec "highlight User3 ctermbg=13  guibg=" . s:purple  . " ctermfg=236 guifg=" . s:grey236
-        exec "highlight User4 ctermbg=9   guibg=" . s:crimson . " ctermfg=236 guifg=" . s:grey236
-        exec "highlight User5 ctermbg=254 guibg=" . s:grey254 . " ctermfg=241 guifg=" . s:grey241 . " gui=none"
-        exec "highlight User6 ctermbg=254 guibg=" . s:grey254 . " ctermfg=241 guifg=" . s:grey241 . " gui=none"
-        exec "highlight User7 ctermbg=254 guibg=" . s:grey254 . " ctermfg=241 guifg=" . s:grey241 . " gui=none"
-        exec "highlight User8 ctermbg=254 guibg=" . s:grey254 . " ctermfg=241 guifg=" . s:grey241 . " gui=none"
-    endif
+    " Set base status line colors.
+    exec "highlight StatusLine   ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white . "   cterm=none gui=none"
+    exec "highlight StatusLineNC ctermbg=236 guibg=" . s:grey236 . " ctermfg=247 guifg=" . s:grey247 . " cterm=none gui=none"
+
+    " Set user colors that will be used to color certain sections of the status
+    " line.
+    exec "highlight User1 ctermbg=4   guibg=" . s:blue    . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User2 ctermbg=251 guibg=" . s:white   . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User3 ctermbg=13  guibg=" . s:purple  . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User4 ctermbg=9   guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
+    exec "highlight User5 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10  guifg=" . s:emerald . " gui=none"
+    exec "highlight User6 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white   . " gui=none"
+    exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4   guifg=" . s:blue    . " gui=none"
+    exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=9   guifg=" . s:crimson . " gui=none"
 endfunction
 
 augroup MoonflyStatuslineAutocmds
