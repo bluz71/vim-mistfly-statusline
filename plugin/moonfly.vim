@@ -37,7 +37,6 @@ let s:modes = {
 let s:white   = "#c6c6c6" " white   = 251
 let s:grey236 = "#303030" " grey236 = 236
 let s:grey234 = "#1c1c1c" " grey234 = 234
-let s:grey247 = "#9e9e9e" " grey247 = 247
 let s:emerald = "#42cf89" " emerald = 10
 let s:blue    = "#80a0ff" " blue    = 4
 let s:purple  = "#ae81ff" " purple  = 13
@@ -141,10 +140,6 @@ function! s:UserColors()
     if g:moonflyHonorUserDefinedColors
         return
     endif
-
-    " Set base status line colors.
-    exec "highlight StatusLine   ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white . "   cterm=none gui=none"
-    exec "highlight StatusLineNC ctermbg=236 guibg=" . s:grey236 . " ctermfg=247 guifg=" . s:grey247 . " cterm=none gui=none"
 
     " Set user colors that will be used to color certain sections of the status
     " line.
