@@ -1,8 +1,13 @@
 moonfly statusline
 ==================
 
-_moonfly statusline_ is a simple _statusline_ for Vim and Neovim that uses
-[moonfly](https://github.com/bluz71/vim-moonfly-colors) colors.
+_moonfly statusline_ is a simple yet informative _statusline_ for Vim and Neovim
+that uses [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors by
+default.
+
+:cake: when the `g:moonflyHonorUserDefinedColors` option is enabled the
+[nightly](https://github.com/bluz71/vim-nightfly-guicolors) Vim theme will style
+the `statusline` using _nightfly_ colors.
 
 Screenshots
 -----------
@@ -88,15 +93,16 @@ let g:moonflyWithObessionGeometricCharacters = 1
 
 ### g:moonflyHonorUserDefinedColors
 
-The `g:moonflyHonorUserDefinedColors` option specifies whether user-defined
-colors should be used instead of the default colors from the moonfly color
-scheme.
+The `g:moonflyHonorUserDefinedColors` option specifies whether user-defined, or
+theme-defined such as
+[nightfly](https://github.com/bluz71/vim-nightfly-guicolors), colors should be
+used instead of the default colors from the moonfly color scheme.
 
 ```viml
 let g:moonflyHonorUserDefinedColors = 1
 ```
 
-For example, these user-defined colors mimic Vim's default status line colors:
+For example, these user-defined colors mimic Vim's default `statusline`:
 
 ```viml
 highlight! link User1 StatusLine
