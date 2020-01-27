@@ -102,7 +102,7 @@ function! MoonflyInactiveStatusLine()
     let l:statusline = ""
 
     let l:statusline  = " %*%<%{MoonflyShortFilePath()}\ %h%m%r"
-    let l:statusline .= "%*%=%-14.(%l,%c%V%)[%L]\ %P"
+    let l:statusline .= "%*%=%-12.(%l,%c%V%)[%L]\ %P "
 
     return l:statusline
 endfunction
