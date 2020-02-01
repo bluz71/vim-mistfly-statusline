@@ -102,16 +102,18 @@ used instead of the default colors from the moonfly color scheme.
 let g:moonflyHonorUserDefinedColors = 1
 ```
 
-For example, these user-defined colors mimic Vim's default `statusline`:
+Here is an example user-defined theme override saved in an appropriate `after`
+file such as `~/.vim/after/plugin/moonfly-statusline.vim`:
 
 ```viml
-highlight! link User1 StatusLine
+highlight! link User1 DiffText
 highlight! link User2 DiffAdd
-highlight! link User3 DiffChange
-highlight! link User4 DiffDelete
+highlight! link User3 Search
+highlight! link User4 IncSearch
 highlight! link User5 StatusLine
 highlight! link User6 StatusLine
 highlight! link User7 StatusLine
+highlight! link User8 StatusLine
 ```
 
 License
