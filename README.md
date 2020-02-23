@@ -42,6 +42,13 @@ If using [vim-plug](https://github.com/junegunn/vim-plug) do the following:
 1. Add `Plug 'bluz71/vim-moonfly-statusline'` to your _vimrc_
 2. Run `:PlugInstall`
 
+Notice
+------
+
+File explorers, such as _NERDTree_ and _netrw_, and certain other special
+windows will specifically **not** be styled by this plugin. Mode indicators in
+such windows are not useful.
+
 Options
 -------
 
