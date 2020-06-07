@@ -28,9 +28,11 @@ First install [moonfly](https://github.com/bluz71/vim-moonfly-colors)
 Plugins supported
 -----------------
 
--   [fugitive](https://github.com/tpope/vim-fugitive)
+- [fugitive](https://github.com/tpope/vim-fugitive)
 
--   [obsession](https://github.com/tpope/vim-obsession)
+- [obsession](https://github.com/tpope/vim-obsession)
+
+- [ALE](https://github.com/dense-analysis/ale)
 
 Installation
 ------------
@@ -91,11 +93,30 @@ geometric characters.
 If `g:moonflyWithObessionGeometricCharacters` is unset the default value from
 the obsession plugin will be used.
 
-To display the Unicode Git branch character please add the following to your
-_vimrc_:
+To display Obsession status with geometric characters please add the following
+to your _vimrc_:
 
 ```viml
 let g:moonflyWithObessionGeometricCharacters = 1
+```
+
+### g:moonflyWithALECrossCharacter
+
+_moonfly statusline_ supports the [ALE](https://github.com/dense-analysis/ale)
+plugin.
+
+The `g:moonflyWithALECrossCharacter` option specifies whether to indicate ALE
+errors using the Unicode cross character (`U+2716`). A modern font, such as
+[Iosevka](https://github.com/be5invis/Iosevka), will contain that Unicode
+character.
+
+If `g:moonflyWithALECrossCharacter` is unset then a simple `x` will be used to
+indicate ALE lint errors.
+
+To use the Unicode cross character please add the following to your _vimrc_:
+
+```viml
+let g:moonflyWithALECrossCharacter = 1
 ```
 
 ### g:moonflyHonorUserDefinedColors

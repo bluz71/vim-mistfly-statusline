@@ -16,6 +16,10 @@ let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0
 " status.
 let g:moonflyWithObessionGeometricCharacters = get(g:, "moonflyWithObessionGeometricCharacters", 0)
 
+" By default don't use Unicode cross symbol, U+2716, to indicate ALE
+" (https://github.com/dense-analysis/ale) error status.
+let g:moonflyWithALECrossCharacter = get(g:, "moonflyWithObessionGeometricCharacters", 0)
+
 " By default always use moonfly colors and ignore any user-defined colors.
 let g:moonflyHonorUserDefinedColors = get(g:, "moonflyHonorUserDefinedColors", 0)
 
@@ -68,9 +72,28 @@ function! MoonflyObsessionStatus()
     endif
 
     if g:moonflyWithObessionGeometricCharacters
-        return ObsessionStatus("[●] ", "[■] ")
+        return ObsessionStatus("● ", "■ ")
     else
-        return ObsessionStatus("[$] ", "[S] ")
+        return ObsessionStatus("$ ", "S ")
+    endif
+endfunction
+
+function! MoonflyALEStatus()
+    if !exists("g:loaded_ale")
+        return ""
+    endif
+
+    let l:errors = "x "
+    if g:moonflyWithALECrossCharacter
+        let l:errors = "✖ "
+    endif
+
+    let l:total = ale#statusline#Count(bufnr('')).total
+
+    if l:total > 0
+        return l:errors
+    else
+        return ""
     endif
 endfunction
 
@@ -91,8 +114,8 @@ function! MoonflyActiveStatusLine()
     let l:statusline .= "%* %<%{MoonflyShortFilePath()} %h%m%r"
     let l:statusline .= "%5* %{MoonflyFugitiveBranch()} "
     let l:statusline .= "%6*%=%-12.(%l,%c%V%)"
+    let l:statusline .= "%8*%{MoonflyObsessionStatus()}%{MoonflyALEStatus()}"
     let l:statusline .= "%7*[%L] "
-    let l:statusline .= "%8*%{MoonflyObsessionStatus()}"
     let l:statusline .= "%6*%P "
 
     return l:statusline
