@@ -62,8 +62,8 @@ plugin.
 
 The `g:moonflyWithALEIndicator` option specifies whether to indicate the
 presence of the ALE diagnostic errors in the current buffer via the defined
-`g:moonflyDiagnosticsIndicator`, by default the Unicode U+2716 `✖` symbol. If
-set, the indicator will be displayed in the right-side section of the
+`g:moonflyDiagnosticsIndicator` (the Unicode `U+2716` `✖` symbol by default). If
+enabled, the indicator will be displayed in the right-side section of the
 statusline.
 
 By default, ALE errors will **not** be indicated.
