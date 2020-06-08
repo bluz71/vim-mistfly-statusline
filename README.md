@@ -33,7 +33,7 @@ Plugins supported
 - [obsession](https://github.com/tpope/vim-obsession)
 
 - [ALE](https://github.com/dense-analysis/ale) via the
-  'g:moonflyWithALEIndicator' option
+  `g:moonflyWithALEIndicator` option
 
 Installation
 ------------
@@ -62,13 +62,13 @@ plugin.
 
 The `g:moonflyWithALEIndicator` option specifies whether to indicate the
 presence of the ALE diagnostic errors in the current buffer via the defined
-`g:moonflyDiagnosticsIndicator`, by default the Unicode U+2716 `✖` symbol, in
-the right-side section of the statusline.
+`g:moonflyDiagnosticsIndicator`, by default the Unicode U+2716 `✖` symbol. If
+set, the indicator will be displayed in the right-side section of the
+statusline.
 
 By default ALE errors will **not** be indicated.
 
-If ALE lint error indication is desired please add the following to your
-_vimrc_:
+If ALE error indication is desired please add the following to your _vimrc_:
 
 ```viml
 let g:moonflyWithALEIndicator = 1
@@ -77,13 +77,13 @@ let g:moonflyWithALEIndicator = 1
 ### g:moonflyDiagnosticsIndicator
 
 The `g:moonflyDiagnosticsIndicator` option specifies which character to use to
-indicate lint errors. Currently only
+indicate diagnostic errors. Currently only
 [ALE](https://github.com/dense-analysis/ale) lint errors may be indicated. In
 future other diagnostic systems may also be supported.
 
-By default the Unicode cross character (`U+2716`), `✖`, will be used. A modern
-font, such as [Iosevka](https://github.com/be5invis/Iosevka), will contain that
-Unicode character.
+By default the Unicode cross character (`U+2716`), `✖`, will be displayed. A
+modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
+contain that Unicode character.
 
 To specify your own diagnostics indicator please add the following to your
 _vimrc_:
