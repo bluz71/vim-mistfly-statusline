@@ -66,7 +66,7 @@ presence of the ALE diagnostic errors in the current buffer via the defined
 set, the indicator will be displayed in the right-side section of the
 statusline.
 
-By default ALE errors will **not** be indicated.
+By default, ALE errors will **not** be indicated.
 
 If ALE error indication is desired please add the following to your _vimrc_:
 
@@ -76,12 +76,12 @@ let g:moonflyWithALEIndicator = 1
 
 ### g:moonflyDiagnosticsIndicator
 
-The `g:moonflyDiagnosticsIndicator` option specifies which character to use to
-indicate diagnostic errors. Currently only
-[ALE](https://github.com/dense-analysis/ale) lint errors may be indicated. In
-future other diagnostic systems may also be supported.
+The `g:moonflyDiagnosticsIndicator` option specifies which character to indicate
+diagnostic errors. Currently, only [ALE](https://github.com/dense-analysis/ale)
+lint errors may be indicated. In future other diagnostic systems may also be
+supported.
 
-By default the Unicode cross character (`U+2716`), `✖`, will be displayed. A
+By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
 modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
 contain that Unicode character.
 
