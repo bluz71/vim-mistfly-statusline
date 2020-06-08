@@ -8,6 +8,16 @@ if exists("g:loaded_moonfly_statusline")
 endif
 let g:loaded_moonfly_statusline = 1
 
+" By default don't indicate ALE lint errors via the defined
+" g:moonflyDiagnosticsIndicator.
+let g:moonflyWithALEIndicator = get(g:, "moonflyWithALEIndicator", 0)
+
+" The character used to indicate the presence of diagnostic errors in the
+" current buffer. By default the U+2716 cross symbol will be used. Currently
+" only ALE linting errors may be indicated. In future other diagnostic systems
+" may also be supported.
+let g:moonflyDiagnosticsIndicator = get(g:, "moonflyDiagnosticsIndicator", "✖")
+
 " By default don't display Git branches using the U+E0A0 branch character.
 let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0)
 
@@ -15,10 +25,6 @@ let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0
 " Circle, to indicate the obsession (https://github.com/tpope/vim-obsession)
 " status.
 let g:moonflyWithObessionGeometricCharacters = get(g:, "moonflyWithObessionGeometricCharacters", 0)
-
-" By default don't use Unicode cross symbol, U+2716, to indicate ALE
-" (https://github.com/dense-analysis/ale) error status.
-let g:moonflyWithALECrossCharacter = get(g:, "moonflyWithObessionGeometricCharacters", 0)
 
 " By default always use moonfly colors and ignore any user-defined colors.
 let g:moonflyHonorUserDefinedColors = get(g:, "moonflyHonorUserDefinedColors", 0)
@@ -78,20 +84,13 @@ function! MoonflyObsessionStatus()
     endif
 endfunction
 
-function! MoonflyALEStatus()
-    if !exists("g:loaded_ale")
+function! MoonflyDiagnosticsStatus()
+    if !g:moonflyWithALEIndicator || !exists("g:loaded_ale")
         return ""
     endif
 
-    let l:errors = "x "
-    if g:moonflyWithALECrossCharacter
-        let l:errors = "✖ "
-    endif
-
-    let l:total = ale#statusline#Count(bufnr('')).total
-
-    if l:total > 0
-        return l:errors
+    if ale#statusline#Count(bufnr('')).total > 0
+        return g:moonflyDiagnosticsIndicator . " "
     else
         return ""
     endif
@@ -114,7 +113,7 @@ function! MoonflyActiveStatusLine()
     let l:statusline .= "%* %<%{MoonflyShortFilePath()} %h%m%r"
     let l:statusline .= "%5* %{MoonflyFugitiveBranch()} "
     let l:statusline .= "%6*%=%-12.(%l,%c%V%)"
-    let l:statusline .= "%8*%{MoonflyObsessionStatus()}%{MoonflyALEStatus()}"
+    let l:statusline .= "%8*%{MoonflyObsessionStatus()}%{MoonflyDiagnosticsStatus()}"
     let l:statusline .= "%7*[%L] "
     let l:statusline .= "%6*%P "
 
