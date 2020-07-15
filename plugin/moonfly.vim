@@ -129,15 +129,15 @@ function! MoonflyInactiveStatusLine()
     return l:statusline
 endfunction
 
-function! s:StatusLine(mode)
+function! s:StatusLine(active)
     let l:bn = bufname("%")
     if &buftype == "nofile" || &filetype == "netrw" || l:bn == "[BufExplorer]" || l:bn == "undotree_2"
         " Don't set a custom status line for special windows.
         return
-    elseif a:mode == "inactive"
-        setlocal statusline=%!MoonflyInactiveStatusLine()
-    else
+    elseif a:active == v:true
         setlocal statusline=%!MoonflyActiveStatusLine()
+    else
+        setlocal statusline=%!MoonflyInactiveStatusLine()
     endif
 endfunction
 
@@ -179,9 +179,9 @@ augroup MoonflyStatuslineAutocmds
     autocmd!
     autocmd VimEnter              * call s:UpdateInactiveWindows()
     autocmd ColorScheme,SourcePre * call s:UserColors()
-    autocmd WinEnter,BufWinEnter  * call s:StatusLine("active")
-    autocmd WinLeave              * call s:StatusLine("inactive")
+    autocmd WinEnter,BufWinEnter  * call s:StatusLine(v:true)
+    autocmd WinLeave              * call s:StatusLine(v:false)
     if exists("##CmdlineEnter")
-        autocmd CmdlineEnter      * call s:StatusLine("command") | redraw
+        autocmd CmdlineEnter      * call s:StatusLine(v:true) | redraw
     endif
 augroup END
