@@ -105,10 +105,8 @@ function! MoonflyShortFilePath()
 endfunction
 
 function! MoonflyActiveStatusLine()
-    let l:statusline = ""
     let l:mode = mode()
-
-    let l:statusline  = MoonflyModeColor(l:mode)
+    let l:statusline = MoonflyModeColor(l:mode)
     let l:statusline .= MoonflyModeText(l:mode)
     let l:statusline .= "%* %<%{MoonflyShortFilePath()} %h%m%r"
     let l:statusline .= "%5* %{MoonflyFugitiveBranch()} "
@@ -116,23 +114,26 @@ function! MoonflyActiveStatusLine()
     let l:statusline .= "%8*%{MoonflyObsessionStatus()}%{MoonflyDiagnosticsStatus()}"
     let l:statusline .= "%7*[%L] "
     let l:statusline .= "%6*%P "
-
     return l:statusline
 endfunction
 
 function! MoonflyInactiveStatusLine()
-    let l:statusline = ""
-
     let l:statusline  = " %*%<%{MoonflyShortFilePath()}\ %h%m%r"
     let l:statusline .= "%*%=%-12.(%l,%c%V%)[%L]\ %P "
+    return l:statusline
+endfunction
 
+function! MoonflyExplorerStatusLine()
+    let l:statusline = " %{fnamemodify(getcwd(), ':~:.')}"
     return l:statusline
 endfunction
 
 function! s:StatusLine(active)
     let l:bn = bufname("%")
-    if &buftype == "nofile" || &filetype == "netrw" || l:bn == "[BufExplorer]" || l:bn == "undotree_2"
-        " Don't set a custom status line for special windows.
+    if &buftype == "nofile" || &filetype == "netrw" || l:bn == "[BufExplorer]"
+        setlocal statusline=%!MoonflyExplorerStatusLine()
+    elseif l:bn == "undotree_2"
+        " Don't set a custom status line for certain special windows.
         return
     elseif a:active == v:true
         setlocal statusline=%!MoonflyActiveStatusLine()
