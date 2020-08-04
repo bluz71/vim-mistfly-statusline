@@ -100,7 +100,7 @@ function! MoonflyShortFilePath()
     if &buftype == "terminal"
         return expand("%:t")
     else
-        return pathshorten(expand("%:f"))
+        return pathshorten(fnamemodify(expand("%:f"), ":~:."))
     endif
 endfunction
 
