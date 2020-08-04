@@ -123,15 +123,15 @@ function! MoonflyInactiveStatusLine()
     return l:statusline
 endfunction
 
-function! MoonflyExplorerStatusLine()
-    let l:statusline = " %{fnamemodify(getcwd(), ':~:.')}"
+function! MoonflyFileExplorerStatusLine()
+    let l:statusline = " %{pathshorten(fnamemodify(getcwd(), ':~:.'))}"
     return l:statusline
 endfunction
 
 function! s:StatusLine(active)
     let l:bn = bufname("%")
-    if &buftype == "nofile" || &filetype == "netrw" || l:bn == "[BufExplorer]"
-        setlocal statusline=%!MoonflyExplorerStatusLine()
+    if &buftype == "nofile" || &filetype == "netrw"
+        setlocal statusline=%!MoonflyFileExplorerStatusLine()
     elseif l:bn == "undotree_2"
         " Don't set a custom status line for certain special windows.
         return
