@@ -100,7 +100,12 @@ function! MoonflyShortFilePath()
     if &buftype == "terminal"
         return expand("%:t")
     else
-        return pathshorten(fnamemodify(expand("%:f"), ":~:."))
+        let l:path = expand("%:f")
+        if len(l:path) == 0
+            return ""
+        else
+            return pathshorten(fnamemodify(expand("%:f"), ":~:."))
+        endif
     endif
 endfunction
 
@@ -123,7 +128,7 @@ function! MoonflyInactiveStatusLine()
     return l:statusline
 endfunction
 
-function! MoonflyFileExplorerStatusLine()
+function! MoonflyNoFileStatusLine()
     let l:statusline = " %{pathshorten(fnamemodify(getcwd(), ':~:.'))}"
     return l:statusline
 endfunction
@@ -131,7 +136,7 @@ endfunction
 function! s:StatusLine(active)
     let l:bn = bufname("%")
     if &buftype == "nofile" || &filetype == "netrw"
-        setlocal statusline=%!MoonflyFileExplorerStatusLine()
+        setlocal statusline=%!MoonflyNoFileStatusLine()
     elseif l:bn == "undotree_2"
         " Don't set a custom status line for certain special windows.
         return
