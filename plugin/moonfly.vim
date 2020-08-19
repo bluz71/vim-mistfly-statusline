@@ -113,18 +113,16 @@ function! MoonflyActiveStatusLine()
     let l:mode = mode()
     let l:statusline = MoonflyModeColor(l:mode)
     let l:statusline .= MoonflyModeText(l:mode)
-    let l:statusline .= "%* %<%{MoonflyShortFilePath()} %h%m%r"
+    let l:statusline .= "%* %<%{MoonflyShortFilePath()} %H%M%R"
     let l:statusline .= "%5* %{MoonflyFugitiveBranch()} "
-    let l:statusline .= "%6*%=%-12.(%l,%c%V%)"
     let l:statusline .= "%8*%{MoonflyObsessionStatus()}%{MoonflyDiagnosticsStatus()}"
-    let l:statusline .= "%7*[%L] "
-    let l:statusline .= "%6*%P "
+    let l:statusline .= "%6*%=%l:%c | %7*%L%6* | %P "
     return l:statusline
 endfunction
 
 function! MoonflyInactiveStatusLine()
     let l:statusline  = " %*%<%{MoonflyShortFilePath()}\ %h%m%r"
-    let l:statusline .= "%*%=%-12.(%l,%c%V%)[%L]\ %P "
+    let l:statusline .= "%*%=%l:%c | %L | %P "
     return l:statusline
 endfunction
 
@@ -175,7 +173,7 @@ function! s:UserColors()
     exec "highlight User2 ctermbg=251 guibg=" . s:white   . " ctermfg=234 guifg=" . s:grey234
     exec "highlight User3 ctermbg=13  guibg=" . s:purple  . " ctermfg=234 guifg=" . s:grey234
     exec "highlight User4 ctermbg=9   guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User5 ctermbg=236 guibg=" . s:grey236 . " ctermfg=10  guifg=" . s:emerald . " gui=none"
+    exec "highlight User5 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4   guifg=" . s:blue    . " gui=none"
     exec "highlight User6 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white   . " gui=none"
     exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4   guifg=" . s:blue    . " gui=none"
     exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=9   guifg=" . s:crimson . " gui=none"
