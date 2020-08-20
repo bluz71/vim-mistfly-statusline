@@ -3,11 +3,13 @@ moonfly statusline
 
 _moonfly statusline_ is a simple yet informative _statusline_ for Vim and Neovim
 that uses [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors by
-default.
+default. If those colors don't suit then they can easily be
+[customized](https://github.com/bluz71/vim-moonfly-statusline#gmoonflyignoredefaultcolors)
+if desired.
 
 :cake: When the `g:moonflyIgnoreDefaultColors` option is set the
-[nightly](https://github.com/bluz71/vim-nightfly-guicolors) Vim theme will style
-the `statusline` using _nightfly_ colors.
+[nightly](https://github.com/bluz71/vim-nightfly-guicolors) Vim theme will
+automatically style the `statusline` using _nightfly_ colors.
 
 Screenshots
 -----------
@@ -23,11 +25,6 @@ Screenshots
 The font in use is [Iosevka](https://github.com/be5invis/Iosevka). Also, the
 `g:moonflyWithGitBranchCharacter` option is set to `1`.
 
-Dependency
-----------
-
-First install [moonfly](https://github.com/bluz71/vim-moonfly-colors)
-
 Plugins supported
 -----------------
 
@@ -41,7 +38,7 @@ Plugins supported
 Installation
 ------------
 
-Use your favoured plugin manager to install **bluz71/vim-moonfly-statusline**.
+Use your preferred plugin manager to install **bluz71/vim-moonfly-statusline**.
 
 If using [vim-plug](https://github.com/junegunn/vim-plug) do the following:
 
@@ -52,30 +49,57 @@ Notice
 ------
 
 File explorers, such as _NERDTree_ and _netrw_, and certain other special
-windows will specifically **not** be styled by this plugin. Mode indicators in
-such windows are not useful.
+windows will **not** be directly styled by this plugin.
+
+Layout And Default Colors
+-------------------------
+
+The *moonfly-statusline* layout contains two groupings, the left side segments:
+
+```
+<Mode> <Filename & Flags> <Git Branch> <Plugin Indicators>
+```
+
+And the right side segments:
+
+```
+<Line:Column> | <No. Of Lines> | <% Position>
+```
+
+The default [moonfly](https://github.com/bluz71/vim-moonfly-colors) colours used
+in this _statusline_ layout:
+
+| Segment           | Highlight Group | Background                                                  | Foreground                                                  |
+|-------------------|-----------------|-------------------------------------------------------------|-------------------------------------------------------------|
+| Normal Mode       | `User1`         | ![background](https://placehold.it/32/80a0ff/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
+| Insert Mode       | `User2`         | ![background](https://placehold.it/32/c6c6c6/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
+| Visual Mode       | `User3`         | ![background](https://placehold.it/32/ae81ff/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
+| Replace Mode      | `User4`         | ![background](https://placehold.it/32/f74782/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
+| Git Branch        | `User5`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
+| Line:Column & %   | `User6`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/c6c6c6/000000?text=+) |
+| No. Of Line       | `User7`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
+| Plugin Indicators | `User8`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/f74782/000000?text=+) |
 
 Options
 -------
 
 ### g:moonflyIgnoreDefaultColors
 
-The `g:moonflyIgnoreDefaultColors` option specifies whether custom statusline
+The `g:moonflyIgnoreDefaultColors` option specifies whether custom _statusline_
 colors should be used in-place of
-[moonfly](https://github.com/bluz71/vim-moonfly-colors) colors.
-
-By default [moonfly](https://github.com/bluz71/vim-moonfly-colors) will be
-displayed.
-
-Note, the [nightfly](https://github.com/bluz71/vim-nightfly-guicolors) color
-scheme defines theme-specific statusline colors that are compatible with this
-plugin, but only when the following option is set:
+[moonfly](https://github.com/bluz71/vim-moonfly-colors) colors. By default
+[moonfly](https://github.com/bluz71/vim-moonfly-colors) will be displayed. If
+custom colors are to be used then please set the following option:
 
 ```viml
 let g:moonflyIgnoreDefaultColors = 1
 ```
 
-:gift: An example of a custom statusline color theme saved in an
+Note, the [nightfly](https://github.com/bluz71/vim-nightfly-guicolors) color
+scheme defines theme-specific _statusline_ colors that are compatible with this
+plugin, but only when `let g:moonflyIgnoreDefaultColors = 1` is set.
+
+:gift: Here is an example of a custom _statusline_ color theme saved in an
 appropriate `after` file such as `~/.vim/after/plugin/moonfly-statusline.vim`:
 
 ```viml
@@ -102,8 +126,8 @@ plugin.
 The `g:moonflyWithALEIndicator` option specifies whether to indicate the
 presence of the ALE diagnostic errors in the current buffer via the defined
 `g:moonflyDiagnosticsIndicator` (the Unicode `U+2716` `✖` symbol by default). If
-enabled, the indicator will be displayed in the right-side section of the
-statusline.
+enabled, the indicator will be displayed in the left-side section of the
+_statusline_.
 
 By default, ALE errors will **not** be indicated.
 
