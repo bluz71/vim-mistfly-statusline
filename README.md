@@ -7,6 +7,13 @@ default. If those colors do not suit then they can easily be
 [customized](https://github.com/bluz71/vim-moonfly-statusline#gmoonflyignoredefaultcolors)
 if desired.
 
+_moonfly statusline_ is also a very light _statusline_ plugin clocking in at
+less the 200 source lines of Vimscript, for comparison the
+[lightline](https://github.com/itchyny/lightline.vim) plugin contains over 3,000
+lines and the [airline](https://github.com/vim-airline/vim-airline) plugin over
+6,000 lines of Vimscript. In fairness, the latter two plugins are also more
+featureful.
+
 Screenshots
 -----------
 
