@@ -26,7 +26,9 @@ let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0
 " status.
 let g:moonflyWithObessionGeometricCharacters = get(g:, "moonflyWithObessionGeometricCharacters", 0)
 
-" By default always use moonfly colors and ignore any user-defined colors.
+" By default use moonfly colors.
+let g:moonflyIgnoreDefaultColors = get(g:, "moonflyIgnoreDefaultColors", 0)
+" Deprecated option, use 'g:moonflyIgnoreDefaultColors' option instead.
 let g:moonflyHonorUserDefinedColors = get(g:, "moonflyHonorUserDefinedColors", 0)
 
 let s:modes = {
@@ -163,7 +165,7 @@ function! s:UpdateInactiveWindows()
 endfunction
 
 function! s:UserColors()
-    if g:moonflyHonorUserDefinedColors
+    if g:moonflyIgnoreDefaultColors || g:moonflyHonorUserDefinedColors
         return
     endif
 

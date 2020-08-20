@@ -5,7 +5,7 @@ _moonfly statusline_ is a simple yet informative _statusline_ for Vim and Neovim
 that uses [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors by
 default.
 
-:cake: when the `g:moonflyHonorUserDefinedColors` option is enabled the
+:cake: When the `g:moonflyIgnoreDefaultColors` option is set the
 [nightly](https://github.com/bluz71/vim-nightfly-guicolors) Vim theme will style
 the `statusline` using _nightfly_ colors.
 
@@ -20,8 +20,8 @@ Screenshots
 
 <img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_replace.png">
 
-The font in use is [Iosevka](https://github.com/be5invis/Iosevka).
-Also, the `g:moonflyWithGitBranchCharacter` option is set to `1`.
+The font in use is [Iosevka](https://github.com/be5invis/Iosevka). Also, the
+`g:moonflyWithGitBranchCharacter` option is set to `1`.
 
 Dependency
 ----------
@@ -57,6 +57,36 @@ such windows are not useful.
 
 Options
 -------
+
+### g:moonflyIgnoreDefaultColors
+
+The `g:moonflyIgnoreDefaultColors` option specifies whether user-defined, or
+theme-defined such as
+[nightfly](https://github.com/bluz71/vim-nightfly-guicolors), colors should be
+used instead of the default colors from the moonfly color scheme.
+
+```viml
+let g:moonflyIgnoreDefaultColors = 1
+```
+
+:gift: An example of a custom statusline colorscheme saved in an
+appropriate `after` file such as `~/.vim/after/plugin/moonfly-statusline.vim`:
+
+```viml
+highlight! link User1 DiffText
+highlight! link User2 DiffAdd
+highlight! link User3 Search
+highlight! link User4 IncSearch
+highlight! link User5 StatusLine
+highlight! link User6 StatusLine
+highlight! link User7 StatusLine
+highlight! link User8 StatusLine
+```
+
+### g:moonflyHonorUserDefinedColors
+
+**DEPRECATED**, please refer to and use the `g:moonflyIgnoreDefaultColors`
+option instead.
 
 ### g:moonflyWithALEIndicator
 
@@ -139,31 +169,6 @@ to your _vimrc_:
 
 ```viml
 let g:moonflyWithObessionGeometricCharacters = 1
-```
-
-### g:moonflyHonorUserDefinedColors
-
-The `g:moonflyHonorUserDefinedColors` option specifies whether user-defined, or
-theme-defined such as
-[nightfly](https://github.com/bluz71/vim-nightfly-guicolors), colors should be
-used instead of the default colors from the moonfly color scheme.
-
-```viml
-let g:moonflyHonorUserDefinedColors = 1
-```
-
-Here is an example user-defined theme override saved in an appropriate `after`
-file such as `~/.vim/after/plugin/moonfly-statusline.vim`:
-
-```viml
-highlight! link User1 DiffText
-highlight! link User2 DiffAdd
-highlight! link User3 Search
-highlight! link User4 IncSearch
-highlight! link User5 StatusLine
-highlight! link User6 StatusLine
-highlight! link User7 StatusLine
-highlight! link User8 StatusLine
 ```
 
 License
