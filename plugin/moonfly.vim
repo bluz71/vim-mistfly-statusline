@@ -55,11 +55,11 @@ let s:purple  = "#ae81ff" " purple  = 13
 let s:crimson = "#f74782" " crimson = 9
 
 function! MoonflyModeColor(mode)
-  return get(s:modes, a:mode, "%*1")[0]
+    return get(s:modes, a:mode, "%*1")[0]
 endfunction
 
 function! MoonflyModeText(mode)
-  return get(s:modes, a:mode, " normal ")[1]
+    return get(s:modes, a:mode, " normal ")[1]
 endfunction
 
 function! MoonflyFugitiveBranch()
