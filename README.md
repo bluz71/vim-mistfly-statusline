@@ -60,16 +60,22 @@ Options
 
 ### g:moonflyIgnoreDefaultColors
 
-The `g:moonflyIgnoreDefaultColors` option specifies whether user-defined, or
-theme-defined such as
-[nightfly](https://github.com/bluz71/vim-nightfly-guicolors), colors should be
-used instead of the default colors from the moonfly color scheme.
+The `g:moonflyIgnoreDefaultColors` option specifies whether custom statusline
+colors should be used in-place of
+[moonfly](https://github.com/bluz71/vim-moonfly-colors) colors.
+
+By default [moonfly](https://github.com/bluz71/vim-moonfly-colors) will be
+displayed.
+
+Note, the [nightfly](https://github.com/bluz71/vim-nightfly-guicolors) color
+scheme defines theme-specific statusline colors that are compatible with this
+plugin, but only when the following option is set:
 
 ```viml
 let g:moonflyIgnoreDefaultColors = 1
 ```
 
-:gift: An example of a custom statusline colorscheme saved in an
+:gift: An example of a custom statusline color theme saved in an
 appropriate `after` file such as `~/.vim/after/plugin/moonfly-statusline.vim`:
 
 ```viml
