@@ -18,7 +18,10 @@ Screenshots
 
 <img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_visual.png">
 
+<img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_replace.png">
+
 The font in use is [Iosevka](https://github.com/be5invis/Iosevka).
+Also, the `g:moonflyWithGitBranchCharacter` option is set to `1`.
 
 Dependency
 ----------
