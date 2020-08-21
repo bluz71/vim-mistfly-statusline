@@ -75,8 +75,21 @@ And the right side segments:
 <Line:Column> | <Total Lines> | <% Position>
 ```
 
+Note, filenames will be displayed as follows:
+
+- Pathless filenames only for files in the current working directory
+
+- Relative paths in preference to absolute paths for files not in the current
+  workding directory
+
+- Likewise, `~` home directory paths in preference to absolute paths
+
+- For screen real estate reasons, filenames will be displayed with compacted
+  paths, for example `foo/bar/bazz/hello.txt` will be displayed as
+  `f/b/b/hello.txt`
+
 The default [moonfly](https://github.com/bluz71/vim-moonfly-colors) colours used
-in this _statusline_ layout:
+by the above _statusline_ layout:
 
 | Segment           | Highlight Group | Background                                                  | Foreground                                                  |
 |-------------------|-----------------|-------------------------------------------------------------|-------------------------------------------------------------|
