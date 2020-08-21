@@ -8,6 +8,11 @@ if exists("g:loaded_moonfly_statusline")
 endif
 let g:loaded_moonfly_statusline = 1
 
+" By default use moonfly colors.
+let g:moonflyIgnoreDefaultColors = get(g:, "moonflyIgnoreDefaultColors", 0)
+" DEPRECATED option, use 'g:moonflyIgnoreDefaultColors' option instead.
+let g:moonflyHonorUserDefinedColors = get(g:, "moonflyHonorUserDefinedColors", 0)
+
 " By default don't indicate ALE lint errors via the defined
 " g:moonflyDiagnosticsIndicator.
 let g:moonflyWithALEIndicator = get(g:, "moonflyWithALEIndicator", 0)
@@ -25,11 +30,6 @@ let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0
 " Circle, to indicate the obsession (https://github.com/tpope/vim-obsession)
 " status.
 let g:moonflyWithObessionGeometricCharacters = get(g:, "moonflyWithObessionGeometricCharacters", 0)
-
-" By default use moonfly colors.
-let g:moonflyIgnoreDefaultColors = get(g:, "moonflyIgnoreDefaultColors", 0)
-" Deprecated option, use 'g:moonflyIgnoreDefaultColors' option instead.
-let g:moonflyHonorUserDefinedColors = get(g:, "moonflyHonorUserDefinedColors", 0)
 
 let s:modes = {
   \  "n":      ["%1*", " normal "],
