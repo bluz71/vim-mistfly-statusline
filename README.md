@@ -96,8 +96,8 @@ Options
 The `g:moonflyIgnoreDefaultColors` option specifies whether custom _statusline_
 colors should be used in-place of
 [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors. By default
-[moonfly](https://github.com/bluz71/vim-moonfly-colors) will be displayed. If
-custom colors are to be used then please set the following option:
+[moonfly](https://github.com/bluz71/vim-moonfly-colors) colors will be
+displayed. If custom colors are to be used then please set the following option:
 
 ```viml
 let g:moonflyIgnoreDefaultColors = 1
@@ -107,8 +107,12 @@ let g:moonflyIgnoreDefaultColors = 1
 scheme automatically defines _statusline_ colors that are compatible with this
 plugin, but only when `let g:moonflyIgnoreDefaultColors = 1` is set.
 
-:gift: Here is an example of a custom _statusline_ color theme saved in an
-appropriate `after` file such as `~/.vim/after/plugin/moonfly-statusline.vim`:
+:gift: Here is an example of a customized _statusline_ color theme which should
+work well with most existing Vim color schemes including:
+[gruvbox](https://github.com/morhetz/gruvbox) and
+[nord](https://github.com/arcticicestudio/nord-vim). Save the following either
+at the end of your `~/.vimrc` file or in an appropriate `after` file such as
+`~/.vim/after/plugin/moonfly-statusline.vim`:
 
 ```viml
 highlight! link User1 DiffText
