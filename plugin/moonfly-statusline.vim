@@ -123,7 +123,7 @@ function! MoonflyActiveStatusLine()
 endfunction
 
 function! MoonflyInactiveStatusLine()
-    let l:statusline  = " %*%<%{MoonflyShortFilePath()}\ %H%M%R"
+    let l:statusline = " %*%<%{MoonflyShortFilePath()}\ %H%M%R"
     let l:statusline .= "%*%=%l:%c | %L | %P "
     return l:statusline
 endfunction
@@ -134,10 +134,10 @@ function! MoonflyNoFileStatusLine()
 endfunction
 
 function! s:StatusLine(active)
-    let l:bn = bufname("%")
     if &buftype == "nofile" || &filetype == "netrw"
+        " Likely a file explorer.
         setlocal statusline=%!MoonflyNoFileStatusLine()
-    elseif l:bn == "undotree_2"
+    elseif &buftype == "nowrite"
         " Don't set a custom status line for certain special windows.
         return
     elseif a:active == v:true
