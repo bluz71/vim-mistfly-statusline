@@ -8,11 +8,16 @@ default. If those colors do not suit then they can easily be
 if desired.
 
 _moonfly statusline_ is also a very light _statusline_ plugin clocking in at
-less the 200 source lines of Vimscript. For comparison, the
-[lightline](https://github.com/itchyny/lightline.vim) plugin contains over 3,000
-lines of Vimscript and the [airline](https://github.com/vim-airline/vim-airline)
-plugin over 6,000 lines of Vimscript. In fairness, the latter two plugins are
-also more featureful.
+less the 150 lines of Vimscript. For comparison, the
+[lightline](https://github.com/itchyny/lightline.vim) and
+[airline](https://github.com/vim-airline/vim-airline) _statuslines_ plugins
+contain over 3,500 and 6,500 lines of Vimscript respectively. In fairness, the
+latter two plugins are also more featureful.
+
+Lastly, for those that wish to hack their own _statusline_ but wish only to add
+some niceties, such a colorful mode indicator for example, then feel free to browse the
+[source](https://github.com/bluz71/vim-moonfly-statusline/blob/master/plugin/moonfly-statusline.vim)
+and borrow freely.
 
 Screenshots
 -----------
@@ -66,7 +71,7 @@ The *moonfly-statusline* layout contains two groupings, the left side segments:
 And the right side segments:
 
 ```
-<Line:Column> | <No. Of Lines> | <% Position>
+<Line:Column> | <Total Lines> | <% Position>
 ```
 
 The default [moonfly](https://github.com/bluz71/vim-moonfly-colors) colours used
@@ -80,7 +85,7 @@ in this _statusline_ layout:
 | Replace Mode      | `User4`         | ![background](https://placehold.it/32/f74782/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
 | Git Branch        | `User5`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
 | Line:Column & %   | `User6`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/c6c6c6/000000?text=+) |
-| No. Of Line       | `User7`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
+| Total Lines       | `User7`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
 | Plugin Indicators | `User8`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/f74782/000000?text=+) |
 
 Options
