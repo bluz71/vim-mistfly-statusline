@@ -14,8 +14,9 @@ less the 150 lines of Vimscript. For comparison, the
 contain over 3,500 and 6,500 lines of Vimscript respectively. In fairness, the
 latter two plugins are also more featureful.
 
-Lastly, for those that wish to hack their own _statusline_ but want only to add
-some niceties, such a colorful mode indicator for example, then feel free to browse the
+Lastly, for those that configure their own _statusline_ but seek only to add
+some niceties, such a colorful mode indicator for example, then feel free to
+browse the
 [source](https://github.com/bluz71/vim-moonfly-statusline/blob/master/plugin/moonfly-statusline.vim)
 and borrow freely.
 
