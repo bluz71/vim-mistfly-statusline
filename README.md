@@ -10,7 +10,7 @@ if desired.
 _moonfly statusline_ is also a very light _statusline_ plugin clocking in at
 less the 150 lines of Vimscript. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim) and
-[airline](https://github.com/vim-airline/vim-airline) _statuslines_ plugins
+[airline](https://github.com/vim-airline/vim-airline) _statusline_ plugins
 contain over 3,500 and 6,500 lines of Vimscript respectively. In fairness, the
 latter two plugins are also more featureful.
 
@@ -37,12 +37,15 @@ The font in use is [Iosevka](https://github.com/be5invis/Iosevka). Also, the
 Plugins supported
 -----------------
 
-- [fugitive](https://github.com/tpope/vim-fugitive)
+- [Fugitive](https://github.com/tpope/vim-fugitive)
 
-- [obsession](https://github.com/tpope/vim-obsession)
+- [Obsession](https://github.com/tpope/vim-obsession)
 
 - [ALE](https://github.com/dense-analysis/ale) via the
   `g:moonflyWithALEIndicator` option
+
+- [Coc](https://github.com/neoclide/coc.nvim) via the `g:moonflyWithCocStatus`
+  option
 
 Installation
 ------------
@@ -66,7 +69,7 @@ Layout And Default Colors
 The *moonfly-statusline* layout contains two groupings, the left side segments:
 
 ```
-<Mode> <Filename & Flags> <Git Branch> <Plugin Indicators>
+<Mode> <Filename & Flags> <Git Branch> <Plugins Status>
 ```
 
 And the right side segments:
@@ -100,7 +103,7 @@ by the above _statusline_ layout:
 | Git Branch        | `User5`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
 | Line:Column & %   | `User6`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/c6c6c6/000000?text=+) |
 | Total Lines       | `User7`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
-| Plugin Indicators | `User8`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/f74782/000000?text=+) |
+| Plugins Status    | `User8`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/f74782/000000?text=+) |
 
 Options
 -------
@@ -157,18 +160,35 @@ _statusline_.
 
 By default, ALE errors will **not** be indicated.
 
-If ALE error indication is desired please add the following to your _vimrc_:
+If ALE error indication is desired then please add the following to your
+_vimrc_:
 
 ```viml
 let g:moonflyWithALEIndicator = 1
+```
+
+### g:moonflyWithCocStatus
+
+_moonfly statusline_ supports the [Coc](https://github.com/neoclide/coc.nvim)
+plugin.
+
+The `g:moonflyWithCocStatus` option specifies whether to display Coc buffer
+diagnostics and extension details in the _statusline_.
+
+By default, Coc details will **not** be displayed.
+
+If Coc details are desired then please add the following to your _vimrc_:
+
+```viml
+let g:moonflyWithCocStatus = 1
 ```
 
 ### g:moonflyDiagnosticsIndicator
 
 The `g:moonflyDiagnosticsIndicator` option specifies which character to indicate
 diagnostic errors. Currently, only [ALE](https://github.com/dense-analysis/ale)
-lint errors may be indicated. In future other diagnostic systems may also be
-supported.
+lint errors may be indicated via this option. In future other diagnostic systems
+may also be supported.
 
 By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
 modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
@@ -184,7 +204,7 @@ let g:moonflyDiagnosticsIndicator = "<<CHARACTER-OF-YOUR-CHOOSING>>"
 ### g:moonflyWithGitBranchCharacter
 
 _moonfly statusline_ supports Tim Pope's
-[fugitive](https://github.com/tpope/vim-fugitive) plugin.
+[Fugitive](https://github.com/tpope/vim-fugitive) plugin.
 
 The `g:moonflyWithGitBranchCharacter` option specifies whether to display Git
 branch details using the Unicode Git branch character `U+E0A0`. By default Git
@@ -195,7 +215,7 @@ Code](https://github.com/tonsky/FiraCode) and
 character.
 
 If `g:moonflyWithGitBranchCharacter` is unset the default value from
-the fugitive plugin will be used.
+the Fugitive plugin will be used.
 
 To display the Unicode Git branch character please add the following to your
 _vimrc_:
@@ -209,7 +229,7 @@ The above screenshots are displayed with the Git branch character.
 ### g:moonflyWithObessionGeometricCharacters
 
 _moonfly statusline_ supports Tim Pope's
-[obsession](https://github.com/tpope/vim-obsession) plugin.
+[Obsession](https://github.com/tpope/vim-obsession) plugin.
 
 The `g:moonflyWithObessionGeometricCharacters` option specifies whether to
 display obsession details using Unicode geometric characters (`U+25A0` - Black
@@ -218,7 +238,7 @@ Square & `U+25CF` - Black Circle). A modern font, such as
 geometric characters.
 
 If `g:moonflyWithObessionGeometricCharacters` is unset the default value from
-the obsession plugin will be used.
+the Obsession plugin will be used.
 
 To display Obsession status with geometric characters please add the following
 to your _vimrc_:

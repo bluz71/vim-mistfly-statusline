@@ -17,6 +17,9 @@ let g:moonflyHonorUserDefinedColors = get(g:, "moonflyHonorUserDefinedColors", 0
 " g:moonflyDiagnosticsIndicator.
 let g:moonflyWithALEIndicator = get(g:, "moonflyWithALEIndicator", 0)
 
+" By default don't display Coc status.
+let g:moonflyWithCocStatus = get(g:, "moonflyWithCocStatus", 0)
+
 " The character used to indicate the presence of diagnostic errors in the
 " current buffer. By default the U+2716 cross symbol will be used. Currently
 " only ALE linting errors may be indicated. In future other diagnostic systems
@@ -74,30 +77,6 @@ function! MoonflyFugitiveBranch()
     endif
 endfunction
 
-function! MoonflyObsessionStatus()
-    if !exists("g:loaded_obsession")
-        return ""
-    endif
-
-    if g:moonflyWithObessionGeometricCharacters
-        return ObsessionStatus("● ", "■ ")
-    else
-        return ObsessionStatus("$ ", "S ")
-    endif
-endfunction
-
-function! MoonflyDiagnosticsStatus()
-    if !g:moonflyWithALEIndicator || !exists("g:loaded_ale")
-        return ""
-    endif
-
-    if ale#statusline#Count(bufnr('')).total > 0
-        return g:moonflyDiagnosticsIndicator . " "
-    else
-        return ""
-    endif
-endfunction
-
 function! MoonflyShortFilePath()
     if &buftype == "terminal"
         return expand("%:t")
@@ -111,13 +90,40 @@ function! MoonflyShortFilePath()
     endif
 endfunction
 
+function! MoonflyPluginsStatus()
+    let l:status = ""
+
+    " Obsession plugin.
+    if exists("g:loaded_obsession")
+        if g:moonflyWithObessionGeometricCharacters
+            let l:status .= ObsessionStatus("● ", "■ ")
+        else
+            let l:status .= ObsessionStatus("$ ", "S ")
+        endif
+    endif
+
+    " ALE plugin.
+    if g:moonflyWithALEIndicator && exists("g:loaded_ale")
+        if ale#statusline#Count(bufnr('')).total > 0
+            let l:status .= g:moonflyDiagnosticsIndicator . " "
+        endif
+    endif
+
+    " Coc plugin.
+    if g:moonflyWithCocStatus && exists('g:did_coc_loaded')
+        let l:status .= coc#status()
+    endif
+
+    return l:status
+endfunction
+
 function! MoonflyActiveStatusLine()
     let l:mode = mode()
     let l:statusline = MoonflyModeColor(l:mode)
     let l:statusline .= MoonflyModeText(l:mode)
     let l:statusline .= "%* %<%{MoonflyShortFilePath()} %H%M%R"
     let l:statusline .= "%5* %{MoonflyFugitiveBranch()} "
-    let l:statusline .= "%8*%{MoonflyObsessionStatus()}%{MoonflyDiagnosticsStatus()}"
+    let l:statusline .= "%8*%{MoonflyPluginsStatus()}"
     let l:statusline .= "%6*%=%l:%c | %7*%L%6* | %P "
     return l:statusline
 endfunction
@@ -181,7 +187,7 @@ function! s:UserColors()
     exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=9   guifg=" . s:crimson . " gui=none"
 endfunction
 
-augroup MoonflyStatuslineAutocmds
+augroup MoonflyStatuslineEvents
     autocmd!
     autocmd VimEnter              * call s:UpdateInactiveWindows()
     autocmd ColorScheme,SourcePre * call s:UserColors()
