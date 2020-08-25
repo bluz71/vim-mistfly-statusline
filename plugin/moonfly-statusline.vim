@@ -50,7 +50,6 @@ let s:modes = {
 
 " The moonfly colors (https://github.com/bluz71/vim-moonfly-colors)
 let s:white   = "#c6c6c6" " white   = 251
-let s:grey236 = "#303030" " grey236 = 236
 let s:grey234 = "#1c1c1c" " grey234 = 234
 let s:emerald = "#42cf89" " emerald = 10
 let s:blue    = "#80a0ff" " blue    = 4
@@ -123,8 +122,8 @@ function! MoonflyActiveStatusLine()
     let l:statusline .= MoonflyModeText(l:mode)
     let l:statusline .= "%* %<%{MoonflyShortFilePath()} %H%M%R"
     let l:statusline .= "%5* %{MoonflyFugitiveBranch()} "
-    let l:statusline .= "%8*%{MoonflyPluginsStatus()}"
-    let l:statusline .= "%6*%=%l:%c | %7*%L%6* | %P "
+    let l:statusline .= "%6*%{MoonflyPluginsStatus()}"
+    let l:statusline .= "%*%=%l:%c | %7*%L%* | %P "
     return l:statusline
 endfunction
 
@@ -175,16 +174,28 @@ function! s:UserColors()
         return
     endif
 
+    " Leverage existing 'colorscheme' StatusLine colors taking into account the
+    " 'reverse' option.
+    if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'cterm') == 1
+        let l:slBgCterm = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'cterm')
+    else
+        let l:slBgCterm = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'cterm')
+    endif
+    if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'gui') == 1
+        let l:slBgGui = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
+    else
+        let l:slBgGui = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
+    endif
+
     " Set user colors that will be used to color certain sections of the status
     " line.
     exec "highlight User1 ctermbg=4   guibg=" . s:blue    . " ctermfg=234 guifg=" . s:grey234
     exec "highlight User2 ctermbg=251 guibg=" . s:white   . " ctermfg=234 guifg=" . s:grey234
     exec "highlight User3 ctermbg=13  guibg=" . s:purple  . " ctermfg=234 guifg=" . s:grey234
     exec "highlight User4 ctermbg=9   guibg=" . s:crimson . " ctermfg=234 guifg=" . s:grey234
-    exec "highlight User5 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4   guifg=" . s:blue    . " gui=none"
-    exec "highlight User6 ctermbg=236 guibg=" . s:grey236 . " ctermfg=251 guifg=" . s:white   . " gui=none"
-    exec "highlight User7 ctermbg=236 guibg=" . s:grey236 . " ctermfg=4   guifg=" . s:blue    . " gui=none"
-    exec "highlight User8 ctermbg=236 guibg=" . s:grey236 . " ctermfg=9   guifg=" . s:crimson . " gui=none"
+    exec "highlight User5 ctermbg=" . l:slBgCterm . " guibg=" . l:slBgGui . " ctermfg=4   guifg=" . s:blue    . " gui=none"
+    exec "highlight User6 ctermbg=" . l:slBgCterm . " guibg=" . l:slBgGui . " ctermfg=9   guifg=" . s:crimson . " gui=none"
+    exec "highlight User7 ctermbg=" . l:slBgCterm . " guibg=" . l:slBgGui . " ctermfg=4   guifg=" . s:blue    . " gui=none"
 endfunction
 
 augroup MoonflyStatuslineEvents

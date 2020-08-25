@@ -69,16 +69,18 @@ Layout And Default Colors
 The *moonfly-statusline* layout contains two groupings, the left side segments:
 
 ```
-<Mode> <Filename & Flags> <Git Branch> <Plugins Status>
+<Mode *> <Filename & Flags> <Git Branch *> <Plugins Status *>
 ```
 
 And the right side segments:
 
 ```
-<Line:Column> | <Total Lines> | <% Position>
+<Line:Column> | <Total Lines *> | <% Position>
 ```
 
-Note, filenames will be displayed as follows:
+Segments marked with a `*` will be colored by default, refer to the table below.
+
+Note also, filenames will be displayed as follows:
 
 - Pathless filenames only for files in the current working directory
 
@@ -92,7 +94,7 @@ Note, filenames will be displayed as follows:
   `f/b/b/hello.txt`
 
 The default [moonfly](https://github.com/bluz71/vim-moonfly-colors) colours used
-by the above _statusline_ layout:
+for the above listed colored `*` segments:
 
 | Segment           | Highlight Group | Background                                                  | Foreground                                                  |
 |-------------------|-----------------|-------------------------------------------------------------|-------------------------------------------------------------|
@@ -101,9 +103,8 @@ by the above _statusline_ layout:
 | Visual Mode       | `User3`         | ![background](https://placehold.it/32/ae81ff/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
 | Replace Mode      | `User4`         | ![background](https://placehold.it/32/f74782/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
 | Git Branch        | `User5`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
-| Line:Column & %   | `User6`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/c6c6c6/000000?text=+) |
+| Plugins Status    | `User6`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/f74782/000000?text=+) |
 | Total Lines       | `User7`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
-| Plugins Status    | `User8`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/f74782/000000?text=+) |
 
 Options
 -------
@@ -122,7 +123,7 @@ let g:moonflyIgnoreDefaultColors = 1
 
 :cake: The [nightfly](https://github.com/bluz71/vim-nightfly-guicolors) color
 scheme automatically defines _statusline_ colors that are compatible with this
-plugin, but only when `let g:moonflyIgnoreDefaultColors = 1` is set.
+plugin. No custom settings are required with this color scheme.
 
 :gift: Here is an example of a customized _statusline_ color theme which should
 work well with most existing Vim color schemes including:
@@ -139,7 +140,6 @@ highlight! link User4 IncSearch
 highlight! link User5 StatusLine
 highlight! link User6 StatusLine
 highlight! link User7 StatusLine
-highlight! link User8 StatusLine
 ```
 
 ### g:moonflyHonorUserDefinedColors
