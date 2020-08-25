@@ -13,18 +13,20 @@ let g:moonflyIgnoreDefaultColors = get(g:, "moonflyIgnoreDefaultColors", 0)
 " DEPRECATED option, use 'g:moonflyIgnoreDefaultColors' option instead.
 let g:moonflyHonorUserDefinedColors = get(g:, "moonflyHonorUserDefinedColors", 0)
 
+" The character used to indicate the presence of diagnostic errors in the
+" current buffer. By default the U+2716 cross symbol will be used.
+let g:moonflyDiagnosticsIndicator = get(g:, "moonflyDiagnosticsIndicator", "✖")
+
 " By default don't indicate ALE lint errors via the defined
 " g:moonflyDiagnosticsIndicator.
 let g:moonflyWithALEIndicator = get(g:, "moonflyWithALEIndicator", 0)
 
-" By default don't display Coc status.
-let g:moonflyWithCocStatus = get(g:, "moonflyWithCocStatus", 0)
+" By default don't indicate Coc lint errors via the defined
+" g:moonflyDiagnosticsIndicator.
+let g:moonflyWithCocIndicator = get(g:, "moonflyWithCocIndicator", 0)
 
-" The character used to indicate the presence of diagnostic errors in the
-" current buffer. By default the U+2716 cross symbol will be used. Currently
-" only ALE linting errors may be indicated. In future other diagnostic systems
-" may also be supported.
-let g:moonflyDiagnosticsIndicator = get(g:, "moonflyDiagnosticsIndicator", "✖")
+" By default don't display verbose Coc status.
+let g:moonflyWithCocStatus = get(g:, "moonflyWithCocStatus", 0)
 
 " By default don't display Git branches using the U+E0A0 branch character.
 let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0)
@@ -101,14 +103,22 @@ function! MoonflyPluginsStatus()
         endif
     endif
 
-    " ALE plugin.
+    " ALE plugin indicator.
     if g:moonflyWithALEIndicator && exists("g:loaded_ale")
         if ale#statusline#Count(bufnr('')).total > 0
             let l:status .= g:moonflyDiagnosticsIndicator . " "
         endif
     endif
 
-    " Coc plugin.
+    " Coc plugin indicator.
+    if g:moonflyWithCocIndicator && exists('g:did_coc_loaded')
+        if empty(get(b:, 'coc_diagnostic_info', {})) == 0
+            " Not empty, Coc indicates diagnostics for the current buffer.
+            let l:status .= g:moonflyDiagnosticsIndicator . " "
+        endif
+    endif
+
+    " Coc plugin status.
     if g:moonflyWithCocStatus && exists('g:did_coc_loaded')
         let l:status .= coc#status()
     endif

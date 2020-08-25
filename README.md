@@ -8,7 +8,7 @@ default. If those colors do not suit then they can easily be
 if desired.
 
 _moonfly statusline_ is also a very light _statusline_ plugin clocking in at
-less the 150 lines of Vimscript. For comparison, the
+well less the 200 lines of Vimscript. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim) and
 [airline](https://github.com/vim-airline/vim-airline) _statusline_ plugins
 contain over 3,500 and 6,500 lines of Vimscript respectively. In fairness, the
@@ -44,8 +44,8 @@ Plugins supported
 - [ALE](https://github.com/dense-analysis/ale) via the
   `g:moonflyWithALEIndicator` option
 
-- [Coc](https://github.com/neoclide/coc.nvim) via the `g:moonflyWithCocStatus`
-  option
+- [Coc](https://github.com/neoclide/coc.nvim) via the
+  `g:moonflyWithCocIndicator` or `g:moonflyWithCocStatus` options
 
 Installation
 ------------
@@ -102,9 +102,9 @@ for the above listed colored `*` segments:
 | Insert Mode       | `User2`         | ![background](https://placehold.it/32/c6c6c6/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
 | Visual Mode       | `User3`         | ![background](https://placehold.it/32/ae81ff/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
 | Replace Mode      | `User4`         | ![background](https://placehold.it/32/f74782/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
-| Git Branch        | `User5`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
-| Plugins Status    | `User6`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/f74782/000000?text=+) |
-| Total Lines       | `User7`         | ![background](https://placehold.it/32/303030/000000?text=+) | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
+| Git Branch        | `User5`         | `StatusLine` background                                     | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
+| Plugins Status    | `User6`         | `StatusLine` background                                     | ![background](https://placehold.it/32/f74782/000000?text=+) |
+| Total Lines       | `User7`         | `StatusLine` background                                     | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
 
 Options
 -------
@@ -147,13 +147,31 @@ highlight! link User7 StatusLine
 **DEPRECATED**, please refer to and use the `g:moonflyIgnoreDefaultColors`
 option instead.
 
+### g:moonflyDiagnosticsIndicator
+
+The `g:moonflyDiagnosticsIndicator` option specifies which character to indicate
+diagnostic errors. Currently, [ALE](https://github.com/dense-analysis/ale)
+and [Coc](https://github.com/neoclide/coc.nvim) lint errors may be indicated via
+this option.
+
+By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
+modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
+contain that Unicode character.
+
+To specify your own diagnostics indicator please add the following to your
+_vimrc_:
+
+```viml
+let g:moonflyDiagnosticsIndicator = "<<CHARACTER-OF-YOUR-CHOOSING>>"
+```
+
 ### g:moonflyWithALEIndicator
 
 _moonfly statusline_ supports the [ALE](https://github.com/dense-analysis/ale)
 plugin.
 
 The `g:moonflyWithALEIndicator` option specifies whether to indicate the
-presence of the ALE diagnostic errors in the current buffer via the defined
+presence of the ALE diagnostics in the current buffer via the defined
 `g:moonflyDiagnosticsIndicator` (the Unicode `U+2716` `✖` symbol by default). If
 enabled, the indicator will be displayed in the left-side section of the
 _statusline_.
@@ -167,39 +185,43 @@ _vimrc_:
 let g:moonflyWithALEIndicator = 1
 ```
 
-### g:moonflyWithCocStatus
+### g:moonflyWithCocIndicator
 
 _moonfly statusline_ supports the [Coc](https://github.com/neoclide/coc.nvim)
 plugin.
 
-The `g:moonflyWithCocStatus` option specifies whether to display Coc buffer
-diagnostics and extension details in the _statusline_.
+The `g:moonflyWithCocIndicator` option specifies whether to indicate the
+presence of the Coc diagnostics in the current buffer via the defined
+`g:moonflyDiagnosticsIndicator` (the Unicode `U+2716` `✖` symbol by default). If
+enabled, the indicator will be displayed in the left-side section of the
+_statusline_.
 
-By default, Coc details will **not** be displayed.
+By default, Coc errors will **not** be indicated.
 
-If Coc details are desired then please add the following to your _vimrc_:
+If Coc error indication is desired then please add the following to your
+_vimrc_:
+
+```viml
+let g:moonflyWithCocIndicator = 1
+```
+
+### g:moonflyWithCocStatus
+
+Unlike `g:moonflyWithCocIndicator`, the `g:moonflyWithCocStatus` option
+specifies whether to display verbose Coc buffer diagnostics and extension
+details in the _statusline_, not just an indicator.
+
+By default, verbose Coc details will **not** be displayed.
+
+If Coc verbose details are desired then please add the following to your
+_vimrc_:
 
 ```viml
 let g:moonflyWithCocStatus = 1
 ```
 
-### g:moonflyDiagnosticsIndicator
-
-The `g:moonflyDiagnosticsIndicator` option specifies which character to indicate
-diagnostic errors. Currently, only [ALE](https://github.com/dense-analysis/ale)
-lint errors may be indicated via this option. In future other diagnostic systems
-may also be supported.
-
-By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
-modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
-contain that Unicode character.
-
-To specify your own diagnostics indicator please add the following to your
-_vimrc_:
-
-```viml
-let g:moonflyDiagnosticsIndicator = "<<CHARACTER-OF-YOUR-CHOOSING>>"
-```
+If using Coc, then it is recommended to only set one of
+`g:moonflyWithCocIndicator` or `g:moonflyWithCocStatus`.
 
 ### g:moonflyWithGitBranchCharacter
 
