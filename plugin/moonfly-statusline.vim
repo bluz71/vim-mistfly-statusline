@@ -186,6 +186,14 @@ function! s:UserColors()
     else
         let l:slBgGui = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
     endif
+    " Fallback to moonfly colors when the colorscheme does not set StatusLine
+    " colors.
+    if len(l:slBgCterm) == 0
+        let l:slBgCterm = '236'
+    endif
+    if len(l:slBgGui) == 0
+        let l:slBgGui = '#303030'
+    endif
 
     " Set user colors that will be used to color certain sections of the status
     " line.
