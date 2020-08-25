@@ -45,7 +45,7 @@ Plugins supported
   `g:moonflyWithALEIndicator` option
 
 - [Coc](https://github.com/neoclide/coc.nvim) via the
-  `g:moonflyWithCocIndicator` or `g:moonflyWithCocStatus` options
+  `g:moonflyWithCocIndicator` option
 
 Installation
 ------------
@@ -151,7 +151,7 @@ option instead.
 
 The `g:moonflyDiagnosticsIndicator` option specifies which character to indicate
 diagnostic errors. Currently, [ALE](https://github.com/dense-analysis/ale)
-and [Coc](https://github.com/neoclide/coc.nvim) lint errors may be indicated via
+and [Coc](https://github.com/neoclide/coc.nvim) diagnostics may be indicated via
 this option.
 
 By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
@@ -204,24 +204,6 @@ _vimrc_:
 ```viml
 let g:moonflyWithCocIndicator = 1
 ```
-
-### g:moonflyWithCocStatus
-
-Unlike `g:moonflyWithCocIndicator`, the `g:moonflyWithCocStatus` option
-specifies whether to display verbose Coc buffer diagnostics and extension
-details in the _statusline_, not just an indicator.
-
-By default, verbose Coc details will **not** be displayed.
-
-If Coc verbose details are desired then please add the following to your
-_vimrc_:
-
-```viml
-let g:moonflyWithCocStatus = 1
-```
-
-If using Coc, then it is recommended to only set one of
-`g:moonflyWithCocIndicator` or `g:moonflyWithCocStatus`.
 
 ### g:moonflyWithGitBranchCharacter
 

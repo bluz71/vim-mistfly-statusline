@@ -25,9 +25,6 @@ let g:moonflyWithALEIndicator = get(g:, "moonflyWithALEIndicator", 0)
 " g:moonflyDiagnosticsIndicator.
 let g:moonflyWithCocIndicator = get(g:, "moonflyWithCocIndicator", 0)
 
-" By default don't display verbose Coc status.
-let g:moonflyWithCocStatus = get(g:, "moonflyWithCocStatus", 0)
-
 " By default don't display Git branches using the U+E0A0 branch character.
 let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0)
 
@@ -112,15 +109,9 @@ function! MoonflyPluginsStatus()
 
     " Coc plugin indicator.
     if g:moonflyWithCocIndicator && exists('g:did_coc_loaded')
-        if empty(get(b:, 'coc_diagnostic_info', {})) == 0
-            " Not empty, Coc indicates diagnostics for the current buffer.
+        if len(coc#status()) > 0
             let l:status .= g:moonflyDiagnosticsIndicator . " "
         endif
-    endif
-
-    " Coc plugin status.
-    if g:moonflyWithCocStatus && exists('g:did_coc_loaded')
-        let l:status .= coc#status()
     endif
 
     return l:status
