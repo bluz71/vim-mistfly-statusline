@@ -69,9 +69,9 @@ function! MoonflyFugitiveBranch()
     endif
 
     if g:moonflyWithGitBranchCharacter
-        return "[ " . fugitive#head() . "]"
+        return "\ [ " . fugitive#head() . "] "
     else
-        return fugitive#statusline()
+        return fugitive#statusline() . " "
     endif
 endfunction
 
@@ -121,8 +121,10 @@ function! MoonflyActiveStatusLine()
     let l:mode = mode()
     let l:statusline = MoonflyModeColor(l:mode)
     let l:statusline .= MoonflyModeText(l:mode)
-    let l:statusline .= "%* %<%{MoonflyShortFilePath()} %H%M%R"
-    let l:statusline .= "%5* %{MoonflyFugitiveBranch()} "
+    let l:statusline .= "%* %<%{MoonflyShortFilePath()}"
+    let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
+    let l:statusline .= "%{&readonly?'RO\ ':''}"
+    let l:statusline .= "%5*%{MoonflyFugitiveBranch()}"
     let l:statusline .= "%6*%{MoonflyPluginsStatus()}"
     let l:statusline .= "%*%=%l:%c | %7*%L%* | %P "
     return l:statusline
