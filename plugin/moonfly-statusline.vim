@@ -13,6 +13,12 @@ let g:moonflyIgnoreDefaultColors = get(g:, "moonflyIgnoreDefaultColors", 0)
 " DEPRECATED option, use 'g:moonflyIgnoreDefaultColors' option instead.
 let g:moonflyHonorUserDefinedColors = get(g:, "moonflyHonorUserDefinedColors", 0)
 
+" By default display Git branches.
+let g:moonflyWithGitBranch = get(g:, "moonflyWithGitBranch", 1)
+
+" By default don't display Git branches with the U+E0A0 branch character.
+let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0)
+
 " The character used to indicate the presence of diagnostic errors in the
 " current buffer. By default the U+2716 cross symbol will be used.
 let g:moonflyDiagnosticsIndicator = get(g:, "moonflyDiagnosticsIndicator", "✖")
@@ -24,9 +30,6 @@ let g:moonflyWithALEIndicator = get(g:, "moonflyWithALEIndicator", 0)
 " By default don't indicate Coc lint errors via the defined
 " g:moonflyDiagnosticsIndicator.
 let g:moonflyWithCocIndicator = get(g:, "moonflyWithCocIndicator", 0)
-
-" By default don't display Git branches using the U+E0A0 branch character.
-let g:moonflyWithGitBranchCharacter = get(g:, "moonflyWithGitBranchCharacter", 0)
 
 " By default don't use geometric shapes, U+25A0 - Black Square & U+25CF - Black
 " Circle, to indicate the obsession (https://github.com/tpope/vim-obsession)
@@ -63,28 +66,20 @@ function! MoonflyModeText(mode)
     return get(s:modes, a:mode, " normal ")[1]
 endfunction
 
-function! MoonflyFugitiveBranch()
-    if !exists("g:loaded_fugitive") || !exists("b:git_dir")
+function! MoonflyGitBranch()
+    if !g:moonflyWithGitBranch
+        return ""
+    endif
+
+    let l:gitBranch = moonfly_statusline#gitBranch()
+    if len(l:gitBranch) == 0
         return ""
     endif
 
     if g:moonflyWithGitBranchCharacter
-        return "\ [ " . fugitive#head() . "] "
+        return "\ [ " . l:gitBranch . "] "
     else
-        return fugitive#statusline() . " "
-    endif
-endfunction
-
-function! MoonflyShortFilePath()
-    if &buftype == "terminal"
-        return expand("%:t")
-    else
-        let l:path = expand("%:f")
-        if len(l:path) == 0
-            return ""
-        else
-            return pathshorten(fnamemodify(expand("%:f"), ":~:."))
-        endif
+        return "\ [" . l:gitBranch . "] "
     endif
 endfunction
 
@@ -121,17 +116,19 @@ function! MoonflyActiveStatusLine()
     let l:mode = mode()
     let l:statusline = MoonflyModeColor(l:mode)
     let l:statusline .= MoonflyModeText(l:mode)
-    let l:statusline .= "%* %<%{MoonflyShortFilePath()}"
+    let l:statusline .= "%* %<%{moonfly_statusline#shortFilePath()}"
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
-    let l:statusline .= "%5*%{MoonflyFugitiveBranch()}"
+    let l:statusline .= "%5*%{MoonflyGitBranch()}"
     let l:statusline .= "%6*%{MoonflyPluginsStatus()}"
     let l:statusline .= "%*%=%l:%c | %7*%L%* | %P "
     return l:statusline
 endfunction
 
 function! MoonflyInactiveStatusLine()
-    let l:statusline = " %*%<%{MoonflyShortFilePath()}\ %H%M%R"
+    let l:statusline = " %*%<%{moonfly_statusline#shortFilePath()}"
+    let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
+    let l:statusline .= "%{&readonly?'RO\ ':''}"
     let l:statusline .= "%*%=%l:%c | %L | %P "
     return l:statusline
 endfunction

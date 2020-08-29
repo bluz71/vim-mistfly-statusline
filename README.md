@@ -8,7 +8,7 @@ default. If those colors do not suit then they can easily be
 if desired.
 
 _moonfly statusline_ is also a very light _statusline_ plugin clocking in at
-well less the 200 lines of Vimscript. For comparison, the
+around 200 lines of Vimscript. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim) and
 [airline](https://github.com/vim-airline/vim-airline) _statusline_ plugins
 contain over 3,500 and 6,500 lines of Vimscript respectively. In fairness, the
@@ -36,8 +36,6 @@ The font in use is [Iosevka](https://github.com/be5invis/Iosevka). Also, the
 
 Plugins supported
 -----------------
-
-- [Fugitive](https://github.com/tpope/vim-fugitive)
 
 - [Obsession](https://github.com/tpope/vim-obsession)
 
@@ -121,10 +119,6 @@ displayed. If custom colors are to be used then please set the following option:
 let g:moonflyIgnoreDefaultColors = 1
 ```
 
-:cake: The [nightfly](https://github.com/bluz71/vim-nightfly-guicolors) color
-scheme automatically defines _statusline_ colors that are compatible with this
-plugin. No custom settings are required with this color scheme.
-
 :gift: Here is an example of a customized _statusline_ color theme which should
 work well with most existing Vim color schemes including:
 [gruvbox](https://github.com/morhetz/gruvbox) and
@@ -142,10 +136,49 @@ highlight! link User6 StatusLine
 highlight! link User7 StatusLine
 ```
 
+:cake: Note, the [nightfly](https://github.com/bluz71/vim-nightfly-guicolors)
+color scheme automatically defines _statusline_ colors that are compatible with
+this plugin. **No** custom settings are required with this color scheme.
+
 ### g:moonflyHonorUserDefinedColors
 
 **DEPRECATED**, please refer to and use the `g:moonflyIgnoreDefaultColors`
 option instead.
+
+### g:moonflyWithGitBranch
+
+The `g:moonflyWithGitBranch` option specifies whether to display Git branch
+details in the _statusline_. By default Git branches will be displayed in the
+`statusline`.
+
+To disable the display of Git branches in the _statusline_ please add the
+following to your _vimrc_:
+
+```viml
+let g:moonflyWithGitBranch = 0
+```
+
+### g:moonflyWithGitBranchCharacter
+
+The `g:moonflyWithGitBranchCharacter` option specifies whether to display Git
+branch details with the Unicode Git branch character `U+E0A0`. By default Git
+branches displayed in the `statusline` will not use that character since many
+monospace fonts will not contain it. However, some modern fonts, such as [Fira
+Code](https://github.com/tonsky/FiraCode) and
+[Iosevka](https://github.com/be5invis/Iosevka), do contain that Git branch
+character.
+
+If `g:moonflyWithGitBranchCharacter` is unset or set to zero then the current
+Git branch will be displayed inside square brackets.
+
+To display with the Unicode Git branch character please add the following to
+your _vimrc_:
+
+```viml
+let g:moonflyWithGitBranchCharacter = 1
+```
+
+The above screenshots are displayed with the Git branch character.
 
 ### g:moonflyDiagnosticsIndicator
 
@@ -204,31 +237,6 @@ _vimrc_:
 ```viml
 let g:moonflyWithCocIndicator = 1
 ```
-
-### g:moonflyWithGitBranchCharacter
-
-_moonfly statusline_ supports Tim Pope's
-[Fugitive](https://github.com/tpope/vim-fugitive) plugin.
-
-The `g:moonflyWithGitBranchCharacter` option specifies whether to display Git
-branch details using the Unicode Git branch character `U+E0A0`. By default Git
-branches displayed in the `statusline` will not use that character since many
-monospace fonts will not contain it. However, some modern fonts, such as [Fira
-Code](https://github.com/tonsky/FiraCode) and
-[Iosevka](https://github.com/be5invis/Iosevka), do contain the Git branch
-character.
-
-If `g:moonflyWithGitBranchCharacter` is unset the default value from
-the Fugitive plugin will be used.
-
-To display the Unicode Git branch character please add the following to your
-_vimrc_:
-
-```viml
-let g:moonflyWithGitBranchCharacter = 1
-```
-
-The above screenshots are displayed with the Git branch character.
 
 ### g:moonflyWithObessionGeometricCharacters
 
