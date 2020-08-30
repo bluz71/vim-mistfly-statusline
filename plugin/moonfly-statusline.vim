@@ -67,7 +67,7 @@ function! MoonflyModeText(mode)
 endfunction
 
 function! MoonflyGitBranch()
-    if !g:moonflyWithGitBranch
+    if !g:moonflyWithGitBranch || bufname("%") == ""
         return ""
     endif
 
