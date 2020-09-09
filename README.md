@@ -34,8 +34,8 @@ Screenshots
 The font in use is [Iosevka](https://github.com/be5invis/Iosevka). Also, the
 `g:moonflyWithGitBranchCharacter` option is set to `1`.
 
-Plugins supported
------------------
+Plugins and Diagnostics supported
+---------------------------------
 
 - [Obsession](https://github.com/tpope/vim-obsession)
 
@@ -44,6 +44,9 @@ Plugins supported
 
 - [Coc](https://github.com/neoclide/coc.nvim) via the
   `g:moonflyWithCocIndicator` option
+
+- [Neovim LSP](https://neovim.io/doc/user/lsp.html) via the
+  `g:moonflyWithNvimLspIndicator` option
 
 Installation
 ------------
@@ -183,9 +186,10 @@ The above screenshots are displayed with the Git branch character.
 ### g:moonflyDiagnosticsIndicator
 
 The `g:moonflyDiagnosticsIndicator` option specifies which character to indicate
-diagnostic errors. Currently, [ALE](https://github.com/dense-analysis/ale)
-and [Coc](https://github.com/neoclide/coc.nvim) diagnostics may be indicated via
-this option.
+diagnostic errors. Currently, [ALE](https://github.com/dense-analysis/ale),
+[Coc](https://github.com/neoclide/coc.nvim) and [Neovim
+LSP](https://neovim.io/doc/user/lsp.html) diagnostics may be indicated via this
+option.
 
 By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
 modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
@@ -238,6 +242,25 @@ _vimrc_:
 let g:moonflyWithCocIndicator = 1
 ```
 
+### g:moonflyWithNvimLspIndicator
+
+_moonfly statusline_ supports [Neovim LSP](https://neovim.io/doc/user/lsp.html)
+diagnostics.
+
+The `g:moonflyWithNvimLspIndicator` option specifies whether to indicate the
+presence of the Neovim LSP diagnostics in the current buffer via the defined
+`g:moonflyDiagnosticsIndicator` (the Unicode `U+2716` `✖` symbol by default). If
+enabled, the indicator will be displayed in the left-side section of the
+_statusline_.
+
+By default, Neovim LSP diagnositics will **not** be indicated.
+
+If Neovim LSP diagnostic indication is desired then please add the following to
+your _vimrc_:
+
+```viml
+let g:moonflyWithNvimLspIndicator = 1
+```
 ### g:moonflyWithObessionGeometricCharacters
 
 _moonfly statusline_ supports Tim Pope's

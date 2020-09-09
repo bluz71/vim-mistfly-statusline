@@ -31,6 +31,10 @@ let g:moonflyWithALEIndicator = get(g:, "moonflyWithALEIndicator", 0)
 " g:moonflyDiagnosticsIndicator.
 let g:moonflyWithCocIndicator = get(g:, "moonflyWithCocIndicator", 0)
 
+" By default don't indicate Neovim LSP diagnostics via the defined
+" g:moonflyDiagnosticsIndicator.
+let g:moonflyWithNvimLspIndicator = get(g:, "moonflyWithNvimLspIndicator", 0)
+
 " By default don't use geometric shapes, U+25A0 - Black Square & U+25CF - Black
 " Circle, to indicate the obsession (https://github.com/tpope/vim-obsession)
 " status.
@@ -105,6 +109,15 @@ function! MoonflyPluginsStatus()
     " Coc plugin indicator.
     if g:moonflyWithCocIndicator && exists('g:did_coc_loaded')
         if len(coc#status()) > 0
+            let l:status .= g:moonflyDiagnosticsIndicator . " "
+        endif
+    endif
+
+    " Neovin LSP diagnostics indicator.
+    if g:moonflyWithNvimLspIndicator && has('nvim-0.5')
+        let l:count = luaeval("vim.lsp.util.buf_diagnostics_count([[Error]])") 
+                  \ + luaeval("vim.lsp.util.buf_diagnostics_count([[Warning]])")
+        if l:count > 0
             let l:status .= g:moonflyDiagnosticsIndicator . " "
         endif
     endif
