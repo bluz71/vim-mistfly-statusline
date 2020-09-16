@@ -48,12 +48,6 @@ Plugins and Diagnostics supported
 - [Neovim LSP](https://neovim.io/doc/user/lsp.html) via the
   `g:moonflyWithNvimLspIndicator` option
 
-Prerequisites
--------------
-
-A version of Vim greater than or equal to 8.0, or a Neovim version greater than
-0.2, is required.
-
 Installation
 ------------
 

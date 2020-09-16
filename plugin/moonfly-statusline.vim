@@ -1,4 +1,4 @@
-" A simple Vim/Neovim status line using moonfly colors.
+" A simple Vim / Neovim status line that moonfly colors by default.
 "
 " URL:          github.com/bluz71/vim-moonfly-statusline
 " License:      MIT (https://opensource.org/licenses/MIT)
@@ -40,20 +40,6 @@ let g:moonflyWithNvimLspIndicator = get(g:, 'moonflyWithNvimLspIndicator', 0)
 " status.
 let g:moonflyWithObessionGeometricCharacters = get(g:, 'moonflyWithObessionGeometricCharacters', 0)
 
-let s:modes = {
-  \  'n':      ['%1*', ' normal '],
-  \  'i':      ['%2*', ' insert '],
-  \  'R':      ['%4*', ' r-mode '],
-  \  'v':      ['%3*', ' visual '],
-  \  'V':      ['%3*', ' v-line '],
-  \  "\<C-v>": ['%3*', ' v-rect '],
-  \  'c':      ['%1*', ' c-mode '],
-  \  's':      ['%3*', ' select '],
-  \  'S':      ['%3*', ' s-line '],
-  \  "\<C-s>": ['%3*', ' s-rect '],
-  \  't':      ['%2*', ' term '],
-  \}
-
 " The moonfly colors (https://github.com/bluz71/vim-moonfly-colors)
 let s:white   = '#c6c6c6' " white   = 251
 let s:grey234 = '#1c1c1c' " grey234 = 234
@@ -62,78 +48,15 @@ let s:blue    = '#80a0ff' " blue    = 4
 let s:purple  = '#ae81ff' " purple  = 13
 let s:crimson = '#f74782' " crimson = 9
 
-function! s:ModeColor(mode) abort
-    return get(s:modes, a:mode, '%*1')[0]
-endfunction
-
-function! s:ModeText(mode) abort
-    return get(s:modes, a:mode, ' normal ')[1]
-endfunction
-
-function! MoonflyGitBranch() abort
-    if !g:moonflyWithGitBranch || bufname('%') == ''
-        return ''
-    endif
-
-    let l:gitBranch = moonfly_statusline#GitBranch()
-    if len(l:gitBranch) == 0
-        return ''
-    endif
-
-    if g:moonflyWithGitBranchCharacter
-        return ' [ ' . l:gitBranch . '] '
-    else
-        return ' [' . l:gitBranch . '] '
-    endif
-endfunction
-
-function! MoonflyPluginsStatus() abort
-    let l:status = ''
-
-    " Obsession plugin.
-    if exists('g:loaded_obsession')
-        if g:moonflyWithObessionGeometricCharacters
-            let l:status .= ObsessionStatus('● ', '■ ')
-        else
-            let l:status .= ObsessionStatus('$ ', 'S ')
-        endif
-    endif
-
-    " ALE plugin indicator.
-    if g:moonflyWithALEIndicator && exists('g:loaded_ale')
-        if ale#statusline#Count(bufnr('')).total > 0
-            let l:status .= g:moonflyDiagnosticsIndicator . ' '
-        endif
-    endif
-
-    " Coc plugin indicator.
-    if g:moonflyWithCocIndicator && exists('g:did_coc_loaded')
-        if len(coc#status()) > 0
-            let l:status .= g:moonflyDiagnosticsIndicator . ' '
-        endif
-    endif
-
-    " Neovin LSP diagnostics indicator.
-    if g:moonflyWithNvimLspIndicator && has('nvim-0.5')
-        let l:count = luaeval('vim.lsp.util.buf_diagnostics_count([[Error]])') 
-                  \ + luaeval('vim.lsp.util.buf_diagnostics_count([[Warning]])')
-        if l:count > 0
-            let l:status .= g:moonflyDiagnosticsIndicator . ' '
-        endif
-    endif
-
-    return l:status
-endfunction
-
 function! MoonflyActiveStatusLine() abort
     let l:mode = mode()
-    let l:statusline = s:ModeColor(l:mode)
-    let l:statusline .= s:ModeText(l:mode)
+    let l:statusline = moonfly_statusline#ModeColor(l:mode)
+    let l:statusline .= moonfly_statusline#ModeText(l:mode)
     let l:statusline .= '%* %<%{moonfly_statusline#ShortFilePath()}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
-    let l:statusline .= '%5*%{MoonflyGitBranch()}'
-    let l:statusline .= '%6*%{MoonflyPluginsStatus()}'
+    let l:statusline .= '%5*%{moonfly_statusline#GitBranch()}'
+    let l:statusline .= '%6*%{moonfly_statusline#PluginsStatus()}'
     let l:statusline .= '%*%=%l:%c | %7*%L%* | %P '
     return l:statusline
 endfunction
@@ -158,7 +81,7 @@ function! s:StatusLine(active) abort
     elseif &buftype ==# 'nowrite'
         " Don't set a custom status line for certain special windows.
         return
-    elseif a:active == v:true
+    elseif a:active == 1
         setlocal statusline=%!MoonflyActiveStatusLine()
     else
         setlocal statusline=%!MoonflyInactiveStatusLine()
@@ -223,9 +146,9 @@ augroup MoonflyStatuslineEvents
     autocmd!
     autocmd VimEnter              * call s:UpdateInactiveWindows()
     autocmd ColorScheme,SourcePre * call s:UserColors()
-    autocmd WinEnter,BufWinEnter  * call s:StatusLine(v:true)
-    autocmd WinLeave              * call s:StatusLine(v:false)
+    autocmd WinEnter,BufWinEnter  * call s:StatusLine(1)
+    autocmd WinLeave              * call s:StatusLine(0)
     if exists('##CmdlineEnter')
-        autocmd CmdlineEnter      * call s:StatusLine(v:true) | redraw
+        autocmd CmdlineEnter      * call s:StatusLine(1) | redraw
     endif
 augroup END

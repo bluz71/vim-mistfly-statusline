@@ -1,3 +1,25 @@
+let s:modes = {
+  \  'n':      ['%1*', ' normal '],
+  \  'i':      ['%2*', ' insert '],
+  \  'R':      ['%4*', ' r-mode '],
+  \  'v':      ['%3*', ' visual '],
+  \  'V':      ['%3*', ' v-line '],
+  \  "\<C-v>": ['%3*', ' v-rect '],
+  \  'c':      ['%1*', ' c-mode '],
+  \  's':      ['%3*', ' select '],
+  \  'S':      ['%3*', ' s-line '],
+  \  "\<C-s>": ['%3*', ' s-rect '],
+  \  't':      ['%2*', ' term '],
+  \}
+
+function! moonfly_statusline#ModeColor(mode) abort
+    return get(s:modes, a:mode, '%*1')[0]
+endfunction
+
+function! moonfly_statusline#ModeText(mode) abort
+    return get(s:modes, a:mode, ' normal ')[1]
+endfunction
+
 function! moonfly_statusline#ShortFilePath() abort
     if &buftype ==# 'terminal'
         return expand('%:t')
@@ -15,12 +37,67 @@ function! moonfly_statusline#ShortCurrentPath() abort
     return pathshorten(fnamemodify(getcwd(), ':~:.'))
 endfunction
 
+function! moonfly_statusline#GitBranch() abort
+    if !g:moonflyWithGitBranch || bufname('%') == ''
+        return ''
+    endif
+
+    let l:gitBranchName = s:GitBranchName()
+    if len(l:gitBranchName) == 0
+        return ''
+    endif
+
+    if g:moonflyWithGitBranchCharacter
+        return ' [ ' . l:gitBranchName . '] '
+    else
+        return ' [' . l:gitBranchName . '] '
+    endif
+endfunction
+
+function! moonfly_statusline#PluginsStatus() abort
+    let l:status = ''
+
+    " Obsession plugin status.
+    if exists('g:loaded_obsession')
+        if g:moonflyWithObessionGeometricCharacters
+            let l:status .= ObsessionStatus('● ', '■ ')
+        else
+            let l:status .= ObsessionStatus('$ ', 'S ')
+        endif
+    endif
+
+    " ALE plugin indicator.
+    if g:moonflyWithALEIndicator && exists('g:loaded_ale')
+        if ale#statusline#Count(bufnr('')).total > 0
+            let l:status .= g:moonflyDiagnosticsIndicator . ' '
+        endif
+    endif
+
+    " Coc plugin indicator.
+    if g:moonflyWithCocIndicator && exists('g:did_coc_loaded')
+        if len(coc#status()) > 0
+            let l:status .= g:moonflyDiagnosticsIndicator . ' '
+        endif
+    endif
+
+    " Neovin LSP diagnostics indicator.
+    if g:moonflyWithNvimLspIndicator && has('nvim-0.5')
+        let l:count = luaeval('vim.lsp.util.buf_diagnostics_count([[Error]])') 
+                  \ + luaeval('vim.lsp.util.buf_diagnostics_count([[Warning]])')
+        if l:count > 0
+            let l:status .= g:moonflyDiagnosticsIndicator . ' '
+        endif
+    endif
+
+    return l:status
+endfunction
+
 " The following Git branch functionality derives from:
 "   https://github.com/itchyny/vim-gitbranch
 "
 " MIT Licensed Copyright (c) 2014-2017 itchyny
 "
-function! moonfly_statusline#GitBranch() abort
+function! s:GitBranchName() abort
     if get(b:, 'gitbranch_pwd', '') !=# expand('%:p:h') || !has_key(b:, 'gitbranch_path')
         call s:GitDetect()
     endif
