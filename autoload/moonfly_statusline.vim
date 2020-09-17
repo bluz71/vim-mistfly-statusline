@@ -92,6 +92,33 @@ function! moonfly_statusline#PluginsStatus() abort
     return l:status
 endfunction
 
+function! moonfly_statusline#ActiveStatusLine() abort
+    let l:mode = mode()
+    let l:statusline = moonfly_statusline#ModeColor(l:mode)
+    let l:statusline .= moonfly_statusline#ModeText(l:mode)
+    let l:statusline .= '%* %<%{moonfly_statusline#ShortFilePath()}'
+    let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
+    let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
+    let l:statusline .= '%5*%{moonfly_statusline#GitBranch()}'
+    let l:statusline .= '%6*%{moonfly_statusline#PluginsStatus()}'
+    let l:statusline .= '%*%=%l:%c | %7*%L%* | %P '
+
+    return l:statusline
+endfunction
+
+function! moonfly_statusline#InactiveStatusLine() abort
+    let l:statusline = ' %*%<%{moonfly_statusline#ShortFilePath()}'
+    let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
+    let l:statusline .= "%{&readonly?'RO\ ':''}"
+    let l:statusline .= '%*%=%l:%c | %L | %P '
+
+    return l:statusline
+endfunction
+
+function! moonfly_statusline#NoFileStatusLine() abort
+    return ' %{moonfly_statusline#ShortCurrentPath()}'
+endfunction
+
 " The following Git branch functionality derives from:
 "   https://github.com/itchyny/vim-gitbranch
 "

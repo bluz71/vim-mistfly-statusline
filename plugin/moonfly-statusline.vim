@@ -1,4 +1,4 @@
-" A simple Vim / Neovim status line that moonfly colors by default.
+" A simple Vim / Neovim statusline that uses moonfly colors by default.
 "
 " URL:          github.com/bluz71/vim-moonfly-statusline
 " License:      MIT (https://opensource.org/licenses/MIT)
@@ -48,43 +48,17 @@ let s:blue    = '#80a0ff' " blue    = 4
 let s:purple  = '#ae81ff' " purple  = 13
 let s:crimson = '#f74782' " crimson = 9
 
-function! MoonflyActiveStatusLine() abort
-    let l:mode = mode()
-    let l:statusline = moonfly_statusline#ModeColor(l:mode)
-    let l:statusline .= moonfly_statusline#ModeText(l:mode)
-    let l:statusline .= '%* %<%{moonfly_statusline#ShortFilePath()}'
-    let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
-    let l:statusline .= "%{&readonly?'RO\ ':''}"
-    let l:statusline .= '%5*%{moonfly_statusline#GitBranch()}'
-    let l:statusline .= '%6*%{moonfly_statusline#PluginsStatus()}'
-    let l:statusline .= '%*%=%l:%c | %7*%L%* | %P '
-    return l:statusline
-endfunction
-
-function! MoonflyInactiveStatusLine() abort
-    let l:statusline = ' %*%<%{moonfly_statusline#ShortFilePath()}'
-    let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
-    let l:statusline .= "%{&readonly?'RO\ ':''}"
-    let l:statusline .= '%*%=%l:%c | %L | %P '
-    return l:statusline
-endfunction
-
-function! MoonflyNoFileStatusLine() abort
-    let l:statusline = ' %{moonfly_statusline#ShortCurrentPath()}'
-    return l:statusline
-endfunction
-
 function! s:StatusLine(active) abort
     if &buftype ==# 'nofile' || &filetype ==# 'netrw'
         " Likely a file explorer.
-        setlocal statusline=%!MoonflyNoFileStatusLine()
+        setlocal statusline=%!moonfly_statusline#NoFileStatusLine()
     elseif &buftype ==# 'nowrite'
         " Don't set a custom status line for certain special windows.
         return
     elseif a:active == 1
-        setlocal statusline=%!MoonflyActiveStatusLine()
+        setlocal statusline=%!moonfly_statusline#ActiveStatusLine()
     else
-        setlocal statusline=%!MoonflyInactiveStatusLine()
+        setlocal statusline=%!moonfly_statusline#InactiveStatusLine()
     endif
 endfunction
 
@@ -100,7 +74,7 @@ endfunction
 function! s:UpdateInactiveWindows() abort
     for winnum in range(1, winnr('$'))
         if winnum != winnr()
-            call setwinvar(winnum, '&statusline', '%!MoonflyInactiveStatusLine()')
+            call setwinvar(winnum, '&statusline', '%!moonfly_statusline#InactiveStatusLine()')
         endif
     endfor
 endfunction
