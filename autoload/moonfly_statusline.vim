@@ -82,8 +82,8 @@ function! moonfly_statusline#PluginsStatus() abort
 
     " Neovin LSP diagnostics indicator.
     if g:moonflyWithNvimLspIndicator && has('nvim-0.5')
-        let l:count = luaeval('vim.lsp.util.buf_diagnostics_count([[Error]])') 
-                  \ + luaeval('vim.lsp.util.buf_diagnostics_count([[Warning]])')
+        let l:count = luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
+                  \ + luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
         if l:count > 0
             let l:status .= g:moonflyDiagnosticsIndicator . ' '
         endif
