@@ -99,13 +99,13 @@ for the above listed colored `*` segments:
 
 | Segment           | Highlight Group | Background                                                  | Foreground                                                  |
 |-------------------|-----------------|-------------------------------------------------------------|-------------------------------------------------------------|
-| Normal Mode       | `User1`         | ![background](https://placehold.it/32/80a0ff/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
-| Insert Mode       | `User2`         | ![background](https://placehold.it/32/c6c6c6/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
-| Visual Mode       | `User3`         | ![background](https://placehold.it/32/ae81ff/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
-| Replace Mode      | `User4`         | ![background](https://placehold.it/32/f74782/000000?text=+) | ![background](https://placehold.it/32/1c1c1c/000000?text=+) |
-| Git Branch        | `User5`         | `StatusLine` background                                     | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
-| Plugins Status    | `User6`         | `StatusLine` background                                     | ![background](https://placehold.it/32/f74782/000000?text=+) |
-| Total Lines       | `User7`         | `StatusLine` background                                     | ![background](https://placehold.it/32/80a0ff/000000?text=+) |
+| Normal Mode       | `User1`         | ![background](https://via.placeholder.com/32/80a0ff?text=+) | ![background](https://via.placeholder.com/32/1c1c1c?text=+) |
+| Insert Mode       | `User2`         | ![background](https://via.placeholder.com/32/c6c6c6?text=+) | ![background](https://via.placeholder.com/32/1c1c1c?text=+) |
+| Visual Mode       | `User3`         | ![background](https://via.placeholder.com/32/ae81ff?text=+) | ![background](https://via.placeholder.com/32/1c1c1c?text=+) |
+| Replace Mode      | `User4`         | ![background](https://via.placeholder.com/32/f74782?text=+) | ![background](https://via.placeholder.com/32/1c1c1c?text=+) |
+| Git Branch        | `User5`         | `StatusLine` background                                     | ![background](https://via.placeholder.com/32/80a0ff?text=+) |
+| Plugins Status    | `User6`         | `StatusLine` background                                     | ![background](https://via.placeholder.com/32/f74782?text=+) |
+| Total Lines       | `User7`         | `StatusLine` background                                     | ![background](https://via.placeholder.com/32/80a0ff?text=+) |
 
 Options
 -------
