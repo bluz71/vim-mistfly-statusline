@@ -24,11 +24,21 @@ function! moonfly_statusline#ShortFilePath() abort
     if &buftype ==# 'terminal'
         return expand('%:t')
     else
-        let l:path = expand('%:f')
-        if len(l:path) == 0
+        if len(expand('%:f')) == 0
             return ''
         else
-            return pathshorten(fnamemodify(expand('%:f'), ':~:.'))
+            let l:separator = '/'
+            if has('win32') || has('win64')
+                let l:separator = '\'
+            endif
+            let l:path = pathshorten(fnamemodify(expand('%:f'), ':~:.'))
+            let l:pathComponents = split(l:path, l:separator)
+            let l:numPathComponents = len(l:pathComponents)
+            if l:numPathComponents > 4
+                return '...' . join(l:pathComponents[l:numPathComponents - 4:], l:separator)
+            else
+                return l:path
+            endif
         endif
     endif
 endfunction

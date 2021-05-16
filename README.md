@@ -86,13 +86,17 @@ Note also, filenames will be displayed as follows:
 - Pathless filenames only for files in the current working directory
 
 - Relative paths in preference to absolute paths for files not in the current
-  workding directory
+  working directory
 
-- Likewise, `~` home directory paths in preference to absolute paths
+- `~`-style home directory paths in preference to absolute paths
 
-- For screen real estate reasons, filenames will be displayed with compacted
-  paths, for example `foo/bar/bazz/hello.txt` will be displayed as
+- Compacted, for example `foo/bar/bazz/hello.txt` will be displayed as
   `f/b/b/hello.txt`
+
+- Trimmed, a maximum of four path components will be displayed for a filename,
+  if a filename is more deeply nested then only the four most significant
+  components, including the filename, will be displayed with an ellipses `...`
+  prefix used to indicate path trimming.
 
 The default [moonfly](https://github.com/bluz71/vim-moonfly-colors) colours used
 for the above listed colored `*` segments:
