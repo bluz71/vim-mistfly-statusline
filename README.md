@@ -34,8 +34,8 @@ Screenshots
 The font in use is [Iosevka](https://github.com/be5invis/Iosevka). Also, the
 `g:moonflyWithGitBranchCharacter` option is set to `1`.
 
-Plugins and Diagnostics supported
----------------------------------
+Plugins, Linters and Diagnostics supported
+------------------------------------------
 
 - [Obsession](https://github.com/tpope/vim-obsession)
 
@@ -187,13 +187,30 @@ let g:moonflyWithGitBranchCharacter = 1
 
 The above screenshots are displayed with the Git branch character.
 
+### g:moonflyLinterIndicator
+
+The `g:moonflyLinterIndicator` option specifies which character to indicate
+linter errors and warnings. Currently,
+[ALE](https://github.com/dense-analysis/ale) errors and warnings may be
+indicated via this option.
+
+By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
+modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
+contain that Unicode character.
+
+To specify your own linter indicator please add the following to your
+_vimrc_:
+
+```viml
+let g:moonflyLinterIndicator = "<<CHARACTER-OF-YOUR-CHOOSING>>"
+```
+
 ### g:moonflyDiagnosticsIndicator
 
 The `g:moonflyDiagnosticsIndicator` option specifies which character to indicate
-diagnostic errors. Currently, [ALE](https://github.com/dense-analysis/ale),
-[Coc](https://github.com/neoclide/coc.nvim) and [Neovim
-LSP](https://neovim.io/doc/user/lsp.html) diagnostics may be indicated via this
-option.
+diagnostic errors. Currently, [Coc](https://github.com/neoclide/coc.nvim) and
+[Neovim LSP](https://neovim.io/doc/user/lsp.html) diagnostics may be indicated
+via this option.
 
 By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
 modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
@@ -212,14 +229,14 @@ _moonfly statusline_ supports the [ALE](https://github.com/dense-analysis/ale)
 plugin.
 
 The `g:moonflyWithALEIndicator` option specifies whether to indicate the
-presence of the ALE diagnostics in the current buffer via the defined
-`g:moonflyDiagnosticsIndicator` (the Unicode `U+2716` `✖` symbol by default). If
+presence of the ALE errors and warnings in the current buffer via the defined
+`g:moonflyLinterIndicator` (the Unicode `U+2716` `✖` symbol by default). If
 enabled, the indicator will be displayed in the left-side section of the
 _statusline_.
 
-By default, ALE errors will **not** be indicated.
+By default, ALE errors and warnings will **not** be indicated.
 
-If ALE error indication is desired then please add the following to your
+If ALE indication is desired then please add the following to your
 _vimrc_:
 
 ```viml
@@ -265,6 +282,7 @@ your _vimrc_:
 ```viml
 let g:moonflyWithNvimLspIndicator = 1
 ```
+
 ### g:moonflyWithObessionGeometricCharacters
 
 _moonfly statusline_ supports Tim Pope's

@@ -66,7 +66,6 @@ endfunction
 
 function! moonfly_statusline#PluginsStatus() abort
     let l:status = ''
-    let l:ale_active_but_empty = 0
 
     " Obsession plugin status.
     if exists('g:loaded_obsession')
@@ -80,22 +79,13 @@ function! moonfly_statusline#PluginsStatus() abort
     " ALE plugin indicator.
     if g:moonflyWithALEIndicator && exists('g:loaded_ale')
         if ale#statusline#Count(bufnr('')).total > 0
-            let l:status .= g:moonflyDiagnosticsIndicator . ' '
-        else
-            let l:ale_active_but_empty = 1
+            let l:status .= g:moonflyLinterIndicator . ' '
         endif
     endif
 
     " Coc plugin indicator.
     if g:moonflyWithCocIndicator && exists('g:did_coc_loaded')
         if len(coc#status()) > 0
-            " If using ALE and Coc at the same time than make sure that the Coc
-            " diagnostics indicator is fixed to the second column to distinguish
-            " it from ALE indicator in the first column. Use padding if there
-            " are no ALE lint errors.
-            if l:ale_active_but_empty == 1
-                let l:status .= '   '
-            end
             let l:status .= g:moonflyDiagnosticsIndicator . ' '
         endif
     endif
@@ -105,13 +95,6 @@ function! moonfly_statusline#PluginsStatus() abort
         let l:count = luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
                   \ + luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
         if l:count > 0
-            " If using ALE and Neovim LSP diagnostics at the same time than make
-            " sure that the Neovim diagnostics indicator is fixed to the second
-            " column to distinguish it from ALE indicator in the first column.
-            " Use padding if there are no ALE lint errors.
-            if l:ale_active_but_empty == 1
-                let l:status .= '   '
-            end
             let l:status .= g:moonflyDiagnosticsIndicator . ' '
         endif
     endif

@@ -19,8 +19,12 @@ let g:moonflyWithGitBranch = get(g:, 'moonflyWithGitBranch', 1)
 " By default don't display Git branches with the U+E0A0 branch character.
 let g:moonflyWithGitBranchCharacter = get(g:, 'moonflyWithGitBranchCharacter', 0)
 
-" The character used to indicate the presence of diagnostic errors in the
-" current buffer. By default the U+2716 cross symbol will be used.
+" The character used to indicate the presence of linter errors and warnings in
+" the current buffer. By default the U+2716 cross symbol will be used.
+let g:moonflyLinterIndicator = get(g:, 'moonflyLinterIndicator', '✖')
+
+" The character used to indicate the presence of diagnostics in the current
+" buffer. By default the U+2716 cross symbol will be used.
 let g:moonflyDiagnosticsIndicator = get(g:, 'moonflyDiagnosticsIndicator', '✖')
 
 " By default don't indicate ALE lint errors via the defined
