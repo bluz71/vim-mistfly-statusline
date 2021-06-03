@@ -64,6 +64,22 @@ function! moonfly_statusline#GitBranch() abort
     endif
 endfunction
 
+function! moonfly_statusline#GetFileIcon() abort
+    if !g:moonflyWithNerdIcon
+        return ''
+    endif
+
+    return WebDevIconsGetFileTypeSymbol()
+endfunction
+
+function! moonfly_statusline#GetFormatIcon() abort
+    if !g:moonflyWithNerdIcon
+        return ''
+    endif
+
+    return WebDevIconsGetFileFormatSymbol()
+endfunction
+
 function! moonfly_statusline#PluginsStatus() abort
     let l:status = ''
 
@@ -106,12 +122,14 @@ function! moonfly_statusline#ActiveStatusLine() abort
     let l:mode = mode()
     let l:statusline = moonfly_statusline#ModeColor(l:mode)
     let l:statusline .= moonfly_statusline#ModeText(l:mode)
-    let l:statusline .= '%* %<%{moonfly_statusline#ShortFilePath()}'
+    let l:statusline .= '%* %<%{moonfly_statusline#GetFileIcon()} '
+    let l:statusline .= '%{moonfly_statusline#ShortFilePath()}'
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     let l:statusline .= '%5*%{moonfly_statusline#GitBranch()}'
     let l:statusline .= '%6*%{moonfly_statusline#PluginsStatus()}'
-    let l:statusline .= '%*%=%l:%c | %7*%L%* | %P '
+    let l:statusline .= '%*%=%{moonfly_statusline#GetFormatIcon()} | '
+    let l:statusline .= '%l:%c | %7*%L%* | %P '
 
     return l:statusline
 endfunction

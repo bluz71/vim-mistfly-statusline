@@ -27,6 +27,10 @@ let g:moonflyLinterIndicator = get(g:, 'moonflyLinterIndicator', '✖')
 " buffer. By default the U+2716 cross symbol will be used.
 let g:moonflyDiagnosticsIndicator = get(g:, 'moonflyDiagnosticsIndicator', '✖')
 
+" Add NERD Font Icon to the status line
+" By default 0
+let g:moonflyWithNerdIcon = get(g:, 'moonflyWithNerdIcon', 0)
+
 " By default don't indicate ALE lint errors via the defined
 " g:moonflyDiagnosticsIndicator.
 let g:moonflyWithALEIndicator = get(g:, 'moonflyWithALEIndicator', 0)
