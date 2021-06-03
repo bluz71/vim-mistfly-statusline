@@ -187,6 +187,15 @@ let g:moonflyWithGitBranchCharacter = 1
 
 The above screenshots are displayed with the Git branch character.
 
+### g:moonflyWithNerdIcon
+
+The `g:moonflyWithNerdIcon` option specifies whether glyphs from NERDFont will be show
+like the ones from lightline / airline. **NOTE** you have to use a [NERD font](https://www.nerdfonts.com/) patched font for this to work. (By default 0)
+
+```viml
+let g:moonflyWithNerdIcon = 1
+```
+
 ### g:moonflyLinterIndicator
 
 The `g:moonflyLinterIndicator` option specifies which character to indicate
