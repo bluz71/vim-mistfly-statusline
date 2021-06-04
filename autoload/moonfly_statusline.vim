@@ -47,7 +47,7 @@ function! s:ShortFilePath() abort
             let l:pathComponents = split(l:path, l:separator)
             let l:numPathComponents = len(l:pathComponents)
             if l:numPathComponents > 4
-                return '...' . join(l:pathComponents[l:numPathComponents - 4:], l:separator)
+                return '.../' . join(l:pathComponents[l:numPathComponents - 4:], l:separator)
             else
                 return l:path
             endif
