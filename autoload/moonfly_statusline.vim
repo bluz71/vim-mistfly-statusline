@@ -20,7 +20,19 @@ function! moonfly_statusline#ModeText(mode) abort
     return get(s:modes, a:mode, ' normal ')[1]
 endfunction
 
-function! moonfly_statusline#ShortFilePath() abort
+function! moonfly_statusline#File() abort
+    return s:FileIcon() . s:ShortFilePath()
+endfunction
+
+function! s:FileIcon() abort
+    if !g:moonflyWithNerdIcon || bufname('%') == '' || !exists('g:loaded_webdevicons')
+        return ''
+    endif
+
+    return WebDevIconsGetFileTypeSymbol() . ' '
+endfunction
+
+function! s:ShortFilePath() abort
     if &buftype ==# 'terminal'
         return expand('%:t')
     else
@@ -106,7 +118,7 @@ function! moonfly_statusline#ActiveStatusLine() abort
     let l:mode = mode()
     let l:statusline = moonfly_statusline#ModeColor(l:mode)
     let l:statusline .= moonfly_statusline#ModeText(l:mode)
-    let l:statusline .= '%* %<%{moonfly_statusline#ShortFilePath()}'
+    let l:statusline .= '%* %<%{moonfly_statusline#File()}'
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     let l:statusline .= '%5*%{moonfly_statusline#GitBranch()}'
@@ -117,7 +129,7 @@ function! moonfly_statusline#ActiveStatusLine() abort
 endfunction
 
 function! moonfly_statusline#InactiveStatusLine() abort
-    let l:statusline = ' %*%<%{moonfly_statusline#ShortFilePath()}'
+    let l:statusline = ' %*%<%{moonfly_statusline#File()}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
     let l:statusline .= '%*%=%l:%c | %L | %P '

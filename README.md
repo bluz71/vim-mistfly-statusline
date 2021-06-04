@@ -39,6 +39,9 @@ Plugins, Linters and Diagnostics supported
 
 - [Obsession](https://github.com/tpope/vim-obsession)
 
+- [vim-devicons](https://github.com/ryanoasis/vim-devicons) via the
+  `g:moonflyWithNerdIcon` option
+
 - [ALE](https://github.com/dense-analysis/ale) via the
   `g:moonflyWithALEIndicator` option
 
@@ -186,6 +189,25 @@ let g:moonflyWithGitBranchCharacter = 1
 ```
 
 The above screenshots are displayed with the Git branch character.
+
+### g:moonflyWithNerdIcon
+
+The `g:moonflyWithNerdIcon` option specifies whether a filetype icon, from the
+current Nerd Font, will be displayed next to the filename in the `statusline`.
+
+Note, a [Nerd Font](https://www.nerdfonts.com) must be in-use  **and** the
+[vim-devicons](https://github.com/ryanoasis/vim-devicons) plugin must be
+installed and active.
+
+By default a Nerd Font filetype icon will not be displayed in the
+`statusline`.
+
+To display a Nerd Font filetype icon please add the following to your
+initialization file:
+
+```viml
+let g:moonflyWithNerdIcon = 1
+```
 
 ### g:moonflyLinterIndicator
 
