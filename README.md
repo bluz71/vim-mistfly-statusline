@@ -58,7 +58,7 @@ Use your preferred plugin manager to install **bluz71/vim-moonfly-statusline**.
 
 If using [vim-plug](https://github.com/junegunn/vim-plug) do the following:
 
-1. Add `Plug 'bluz71/vim-moonfly-statusline'` to your _vimrc_
+1. Add `Plug 'bluz71/vim-moonfly-statusline'` to your initialization file
 2. Run `:PlugInstall`
 
 Notice
@@ -133,7 +133,7 @@ let g:moonflyIgnoreDefaultColors = 1
 work well with most existing Vim color schemes including:
 [gruvbox](https://github.com/morhetz/gruvbox) and
 [nord](https://github.com/arcticicestudio/nord-vim). Save the following either
-at the end of your `~/.vimrc` file or in an appropriate `after` file such as
+at the end of your initialization file or in an appropriate `after` file such as
 `~/.vim/after/plugin/moonfly-statusline.vim`:
 
 ```viml
@@ -162,7 +162,7 @@ details in the _statusline_. By default Git branches will be displayed in the
 `statusline`.
 
 To disable the display of Git branches in the _statusline_ please add the
-following to your _vimrc_:
+following to your initialization file:
 
 ```viml
 let g:moonflyWithGitBranch = 0
@@ -182,7 +182,7 @@ If `g:moonflyWithGitBranchCharacter` is unset or set to zero then the current
 Git branch will be displayed inside square brackets.
 
 To display with the Unicode Git branch character please add the following to
-your _vimrc_:
+your initialization file:
 
 ```viml
 let g:moonflyWithGitBranchCharacter = 1
@@ -221,7 +221,7 @@ modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
 contain that Unicode character.
 
 To specify your own linter indicator please add the following to your
-_vimrc_:
+initialization file:
 
 ```viml
 let g:moonflyLinterIndicator = "<<CHARACTER-OF-YOUR-CHOOSING>>"
@@ -239,7 +239,7 @@ modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
 contain that Unicode character.
 
 To specify your own diagnostics indicator please add the following to your
-_vimrc_:
+initialization file:
 
 ```viml
 let g:moonflyDiagnosticsIndicator = "<<CHARACTER-OF-YOUR-CHOOSING>>"
@@ -259,7 +259,7 @@ _statusline_.
 By default, ALE errors and warnings will **not** be indicated.
 
 If ALE indication is desired then please add the following to your
-_vimrc_:
+initialization file:
 
 ```viml
 let g:moonflyWithALEIndicator = 1
@@ -279,7 +279,7 @@ _statusline_.
 By default, Coc errors will **not** be indicated.
 
 If Coc error indication is desired then please add the following to your
-_vimrc_:
+initialization file:
 
 ```viml
 let g:moonflyWithCocIndicator = 1
@@ -299,7 +299,7 @@ _statusline_.
 By default, Neovim LSP diagnositics will **not** be indicated.
 
 If Neovim LSP diagnostic indication is desired then please add the following to
-your _vimrc_:
+your initialization file:
 
 ```viml
 let g:moonflyWithNvimLspIndicator = 1
@@ -320,7 +320,7 @@ If `g:moonflyWithObessionGeometricCharacters` is unset the default value from
 the Obsession plugin will be used.
 
 To display Obsession status with geometric characters please add the following
-to your _vimrc_:
+to your initialization file:
 
 ```viml
 let g:moonflyWithObessionGeometricCharacters = 1
