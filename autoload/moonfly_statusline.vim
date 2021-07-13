@@ -31,7 +31,7 @@ function! s:FileIcon() abort
 
     if g:nvim_web_devicons
         let l:icon = luaeval("require'nvim-web-devicons'.get_icon(vim.fn.expand('%'), vim.fn.expand('%:e'))") . ' '
-        if !l:icon != 'null'
+        if l:icon != 'null'
             return l:icon
         endif
     elseif exists(g:loaded_webdevicons)
