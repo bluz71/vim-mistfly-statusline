@@ -39,7 +39,7 @@ Plugins, Linters and Diagnostics supported
 
 - [Obsession](https://github.com/tpope/vim-obsession)
 
-- [vim-devicons](https://github.com/ryanoasis/vim-devicons) via the
+- [vim-devicons](https://github.com/ryanoasis/vim-devicons) and [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) via the
   `g:moonflyWithNerdIcon` option
 
 - [ALE](https://github.com/dense-analysis/ale) via the
@@ -196,7 +196,7 @@ The `g:moonflyWithNerdIcon` option specifies whether a filetype icon, from the
 current Nerd Font, will be displayed next to the filename in the `statusline`.
 
 Note, a [Nerd Font](https://www.nerdfonts.com) must be in-use  **and** the
-[vim-devicons](https://github.com/ryanoasis/vim-devicons) plugin must be
+[vim-devicons](https://github.com/ryanoasis/vim-devicons) or [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) plugin must be
 installed and active.
 
 By default a Nerd Font filetype icon will not be displayed in the
