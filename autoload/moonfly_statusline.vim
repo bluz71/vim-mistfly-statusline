@@ -29,7 +29,11 @@ function! s:FileIcon() abort
         return ''
     endif
 
-    return WebDevIconsGetFileTypeSymbol() . ' '
+    if g:nvim_web_devicons
+        return luaeval("require'nvim-web-devicons'.get_icon(vim.fn.expand('%'), vim.fn.expand('%:e'))") . ' '
+    else
+        return WebDevIconsGetFileTypeSymbol() . ' '
+    endif
 endfunction
 
 function! s:ShortFilePath() abort
