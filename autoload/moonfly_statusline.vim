@@ -25,11 +25,17 @@ function! moonfly_statusline#File() abort
 endfunction
 
 function! s:FileIcon() abort
-    if !g:moonflyWithNerdIcon || bufname('%') == '' || !exists('g:loaded_webdevicons')
+    if !g:moonflyWithNerdIcon || bufname('%') == ''
         return ''
     endif
 
-    return WebDevIconsGetFileTypeSymbol() . ' '
+    if exists(g:nvim_web_devicons)
+        return luaeval("require'nvim-web-devicons'.get_icon(vim.fn.expand('%'), vim.fn.expand('%:e'))") . ' '
+    elseif exists(g:loaded_webdevicons)
+        return WebDevIconsGetFileTypeSymbol() . ' '
+    else
+        return ''
+    endif
 endfunction
 
 function! s:ShortFilePath() abort
