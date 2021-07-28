@@ -29,9 +29,9 @@ function! s:FileIcon() abort
         return ''
     endif
 
-    if exists(g:nvim_web_devicons)
+    if exists('g:nvim_web_devicons')
         return luaeval("require'nvim-web-devicons'.get_icon(vim.fn.expand('%'), vim.fn.expand('%:e'))") . ' '
-    elseif exists(g:loaded_webdevicons)
+    elseif exists('g:loaded_webdevicons')
         return WebDevIconsGetFileTypeSymbol() . ' '
     else
         return ''
