@@ -4,7 +4,7 @@ moonfly statusline
 _moonfly statusline_ is a simple yet informative _statusline_ for Vim and Neovim
 that uses [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors by
 default. If those colors do not suit then they can easily be
-[customized](https://github.com/bluz71/vim-moonfly-statusline#gmoonflyignoredefaultcolors)
+[customized](https://github.com/bluz71/vim-moonfly-statusline#moonflyignoredefaultcolors)
 if desired.
 
 _moonfly statusline_ is also a very light _statusline_ plugin clocking in at
@@ -32,12 +32,10 @@ Screenshots
 <img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_replace.png">
 
 The font in use is [Iosevka](https://github.com/be5invis/Iosevka). Also, the
-`moonflyWithGitBranchCharacter` option is set to `1`.
+`g:moonflyWithGitBranchCharacter` option is set to `1`.
 
 Plugins, Linters and Diagnostics supported
 ------------------------------------------
-
-- [Obsession](https://github.com/tpope/vim-obsession)
 
 - [vim-devicons](https://github.com/ryanoasis/vim-devicons) and
   [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) via the
@@ -51,6 +49,8 @@ Plugins, Linters and Diagnostics supported
 
 - [Neovim LSP](https://neovim.io/doc/user/lsp.html) via the
   `moonflyWithNvimLspIndicator` option
+
+- [Obsession](https://github.com/tpope/vim-obsession)
 
 Installation
 ------------
@@ -192,6 +192,8 @@ let g:moonflyWithGitBranch = 0
 -- Lua initialization file
 vim.g.moonflyWithGitBranch = 0
 ```
+
+---
 
 ### moonflyWithGitBranchCharacter
 
