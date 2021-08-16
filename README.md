@@ -412,7 +412,7 @@ let g:moonflyWithObessionGeometricCharacters = 1
 ```
 
 ```lua
--- Vimscript initialization file
+-- Lua initialization file
 vim.g.moonflyWithObessionGeometricCharacters = 1
 ```
 
