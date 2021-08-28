@@ -113,7 +113,7 @@ function! moonfly_statusline#PluginsStatus() abort
         let l:count = luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
                   \ + luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
         if l:count > 0
-            let l:status .= g:moonflyDiagnosticsIndicator . ' '
+            let l:status .= g:moonflyDiagnosticsIndicator . ' ' . l:count
         endif
     endif
 
