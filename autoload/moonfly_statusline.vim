@@ -85,23 +85,15 @@ endfunction
 function! moonfly_statusline#PluginsStatus() abort
     let l:status = ''
 
-    " Obsession plugin status.
-    if exists('g:loaded_obsession')
-        if g:moonflyWithObessionGeometricCharacters
-            let l:status .= ObsessionStatus('● ', '■ ')
-        else
-            let l:status .= ObsessionStatus('$ ', 'S ')
-        endif
-    endif
-
-    " ALE plugin indicator.
+    " ALE indicator.
     if g:moonflyWithALEIndicator && exists('g:loaded_ale')
-        if ale#statusline#Count(bufnr('')).total > 0
-            let l:status .= g:moonflyLinterIndicator . ' '
+        let l:count = ale#statusline#Count(bufnr('')).total
+        if l:count > 0
+            let l:status .= g:moonflyLinterIndicator . ' ' . l:count . ' '
         endif
     endif
 
-    " Coc plugin indicator.
+    " Coc indicator.
     if g:moonflyWithCocIndicator && exists('g:did_coc_loaded')
         if len(coc#status()) > 0
             let l:status .= g:moonflyDiagnosticsIndicator . ' '
@@ -113,7 +105,16 @@ function! moonfly_statusline#PluginsStatus() abort
         let l:count = luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
                   \ + luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
         if l:count > 0
-            let l:status .= g:moonflyDiagnosticsIndicator . ' ' . l:count
+            let l:status .= g:moonflyDiagnosticsIndicator . ' ' . l:count . ' '
+        endif
+    endif
+
+    " Obsession plugin status.
+    if exists('g:loaded_obsession')
+        if g:moonflyWithObessionGeometricCharacters
+            let l:status .= ObsessionStatus(' ● ', ' ■ ')
+        else
+            let l:status .= ObsessionStatus(' $ ', ' S ')
         endif
     endif
 
