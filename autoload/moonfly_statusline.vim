@@ -85,11 +85,12 @@ endfunction
 function! moonfly_statusline#PluginsStatus() abort
     let l:status = ''
 
-    " ALE indicator.
-    if g:moonflyWithALEIndicator && exists('g:loaded_ale')
-        let l:count = ale#statusline#Count(bufnr('')).total
+    " Neovim LSP diagnostics indicator.
+    if g:moonflyWithNvimLspIndicator && has('nvim-0.5')
+        let l:count = luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
+                  \ + luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
         if l:count > 0
-            let l:status .= g:moonflyLinterIndicator . ' ' . l:count . ' '
+            let l:status .= g:moonflyDiagnosticsIndicator . ' ' . l:count . ' '
         endif
     endif
 
@@ -100,12 +101,11 @@ function! moonfly_statusline#PluginsStatus() abort
         endif
     endif
 
-    " Neovin LSP diagnostics indicator.
-    if g:moonflyWithNvimLspIndicator && has('nvim-0.5')
-        let l:count = luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
-                  \ + luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
+    " ALE indicator.
+    if g:moonflyWithALEIndicator && exists('g:loaded_ale')
+        let l:count = ale#statusline#Count(bufnr('')).total
         if l:count > 0
-            let l:status .= g:moonflyDiagnosticsIndicator . ' ' . l:count . ' '
+            let l:status .= g:moonflyLinterIndicator . ' ' . l:count . ' '
         endif
     endif
 
