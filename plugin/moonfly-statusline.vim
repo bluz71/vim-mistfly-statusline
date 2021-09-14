@@ -94,22 +94,22 @@ function! s:UserColors() abort
     " Leverage existing 'colorscheme' StatusLine colors taking into account the
     " 'reverse' option.
     if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'cterm') == 1
-        let l:slBgCterm = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'cterm')
+        let l:sl_bg_cterm = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'cterm')
     else
-        let l:slBgCterm = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'cterm')
+        let l:sl_bg_cterm = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'cterm')
     endif
     if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'gui') == 1
-        let l:slBgGui = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
+        let l:sl_bg_gui = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
     else
-        let l:slBgGui = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
+        let l:sl_bg_gui = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
     endif
     " Fallback to moonfly colors when the current color scheme does not define
     " StatusLine colors.
-    if len(l:slBgCterm) == 0
-        let l:slBgCterm = '236'
+    if len(l:sl_bg_cterm) == 0
+        let l:sl_bg_cterm = '236'
     endif
-    if len(l:slBgGui) == 0
-        let l:slBgGui = '#303030'
+    if len(l:sl_bg_gui) == 0
+        let l:sl_bg_gui = '#303030'
     endif
 
     " Set user colors that will be used to color certain sections of the status
@@ -118,9 +118,9 @@ function! s:UserColors() abort
     exec 'highlight User2 ctermbg=251 guibg=' . s:white   . ' ctermfg=234 guifg=' . s:grey234
     exec 'highlight User3 ctermbg=13  guibg=' . s:purple  . ' ctermfg=234 guifg=' . s:grey234
     exec 'highlight User4 ctermbg=9   guibg=' . s:crimson . ' ctermfg=234 guifg=' . s:grey234
-    exec 'highlight User5 ctermbg=' . l:slBgCterm . ' guibg=' . l:slBgGui . ' ctermfg=4   guifg=' . s:blue    . ' gui=none'
-    exec 'highlight User6 ctermbg=' . l:slBgCterm . ' guibg=' . l:slBgGui . ' ctermfg=9   guifg=' . s:crimson . ' gui=none'
-    exec 'highlight User7 ctermbg=' . l:slBgCterm . ' guibg=' . l:slBgGui . ' ctermfg=4   guifg=' . s:blue    . ' gui=none'
+    exec 'highlight User5 ctermbg=' . l:sl_bg_cterm . ' guibg=' . l:sl_bg_gui . ' ctermfg=4   guifg=' . s:blue    . ' gui=none'
+    exec 'highlight User6 ctermbg=' . l:sl_bg_cterm . ' guibg=' . l:sl_bg_gui . ' ctermfg=9   guifg=' . s:crimson . ' gui=none'
+    exec 'highlight User7 ctermbg=' . l:sl_bg_cterm . ' guibg=' . l:sl_bg_gui . ' ctermfg=4   guifg=' . s:blue    . ' gui=none'
 endfunction
 
 augroup MoonflyStatuslineEvents
