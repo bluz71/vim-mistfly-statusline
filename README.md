@@ -1,13 +1,15 @@
 moonfly statusline
 ==================
 
-_moonfly statusline_ is a simple yet informative _statusline_ for Vim and Neovim
-that uses [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors by
-default. If those colors do not suit then they can easily be
+_moonfly statusline_ is a simple, yet informative, _statusline_ for Vim and
+Neovim that uses [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors
+by default. 
+
+Be aware, the _statusline_ colors can easily be
 [customized](https://github.com/bluz71/vim-moonfly-statusline#moonflyignoredefaultcolors)
 if desired.
 
-_moonfly statusline_ is also a very light _statusline_ plugin clocking in at
+_moonfly statusline_ is a very light _statusline_ plugin clocking in at
 around 200 lines of Vimscript. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim) and
 [airline](https://github.com/vim-airline/vim-airline) _statusline_ plugins
@@ -122,8 +124,8 @@ for the above listed colored `*` segments:
 | Plugins Status    | `User6`         | `StatusLine` background                                     | ![background](https://via.placeholder.com/32/f74782?text=+) |
 | Total Lines       | `User7`         | `StatusLine` background                                     | ![background](https://via.placeholder.com/32/80a0ff?text=+) |
 
-Options
--------
+:wrench: Options
+----------------
 
 ### moonflyIgnoreDefaultColors
 
@@ -145,9 +147,7 @@ vim.g.moonflyIgnoreDefaultColors = 1
 ```
 
 :gift: Here is an example of a customized _statusline_ color theme which should
-work well with most existing Vim color schemes including:
-[gruvbox](https://github.com/morhetz/gruvbox) and
-[nord](https://github.com/arcticicestudio/nord-vim). Save the following either
+work well with most existing Vim colorschemes. Save the following either
 at the end of your initialization file or in an appropriate `after` file such as
 `~/.vim/after/plugin/moonfly-statusline.vim`:
 
@@ -163,14 +163,7 @@ highlight! link User7 StatusLine
 
 :cake: Note, the [nightfly](https://github.com/bluz71/vim-nightfly-guicolors)
 color scheme automatically defines _statusline_ colors that are compatible with
-this plugin. **No** custom settings are required with this color scheme.
-
----
-
-### moonflyHonorUserDefinedColors
-
-**DEPRECATED**, please refer to and use the `moonflyIgnoreDefaultColors`
-option instead.
+this plugin. **No** custom settings are required with that colorscheme.
 
 ---
 

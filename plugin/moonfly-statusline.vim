@@ -10,8 +10,6 @@ let g:loaded_moonfly_statusline = 1
 
 " By default use moonfly colors.
 let g:moonflyIgnoreDefaultColors = get(g:, 'moonflyIgnoreDefaultColors', 0)
-" DEPRECATED option, use 'g:moonflyIgnoreDefaultColors' option instead.
-let g:moonflyHonorUserDefinedColors = get(g:, 'moonflyHonorUserDefinedColors', 0)
 
 " By default display Git branches.
 let g:moonflyWithGitBranch = get(g:, 'moonflyWithGitBranch', 1)
@@ -87,7 +85,7 @@ function! s:UpdateInactiveWindows() abort
 endfunction
 
 function! s:UserColors() abort
-    if g:moonflyIgnoreDefaultColors || g:moonflyHonorUserDefinedColors
+    if g:moonflyIgnoreDefaultColors
         return
     endif
 
