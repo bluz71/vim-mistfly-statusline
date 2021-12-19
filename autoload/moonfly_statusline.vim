@@ -104,13 +104,13 @@ function! moonfly_statusline#PluginsStatus() abort
         if has('nvim-0.6')
             let l:count = v:lua.moonfly_nvim_diagnostic_count()
             if l:count > 0
-                let l:status .= g:moonflyDiagnosticsIndicator . ' ' . l:count . ' '
+                let l:status .= g:moonflyDiagnosticSymbol . ' ' . l:count . ' '
             endif
         elseif has('nvim-0.5')
             let l:count = luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
                       \ + luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
             if l:count > 0
-                let l:status .= g:moonflyDiagnosticsIndicator . ' ' . l:count . ' '
+                let l:status .= g:moonflyDiagnosticSymbol . ' ' . l:count . ' '
             endif
         endif
     endif
@@ -119,14 +119,14 @@ function! moonfly_statusline#PluginsStatus() abort
     if g:moonflyWithALEIndicator && exists('g:loaded_ale')
         let l:count = ale#statusline#Count(bufnr('')).total
         if l:count > 0
-            let l:status .= g:moonflyDiagnosticsIndicator . ' ' . l:count . ' '
+            let l:status .= g:moonflyDiagnosticSymbol . ' ' . l:count . ' '
         endif
     endif
 
     " Coc indicator.
     if g:moonflyWithCocIndicator && exists('g:did_coc_loaded')
         if len(coc#status()) > 0
-            let l:status .= g:moonflyDiagnosticsIndicator . ' '
+            let l:status .= g:moonflyDiagnosticSymbol . ' '
         endif
     endif
 

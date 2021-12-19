@@ -246,9 +246,9 @@ vim.g.moonflyWithNerdIcon = 1
 
 ---
 
-### moonflyDiagnosticsIndicator
+### moonflyDiagnosticSymbol
 
-The `moonflyDiagnosticsIndicator` option specifies which character to indicate
+The `moonflyDiagnosticSymbol` option specifies which symbol to use to indicate
 diagnostic errors. Currently,
 [Neovim](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) and
@@ -259,17 +259,17 @@ By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
 modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
 contain that Unicode character.
 
-To specify your own diagnostics indicator please add the following to your
+To specify your own diagnostics symbol please add the following to your
 initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:moonflyDiagnosticsIndicator = '<<CHARACTER-OF-YOUR-CHOOSING>>'
+let g:moonflyDiagnosticSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.moonflyDiagnosticsIndicator = '<<CHARACTER-OF-YOUR-CHOOSING>>'
+vim.g.moonflyDiagnosticSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
 
 ---
@@ -281,7 +281,7 @@ Diagnostics](https://neovim.io/doc/user/diagnostic.html)
 
 The `moonflyWithNvimDiagnosticIndicator` option specifies whether to indicate
 the presence of the Neovim Diagnostics in the current buffer via the defined
-`moonflyDiagnosticsIndicator` (the Unicode `U+2716` `✖` symbol by default). If
+`moonflyDiagnosticSymbol` (the Unicode `U+2716` `✖` symbol by default). If
 enabled, the indicator will be displayed in the left-side section of the
 _statusline_.
 
@@ -309,7 +309,7 @@ plugin.
 
 The `moonflyWithALEIndicator` option specifies whether to indicate the
 presence of the ALE errors and warnings in the current buffer via the defined
-`moonflyDiagnosticsIndicator` (the Unicode `U+2716` `✖` symbol by default). If
+`moonflyDiagnosticSymbol` (the Unicode `U+2716` `✖` symbol by default). If
 enabled, the indicator will be displayed in the left-side section of the
 _statusline_.
 
@@ -337,7 +337,7 @@ plugin.
 
 The `moonflyWithCocIndicator` option specifies whether to indicate the
 presence of the Coc diagnostics in the current buffer via the defined
-`moonflyDiagnosticsIndicator` (the Unicode `U+2716` `✖` symbol by default). If
+`moonflyDiagnosticSymbol` (the Unicode `U+2716` `✖` symbol by default). If
 enabled, the indicator will be displayed in the left-side section of the
 _statusline_.
 

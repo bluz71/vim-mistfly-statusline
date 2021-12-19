@@ -25,15 +25,15 @@ let g:moonflyDiagnosticsIndicator = get(g:, 'moonflyDiagnosticsIndicator', '✖'
 let g:moonflyWithNerdIcon = get(g:, 'moonflyWithNerdIcon', 0)
 
 " By default don't indicate Neovim Diagnostics via the defined
-" g:moonflyDiagnosticsIndicator.
+" g:moonflyDiagnosticSymbol.
 let g:moonflyWithNvimDiagnosticIndicator = get(g:, 'moonflyWithNvimDiagnosticIndicator', 0)
 
 " By default don't indicate ALE lint errors via the defined
-" g:moonflyDiagnosticsIndicator.
+" g:moonflyDiagnosticSymbol.
 let g:moonflyWithALEIndicator = get(g:, 'moonflyWithALEIndicator', 0)
 
 " By default don't indicate Coc lint errors via the defined
-" g:moonflyDiagnosticsIndicator.
+" g:moonflyDiagnosticSymbol.
 let g:moonflyWithCocIndicator = get(g:, 'moonflyWithCocIndicator', 0)
 
 " By default don't use geometric shapes, U+25A0 - Black Square & U+25CF - Black
