@@ -3,7 +3,7 @@ moonfly statusline
 
 _moonfly statusline_ is a simple, yet informative, _statusline_ for Vim and
 Neovim that uses [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors
-by default. 
+by default.
 
 Be aware, the _statusline_ colors can easily be
 [customized](https://github.com/bluz71/vim-moonfly-statusline#moonflyignoredefaultcolors)
@@ -246,38 +246,14 @@ vim.g.moonflyWithNerdIcon = 1
 
 ---
 
-### moonflyLinterIndicator
-
-The `moonflyLinterIndicator` option specifies which character to indicate
-linter errors and warnings. Currently,
-[ALE](https://github.com/dense-analysis/ale) errors and warnings may be
-indicated via this option.
-
-By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
-modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
-contain that Unicode character.
-
-To specify your own linter indicator please add the following to your
-initialization file:
-
-```viml
-" Vimscript initialization file
-let g:moonflyLinterIndicator = '<<CHARACTER-OF-YOUR-CHOOSING>>'
-```
-
-```lua
--- Lua initialization file
-vim.g.moonflyLinterIndicator = '<<CHARACTER-OF-YOUR-CHOOSING>>'
-```
-
----
-
 ### moonflyDiagnosticsIndicator
 
 The `moonflyDiagnosticsIndicator` option specifies which character to indicate
-diagnostic errors. Currently, [Neovim
-Diagnostics](https://neovim.io/doc/user/diagnostic.html) and
-[Coc](https://github.com/neoclide/coc.nvim) may be indicated via this option.
+diagnostic errors. Currently,
+[Neovim](https://neovim.io/doc/user/diagnostic.html),
+[ALE](https://github.com/dense-analysis/ale) and
+[Coc](https://github.com/neoclide/coc.nvim) diagnostics may be indicated via
+this option.
 
 By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
 modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
@@ -333,7 +309,7 @@ plugin.
 
 The `moonflyWithALEIndicator` option specifies whether to indicate the
 presence of the ALE errors and warnings in the current buffer via the defined
-`moonflyLinterIndicator` (the Unicode `U+2716` `✖` symbol by default). If
+`moonflyDiagnosticsIndicator` (the Unicode `U+2716` `✖` symbol by default). If
 enabled, the indicator will be displayed in the left-side section of the
 _statusline_.
 
