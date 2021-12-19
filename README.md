@@ -43,14 +43,14 @@ Plugins, Linters and Diagnostics supported
   [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) via the
   `moonflyWithNerdIcon` option
 
+- [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html) via the
+  `moonflyWithNvimDiagnosticIndicator` option
+
 - [ALE](https://github.com/dense-analysis/ale) via the
   `moonflyWithALEIndicator` option
 
 - [Coc](https://github.com/neoclide/coc.nvim) via the
   `moonflyWithCocIndicator` option
-
-- [Neovim LSP](https://neovim.io/doc/user/lsp.html) via the
-  `moonflyWithNvimLspIndicator` option
 
 - [Obsession](https://github.com/tpope/vim-obsession)
 
@@ -275,9 +275,9 @@ vim.g.moonflyLinterIndicator = '<<CHARACTER-OF-YOUR-CHOOSING>>'
 ### moonflyDiagnosticsIndicator
 
 The `moonflyDiagnosticsIndicator` option specifies which character to indicate
-diagnostic errors. Currently, [Coc](https://github.com/neoclide/coc.nvim) and
-[Neovim LSP](https://neovim.io/doc/user/lsp.html) diagnostics may be indicated
-via this option.
+diagnostic errors. Currently, [Neovim
+Diagnostics](https://neovim.io/doc/user/diagnostic.html) and
+[Coc](https://github.com/neoclide/coc.nvim) may be indicated via this option.
 
 By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
 modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
@@ -294,6 +294,34 @@ let g:moonflyDiagnosticsIndicator = '<<CHARACTER-OF-YOUR-CHOOSING>>'
 ```lua
 -- Lua initialization file
 vim.g.moonflyDiagnosticsIndicator = '<<CHARACTER-OF-YOUR-CHOOSING>>'
+```
+
+---
+
+### moonflyWithNvimDiagnosticIndicator
+
+_moonfly statusline_ supports [Neovim
+Diagnostics](https://neovim.io/doc/user/diagnostic.html)
+
+The `moonflyWithNvimDiagnosticIndicator` option specifies whether to indicate
+the presence of the Neovim Diagnostics in the current buffer via the defined
+`moonflyDiagnosticsIndicator` (the Unicode `U+2716` `✖` symbol by default). If
+enabled, the indicator will be displayed in the left-side section of the
+_statusline_.
+
+By default, Neovim Diagnositics will **not** be indicated.
+
+If Neovim Diagnostic indication is desired then please add the following to
+your initialization file:
+
+```viml
+" Vimscript initialization file
+let g:moonflyWithNvimDiagnosticIndicator = 1
+```
+
+```lua
+-- Lua initialization file
+vim.g.moonflyWithNvimDiagnosticIndicator = 1
 ```
 
 ---
@@ -350,34 +378,6 @@ let g:moonflyWithCocIndicator = 1
 ```lua
 -- Lua initialization file
 vim.g.moonflyWithCocIndicator = 1
-```
-
----
-
-### moonflyWithNvimLspIndicator
-
-_moonfly statusline_ supports [Neovim LSP](https://neovim.io/doc/user/lsp.html)
-diagnostics.
-
-The `moonflyWithNvimLspIndicator` option specifies whether to indicate the
-presence of the Neovim LSP diagnostics in the current buffer via the defined
-`moonflyDiagnosticsIndicator` (the Unicode `U+2716` `✖` symbol by default). If
-enabled, the indicator will be displayed in the left-side section of the
-_statusline_.
-
-By default, Neovim LSP diagnositics will **not** be indicated.
-
-If Neovim LSP diagnostic indication is desired then please add the following to
-your initialization file:
-
-```viml
-" Vimscript initialization file
-let g:moonflyWithNvimLspIndicator = 1
-```
-
-```lua
--- Lua initialization file
-vim.g.moonflyWithNvimLspIndicator = 1
 ```
 
 ---

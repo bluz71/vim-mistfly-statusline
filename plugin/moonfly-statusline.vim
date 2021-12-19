@@ -28,6 +28,10 @@ let g:moonflyDiagnosticsIndicator = get(g:, 'moonflyDiagnosticsIndicator', '✖'
 " By default don't display a Nerd Font filetype icon.
 let g:moonflyWithNerdIcon = get(g:, 'moonflyWithNerdIcon', 0)
 
+" By default don't indicate Neovim Diagnostics via the defined
+" g:moonflyDiagnosticsIndicator.
+let g:moonflyWithNvimDiagnosticIndicator = get(g:, 'moonflyWithNvimDiagnosticIndicator', 0)
+
 " By default don't indicate ALE lint errors via the defined
 " g:moonflyLinterIndicator.
 let g:moonflyWithALEIndicator = get(g:, 'moonflyWithALEIndicator', 0)
@@ -35,10 +39,6 @@ let g:moonflyWithALEIndicator = get(g:, 'moonflyWithALEIndicator', 0)
 " By default don't indicate Coc lint errors via the defined
 " g:moonflyDiagnosticsIndicator.
 let g:moonflyWithCocIndicator = get(g:, 'moonflyWithCocIndicator', 0)
-
-" By default don't indicate Neovim LSP diagnostics via the defined
-" g:moonflyDiagnosticsIndicator.
-let g:moonflyWithNvimLspIndicator = get(g:, 'moonflyWithNvimLspIndicator', 0)
 
 " By default don't use geometric shapes, U+25A0 - Black Square & U+25CF - Black
 " Circle, to indicate the obsession (https://github.com/tpope/vim-obsession)

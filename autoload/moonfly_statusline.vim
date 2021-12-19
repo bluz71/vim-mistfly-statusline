@@ -82,22 +82,34 @@ function! moonfly_statusline#GitBranch() abort
     endif
 endfunction
 
+lua << EOF
+-- Neovim 0.6 diagnostic counter.
+function _G.moonfly_nvim_diagnostic_count()
+  local diagnostics = vim.diagnostic.get(0)
+  local count = {0, 0, 0, 0}
+
+  for _, diagnostic in ipairs(diagnostics) do
+    count[diagnostic.severity] = count[diagnostic.severity] + 1
+  end
+
+  return count[vim.diagnostic.severity.ERROR] + count[vim.diagnostic.severity.WARN]
+end
+EOF
+
 function! moonfly_statusline#PluginsStatus() abort
     let l:status = ''
 
-    " Neovim LSP diagnostics indicator.
-    if g:moonflyWithNvimLspIndicator && has('nvim-0.5')
+    " Neovim Diagnostic indicator.
+    if g:moonflyWithNvimDiagnosticIndicator && has('nvim-0.6')
+        let l:count = v:lua.moonfly_nvim_diagnostic_count()
+        if l:count > 0
+            let l:status .= g:moonflyDiagnosticsIndicator . ' ' . l:count . ' '
+        endif
+    elseif g:moonflyWithNvimDiagnosticIndicator && has('nvim-0.5')
         let l:count = luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
                   \ + luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
         if l:count > 0
             let l:status .= g:moonflyDiagnosticsIndicator . ' ' . l:count . ' '
-        endif
-    endif
-
-    " Coc indicator.
-    if g:moonflyWithCocIndicator && exists('g:did_coc_loaded')
-        if len(coc#status()) > 0
-            let l:status .= g:moonflyDiagnosticsIndicator . ' '
         endif
     endif
 
@@ -106,6 +118,13 @@ function! moonfly_statusline#PluginsStatus() abort
         let l:count = ale#statusline#Count(bufnr('')).total
         if l:count > 0
             let l:status .= g:moonflyLinterIndicator . ' ' . l:count . ' '
+        endif
+    endif
+
+    " Coc indicator.
+    if g:moonflyWithCocIndicator && exists('g:did_coc_loaded')
+        if len(coc#status()) > 0
+            let l:status .= g:moonflyDiagnosticsIndicator . ' '
         endif
     endif
 
