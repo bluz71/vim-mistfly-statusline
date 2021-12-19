@@ -17,9 +17,9 @@ let g:moonflyWithGitBranch = get(g:, 'moonflyWithGitBranch', 1)
 " By default don't display Git branches with the U+E0A0 branch character.
 let g:moonflyWithGitBranchCharacter = get(g:, 'moonflyWithGitBranchCharacter', 0)
 
-" The character used to indicate the presence of diagnostics in the current
+" The symbol used to indicate the presence of diagnostics in the current
 " buffer. By default the U+2716 cross symbol will be used.
-let g:moonflyDiagnosticsIndicator = get(g:, 'moonflyDiagnosticsIndicator', '✖')
+let g:moonflyDiagnosticSymbol = get(g:, 'moonflyDiagnosticSymbol', '✖')
 
 " By default don't display a Nerd Font filetype icon.
 let g:moonflyWithNerdIcon = get(g:, 'moonflyWithNerdIcon', 0)
