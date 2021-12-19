@@ -3,9 +3,7 @@ moonfly statusline
 
 _moonfly statusline_ is a simple, yet informative, _statusline_ for Vim and
 Neovim that uses [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors
-by default.
-
-Be aware, the _statusline_ colors can easily be
+by default. Note, the _statusline_ colors can easily be
 [customized](https://github.com/bluz71/vim-moonfly-statusline#moonflyignoredefaultcolors)
 if desired.
 
@@ -248,12 +246,12 @@ vim.g.moonflyWithNerdIcon = 1
 
 ### moonflyDiagnosticSymbol
 
-The `moonflyDiagnosticSymbol` option specifies which symbol to use to indicate
-diagnostic errors. Currently,
+The `moonflyDiagnosticSymbol` option specifies which character symbol to use to
+indicate diagnostic errors. Currently,
 [Neovim](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) and
-[Coc](https://github.com/neoclide/coc.nvim) diagnostics may be indicated via
-this option.
+[Coc](https://github.com/neoclide/coc.nvim) diagnostics may be indicated with
+this symbol (when the appropriate diagnostic option is set, see below).
 
 By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
 modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
