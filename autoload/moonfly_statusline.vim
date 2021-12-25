@@ -82,35 +82,19 @@ function! moonfly_statusline#GitBranch() abort
     endif
 endfunction
 
-if has('nvim')
-lua << EOF
--- Neovim 0.6 diagnostic counter.
-function _G.moonfly_nvim_diagnostic_count()
-    local diagnostics = vim.diagnostic.get(0)
-    local count = {0, 0, 0, 0}
-
-    for _, diagnostic in ipairs(diagnostics) do
-        count[diagnostic.severity] = count[diagnostic.severity] + 1
-    end
-
-    return count[vim.diagnostic.severity.ERROR] + count[vim.diagnostic.severity.WARN]
-end
-EOF
-endif
-
 function! moonfly_statusline#PluginsStatus() abort
     let l:status = ''
 
     " Neovim Diagnostic indicator.
     if g:moonflyWithNvimDiagnosticIndicator
         if has('nvim-0.6')
-            let l:count = v:lua.moonfly_nvim_diagnostic_count()
+            let l:count = luaeval('#vim.diagnostic.get(0, {severity = {min = vim.diagnostic.severity.WARN}})')
             if l:count > 0
                 let l:status .= g:moonflyDiagnosticSymbol . ' ' . l:count . ' '
             endif
         elseif has('nvim-0.5')
-            let l:count = luaeval("vim.lsp.diagnostic.get_count(0, [[Error]])")
-                      \ + luaeval("vim.lsp.diagnostic.get_count(0, [[Warning]])")
+            let l:count = luaeval('vim.lsp.diagnostic.get_count(0, [[Error]])')
+                      \ + luaeval('vim.lsp.diagnostic.get_count(0, [[Warning]])')
             if l:count > 0
                 let l:status .= g:moonflyDiagnosticSymbol . ' ' . l:count . ' '
             endif
