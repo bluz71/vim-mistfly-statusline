@@ -383,6 +383,11 @@ let g:moonflyWithObessionGeometricCharacters = 1
 vim.g.moonflyWithObessionGeometricCharacters = 1
 ```
 
+Sponsor
+-------
+
+[![Ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/bluz71)
+
 License
 -------
 
