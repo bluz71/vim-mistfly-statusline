@@ -137,7 +137,7 @@ function! moonfly_statusline#ActiveStatusLine() abort
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     let l:statusline .= '%5*%{moonfly_statusline#GitBranch()}'
     let l:statusline .= '%6*%{moonfly_statusline#PluginsStatus()}'
-    let l:statusline .= '%*%=%l:%c | %7*%L%* | %P '
+    let l:statusline .= '%*%=%l:%c | %5*%L%* | %P '
 
     return l:statusline
 endfunction
@@ -153,6 +153,33 @@ endfunction
 
 function! moonfly_statusline#NoFileStatusLine() abort
     return ' %{moonfly_statusline#ShortCurrentPath()}'
+endfunction
+
+function! moonfly_statusline#ActiveWinBar() abort
+    if len(expand('%:f')) == 0
+        return ''
+    endif
+    let l:mode = mode()
+    let l:winbar = moonfly_statusline#ModeColor(l:mode)
+    let l:winbar .= moonfly_statusline#ModeText(l:mode)
+    let l:winbar .= '%* %<%{moonfly_statusline#File()}'
+    let l:winbar .= "%{&modified ? '+\ ' : ' \ \ '}"
+    let l:winbar .= "%{&readonly ? 'RO\ ' : ''}"
+    let l:winbar .= '%#Normal#'
+
+    return l:winbar
+endfunction
+
+function! moonfly_statusline#InactiveWinBar() abort
+    if len(expand('%:f')) == 0
+        return ''
+    endif
+    let l:winbar = ' %*%<%{moonfly_statusline#File()}'
+    let l:winbar .= "%{&modified?'+\ ':' \ \ '}"
+    let l:winbar .= "%{&readonly?'RO\ ':''}"
+    let l:winbar .= '%#NonText#'
+
+    return l:winbar
 endfunction
 
 " The following Git branch functionality derives from:

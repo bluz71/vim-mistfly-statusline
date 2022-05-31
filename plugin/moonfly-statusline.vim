@@ -48,18 +48,28 @@ let s:emerald = '#42cf89' " emerald = 10
 let s:blue    = '#80a0ff' " blue    = 4
 let s:purple  = '#ae81ff' " purple  = 13
 let s:crimson = '#f74782' " crimson = 9
+let s:yellow  = '#e3c78a' " yellow = 3
 
 function! s:StatusLine(active) abort
     if &buftype ==# 'nofile' || &filetype ==# 'netrw'
         " Likely a file explorer.
         setlocal statusline=%!moonfly_statusline#NoFileStatusLine()
+        " if exists('&winbar')
+        "     setlocal winbar=
+        " endif
     elseif &buftype ==# 'nowrite'
         " Don't set a custom status line for certain special windows.
         return
     elseif a:active == 1
         setlocal statusline=%!moonfly_statusline#ActiveStatusLine()
-    else
+        " if exists('&winbar')
+        "     setlocal winbar=%!moonfly_statusline#ActiveWinBar()
+        " endif
+    elseif a:active == 0
         setlocal statusline=%!moonfly_statusline#InactiveStatusLine()
+        " if exists('&winbar')
+        "     setlocal winbar=%!moonfly_statusline#InactiveWinBar()
+        " endif
     endif
 endfunction
 
@@ -114,7 +124,7 @@ function! s:UserColors() abort
     exec 'highlight User4 ctermbg=9   guibg=' . s:crimson . ' ctermfg=234 guifg=' . s:grey234
     exec 'highlight User5 ctermbg=' . l:sl_bg_cterm . ' guibg=' . l:sl_bg_gui . ' ctermfg=4   guifg=' . s:blue    . ' gui=none'
     exec 'highlight User6 ctermbg=' . l:sl_bg_cterm . ' guibg=' . l:sl_bg_gui . ' ctermfg=9   guifg=' . s:crimson . ' gui=none'
-    exec 'highlight User7 ctermbg=' . l:sl_bg_cterm . ' guibg=' . l:sl_bg_gui . ' ctermfg=4   guifg=' . s:blue    . ' gui=none'
+    exec 'highlight User7 ctermbg=' . l:sl_bg_cterm . ' guibg=' . l:sl_bg_gui . ' ctermfg=4   guifg=' . s:yellow    . ' gui=none'
 endfunction
 
 augroup MoonflyStatuslineEvents
