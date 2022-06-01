@@ -11,6 +11,9 @@ let g:loaded_moonfly_statusline = 1
 " By default use moonfly colors.
 let g:moonflyIgnoreDefaultColors = get(g:, 'moonflyIgnoreDefaultColors', 0)
 
+" By default do not enable Neovim's window bar.
+let g:moonflyWinBar = get(g:, 'moonflyWinBar', 0)
+
 " By default display Git branches.
 let g:moonflyWithGitBranch = get(g:, 'moonflyWithGitBranch', 1)
 
@@ -54,22 +57,22 @@ function! s:StatusLine(active) abort
     if &buftype ==# 'nofile' || &filetype ==# 'netrw'
         " Likely a file explorer.
         setlocal statusline=%!moonfly_statusline#NoFileStatusLine()
-        " if exists('&winbar')
-        "     setlocal winbar=
-        " endif
+        if exists('&winbar')
+            setlocal winbar=
+        endif
     elseif &buftype ==# 'nowrite'
         " Don't set a custom status line for certain special windows.
         return
     elseif a:active == 1
         setlocal statusline=%!moonfly_statusline#ActiveStatusLine()
-        " if exists('&winbar')
-        "     setlocal winbar=%!moonfly_statusline#ActiveWinBar()
-        " endif
+        if g:moonflyWinBar && exists('&winbar')
+            setlocal winbar=%!moonfly_statusline#ActiveWinBar()
+        endif
     elseif a:active == 0
         setlocal statusline=%!moonfly_statusline#InactiveStatusLine()
-        " if exists('&winbar')
-        "     setlocal winbar=%!moonfly_statusline#InactiveWinBar()
-        " endif
+        if g:moonflyWinBar && exists('&winbar') && winheight(0) > 1
+            setlocal winbar=%!moonfly_statusline#InactiveWinBar()
+        endif
     endif
 endfunction
 

@@ -130,8 +130,13 @@ endfunction
 
 function! moonfly_statusline#ActiveStatusLine() abort
     let l:mode = mode()
-    let l:statusline = moonfly_statusline#ModeColor(l:mode)
-    let l:statusline .= moonfly_statusline#ModeText(l:mode)
+    let l:statusline = ''
+    if !(&laststatus == 3 && g:moonflyWinBar)
+        " Note, ignore mode when global 'statusline' & 'winbar' are enabled; the
+        " mode in that case will be displayed in the window bar.
+        let l:statusline = moonfly_statusline#ModeColor(l:mode)
+        let l:statusline .= moonfly_statusline#ModeText(l:mode)
+    endif
     let l:statusline .= '%* %<%{moonfly_statusline#File()}'
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"

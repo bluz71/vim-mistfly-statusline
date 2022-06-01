@@ -7,8 +7,12 @@ by default. Note, the _statusline_ colors can easily be
 [customized](https://github.com/bluz71/vim-moonfly-statusline#moonflyignoredefaultcolors)
 if desired.
 
+_moonfly statusline_ also supports Neovim's `winbar` feature when the
+[appropriate option is
+enabled](https://github.com/bluz71/vim-moonfly-statusline#moonflywinbar).
+
 _moonfly statusline_ is a very light _statusline_ plugin clocking in at
-around 200 lines of Vimscript. For comparison, the
+around 300 lines of Vimscript. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim) and
 [airline](https://github.com/vim-airline/vim-airline) _statusline_ plugins
 contain over 3,500 and 6,500 lines of Vimscript respectively. In fairness, the
@@ -162,6 +166,31 @@ highlight! link User7 StatusLine
 :cake: Note, the [nightfly](https://github.com/bluz71/vim-nightfly-guicolors)
 color scheme automatically defines _statusline_ colors that are compatible with
 this plugin. **No** custom settings are required with that colorscheme.
+
+---
+
+### moonflyWinBar
+
+The `moonflyWinBar` option specifies whether to display Neovim's window bar at
+the top of each window. By default window bars will not be displayed.
+
+Displaying a window bar is reasonable when Neovim's global statusline is
+enabled via `set laststatus=3`; the `winbar` will then display the file name at
+the top of each window to disambiguate splits. Note, Neovim 0.8 is required for
+this feature.
+
+To enable Neovim's `winbar` feature please add the following to your
+initialization file:
+
+```viml
+" Vimscript initialization file
+let g:moonflyWinBar = 1
+```
+
+```lua
+-- Lua initialization file
+vim.g.moonflyWinBar = 1
+```
 
 ---
 
