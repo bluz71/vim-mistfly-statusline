@@ -1,4 +1,4 @@
-" A simple Vim / Neovim statusline that uses moonfly colors by default.
+" A simple Vim / Neovim statusline.
 "
 " URL:          github.com/bluz71/vim-mistfly-statusline
 " License:      MIT (https://opensource.org/licenses/MIT)
@@ -8,6 +8,10 @@ if exists('g:loaded_mistfly_statusline')
 endif
 let g:loaded_mistfly_statusline = 1
 
+" The symbol used to indicate the presence of diagnostics in the current
+" buffer. By default the U+2716 cross symbol will be used.
+let g:mistflyDiagnosticSymbol = get(g:, 'mistflyDiagnosticSymbol', '✖')
+
 " By default do not enable Neovim's window bar.
 let g:mistflyWinBar = get(g:, 'mistflyWinBar', 0)
 
@@ -16,10 +20,6 @@ let g:mistflyWithGitBranch = get(g:, 'mistflyWithGitBranch', 1)
 
 " By default don't display Git branches with the U+E0A0 branch character.
 let g:mistflyWithGitBranchCharacter = get(g:, 'mistflyWithGitBranchCharacter', 0)
-
-" The symbol used to indicate the presence of diagnostics in the current
-" buffer. By default the U+2716 cross symbol will be used.
-let g:mistflyDiagnosticSymbol = get(g:, 'mistflyDiagnosticSymbol', '✖')
 
 " By default don't display a Nerd Font filetype icon.
 let g:mistflyWithNerdIcon = get(g:, 'mistflyWithNerdIcon', 0)
@@ -51,12 +51,12 @@ function! s:StatusLine(active) abort
     elseif &buftype ==# 'nowrite'
         " Don't set a custom status line for certain special windows.
         return
-    elseif a:active == 1
+    elseif a:active == v:true
         setlocal statusline=%!mistfly_statusline#ActiveStatusLine()
         if g:mistflyWinBar && exists('&winbar')
             setlocal winbar=%!mistfly_statusline#ActiveWinBar()
         endif
-    elseif a:active == 0
+    elseif a:active == v:false
         setlocal statusline=%!mistfly_statusline#InactiveStatusLine()
         if g:mistflyWinBar && exists('&winbar') && winheight(0) > 1
             setlocal winbar=%!mistfly_statusline#InactiveWinBar()
@@ -106,9 +106,9 @@ augroup mistflyStatuslineEvents
     autocmd!
     autocmd VimEnter              * call s:UpdateInactiveWindows()
     autocmd ColorScheme,SourcePre * call s:UserColors()
-    autocmd WinEnter,BufWinEnter  * call s:StatusLine(1)
-    autocmd WinLeave              * call s:StatusLine(0)
+    autocmd WinEnter,BufWinEnter  * call s:StatusLine(v:true)
+    autocmd WinLeave              * call s:StatusLine(v:false)
     if exists('##CmdlineEnter')
-        autocmd CmdlineEnter      * call s:StatusLine(1) | redraw
+        autocmd CmdlineEnter      * call s:StatusLine(v:true) | redraw
     endif
 augroup END
