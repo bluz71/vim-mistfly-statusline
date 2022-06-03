@@ -30,9 +30,9 @@ Screenshots
 <img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly_replace.png">
 
 The above screenshots are using the
-[moonfly](https://github.com/bluz71/vim-moonfly-colors) colorschme with the
+[moonfly](https://github.com/bluz71/vim-moonfly-colors) colorscheme with the
 [Iosevka](https://github.com/be5invis/Iosevka) font. Also, the
-`g:mistflyWithGitBranchCharacter` option is set to `1`.
+`mistflyWithGitBranchCharacter` option is set to `1`.
 
 Plugins, Linters and Diagnostics supported
 ------------------------------------------
