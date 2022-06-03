@@ -64,19 +64,22 @@ function! s:StatusLine(active) abort
     endif
 endfunction
 
-" Iterate though the windows and update the status line for all inactive
-" windows.
+" Iterate though the windows and update the statusline and winbar for all
+" inactive windows.
 "
 " This is needed when starting Vim with multiple splits, for example 'vim -O
-" file1 file2', otherwise all 'status lines will be rendered as if they are
-" active. Inactive statuslines are usually rendered via the WinLeave and
-" BufLeave events, but those events are not triggered when starting Vim.
+" file1 file2', otherwise all statuslines/winbars will be rendered as if they
+" are active. Inactive statuslines/winbar are usually rendered via the WinLeave
+" and BufLeave events, but those events are not triggered when starting Vim.
 "
 " Note - https://jip.dev/posts/a-simpler-vim-statusline/#inactive-statuslines
 function! s:UpdateInactiveWindows() abort
     for winnum in range(1, winnr('$'))
         if winnum != winnr()
             call setwinvar(winnum, '&statusline', '%!mistfly_statusline#InactiveStatusLine()')
+            if g:mistflyWinBar && exists('&winbar') && winheight(0) > 1
+                call setwinvar(winnum, '&winbar', '%!mistfly_statusline#InactiveWinBar()')
+            endif
         endif
     endfor
 endfunction
