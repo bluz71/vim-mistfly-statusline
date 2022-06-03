@@ -1,28 +1,22 @@
-moonfly statusline
+mistfly statusline
 ==================
 
-_moonfly statusline_ is a simple, yet informative, _statusline_ for Vim and
+_mistfly statusline_ is a simple, yet informative, _statusline_ for Vim and
 Neovim that uses [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors
 by default. Note, the _statusline_ colors can easily be
-[customized](https://github.com/bluz71/vim-moonfly-statusline#moonflyignoredefaultcolors)
+[customized](https://github.com/bluz71/vim-mistfly-statusline#mistflyignoredefaultcolors)
 if desired.
 
-_moonfly statusline_ also supports Neovim's `winbar` feature when the
+_mistfly statusline_ also supports Neovim's `winbar` feature when the
 [appropriate option is
-enabled](https://github.com/bluz71/vim-moonfly-statusline#moonflywinbar).
+enabled](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar).
 
-_moonfly statusline_ is a very light _statusline_ plugin clocking in at
+_mistfly statusline_ is a very light _statusline_ plugin clocking in at
 around 300 lines of Vimscript. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim) and
 [airline](https://github.com/vim-airline/vim-airline) _statusline_ plugins
 contain over 3,500 and 6,500 lines of Vimscript respectively. In fairness, the
 latter two plugins are also more featureful.
-
-Lastly, for those that configure their own _statusline_ but seek only to add
-some niceties, such a colorful mode indicator for example, then feel free to
-browse the
-[source](https://github.com/bluz71/vim-moonfly-statusline/blob/master/plugin/moonfly-statusline.vim)
-and borrow freely.
 
 Screenshots
 -----------
@@ -36,41 +30,60 @@ Screenshots
 <img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_replace.png">
 
 The font in use is [Iosevka](https://github.com/be5invis/Iosevka). Also, the
-`g:moonflyWithGitBranchCharacter` option is set to `1`.
+`g:mistflyWithGitBranchCharacter` option is set to `1`.
 
 Plugins, Linters and Diagnostics supported
 ------------------------------------------
 
 - [vim-devicons](https://github.com/ryanoasis/vim-devicons) and
   [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) via the
-  `moonflyWithNerdIcon` option
+  `mistflyWithNerdIcon` option
 
 - [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html) via the
-  `moonflyWithNvimDiagnosticIndicator` option
+  `mistflyWithNvimDiagnosticIndicator` option
 
 - [ALE](https://github.com/dense-analysis/ale) via the
-  `moonflyWithALEIndicator` option
+  `mistflyWithALEIndicator` option
 
 - [Coc](https://github.com/neoclide/coc.nvim) via the
-  `moonflyWithCocIndicator` option
+  `mistflyWithCocIndicator` option
 
 - [Obsession](https://github.com/tpope/vim-obsession)
 
 Installation
 ------------
 
-Install **bluz71/vim-moonfly-statusline** with your preferred plugin manager.
+Install **bluz71/vim-mistfly-statusline** with your preferred plugin manager.
 
 [vim-plug](https://github.com/junegunn/vim-plug):
 
 ```viml
-Plug 'bluz71/vim-moonfly-statusline'
+Plug 'bluz71/vim-mistfly-statusline'
 ```
 
 [packer.nvim](https://github.com/wbthomason/packer.nvim):
 
 ```lua
-use 'bluz71/vim-moonfly-statusline'
+use 'bluz71/vim-mistfly-statusline'
+```
+
+Legacy Installation
+-------------------
+
+_mistfly statusline_ supports the legacy version of this project, previously
+named _moonfly statusline_, via the `moonfly-compat` branch. That legacy version
+can be installed with your preferred plugin manager.
+
+[vim-plug](https://github.com/junegunn/vim-plug):
+
+```viml
+Plug 'bluz71/vim-mistfly-statusline', { 'branch': 'moonfly-compat' }
+```
+
+[packer.nvim](https://github.com/wbthomason/packer.nvim):
+
+```lua
+use { 'bluz71/vim-mistfly-statusline', branch = 'moonfly-compat' }
 ```
 
 Notice
@@ -82,7 +95,7 @@ windows will **not** be directly styled by this plugin.
 Layout And Default Colors
 -------------------------
 
-The *moonfly-statusline* layout contains two groupings, the left side segments:
+The *mistfly-statusline* layout contains two groupings, the left side segments:
 
 ```
 <Mode *> <Filename & Flags> <Git Branch *> <Plugins Status *>
@@ -129,29 +142,29 @@ for the above listed colored `*` segments:
 :wrench: Options
 ----------------
 
-### moonflyIgnoreDefaultColors
+### mistflyIgnoreDefaultColors
 
-The `moonflyIgnoreDefaultColors` option specifies whether custom _statusline_
+The `mistflyIgnoreDefaultColors` option specifies whether custom _statusline_
 colors should be used in-place of
-[moonfly](https://github.com/bluz71/vim-moonfly-colors) colors. By default
-[moonfly](https://github.com/bluz71/vim-moonfly-colors) colors will be
+[mistfly](https://github.com/bluz71/vim-mistfly-colors) colors. By default
+[mistfly](https://github.com/bluz71/vim-mistfly-colors) colors will be
 displayed. If custom colors are to be used then please add the following to your
 initialization file
 
 ```viml
 " Vimscript initialization file
-let g:moonflyIgnoreDefaultColors = 1
+let g:mistflyIgnoreDefaultColors = 1
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.moonflyIgnoreDefaultColors = 1
+vim.g.mistflyIgnoreDefaultColors = 1
 ```
 
 :gift: Here is an example of a customized _statusline_ color theme which should
 work well with most existing Vim colorschemes. Save the following either
 at the end of your initialization file or in an appropriate `after` file such as
-`~/.vim/after/plugin/moonfly-statusline.vim`:
+`~/.vim/after/plugin/mistfly-statusline.vim`:
 
 ```viml
 highlight! link User1 DiffText
@@ -169,9 +182,9 @@ this plugin. **No** custom settings are required with that colorscheme.
 
 ---
 
-### moonflyWinBar
+### mistflyWinBar
 
-The `moonflyWinBar` option specifies whether to display Neovim's window bar at
+The `mistflyWinBar` option specifies whether to display Neovim's window bar at
 the top of each window. By default window bars will not be displayed.
 
 Displaying a window bar is reasonable when Neovim's global statusline is
@@ -184,19 +197,19 @@ initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:moonflyWinBar = 1
+let g:mistflyWinBar = 1
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.moonflyWinBar = 1
+vim.g.mistflyWinBar = 1
 ```
 
 ---
 
-### moonflyWithGitBranch
+### mistflyWithGitBranch
 
-The `moonflyWithGitBranch` option specifies whether to display Git branch
+The `mistflyWithGitBranch` option specifies whether to display Git branch
 details in the _statusline_. By default Git branches will be displayed in the
 `statusline`.
 
@@ -205,19 +218,19 @@ following to your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:moonflyWithGitBranch = 0
+let g:mistflyWithGitBranch = 0
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.moonflyWithGitBranch = 0
+vim.g.mistflyWithGitBranch = 0
 ```
 
 ---
 
-### moonflyWithGitBranchCharacter
+### mistflyWithGitBranchCharacter
 
-The `moonflyWithGitBranchCharacter` option specifies whether to display Git
+The `mistflyWithGitBranchCharacter` option specifies whether to display Git
 branch details with the Unicode Git branch character `U+E0A0`. By default Git
 branches displayed in the `statusline` will not use that character since many
 monospace fonts will not contain it. However, some modern fonts, such as [Fira
@@ -225,7 +238,7 @@ Code](https://github.com/tonsky/FiraCode) and
 [Iosevka](https://github.com/be5invis/Iosevka), do contain that Git branch
 character.
 
-If `moonflyWithGitBranchCharacter` is unset or set to zero then the current
+If `mistflyWithGitBranchCharacter` is unset or set to zero then the current
 Git branch will be displayed inside square brackets.
 
 To display with the Unicode Git branch character please add the following to
@@ -233,21 +246,21 @@ your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:moonflyWithGitBranchCharacter = 1
+let g:mistflyWithGitBranchCharacter = 1
 ```
 
 ```Lua
 -- Lua initialization file
-vim.g.moonflyWithGitBranchCharacter = 1
+vim.g.mistflyWithGitBranchCharacter = 1
 ```
 
 The above screenshots are displayed with the Git branch character.
 
 ---
 
-### moonflyWithNerdIcon
+### mistflyWithNerdIcon
 
-The `moonflyWithNerdIcon` option specifies whether a filetype icon, from the
+The `mistflyWithNerdIcon` option specifies whether a filetype icon, from the
 current Nerd Font, will be displayed next to the filename in the `statusline`.
 
 Note, a [Nerd Font](https://www.nerdfonts.com) must be in-use **and** the
@@ -263,19 +276,19 @@ initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:moonflyWithNerdIcon = 1
+let g:mistflyWithNerdIcon = 1
 ```
 
 ```lua
 -- lua initialization file
-vim.g.moonflyWithNerdIcon = 1
+vim.g.mistflyWithNerdIcon = 1
 ```
 
 ---
 
-### moonflyDiagnosticSymbol
+### mistflyDiagnosticSymbol
 
-The `moonflyDiagnosticSymbol` option specifies which character symbol to use to
+The `mistflyDiagnosticSymbol` option specifies which character symbol to use to
 indicate diagnostic errors. Currently,
 [Neovim](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) and
@@ -291,24 +304,24 @@ initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:moonflyDiagnosticSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+let g:mistflyDiagnosticSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.moonflyDiagnosticSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+vim.g.mistflyDiagnosticSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
 
 ---
 
-### moonflyWithNvimDiagnosticIndicator
+### mistflyWithNvimDiagnosticIndicator
 
-_moonfly statusline_ supports [Neovim
+_mistfly statusline_ supports [Neovim
 Diagnostics](https://neovim.io/doc/user/diagnostic.html)
 
-The `moonflyWithNvimDiagnosticIndicator` option specifies whether to indicate
+The `mistflyWithNvimDiagnosticIndicator` option specifies whether to indicate
 the presence of the Neovim Diagnostics in the current buffer via the defined
-`moonflyDiagnosticSymbol` (the Unicode `U+2716` `✖` symbol by default). If
+`mistflyDiagnosticSymbol` (the Unicode `U+2716` `✖` symbol by default). If
 enabled, the indicator will be displayed in the left-side section of the
 _statusline_.
 
@@ -319,24 +332,24 @@ your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:moonflyWithNvimDiagnosticIndicator = 1
+let g:mistflyWithNvimDiagnosticIndicator = 1
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.moonflyWithNvimDiagnosticIndicator = 1
+vim.g.mistflyWithNvimDiagnosticIndicator = 1
 ```
 
 ---
 
-### moonflyWithALEIndicator
+### mistflyWithALEIndicator
 
-_moonfly statusline_ supports the [ALE](https://github.com/dense-analysis/ale)
+_mistfly statusline_ supports the [ALE](https://github.com/dense-analysis/ale)
 plugin.
 
-The `moonflyWithALEIndicator` option specifies whether to indicate the
+The `mistflyWithALEIndicator` option specifies whether to indicate the
 presence of the ALE errors and warnings in the current buffer via the defined
-`moonflyDiagnosticSymbol` (the Unicode `U+2716` `✖` symbol by default). If
+`mistflyDiagnosticSymbol` (the Unicode `U+2716` `✖` symbol by default). If
 enabled, the indicator will be displayed in the left-side section of the
 _statusline_.
 
@@ -347,24 +360,24 @@ initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:moonflyWithALEIndicator = 1
+let g:mistflyWithALEIndicator = 1
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.moonflyWithALEIndicator = 1
+vim.g.mistflyWithALEIndicator = 1
 ```
 
 ---
 
-### moonflyWithCocIndicator
+### mistflyWithCocIndicator
 
-_moonfly statusline_ supports the [Coc](https://github.com/neoclide/coc.nvim)
+_mistfly statusline_ supports the [Coc](https://github.com/neoclide/coc.nvim)
 plugin.
 
-The `moonflyWithCocIndicator` option specifies whether to indicate the
+The `mistflyWithCocIndicator` option specifies whether to indicate the
 presence of the Coc diagnostics in the current buffer via the defined
-`moonflyDiagnosticSymbol` (the Unicode `U+2716` `✖` symbol by default). If
+`mistflyDiagnosticSymbol` (the Unicode `U+2716` `✖` symbol by default). If
 enabled, the indicator will be displayed in the left-side section of the
 _statusline_.
 
@@ -375,28 +388,28 @@ initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:moonflyWithCocIndicator = 1
+let g:mistflyWithCocIndicator = 1
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.moonflyWithCocIndicator = 1
+vim.g.mistflyWithCocIndicator = 1
 ```
 
 ---
 
-### moonflyWithObessionGeometricCharacters
+### mistflyWithObessionGeometricCharacters
 
-_moonfly statusline_ supports Tim Pope's
+_mistfly statusline_ supports Tim Pope's
 [Obsession](https://github.com/tpope/vim-obsession) plugin.
 
-The `moonflyWithObessionGeometricCharacters` option specifies whether to
+The `mistflyWithObessionGeometricCharacters` option specifies whether to
 display obsession details using Unicode geometric characters (`U+25A0` - Black
 Square & `U+25CF` - Black Circle). A modern font, such as
 [Iosevka](https://github.com/be5invis/Iosevka), will contain those Unicode
 geometric characters.
 
-If `moonflyWithObessionGeometricCharacters` is unset the default value from
+If `mistflyWithObessionGeometricCharacters` is unset the default value from
 the Obsession plugin will be used.
 
 To display Obsession status with geometric characters please add the following
@@ -404,12 +417,12 @@ to your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:moonflyWithObessionGeometricCharacters = 1
+let g:mistflyWithObessionGeometricCharacters = 1
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.moonflyWithObessionGeometricCharacters = 1
+vim.g.mistflyWithObessionGeometricCharacters = 1
 ```
 
 Sponsor

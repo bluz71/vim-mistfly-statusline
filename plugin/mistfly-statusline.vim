@@ -1,48 +1,48 @@
 " A simple Vim / Neovim statusline that uses moonfly colors by default.
 "
-" URL:          github.com/bluz71/vim-moonfly-statusline
+" URL:          github.com/bluz71/vim-mistfly-statusline
 " License:      MIT (https://opensource.org/licenses/MIT)
 
-if exists('g:loaded_moonfly_statusline')
+if exists('g:loaded_mistfly_statusline')
   finish
 endif
-let g:loaded_moonfly_statusline = 1
+let g:loaded_mistfly_statusline = 1
 
 " By default use moonfly colors.
-let g:moonflyIgnoreDefaultColors = get(g:, 'moonflyIgnoreDefaultColors', 0)
+let g:mistflyIgnoreDefaultColors = get(g:, 'mistflyIgnoreDefaultColors', 0)
 
 " By default do not enable Neovim's window bar.
-let g:moonflyWinBar = get(g:, 'moonflyWinBar', 0)
+let g:mistflyWinBar = get(g:, 'mistflyWinBar', 0)
 
 " By default display Git branches.
-let g:moonflyWithGitBranch = get(g:, 'moonflyWithGitBranch', 1)
+let g:mistflyWithGitBranch = get(g:, 'mistflyWithGitBranch', 1)
 
 " By default don't display Git branches with the U+E0A0 branch character.
-let g:moonflyWithGitBranchCharacter = get(g:, 'moonflyWithGitBranchCharacter', 0)
+let g:mistflyWithGitBranchCharacter = get(g:, 'mistflyWithGitBranchCharacter', 0)
 
 " The symbol used to indicate the presence of diagnostics in the current
 " buffer. By default the U+2716 cross symbol will be used.
-let g:moonflyDiagnosticSymbol = get(g:, 'moonflyDiagnosticSymbol', '✖')
+let g:mistflyDiagnosticSymbol = get(g:, 'mistflyDiagnosticSymbol', '✖')
 
 " By default don't display a Nerd Font filetype icon.
-let g:moonflyWithNerdIcon = get(g:, 'moonflyWithNerdIcon', 0)
+let g:mistflyWithNerdIcon = get(g:, 'mistflyWithNerdIcon', 0)
 
 " By default don't indicate Neovim Diagnostics via the defined
-" g:moonflyDiagnosticSymbol.
-let g:moonflyWithNvimDiagnosticIndicator = get(g:, 'moonflyWithNvimDiagnosticIndicator', 0)
+" g:mistflyDiagnosticSymbol.
+let g:mistflyWithNvimDiagnosticIndicator = get(g:, 'mistflyWithNvimDiagnosticIndicator', 0)
 
 " By default don't indicate ALE lint errors via the defined
-" g:moonflyDiagnosticSymbol.
-let g:moonflyWithALEIndicator = get(g:, 'moonflyWithALEIndicator', 0)
+" g:mistflyDiagnosticSymbol.
+let g:mistflyWithALEIndicator = get(g:, 'mistflyWithALEIndicator', 0)
 
 " By default don't indicate Coc lint errors via the defined
-" g:moonflyDiagnosticSymbol.
-let g:moonflyWithCocIndicator = get(g:, 'moonflyWithCocIndicator', 0)
+" g:mistflyDiagnosticSymbol.
+let g:mistflyWithCocIndicator = get(g:, 'mistflyWithCocIndicator', 0)
 
 " By default don't use geometric shapes, U+25A0 - Black Square & U+25CF - Black
 " Circle, to indicate the obsession (https://github.com/tpope/vim-obsession)
 " status.
-let g:moonflyWithObessionGeometricCharacters = get(g:, 'moonflyWithObessionGeometricCharacters', 0)
+let g:mistflyWithObessionGeometricCharacters = get(g:, 'mistflyWithObessionGeometricCharacters', 0)
 
 " The moonfly colors (https://github.com/bluz71/vim-moonfly-colors)
 let s:white   = '#c6c6c6' " white   = 251
@@ -56,7 +56,7 @@ let s:yellow  = '#e3c78a' " yellow = 3
 function! s:StatusLine(active) abort
     if &buftype ==# 'nofile' || &filetype ==# 'netrw'
         " Likely a file explorer.
-        setlocal statusline=%!moonfly_statusline#NoFileStatusLine()
+        setlocal statusline=%!mistfly_statusline#NoFileStatusLine()
         if exists('&winbar')
             setlocal winbar=
         endif
@@ -64,14 +64,14 @@ function! s:StatusLine(active) abort
         " Don't set a custom status line for certain special windows.
         return
     elseif a:active == 1
-        setlocal statusline=%!moonfly_statusline#ActiveStatusLine()
-        if g:moonflyWinBar && exists('&winbar')
-            setlocal winbar=%!moonfly_statusline#ActiveWinBar()
+        setlocal statusline=%!mistfly_statusline#ActiveStatusLine()
+        if g:mistflyWinBar && exists('&winbar')
+            setlocal winbar=%!mistfly_statusline#ActiveWinBar()
         endif
     elseif a:active == 0
-        setlocal statusline=%!moonfly_statusline#InactiveStatusLine()
-        if g:moonflyWinBar && exists('&winbar') && winheight(0) > 1
-            setlocal winbar=%!moonfly_statusline#InactiveWinBar()
+        setlocal statusline=%!mistfly_statusline#InactiveStatusLine()
+        if g:mistflyWinBar && exists('&winbar') && winheight(0) > 1
+            setlocal winbar=%!mistfly_statusline#InactiveWinBar()
         endif
     endif
 endfunction
@@ -88,13 +88,13 @@ endfunction
 function! s:UpdateInactiveWindows() abort
     for winnum in range(1, winnr('$'))
         if winnum != winnr()
-            call setwinvar(winnum, '&statusline', '%!moonfly_statusline#InactiveStatusLine()')
+            call setwinvar(winnum, '&statusline', '%!mistfly_statusline#InactiveStatusLine()')
         endif
     endfor
 endfunction
 
 function! s:UserColors() abort
-    if g:moonflyIgnoreDefaultColors
+    if g:mistflyIgnoreDefaultColors
         return
     endif
 
@@ -130,7 +130,7 @@ function! s:UserColors() abort
     exec 'highlight User7 ctermbg=' . l:sl_bg_cterm . ' guibg=' . l:sl_bg_gui . ' ctermfg=4   guifg=' . s:yellow    . ' gui=none'
 endfunction
 
-augroup MoonflyStatuslineEvents
+augroup mistflyStatuslineEvents
     autocmd!
     autocmd VimEnter              * call s:UpdateInactiveWindows()
     autocmd ColorScheme,SourcePre * call s:UserColors()

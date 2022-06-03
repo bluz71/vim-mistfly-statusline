@@ -12,20 +12,20 @@ let s:modes = {
   \  't':      ['%2*', ' term '],
   \}
 
-function! moonfly_statusline#ModeColor(mode) abort
+function! mistfly_statusline#ModeColor(mode) abort
     return get(s:modes, a:mode, '%*1')[0]
 endfunction
 
-function! moonfly_statusline#ModeText(mode) abort
+function! mistfly_statusline#ModeText(mode) abort
     return get(s:modes, a:mode, ' normal ')[1]
 endfunction
 
-function! moonfly_statusline#File() abort
+function! mistfly_statusline#File() abort
     return s:FileIcon() . s:ShortFilePath()
 endfunction
 
 function! s:FileIcon() abort
-    if !g:moonflyWithNerdIcon || bufname('%') == ''
+    if !g:mistflyWithNerdIcon || bufname('%') == ''
         return ''
     endif
 
@@ -61,12 +61,12 @@ function! s:ShortFilePath() abort
     endif
 endfunction
 
-function! moonfly_statusline#ShortCurrentPath() abort
+function! mistfly_statusline#ShortCurrentPath() abort
     return pathshorten(fnamemodify(getcwd(), ':~:.'))
 endfunction
 
-function! moonfly_statusline#GitBranch() abort
-    if !g:moonflyWithGitBranch || bufname('%') == ''
+function! mistfly_statusline#GitBranch() abort
+    if !g:mistflyWithGitBranch || bufname('%') == ''
         return ''
     endif
 
@@ -75,50 +75,50 @@ function! moonfly_statusline#GitBranch() abort
         return ''
     endif
 
-    if g:moonflyWithGitBranchCharacter
+    if g:mistflyWithGitBranchCharacter
         return ' [ ' . l:gitBranchName . '] '
     else
         return ' [' . l:gitBranchName . '] '
     endif
 endfunction
 
-function! moonfly_statusline#PluginsStatus() abort
+function! mistfly_statusline#PluginsStatus() abort
     let l:status = ''
 
     " Neovim Diagnostic indicator.
-    if g:moonflyWithNvimDiagnosticIndicator
+    if g:mistflyWithNvimDiagnosticIndicator
         if has('nvim-0.6')
             let l:count = luaeval('#vim.diagnostic.get(0, {severity = {min = vim.diagnostic.severity.WARN}})')
             if l:count > 0
-                let l:status .= g:moonflyDiagnosticSymbol . ' ' . l:count . ' '
+                let l:status .= g:mistflyDiagnosticSymbol . ' ' . l:count . ' '
             endif
         elseif has('nvim-0.5')
             let l:count = luaeval('vim.lsp.diagnostic.get_count(0, [[Error]])')
                       \ + luaeval('vim.lsp.diagnostic.get_count(0, [[Warning]])')
             if l:count > 0
-                let l:status .= g:moonflyDiagnosticSymbol . ' ' . l:count . ' '
+                let l:status .= g:mistflyDiagnosticSymbol . ' ' . l:count . ' '
             endif
         endif
     endif
 
     " ALE indicator.
-    if g:moonflyWithALEIndicator && exists('g:loaded_ale')
+    if g:mistflyWithALEIndicator && exists('g:loaded_ale')
         let l:count = ale#statusline#Count(bufnr('')).total
         if l:count > 0
-            let l:status .= g:moonflyDiagnosticSymbol . ' ' . l:count . ' '
+            let l:status .= g:mistflyDiagnosticSymbol . ' ' . l:count . ' '
         endif
     endif
 
     " Coc indicator.
-    if g:moonflyWithCocIndicator && exists('g:did_coc_loaded')
+    if g:mistflyWithCocIndicator && exists('g:did_coc_loaded')
         if len(coc#status()) > 0
-            let l:status .= g:moonflyDiagnosticSymbol . ' '
+            let l:status .= g:mistflyDiagnosticSymbol . ' '
         endif
     endif
 
     " Obsession plugin status.
     if exists('g:loaded_obsession')
-        if g:moonflyWithObessionGeometricCharacters
+        if g:mistflyWithObessionGeometricCharacters
             let l:status .= ObsessionStatus(' ● ', ' ■ ')
         else
             let l:status .= ObsessionStatus(' $ ', ' S ')
@@ -128,27 +128,27 @@ function! moonfly_statusline#PluginsStatus() abort
     return l:status
 endfunction
 
-function! moonfly_statusline#ActiveStatusLine() abort
+function! mistfly_statusline#ActiveStatusLine() abort
     let l:mode = mode()
     let l:statusline = ''
-    if !(&laststatus == 3 && g:moonflyWinBar)
+    if !(&laststatus == 3 && g:mistflyWinBar)
         " Note, ignore mode when global 'statusline' & 'winbar' are enabled; the
         " mode in that case will be displayed in the window bar.
-        let l:statusline = moonfly_statusline#ModeColor(l:mode)
-        let l:statusline .= moonfly_statusline#ModeText(l:mode)
+        let l:statusline = mistfly_statusline#ModeColor(l:mode)
+        let l:statusline .= mistfly_statusline#ModeText(l:mode)
     endif
-    let l:statusline .= '%* %<%{moonfly_statusline#File()}'
+    let l:statusline .= '%* %<%{mistfly_statusline#File()}'
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
-    let l:statusline .= '%5*%{moonfly_statusline#GitBranch()}'
-    let l:statusline .= '%6*%{moonfly_statusline#PluginsStatus()}'
+    let l:statusline .= '%5*%{mistfly_statusline#GitBranch()}'
+    let l:statusline .= '%6*%{mistfly_statusline#PluginsStatus()}'
     let l:statusline .= '%*%=%l:%c | %5*%L%* | %P '
 
     return l:statusline
 endfunction
 
-function! moonfly_statusline#InactiveStatusLine() abort
-    let l:statusline = ' %*%<%{moonfly_statusline#File()}'
+function! mistfly_statusline#InactiveStatusLine() abort
+    let l:statusline = ' %*%<%{mistfly_statusline#File()}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
     let l:statusline .= '%*%=%l:%c | %L | %P '
@@ -156,18 +156,18 @@ function! moonfly_statusline#InactiveStatusLine() abort
     return l:statusline
 endfunction
 
-function! moonfly_statusline#NoFileStatusLine() abort
-    return ' %{moonfly_statusline#ShortCurrentPath()}'
+function! mistfly_statusline#NoFileStatusLine() abort
+    return ' %{mistfly_statusline#ShortCurrentPath()}'
 endfunction
 
-function! moonfly_statusline#ActiveWinBar() abort
+function! mistfly_statusline#ActiveWinBar() abort
     if len(expand('%:f')) == 0
         return ''
     endif
     let l:mode = mode()
-    let l:winbar = moonfly_statusline#ModeColor(l:mode)
-    let l:winbar .= moonfly_statusline#ModeText(l:mode)
-    let l:winbar .= '%* %<%{moonfly_statusline#File()}'
+    let l:winbar = mistfly_statusline#ModeColor(l:mode)
+    let l:winbar .= mistfly_statusline#ModeText(l:mode)
+    let l:winbar .= '%* %<%{mistfly_statusline#File()}'
     let l:winbar .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:winbar .= "%{&readonly ? 'RO\ ' : ''}"
     let l:winbar .= '%#Normal#'
@@ -175,11 +175,11 @@ function! moonfly_statusline#ActiveWinBar() abort
     return l:winbar
 endfunction
 
-function! moonfly_statusline#InactiveWinBar() abort
+function! mistfly_statusline#InactiveWinBar() abort
     if len(expand('%:f')) == 0
         return ''
     endif
-    let l:winbar = ' %*%<%{moonfly_statusline#File()}'
+    let l:winbar = ' %*%<%{mistfly_statusline#File()}'
     let l:winbar .= "%{&modified?'+\ ':' \ \ '}"
     let l:winbar .= "%{&readonly?'RO\ ':''}"
     let l:winbar .= '%#NonText#'
