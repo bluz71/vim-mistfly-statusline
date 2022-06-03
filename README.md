@@ -110,7 +110,7 @@ And the right-side segment:
 ```
 
 Sub-segments marked with a `*` are linked to a highlight group and may be
-colored, refer to the next section for detail.
+colored, refer to the next section for details.
 
 Note also, filenames will be displayed as follows:
 
@@ -153,12 +153,12 @@ and [nightfly](https://github.com/bluz71/vim-nightfly-guicolors) colorschemes do
 directly support _mistfly statusline_.
 
 If the fallback colors do not suit then it is very easy to override with your
-own personalised colors.
+own highlights.
 
 :gift: Here is an example of customized _mistfly statusline_ colors. Save the
 following either at the end of your initialization file, after setting your
 `colorscheme`, or in an appropriate `after` file such as
-`~/.vim/after/plugin/mistfly-statusline.vim`:
+`~/.vim/after/plugin/mistfly-statusline.vim`.
 
 ```viml
 highlight! link MistflyNormal DiffChange
@@ -175,7 +175,7 @@ highlight! link MistflyNotification TabLine
 ### mistflyDiagnosticSymbol
 
 The `mistflyDiagnosticSymbol` option specifies which character symbol to use to
-indicate diagnostic errors. Currently,
+indicate diagnostics. Currently,
 [Neovim](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) and
 [Coc](https://github.com/neoclide/coc.nvim) diagnostics may be indicated with
