@@ -1,22 +1,22 @@
 mistfly statusline
 ==================
 
-_mistfly statusline_ is a simple, yet informative, _statusline_ for Vim and
-Neovim that uses [moonfly](https://github.com/bluz71/vim-moonfly-colors) colors
-by default. Note, the _statusline_ colors can easily be
-[customized](https://github.com/bluz71/vim-mistfly-statusline#mistflyignoredefaultcolors)
-if desired.
-
-_mistfly statusline_ also supports Neovim's `winbar` feature when the
+_mistfly statusline_ is a simple, yet informative, `statusline` for Vim and
+Neovim. _mistfly statusline_ also supports Neovim's `winbar` feature when the
 [appropriate option is
 enabled](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar).
 
-_mistfly statusline_ is a very light _statusline_ plugin clocking in at
+_mistfly statusline_ will adapt it's colors to the colorscheme currently in
+effect. Colors can also be
+[customized](https://github.com/bluz71/vim-mistfly-statusline#highlight-groups-and-colors)
+if desired.
+
+Lastly, _mistfly statusline_ is a very light _statusline_ plugin clocking in at
 around 300 lines of Vimscript. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim) and
-[airline](https://github.com/vim-airline/vim-airline) _statusline_ plugins
+[airline](https://github.com/vim-airline/vim-airline) `statusline` plugins
 contain over 3,500 and 6,500 lines of Vimscript respectively. In fairness, the
-latter two plugins are also more featureful.
+latter plugins are also more featureful.
 
 Screenshots
 -----------
@@ -95,19 +95,20 @@ windows will **not** be directly styled by this plugin.
 Layout And Default Colors
 -------------------------
 
-The *mistfly-statusline* layout contains two groupings, the left side segments:
+The *mistfly-statusline* layout contains two segments, the left-side segments:
 
 ```
 <Mode *> <Filename & Flags> <Git Branch *> <Plugins Status *>
 ```
 
-And the right side segments:
+And the right-side segments:
 
 ```
 <Line:Column> | <Total Lines *> | <% Position>
 ```
 
-Segments marked with a `*` will be colored by default, refer to the table below.
+Segments marked with a `*` are linked to a highlight group and may be colored,
+refer to the next section for detail.
 
 Note also, filenames will be displayed as follows:
 
@@ -126,61 +127,48 @@ Note also, filenames will be displayed as follows:
   components, including the filename, will be displayed with an ellipses `...`
   prefix used to indicate path trimming.
 
-The default [moonfly](https://github.com/bluz71/vim-moonfly-colors) colours used
-for the above listed colored `*` segments:
+Highlight Groups And Colors
+---------------------------
 
-| Segment           | Highlight Group | Background                                                  | Foreground                                                  |
-|-------------------|-----------------|-------------------------------------------------------------|-------------------------------------------------------------|
-| Normal Mode       | `User1`         | ![background](https://via.placeholder.com/32/80a0ff?text=+) | ![background](https://via.placeholder.com/32/1c1c1c?text=+) |
-| Insert Mode       | `User2`         | ![background](https://via.placeholder.com/32/c6c6c6?text=+) | ![background](https://via.placeholder.com/32/1c1c1c?text=+) |
-| Visual Mode       | `User3`         | ![background](https://via.placeholder.com/32/ae81ff?text=+) | ![background](https://via.placeholder.com/32/1c1c1c?text=+) |
-| Replace Mode      | `User4`         | ![background](https://via.placeholder.com/32/f74782?text=+) | ![background](https://via.placeholder.com/32/1c1c1c?text=+) |
-| Git Branch        | `User5`         | `StatusLine` background                                     | ![background](https://via.placeholder.com/32/80a0ff?text=+) |
-| Plugins Status    | `User6`         | `StatusLine` background                                     | ![background](https://via.placeholder.com/32/f74782?text=+) |
-| Total Lines       | `User7`         | `StatusLine` background                                     | ![background](https://via.placeholder.com/32/80a0ff?text=+) |
+Segments marked with `*` in the previous section are linked to the following
+custom highlight groups and their associated linked fallback highlight groups if
+the current colorscheme does not directly support _mistfly statusline_ (which
+will be the case for most colorschemes).
 
-:wrench: Options
-----------------
+| Segment                  | Custom Highlight Group | Fallback Highlight Group
+|--------------------------|------------------------|-------------------------
+| Normal Mode              | `MistflyNormal`        | `DiffText`
+| Insert Mode              | `MistflyInsert`        | `DiffAdd`
+| Visual Mode              | `MistflyVisual`        | `Search`
+| Replace Mode             | `MistflyReplace`       | `DiffDelete`
+| Git Branch & Total Lines | `MistflyEmphasis`      | `Statusline`
+| Plugins Notification     | `MistflyNotification`  | `StatusLine`
 
-### mistflyIgnoreDefaultColors
+The above fallbacks should work well for most colorschemes.
 
-The `mistflyIgnoreDefaultColors` option specifies whether custom _statusline_
-colors should be used in-place of
-[mistfly](https://github.com/bluz71/vim-mistfly-colors) colors. By default
-[mistfly](https://github.com/bluz71/vim-mistfly-colors) colors will be
-displayed. If custom colors are to be used then please add the following to your
-initialization file
+Note, the [moonfly](https://github.com/bluz71/vim-moonfly-colors)
+and [nightfly](https://github.com/bluz71/vim-nightfly-guicolors) colorschemes do
+directly support _mistfly statusline_.
 
-```viml
-" Vimscript initialization file
-let g:mistflyIgnoreDefaultColors = 1
-```
+If the fallback colors do not suit then it is very easy to override with your
+own personalised colors.
 
-```lua
--- Lua initialization file
-vim.g.mistflyIgnoreDefaultColors = 1
-```
-
-:gift: Here is an example of a customized _statusline_ color theme which should
-work well with most existing Vim colorschemes. Save the following either
-at the end of your initialization file or in an appropriate `after` file such as
+:gift: Here is an example of customized _mistfly statusline_ colors. Save the
+following either at the end of your initialization file, after setting your
+`colorscheme`, or in an appropriate `after` file such as
 `~/.vim/after/plugin/mistfly-statusline.vim`:
 
 ```viml
-highlight! link User1 DiffText
-highlight! link User2 DiffAdd
-highlight! link User3 Search
-highlight! link User4 IncSearch
-highlight! link User5 StatusLine
-highlight! link User6 StatusLine
-highlight! link User7 StatusLine
+highlight! link MistflyNormal DiffChange
+highlight! link MistflyInsert WildMenu
+highlight! link MistflyVisual IncSearch
+highlight! link MistflyReplace ErrorMsg
+highlight! link MistflyEmphasis TabLineSel
+highlight! link MistflyNotification TabLine
 ```
 
-:cake: Note, the [nightfly](https://github.com/bluz71/vim-nightfly-guicolors)
-color scheme automatically defines _statusline_ colors that are compatible with
-this plugin. **No** custom settings are required with that colorscheme.
-
----
+:wrench: Options
+----------------
 
 ### mistflyWinBar
 

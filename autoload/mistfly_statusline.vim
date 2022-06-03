@@ -1,15 +1,15 @@
 let s:modes = {
-  \  'n':      ['%1*', ' normal '],
-  \  'i':      ['%2*', ' insert '],
-  \  'R':      ['%4*', ' r-mode '],
-  \  'v':      ['%3*', ' visual '],
-  \  'V':      ['%3*', ' v-line '],
-  \  "\<C-v>": ['%3*', ' v-rect '],
-  \  'c':      ['%1*', ' c-mode '],
-  \  's':      ['%3*', ' select '],
-  \  'S':      ['%3*', ' s-line '],
-  \  "\<C-s>": ['%3*', ' s-rect '],
-  \  't':      ['%2*', ' term '],
+  \  'n':      ['%#MistflyNormal#', ' normal '],
+  \  'i':      ['%#MistflyInsert#', ' insert '],
+  \  'R':      ['%#MistflyReplace#', ' r-mode '],
+  \  'v':      ['%#MistflyVisual#', ' visual '],
+  \  'V':      ['%#MistflyVisual#', ' v-line '],
+  \  "\<C-v>": ['%#MistflyVisual#', ' v-rect '],
+  \  'c':      ['%#MistflyNormal#', ' c-mode '],
+  \  's':      ['%#MistflyVisual#', ' select '],
+  \  'S':      ['%#MistflyVisual#', ' s-line '],
+  \  "\<C-s>": ['%#MistflyVisual#', ' s-rect '],
+  \  't':      ['%#MistflyInsert#', ' term '],
   \}
 
 function! mistfly_statusline#ModeColor(mode) abort
@@ -140,9 +140,9 @@ function! mistfly_statusline#ActiveStatusLine() abort
     let l:statusline .= '%* %<%{mistfly_statusline#File()}'
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
-    let l:statusline .= '%5*%{mistfly_statusline#GitBranch()}'
-    let l:statusline .= '%6*%{mistfly_statusline#PluginsStatus()}'
-    let l:statusline .= '%*%=%l:%c | %5*%L%* | %P '
+    let l:statusline .= '%#MistflyEmphasis#%{mistfly_statusline#GitBranch()}'
+    let l:statusline .= '%#MistflyNotification#%{mistfly_statusline#PluginsStatus()}'
+    let l:statusline .= '%*%=%l:%c | %#MistflyEmphasis#%L%* | %P '
 
     return l:statusline
 endfunction

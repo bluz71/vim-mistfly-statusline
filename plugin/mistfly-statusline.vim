@@ -8,9 +8,6 @@ if exists('g:loaded_mistfly_statusline')
 endif
 let g:loaded_mistfly_statusline = 1
 
-" By default use moonfly colors.
-let g:mistflyIgnoreDefaultColors = get(g:, 'mistflyIgnoreDefaultColors', 0)
-
 " By default do not enable Neovim's window bar.
 let g:mistflyWinBar = get(g:, 'mistflyWinBar', 0)
 
@@ -43,15 +40,6 @@ let g:mistflyWithCocIndicator = get(g:, 'mistflyWithCocIndicator', 0)
 " Circle, to indicate the obsession (https://github.com/tpope/vim-obsession)
 " status.
 let g:mistflyWithObessionGeometricCharacters = get(g:, 'mistflyWithObessionGeometricCharacters', 0)
-
-" The moonfly colors (https://github.com/bluz71/vim-moonfly-colors)
-let s:white   = '#c6c6c6' " white   = 251
-let s:grey234 = '#1c1c1c' " grey234 = 234
-let s:emerald = '#42cf89' " emerald = 10
-let s:blue    = '#80a0ff' " blue    = 4
-let s:purple  = '#ae81ff' " purple  = 13
-let s:crimson = '#f74782' " crimson = 9
-let s:yellow  = '#e3c78a' " yellow = 3
 
 function! s:StatusLine(active) abort
     if &buftype ==# 'nofile' || &filetype ==# 'netrw'
@@ -94,40 +82,24 @@ function! s:UpdateInactiveWindows() abort
 endfunction
 
 function! s:UserColors() abort
-    if g:mistflyIgnoreDefaultColors
-        return
+    if !hlexists('MistflyNormal') || synIDattr(synIDtrans(hlID('MistflyNormal')), 'bg') == ''
+        highlight! link MistflyNormal DiffText
     endif
-
-    " Leverage existing 'colorscheme' StatusLine colors taking into account the
-    " 'reverse' option.
-    if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'cterm') == 1
-        let l:sl_bg_cterm = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'cterm')
-    else
-        let l:sl_bg_cterm = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'cterm')
+    if !hlexists('MistflyInsert') || synIDattr(synIDtrans(hlID('MistflyInsert')), 'bg') == ''
+        highlight! link MistflyInsert DiffAdd
     endif
-    if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'gui') == 1
-        let l:sl_bg_gui = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
-    else
-        let l:sl_bg_gui = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
+    if !hlexists('MistflyVisual') || synIDattr(synIDtrans(hlID('MistflyVisual')), 'bg') == ''
+        highlight! link MistflyVisual Search
     endif
-    " Fallback to moonfly colors when the current color scheme does not define
-    " StatusLine colors.
-    if len(l:sl_bg_cterm) == 0
-        let l:sl_bg_cterm = '236'
+    if !hlexists('MistflyReplace') || synIDattr(synIDtrans(hlID('MistflyReplace')), 'bg') == ''
+        highlight! link MistflyReplace DiffDelete
     endif
-    if len(l:sl_bg_gui) == 0
-        let l:sl_bg_gui = '#303030'
+    if !hlexists('MistflyEmphasis') || synIDattr(synIDtrans(hlID('MistflyEmphasis')), 'bg') == ''
+        highlight! link MistflyEmphasis StatusLine
     endif
-
-    " Set user colors that will be used to color certain sections of the status
-    " line.
-    exec 'highlight User1 ctermbg=4   guibg=' . s:blue    . ' ctermfg=234 guifg=' . s:grey234
-    exec 'highlight User2 ctermbg=251 guibg=' . s:white   . ' ctermfg=234 guifg=' . s:grey234
-    exec 'highlight User3 ctermbg=13  guibg=' . s:purple  . ' ctermfg=234 guifg=' . s:grey234
-    exec 'highlight User4 ctermbg=9   guibg=' . s:crimson . ' ctermfg=234 guifg=' . s:grey234
-    exec 'highlight User5 ctermbg=' . l:sl_bg_cterm . ' guibg=' . l:sl_bg_gui . ' ctermfg=4   guifg=' . s:blue    . ' gui=none'
-    exec 'highlight User6 ctermbg=' . l:sl_bg_cterm . ' guibg=' . l:sl_bg_gui . ' ctermfg=9   guifg=' . s:crimson . ' gui=none'
-    exec 'highlight User7 ctermbg=' . l:sl_bg_cterm . ' guibg=' . l:sl_bg_gui . ' ctermfg=4   guifg=' . s:yellow    . ' gui=none'
+    if !hlexists('MistflyNotification') || synIDattr(synIDtrans(hlID('MistflyNotification')), 'bg') == ''
+        highlight! link MistflyNotification StatusLine
+    endif
 endfunction
 
 augroup mistflyStatuslineEvents
