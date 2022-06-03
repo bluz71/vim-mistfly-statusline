@@ -21,15 +21,17 @@ latter plugins are also more featureful.
 Screenshots
 -----------
 
-<img width="900" alt="normal" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_normal.png">
+<img width="900" alt="normal" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly_normal.png">
 
-<img width="900" alt="insert" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_insert.png">
+<img width="900" alt="insert" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly_insert.png">
 
-<img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_visual.png">
+<img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly_visual.png">
 
-<img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/moonfly/moonfly_replace.png">
+<img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly_replace.png">
 
-The font in use is [Iosevka](https://github.com/be5invis/Iosevka). Also, the
+The above screenshots are using the
+[moonfly](https://github.com/bluz71/vim-moonfly-colors) colorschme with the
+[Iosevka](https://github.com/be5invis/Iosevka) font. Also, the
 `g:mistflyWithGitBranchCharacter` option is set to `1`.
 
 Plugins, Linters and Diagnostics supported
@@ -70,9 +72,9 @@ use 'bluz71/vim-mistfly-statusline'
 Legacy Installation
 -------------------
 
-_mistfly statusline_ supports the legacy version of this project, previously
-named _moonfly statusline_, via the `moonfly-compat` branch. That legacy version
-can be installed with your preferred plugin manager.
+_mistfly statusline_ still supports the legacy version of this project,
+previously named _moonfly statusline_, via the `moonfly-compat` branch. That
+legacy version can be installed with your preferred plugin manager.
 
 [vim-plug](https://github.com/junegunn/vim-plug):
 
@@ -95,20 +97,20 @@ windows will **not** be directly styled by this plugin.
 Layout And Default Colors
 -------------------------
 
-The *mistfly-statusline* layout contains two segments, the left-side segments:
+The *mistfly-statusline* layout contains two segments, the left-side segment:
 
 ```
-<Mode *> <Filename & Flags> <Git Branch *> <Plugins Status *>
+<Mode *> <Filename & Flags> <Git Branch *> <Plugins Notification *>
 ```
 
-And the right-side segments:
+And the right-side segment:
 
 ```
 <Line:Column> | <Total Lines *> | <% Position>
 ```
 
-Segments marked with a `*` are linked to a highlight group and may be colored,
-refer to the next section for detail.
+Sub-segments marked with a `*` are linked to a highlight group and may be
+colored, refer to the next section for detail.
 
 Note also, filenames will be displayed as follows:
 
@@ -130,7 +132,7 @@ Note also, filenames will be displayed as follows:
 Highlight Groups And Colors
 ---------------------------
 
-Segments marked with `*` in the previous section are linked to the following
+Sub-segments marked with `*` in the previous section are linked to the following
 custom highlight groups and their associated linked fallback highlight groups if
 the current colorscheme does not directly support _mistfly statusline_ (which
 will be the case for most colorschemes).
@@ -169,6 +171,34 @@ highlight! link MistflyNotification TabLine
 
 :wrench: Options
 ----------------
+
+### mistflyDiagnosticSymbol
+
+The `mistflyDiagnosticSymbol` option specifies which character symbol to use to
+indicate diagnostic errors. Currently,
+[Neovim](https://neovim.io/doc/user/diagnostic.html),
+[ALE](https://github.com/dense-analysis/ale) and
+[Coc](https://github.com/neoclide/coc.nvim) diagnostics may be indicated with
+this symbol (when the appropriate diagnostic option is set, see below).
+
+By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
+modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
+contain that Unicode character.
+
+To specify your own diagnostics symbol please add the following to your
+initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyDiagnosticSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyDiagnosticSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+```
+
+---
 
 ### mistflyWinBar
 
@@ -270,34 +300,6 @@ let g:mistflyWithNerdIcon = 1
 ```lua
 -- lua initialization file
 vim.g.mistflyWithNerdIcon = 1
-```
-
----
-
-### mistflyDiagnosticSymbol
-
-The `mistflyDiagnosticSymbol` option specifies which character symbol to use to
-indicate diagnostic errors. Currently,
-[Neovim](https://neovim.io/doc/user/diagnostic.html),
-[ALE](https://github.com/dense-analysis/ale) and
-[Coc](https://github.com/neoclide/coc.nvim) diagnostics may be indicated with
-this symbol (when the appropriate diagnostic option is set, see below).
-
-By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
-modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
-contain that Unicode character.
-
-To specify your own diagnostics symbol please add the following to your
-initialization file:
-
-```viml
-" Vimscript initialization file
-let g:mistflyDiagnosticSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
-```
-
-```lua
--- Lua initialization file
-vim.g.mistflyDiagnosticSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
 
 ---
