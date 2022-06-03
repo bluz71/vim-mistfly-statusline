@@ -72,7 +72,7 @@ use 'bluz71/vim-mistfly-statusline'
 Legacy Installation
 -------------------
 
-_mistfly statusline_ still supports the legacy version of this project,
+_mistfly statusline_ still supports the legacy version of this plugin,
 previously named _moonfly statusline_, via the `moonfly-compat` branch. That
 legacy version can be installed with your preferred plugin manager.
 
