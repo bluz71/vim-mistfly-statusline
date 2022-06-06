@@ -161,9 +161,6 @@ function! mistfly_statusline#NoFileStatusLine() abort
 endfunction
 
 function! mistfly_statusline#ActiveWinBar() abort
-    if len(expand('%:f')) == 0
-        return ''
-    endif
     let l:mode = mode()
     let l:winbar = mistfly_statusline#ModeColor(l:mode)
     let l:winbar .= mistfly_statusline#ModeText(l:mode)
@@ -176,9 +173,6 @@ function! mistfly_statusline#ActiveWinBar() abort
 endfunction
 
 function! mistfly_statusline#InactiveWinBar() abort
-    if len(expand('%:f')) == 0
-        return ''
-    endif
     let l:winbar = ' %*%<%{mistfly_statusline#File()}'
     let l:winbar .= "%{&modified?'+\ ':' \ \ '}"
     let l:winbar .= "%{&readonly?'RO\ ':''}"
