@@ -76,9 +76,9 @@ function! mistfly_statusline#GitBranch() abort
     endif
 
     if g:mistflyWithGitBranchCharacter
-        return ' [ ' . l:gitBranchName . '] '
+        return '[ ' . l:gitBranchName . '] '
     else
-        return ' [' . l:gitBranchName . '] '
+        return '[' . l:gitBranchName . '] '
     endif
 endfunction
 
@@ -128,21 +128,45 @@ function! mistfly_statusline#PluginsStatus() abort
     return l:status
 endfunction
 
+function! mistfly_statusline#IndentStatus() abort
+    if !&expandtab
+        return 'Tab:' . &tabstop
+    else
+        let l:size = &shiftwidth
+        if l:size == 0
+            let l:size = &tabstop
+        end
+        return 'Spaces:' . l:size
+    endif
+endfunction
+
 function! mistfly_statusline#ActiveStatusLine() abort
     let l:mode = mode()
     let l:statusline = ''
     if !(&laststatus == 3 && g:mistflyWinBar)
-        " Note, ignore mode when global 'statusline' & 'winbar' are enabled; the
+        " Ignore mode when global 'statusline' & 'winbar' are enabled; the
         " mode in that case will be displayed in the window bar.
         let l:statusline = mistfly_statusline#ModeColor(l:mode)
         let l:statusline .= mistfly_statusline#ModeText(l:mode)
+        let l:statusline .= '%* %<%{mistfly_statusline#File()}'
+        let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
+        let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
+    else
+        " Global 'statusline' and 'winbar' are enabled; insert a space for
+        " alignment purposes.
+        let l:statusline .= "\ "
     endif
-    let l:statusline .= '%* %<%{mistfly_statusline#File()}'
-    let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
-    let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
-    let l:statusline .= '%#MistflyEmphasis#%{mistfly_statusline#GitBranch()}'
+    let l:statusline .= "%#MistflyEmphasis#%{mistfly_statusline#GitBranch()}"
     let l:statusline .= '%#MistflyNotification#%{mistfly_statusline#PluginsStatus()}'
-    let l:statusline .= '%*%=%l:%c | %#MistflyEmphasis#%L%* | %P '
+    let l:statusline .= '%*%='
+    if &laststatus == 3
+        " Global 'statusline' is enabled; append indent status since there is
+        " plenty of room.
+        let l:statusline .= "\ "
+        let l:statusline .= '%{mistfly_statusline#IndentStatus()} | '
+    endif
+    let l:statusline .= '%l:%c | %#MistflyEmphasis#%L%* '
+    let l:statusline .= '| %P '
 
     return l:statusline
 endfunction
