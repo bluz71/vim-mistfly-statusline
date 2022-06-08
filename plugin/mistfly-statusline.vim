@@ -9,12 +9,12 @@ endif
 let g:loaded_mistfly_statusline = 1
 
 " The symbol used to indicate the presence of errors in the current buffer. By
-" default the U+2612 ballot box symbol will be used.
-let g:mistflyErrorSymbol = get(g:, 'mistflyErrorSymbol', '☒')
+" default the U+2715 multiplication symbol will be used.
+let g:mistflyErrorSymbol = get(g:, 'mistflyErrorSymbol', '✕')
 
 " The symbol used to indicate the presence of warnings in the current buffer. By
-" default the U+26A0 warning sign symbol will be used.
-let g:mistflyWarningSymbol = get(g:, 'mistflyWarningSymbol', '⚠')
+" default the exclamation symbol will be used.
+let g:mistflyWarningSymbol = get(g:, 'mistflyWarningSymbol', '!')
 
 " By default do not enable Neovim's window bar.
 let g:mistflyWinBar = get(g:, 'mistflyWinBar', 0)

@@ -179,7 +179,7 @@ displaying [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) or
 [Coc](https://github.com/neoclide/coc.nvim) errors.
 
-By default, the Unicode ballot box symbol (`U+2612`), `☒`, will be displayed.
+By default, the Unicode multiplication (`U+2715`), `✕`, will be displayed.
 
 To specify your own error symbol please add the following to your initialization
 file:
@@ -203,7 +203,7 @@ displaying [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) or
 [Coc](https://github.com/neoclide/coc.nvim) warnings.
 
-By default, the Unicode warning sign symbol (`U+26A0`), `⚠`, will be displayed.
+By default, the exclamation symbol, `!`, will be displayed.
 
 To specify your own warning symbol please add the following to your
 initialization file:
