@@ -106,7 +106,7 @@ The *mistfly-statusline* layout contains two segments, the left-side segment:
 And the right-side segment:
 
 ```
-<Line:Column> | <Total Lines *> | <% Position>
+<Line:Column> | <Total Lines *> | <% Position> | <% Optional Indentation Status >
 ```
 
 Sub-segments marked with a `*` are linked to a highlight group and may be
@@ -273,6 +273,32 @@ vim.g.mistflyWithGitBranchCharacter = 1
 ```
 
 The above screenshots are displayed with the Git branch character.
+
+---
+
+### mistflyWithIndentStatus
+
+The `mistflyWithIndentStatus` option specifies whether to display the
+indentation status as the last component in the statusline. By default
+indentation status will not be displayed.
+
+Note, if the `expandtab` option is set, for the current buffer, then tab stop
+will be displayed, for example `Tab:4` (tab equals four spaces); if on the other
+hand `noexpandtab` option is set then shift width will be displayed instead, for
+example `Spc:2` ('spc' short for 'space').
+
+To enable indentation status please add the following to your initialization
+file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWithIndentStatus = 1
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyWithIndentStatus = 1
+```
 
 ---
 

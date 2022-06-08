@@ -136,7 +136,7 @@ function! mistfly_statusline#IndentStatus() abort
         if l:size == 0
             let l:size = &tabstop
         end
-        return 'Spaces:' . l:size
+        return 'Spc:' . l:size
     endif
 endfunction
 
@@ -159,14 +159,11 @@ function! mistfly_statusline#ActiveStatusLine() abort
     let l:statusline .= "%#MistflyEmphasis#%{mistfly_statusline#GitBranch()}"
     let l:statusline .= '%#MistflyNotification#%{mistfly_statusline#PluginsStatus()}'
     let l:statusline .= '%*%='
-    if &laststatus == 3
-        " Global 'statusline' is enabled; append indent status since there is
-        " plenty of room.
-        let l:statusline .= "\ "
-        let l:statusline .= '%{mistfly_statusline#IndentStatus()} | '
-    endif
     let l:statusline .= '%l:%c | %#MistflyEmphasis#%L%* '
     let l:statusline .= '| %P '
+    if g:mistflyWithIndentStatus
+        let l:statusline .= '| %{mistfly_statusline#IndentStatus()} '
+    endif
 
     return l:statusline
 endfunction
@@ -176,6 +173,9 @@ function! mistfly_statusline#InactiveStatusLine() abort
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
     let l:statusline .= '%*%=%l:%c | %L | %P '
+    if g:mistflyWithIndentStatus
+        let l:statusline .= '| %{mistfly_statusline#IndentStatus()} '
+    endif
 
     return l:statusline
 endfunction
