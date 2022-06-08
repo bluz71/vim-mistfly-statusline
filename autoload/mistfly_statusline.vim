@@ -84,36 +84,41 @@ endfunction
 
 function! mistfly_statusline#PluginsStatus() abort
     let l:status = ''
+    let l:errors = 0
+    let l:warnings = 0
 
     " Neovim Diagnostic status.
     if g:mistflyWithNvimDiagnosticStatus
         if has('nvim-0.6')
-            let l:count = luaeval('#vim.diagnostic.get(0, {severity = {min = vim.diagnostic.severity.WARN}})')
-            if l:count > 0
-                let l:status .= g:mistflyErrorSymbol . ' ' . l:count . ' '
-            endif
+            let l:errors = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.ERROR})')
+            let l:warnings = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.WARN})')
         elseif has('nvim-0.5')
-            let l:count = luaeval('vim.lsp.diagnostic.get_count(0, [[Error]])')
-                      \ + luaeval('vim.lsp.diagnostic.get_count(0, [[Warning]])')
-            if l:count > 0
-                let l:status .= g:mistflyErrorSymbol . ' ' . l:count . ' '
-            endif
+            let l:errors = luaeval('vim.lsp.diagnostic.get_count(0, [[Error]])')
+            let l:warnings = luaeval('vim.lsp.diagnostic.get_count(0, [[Warning]])')
         endif
     endif
 
     " ALE status.
     if g:mistflyWithALEStatus && exists('g:loaded_ale')
-        let l:count = ale#statusline#Count(bufnr('')).total
-        if l:count > 0
-            let l:status .= g:mistflyErrorSymbol . ' ' . l:count . ' '
-        endif
+        let l:counts = ale#statusline#Count(bufnr(''))
+        let l:errors = l:counts.error
+        let l:warnings = l:counts.warning
     endif
 
     " Coc status.
     if g:mistflyWithCocStatus && exists('g:did_coc_loaded')
-        if len(coc#status()) > 0
-            let l:status .= g:mistflyErrorSymbol . ' '
-        endif
+        let l:counts = get(b:, 'coc_diagnostic_info', {})
+        let l:errors = l:counts['error']
+        let l:warnings = l:counts['warning']
+    endif
+
+    " Display errors and warnings from any of the previous diagnostic or linting
+    " systems.
+    if l:errors > 0
+        let l:status .= g:mistflyErrorSymbol . ' ' . l:errors . ' '
+    endif
+    if l:warnings > 0
+        let l:status .= g:mistflyWarningSymbol . ' ' . l:warnings . ' '
     endif
 
     " Obsession plugin status.

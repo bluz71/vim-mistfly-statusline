@@ -196,6 +196,30 @@ vim.g.mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 
 ---
 
+### mistflyWarningSymbol
+
+The `mistflyWarningSymbol` option specifies which character symbol to use when
+displaying [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html),
+[ALE](https://github.com/dense-analysis/ale) or
+[Coc](https://github.com/neoclide/coc.nvim) warnings.
+
+By default, the Unicode warning sign symbol (`U+26A0`), `⚠`, will be displayed.
+
+To specify your own warning symbol please add the following to your
+initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+```
+
+---
+
 ### mistflyWinBar
 
 The `mistflyWinBar` option specifies whether to display Neovim's window bar at
