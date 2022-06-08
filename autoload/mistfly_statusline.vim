@@ -90,13 +90,13 @@ function! mistfly_statusline#PluginsStatus() abort
         if has('nvim-0.6')
             let l:count = luaeval('#vim.diagnostic.get(0, {severity = {min = vim.diagnostic.severity.WARN}})')
             if l:count > 0
-                let l:status .= g:mistflyDiagnosticSymbol . ' ' . l:count . ' '
+                let l:status .= g:mistflyErrorSymbol . ' ' . l:count . ' '
             endif
         elseif has('nvim-0.5')
             let l:count = luaeval('vim.lsp.diagnostic.get_count(0, [[Error]])')
                       \ + luaeval('vim.lsp.diagnostic.get_count(0, [[Warning]])')
             if l:count > 0
-                let l:status .= g:mistflyDiagnosticSymbol . ' ' . l:count . ' '
+                let l:status .= g:mistflyErrorSymbol . ' ' . l:count . ' '
             endif
         endif
     endif
@@ -105,14 +105,14 @@ function! mistfly_statusline#PluginsStatus() abort
     if g:mistflyWithALEStatus && exists('g:loaded_ale')
         let l:count = ale#statusline#Count(bufnr('')).total
         if l:count > 0
-            let l:status .= g:mistflyDiagnosticSymbol . ' ' . l:count . ' '
+            let l:status .= g:mistflyErrorSymbol . ' ' . l:count . ' '
         endif
     endif
 
     " Coc status.
     if g:mistflyWithCocStatus && exists('g:did_coc_loaded')
         if len(coc#status()) > 0
-            let l:status .= g:mistflyDiagnosticSymbol . ' '
+            let l:status .= g:mistflyErrorSymbol . ' '
         endif
     endif
 

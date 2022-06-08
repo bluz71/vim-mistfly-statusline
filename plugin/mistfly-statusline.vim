@@ -8,9 +8,13 @@ if exists('g:loaded_mistfly_statusline')
 endif
 let g:loaded_mistfly_statusline = 1
 
-" The symbol used to indicate the presence of diagnostics in the current
-" buffer. By default the U+2716 cross symbol will be used.
-let g:mistflyDiagnosticSymbol = get(g:, 'mistflyDiagnosticSymbol', '✖')
+" The symbol used to indicate the presence of errors in the current buffer. By
+" default the U+2612 ballot box symbol will be used.
+let g:mistflyErrorSymbol = get(g:, 'mistflyErrorSymbol', '☒')
+
+" The symbol used to indicate the presence of warnings in the current buffer. By
+" default the U+26A0 warning sign symbol will be used.
+let g:mistflyWarningSymbol = get(g:, 'mistflyWarningSymbol', '⚠')
 
 " By default do not enable Neovim's window bar.
 let g:mistflyWinBar = get(g:, 'mistflyWinBar', 0)
@@ -27,16 +31,13 @@ let g:mistflyWithIndentStatus = get(g:, 'mistflyWithIndentStatus', 0)
 " By default don't display a Nerd Font filetype icon.
 let g:mistflyWithNerdIcon = get(g:, 'mistflyWithNerdIcon', 0)
 
-" By default don't indicate Neovim Diagnostics via the defined
-" g:mistflyDiagnosticSymbol.
+" By default don't indicate Neovim Diagnostic status.
 let g:mistflyWithNvimDiagnosticStatus = get(g:, 'mistflyWithNvimDiagnosticStatus', 0)
 
-" By default don't indicate ALE lint errors via the defined
-" g:mistflyDiagnosticSymbol.
+" By default don't indicate ALE lint status.
 let g:mistflyWithALEStatus = get(g:, 'mistflyWithALEStatus', 0)
 
-" By default don't indicate Coc lint errors via the defined
-" g:mistflyDiagnosticSymbol.
+" By default don't indicate Coc lint status.
 let g:mistflyWithCocStatus = get(g:, 'mistflyWithCocStatus', 0)
 
 " By default don't use geometric shapes, U+25A0 - Black Square & U+25CF - Black

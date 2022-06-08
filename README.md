@@ -172,30 +172,26 @@ highlight! link MistflyNotification TabLine
 :wrench: Options
 ----------------
 
-### mistflyDiagnosticSymbol
+### mistflyErrorSymbol
 
-The `mistflyDiagnosticSymbol` option specifies which character symbol to use to
-indicate diagnostics. Currently,
-[Neovim](https://neovim.io/doc/user/diagnostic.html),
-[ALE](https://github.com/dense-analysis/ale) and
-[Coc](https://github.com/neoclide/coc.nvim) diagnostics may be indicated with
-this symbol (when the appropriate diagnostic option is set, see below).
+The `mistflyErrorSymbol` option specifies which character symbol to use when
+displaying [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html),
+[ALE](https://github.com/dense-analysis/ale) or
+[Coc](https://github.com/neoclide/coc.nvim) errors.
 
-By default, the Unicode cross character (`U+2716`), `✖`, will be displayed. A
-modern font, such as [Iosevka](https://github.com/be5invis/Iosevka), will
-contain that Unicode character.
+By default, the Unicode ballot box symbol (`U+2612`), `☒`, will be displayed.
 
-To specify your own diagnostics symbol please add the following to your
-initialization file:
+To specify your own error symbol please add the following to your initialization
+file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyDiagnosticSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+let g:mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyDiagnosticSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+vim.g.mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
 
 ---
@@ -335,11 +331,9 @@ vim.g.mistflyWithNerdIcon = 1
 _mistfly statusline_ supports [Neovim
 Diagnostics](https://neovim.io/doc/user/diagnostic.html)
 
-The `mistflyWithNvimDiagnosticStatus` option specifies whether to indicate
-the presence of the Neovim Diagnostics in the current buffer via the defined
-`mistflyDiagnosticSymbol` (the Unicode `U+2716` `✖` symbol by default). If
-enabled, the status will be displayed in the left-side section of the
-_statusline_.
+The `mistflyWithNvimDiagnosticStatus` option specifies whether to indicate the
+presence of the Neovim Diagnostics in the current buffer. If enabled, the status
+will be displayed in the left-side section of the _statusline_.
 
 By default, Neovim Diagnositics will **not** be indicated.
 
@@ -363,11 +357,9 @@ vim.g.mistflyWithNvimDiagnosticStatus = 1
 _mistfly statusline_ supports the [ALE](https://github.com/dense-analysis/ale)
 plugin.
 
-The `mistflyWithALEStatus` option specifies whether to indicate the
-presence of the ALE errors and warnings in the current buffer via the defined
-`mistflyDiagnosticSymbol` (the Unicode `U+2716` `✖` symbol by default). If
-enabled, the status will be displayed in the left-side section of the
-_statusline_.
+The `mistflyWithALEStatus` option specifies whether to indicate the presence of
+the ALE errors and warnings in the current buffer. If enabled, the status will
+be displayed in the left-side section of the _statusline_.
 
 By default, ALE errors and warnings will **not** be indicated.
 
@@ -391,11 +383,9 @@ vim.g.mistflyWithALEStatus = 1
 _mistfly statusline_ supports the [Coc](https://github.com/neoclide/coc.nvim)
 plugin.
 
-The `mistflyWithCocStatus` option specifies whether to indicate the
-presence of the Coc diagnostics in the current buffer via the defined
-`mistflyDiagnosticSymbol` (the Unicode `U+2716` `✖` symbol by default). If
-enabled, the status will be displayed in the left-side section of the
-_statusline_.
+The `mistflyWithCocStatus` option specifies whether to indicate the presence of
+the Coc diagnostics in the current buffer. If enabled, the status will be
+displayed in the left-side section of the _statusline_.
 
 By default, Coc errors will **not** be indicated.
 
