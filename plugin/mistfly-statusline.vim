@@ -29,15 +29,15 @@ let g:mistflyWithNerdIcon = get(g:, 'mistflyWithNerdIcon', 0)
 
 " By default don't indicate Neovim Diagnostics via the defined
 " g:mistflyDiagnosticSymbol.
-let g:mistflyWithNvimDiagnosticIndicator = get(g:, 'mistflyWithNvimDiagnosticIndicator', 0)
+let g:mistflyWithNvimDiagnosticStatus = get(g:, 'mistflyWithNvimDiagnosticStatus', 0)
 
 " By default don't indicate ALE lint errors via the defined
 " g:mistflyDiagnosticSymbol.
-let g:mistflyWithALEIndicator = get(g:, 'mistflyWithALEIndicator', 0)
+let g:mistflyWithALEStatus = get(g:, 'mistflyWithALEStatus', 0)
 
 " By default don't indicate Coc lint errors via the defined
 " g:mistflyDiagnosticSymbol.
-let g:mistflyWithCocIndicator = get(g:, 'mistflyWithCocIndicator', 0)
+let g:mistflyWithCocStatus = get(g:, 'mistflyWithCocStatus', 0)
 
 " By default don't use geometric shapes, U+25A0 - Black Square & U+25CF - Black
 " Circle, to indicate the obsession (https://github.com/tpope/vim-obsession)

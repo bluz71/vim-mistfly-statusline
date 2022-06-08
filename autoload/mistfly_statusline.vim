@@ -85,8 +85,8 @@ endfunction
 function! mistfly_statusline#PluginsStatus() abort
     let l:status = ''
 
-    " Neovim Diagnostic indicator.
-    if g:mistflyWithNvimDiagnosticIndicator
+    " Neovim Diagnostic status.
+    if g:mistflyWithNvimDiagnosticStatus
         if has('nvim-0.6')
             let l:count = luaeval('#vim.diagnostic.get(0, {severity = {min = vim.diagnostic.severity.WARN}})')
             if l:count > 0
@@ -101,16 +101,16 @@ function! mistfly_statusline#PluginsStatus() abort
         endif
     endif
 
-    " ALE indicator.
-    if g:mistflyWithALEIndicator && exists('g:loaded_ale')
+    " ALE status.
+    if g:mistflyWithALEStatus && exists('g:loaded_ale')
         let l:count = ale#statusline#Count(bufnr('')).total
         if l:count > 0
             let l:status .= g:mistflyDiagnosticSymbol . ' ' . l:count . ' '
         endif
     endif
 
-    " Coc indicator.
-    if g:mistflyWithCocIndicator && exists('g:did_coc_loaded')
+    " Coc status.
+    if g:mistflyWithCocStatus && exists('g:did_coc_loaded')
         if len(coc#status()) > 0
             let l:status .= g:mistflyDiagnosticSymbol . ' '
         endif
