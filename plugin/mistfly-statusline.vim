@@ -25,6 +25,9 @@ let g:mistflyWithGitBranch = get(g:, 'mistflyWithGitBranch', 1)
 " By default don't display Git branches with the U+E0A0 branch character.
 let g:mistflyWithGitBranchCharacter = get(g:, 'mistflyWithGitBranchCharacter', 0)
 
+" By default don't display Gitsigns status.
+let g:mistflyWithGitsignsStatus = get(g:, 'mistflyWithGitsignsStatus', 0)
+
 " By default do not display indentation details.
 let g:mistflyWithIndentStatus = get(g:, 'mistflyWithIndentStatus', 0)
 

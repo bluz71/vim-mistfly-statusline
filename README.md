@@ -41,6 +41,9 @@ Plugins, Linters and Diagnostics supported
   [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) via the
   `mistflyWithNerdIcon` option
 
+- [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) via the
+  `mistflyWithGitsignsStatus` option
+
 - [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html) via the
   `mistflyWithNvimDiagnosticStatus` option
 
@@ -266,6 +269,54 @@ vim.g.mistflyWithGitBranch = 0
 
 ---
 
+### mistflyWithGitsignsStatus
+
+The `mistflyWithGitsignsStatus` option specifies whether to display
+[Gitsigns](https://github.com/lewis6991/gitsigns.nvim) of the current buffer in
+the _statusline_. If enabled, the status will be displayed in the left-side
+section of the _statusline_.
+
+By default, Gitsigns will **not** be displayed.
+
+To enable the display of Gitsigns in the _statusline_ please add the following
+to your initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWithGitsignsStatus = 1
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyWithGitsignsStatus = 1
+```
+
+Note, the `status_formatter` field of the Gitsigns `setup` function sets the
+style output. This can easily be overridden, for example the following
+implementation will use Unicode characters to indicate additions, changes and
+deletions. If not set, Gitsigns will use a fallback of its own.
+
+```lua
+require('gitsigns').setup({
+  status_formatter = function(status)
+    local added, changed, removed = status.added, status.changed, status.removed
+    local status_txt = {}
+    if added and added   > 0 then
+      table.insert(status_txt, '⊞ ' .. added)
+    end
+    if changed and changed > 0 then
+      table.insert(status_txt, '⊡ ' .. changed)
+    end
+    if removed and removed > 0 then
+      table.insert(status_txt, '⊟ ' .. removed)
+    end
+    return table.concat(status_txt, ' ')
+  end
+})
+```
+
+---
+
 ### mistflyWithGitBranchCharacter
 
 The `mistflyWithGitBranchCharacter` option specifies whether to display Git
@@ -359,9 +410,9 @@ The `mistflyWithNvimDiagnosticStatus` option specifies whether to indicate the
 presence of the Neovim Diagnostics in the current buffer. If enabled, the status
 will be displayed in the left-side section of the _statusline_.
 
-By default, Neovim Diagnositics will **not** be indicated.
+By default, Neovim Diagnositics will **not** be displayed.
 
-If Neovim Diagnostic indication is desired then please add the following to
+If Neovim Diagnostic display is desired then please add the following to
 your initialization file:
 
 ```viml
@@ -385,10 +436,10 @@ The `mistflyWithALEStatus` option specifies whether to indicate the presence of
 the ALE errors and warnings in the current buffer. If enabled, the status will
 be displayed in the left-side section of the _statusline_.
 
-By default, ALE errors and warnings will **not** be indicated.
+By default, ALE errors and warnings will **not** be displayed.
 
-If ALE indication is desired then please add the following to your
-initialization file:
+If ALE errors and warning display is desired then please add the following to
+your initialization file:
 
 ```viml
 " Vimscript initialization file
@@ -411,9 +462,9 @@ The `mistflyWithCocStatus` option specifies whether to indicate the presence of
 the Coc diagnostics in the current buffer. If enabled, the status will be
 displayed in the left-side section of the _statusline_.
 
-By default, Coc errors will **not** be indicated.
+By default, Coc diagnostics will **not** be displayed.
 
-If Coc error indication is desired then please add the following to your
+If Coc diagnostics is desired then please add the following to your
 initialization file:
 
 ```viml

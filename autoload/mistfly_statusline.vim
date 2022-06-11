@@ -70,15 +70,24 @@ function! mistfly_statusline#GitBranch() abort
         return ''
     endif
 
-    let l:gitBranchName = s:GitBranchName()
-    if len(l:gitBranchName) == 0
+    let l:git_branch_name = ''
+    if has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
+        " Gitsigns is available, let's use it to get the branch name since it
+        " will already be in memory.
+        let l:git_branch_name = get(b:, 'gitsigns_head', '')
+    else
+        " Fallback to traditional filesystem-based branch name detection.
+        let l:git_branch_name = s:GitBranchName()
+    endif
+
+    if len(l:git_branch_name) == 0
         return ''
     endif
 
     if g:mistflyWithGitBranchCharacter
-        return '[ ' . l:gitBranchName . '] '
+        return '[ ' . l:git_branch_name . ']  '
     else
-        return '[' . l:gitBranchName . '] '
+        return '[' . l:git_branch_name . ']  '
     endif
 endfunction
 
@@ -86,6 +95,11 @@ function! mistfly_statusline#PluginsStatus() abort
     let l:status = ''
     let l:errors = 0
     let l:warnings = 0
+
+    " Gitsigns status.
+    if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
+        let l:status .= get(b:, 'gitsigns_status', '') . '  '
+    endif
 
     " Neovim Diagnostic status.
     if g:mistflyWithNvimDiagnosticStatus
@@ -101,32 +115,41 @@ function! mistfly_statusline#PluginsStatus() abort
     " ALE status.
     if g:mistflyWithALEStatus && exists('g:loaded_ale')
         let l:counts = ale#statusline#Count(bufnr(''))
-        let l:errors = l:counts.error
-        let l:warnings = l:counts.warning
+        if l:counts->has_key('error')
+            let l:errors = l:counts['error']
+        endif
+        if l:counts->has_key('warning')
+            let l:warnings = l:counts['warning']
+        endif
     endif
 
     " Coc status.
     if g:mistflyWithCocStatus && exists('g:did_coc_loaded')
         let l:counts = get(b:, 'coc_diagnostic_info', {})
-        let l:errors = l:counts['error']
-        let l:warnings = l:counts['warning']
+        if l:counts->has_key('error')
+            let l:errors = l:counts['error']
+        endif
+        if l:counts->has_key('warning')
+            let l:warnings = l:counts['warning']
+        endif
     endif
 
     " Display errors and warnings from any of the previous diagnostic or linting
     " systems.
-    if l:errors > 0
-        let l:status .= g:mistflyErrorSymbol . ' ' . l:errors . ' '
-    endif
-    if l:warnings > 0
-        let l:status .= g:mistflyWarningSymbol . ' ' . l:warnings . ' '
+    if l:errors > 0 && l:warnings > 0
+        let l:status .= g:mistflyErrorSymbol . ' ' . l:errors . ' ' . g:mistflyWarningSymbol . ' ' . l:warnings . '  '
+    elseif l:errors > 0
+        let l:status .= g:mistflyErrorSymbol . ' ' . l:errors . '  '
+    elseif l:warnings > 0
+        let l:status .= g:mistflyWarningSymbol . ' ' . l:warnings . '  '
     endif
 
     " Obsession plugin status.
     if exists('g:loaded_obsession')
         if g:mistflyWithObessionGeometricCharacters
-            let l:status .= ObsessionStatus(' ● ', ' ■ ')
+            let l:status .= ObsessionStatus('●', '■')
         else
-            let l:status .= ObsessionStatus(' $ ', ' S ')
+            let l:status .= ObsessionStatus('$', 'S')
         endif
     endif
 
@@ -161,7 +184,7 @@ function! mistfly_statusline#ActiveStatusLine() abort
         " alignment purposes.
         let l:statusline .= "\ "
     endif
-    let l:statusline .= "%#MistflyEmphasis#%{mistfly_statusline#GitBranch()}"
+    let l:statusline .= '%#MistflyEmphasis#%{mistfly_statusline#GitBranch()}'
     let l:statusline .= '%#MistflyNotification#%{mistfly_statusline#PluginsStatus()}'
     let l:statusline .= '%*%='
     let l:statusline .= '%l:%c | %#MistflyEmphasis#%L%* '
