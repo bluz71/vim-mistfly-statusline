@@ -273,7 +273,7 @@ vim.g.mistflyWithGitBranch = 0
 
 The `mistflyWithGitsignsStatus` option specifies whether to display
 [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) of the current buffer in
-the _statusline_. If enabled, the status will be displayed in the left-side
+the _statusline_. If enabled, the Gitsigns will be displayed in the left-side
 section of the _statusline_.
 
 By default, Gitsigns will **not** be displayed.
@@ -293,24 +293,25 @@ vim.g.mistflyWithGitsignsStatus = 1
 
 Note, the `status_formatter` field of the Gitsigns `setup` function sets the
 style output. This can easily be overridden, for example the following
-implementation will use Unicode characters to indicate additions, changes and
-deletions. If not set, Gitsigns will use a fallback of its own.
+sample implementation will use Unicode characters to indicate additions, changes
+and deletions. If `status_formatter` is not set, Gitsigns will use a fallback of
+its own.
 
 ```lua
 require('gitsigns').setup({
   status_formatter = function(status)
     local added, changed, removed = status.added, status.changed, status.removed
-    local status_txt = {}
+    local status_text = {}
     if added and added > 0 then
-      table.insert(status_txt, '⊞ ' .. added)
+      table.insert(status_text, '⊞ ' .. added)
     end
     if changed and changed > 0 then
-      table.insert(status_txt, '⊡ ' .. changed)
+      table.insert(status_text, '⊡ ' .. changed)
     end
     if removed and removed > 0 then
-      table.insert(status_txt, '⊟ ' .. removed)
+      table.insert(status_text, '⊟ ' .. removed)
     end
-    return table.concat(status_txt, ' ')
+    return table.concat(status_text, ' ')
   end
 })
 ```
