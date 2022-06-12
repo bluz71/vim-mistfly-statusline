@@ -98,7 +98,10 @@ function! mistfly_statusline#PluginsStatus() abort
 
     " Gitsigns status.
     if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
-        let l:status .= get(b:, 'gitsigns_status', '') . '  '
+        let l:status .= get(b:, 'gitsigns_status', '')
+        if len(l:status) > 0
+            let l:status .= '  '
+        endif
     endif
 
     " Neovim Diagnostic status.
@@ -115,10 +118,10 @@ function! mistfly_statusline#PluginsStatus() abort
     " ALE status.
     if g:mistflyWithALEStatus && exists('g:loaded_ale')
         let l:counts = ale#statusline#Count(bufnr(''))
-        if l:counts->has_key('error')
+        if has_key(l:counts, 'error')
             let l:errors = l:counts['error']
         endif
-        if l:counts->has_key('warning')
+        if has_key(l:counts, 'warning')
             let l:warnings = l:counts['warning']
         endif
     endif
@@ -126,10 +129,10 @@ function! mistfly_statusline#PluginsStatus() abort
     " Coc status.
     if g:mistflyWithCocStatus && exists('g:did_coc_loaded')
         let l:counts = get(b:, 'coc_diagnostic_info', {})
-        if l:counts->has_key('error')
+        if has_key(l:counts, 'error')
             let l:errors = l:counts['error']
         endif
-        if l:counts->has_key('warning')
+        if has_key(l:counts, 'warning')
             let l:warnings = l:counts['warning']
         endif
     endif
