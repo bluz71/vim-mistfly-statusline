@@ -176,15 +176,9 @@ function! mistfly_statusline#ActiveStatusLine() abort
     let l:statusline = ''
     let l:statusline = mistfly_statusline#ModeColor(l:mode)
     let l:statusline .= mistfly_statusline#ModeText(l:mode)
-    if !(&laststatus == 3 && g:mistflyWinBar)
-        let l:statusline .= '%* %<%{mistfly_statusline#File()}'
-        let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
-        let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
-    else
-        " Global 'statusline' and 'winbar' are enabled; insert a space for
-        " alignment purposes.
-        let l:statusline .= '%* '
-    endif
+    let l:statusline .= '%* %<%{mistfly_statusline#File()}'
+    let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
+    let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     let l:statusline .= '%#MistflyEmphasis#%{mistfly_statusline#GitBranch()}'
     let l:statusline .= '%#MistflyNotification#%{mistfly_statusline#PluginsStatus()}'
     let l:statusline .= '%*%='
