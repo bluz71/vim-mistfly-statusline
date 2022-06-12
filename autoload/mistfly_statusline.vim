@@ -171,18 +171,16 @@ endfunction
 function! mistfly_statusline#ActiveStatusLine() abort
     let l:mode = mode()
     let l:statusline = ''
+    let l:statusline = mistfly_statusline#ModeColor(l:mode)
+    let l:statusline .= mistfly_statusline#ModeText(l:mode)
     if !(&laststatus == 3 && g:mistflyWinBar)
-        " Ignore mode when global 'statusline' & 'winbar' are enabled; the
-        " mode in that case will be displayed in the window bar.
-        let l:statusline = mistfly_statusline#ModeColor(l:mode)
-        let l:statusline .= mistfly_statusline#ModeText(l:mode)
         let l:statusline .= '%* %<%{mistfly_statusline#File()}'
         let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
         let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     else
         " Global 'statusline' and 'winbar' are enabled; insert a space for
         " alignment purposes.
-        let l:statusline .= "\ "
+        let l:statusline .= '%* '
     endif
     let l:statusline .= '%#MistflyEmphasis#%{mistfly_statusline#GitBranch()}'
     let l:statusline .= '%#MistflyNotification#%{mistfly_statusline#PluginsStatus()}'
@@ -215,7 +213,7 @@ endfunction
 function! mistfly_statusline#ActiveWinBar() abort
     let l:mode = mode()
     let l:winbar = mistfly_statusline#ModeColor(l:mode)
-    let l:winbar .= mistfly_statusline#ModeText(l:mode)
+    let l:winbar .= ' '
     let l:winbar .= '%* %<%{mistfly_statusline#File()}'
     let l:winbar .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:winbar .= "%{&readonly ? 'RO\ ' : ''}"
