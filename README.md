@@ -11,7 +11,7 @@ effect. Colors can also be
 [customized](https://github.com/bluz71/vim-mistfly-statusline#highlight-groups-and-colors)
 if desired.
 
-Lastly, _mistfly statusline_ is a very light _statusline_ plugin clocking in at
+Lastly, _mistfly statusline_ is a light _statusline_ plugin clocking in at
 around 300 lines of Vimscript. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim) and
 [airline](https://github.com/vim-airline/vim-airline) `statusline` plugins
