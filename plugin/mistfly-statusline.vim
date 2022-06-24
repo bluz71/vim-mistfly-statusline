@@ -8,6 +8,9 @@ if exists('g:loaded_mistfly_statusline')
 endif
 let g:loaded_mistfly_statusline = 1
 
+" By default use Unicode character shapes for dividers and symbols.
+let g:mistflyUnicodeShapes = get(g:, 'mistflyUnicodeShapes', 1)
+
 " The symbol used to indicate the presence of errors in the current buffer. By
 " default the U+2715 multiplication symbol will be used.
 let g:mistflyErrorSymbol = get(g:, 'mistflyErrorSymbol', '✕')
@@ -42,11 +45,6 @@ let g:mistflyWithALEStatus = get(g:, 'mistflyWithALEStatus', 0)
 
 " By default don't indicate Coc lint status.
 let g:mistflyWithCocStatus = get(g:, 'mistflyWithCocStatus', 0)
-
-" By default don't use geometric shapes, U+25A0 - Black Square & U+25CF - Black
-" Circle, to indicate the obsession (https://github.com/tpope/vim-obsession)
-" status.
-let g:mistflyWithObessionGeometricCharacters = get(g:, 'mistflyWithObessionGeometricCharacters', 0)
 
 function! s:StatusLine(active) abort
     if &buftype ==# 'nofile' || &filetype ==# 'netrw'

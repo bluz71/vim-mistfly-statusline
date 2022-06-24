@@ -149,7 +149,7 @@ function! mistfly_statusline#PluginsStatus() abort
 
     " Obsession plugin status.
     if exists('g:loaded_obsession')
-        if g:mistflyWithObessionGeometricCharacters
+        if g:mistflyUnicodeShapes
             let l:status .= ObsessionStatus('●', '■')
         else
             let l:status .= ObsessionStatus('$', 'S')
@@ -171,8 +171,17 @@ function! mistfly_statusline#IndentStatus() abort
     endif
 endfunction
 
+function! mistfly_statusline#Divider() abort
+    if g:mistflyUnicodeShapes
+        return '│'
+    else
+        return '|'
+    endif
+endfunction
+
 function! mistfly_statusline#ActiveStatusLine() abort
     let l:mode = mode()
+    let l:divider = mistfly_statusline#Divider()
     let l:statusline = ''
     let l:statusline = mistfly_statusline#ModeColor(l:mode)
     let l:statusline .= mistfly_statusline#ModeText(l:mode)
@@ -182,22 +191,23 @@ function! mistfly_statusline#ActiveStatusLine() abort
     let l:statusline .= '%#MistflyEmphasis#%{mistfly_statusline#GitBranch()}'
     let l:statusline .= '%#MistflyNotification#%{mistfly_statusline#PluginsStatus()}'
     let l:statusline .= '%*%='
-    let l:statusline .= '%l:%c | %#MistflyEmphasis#%L%* '
-    let l:statusline .= '| %P '
+    let l:statusline .= '%l:%c ' . l:divider . ' %#MistflyEmphasis#%L%* '
+    let l:statusline .= l:divider . ' %P '
     if g:mistflyWithIndentStatus
-        let l:statusline .= '| %{mistfly_statusline#IndentStatus()} '
+        let l:statusline .= l:divider . ' %{mistfly_statusline#IndentStatus()} '
     endif
 
     return l:statusline
 endfunction
 
 function! mistfly_statusline#InactiveStatusLine() abort
+    let l:divider = mistfly_statusline#Divider()
     let l:statusline = ' %*%<%{mistfly_statusline#File()}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
-    let l:statusline .= '%*%=%l:%c | %L | %P '
+    let l:statusline .= '%*%=%l:%c ' . l:divider . ' %L ' . l:divider . ' %P '
     if g:mistflyWithIndentStatus
-        let l:statusline .= '| %{mistfly_statusline#IndentStatus()} '
+        let l:statusline .= l:divider . ' %{mistfly_statusline#IndentStatus()} '
     endif
 
     return l:statusline

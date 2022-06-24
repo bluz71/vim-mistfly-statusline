@@ -175,6 +175,28 @@ highlight! link MistflyNotification TabLine
 :wrench: Options
 ----------------
 
+### mistflyUnicodeShapes
+
+The `mistflyUnicodeShapes` option specifies whether to use Unicode characters
+for dividers and symbols. Modern fonts will often provide these shapes,
+legacy fonts however may not.
+
+By default, the Unicode shapes option will be enabled.
+
+To disable Unicode shapes please add the following to your initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyUnicodeShapes = 0
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyUnicodeShapes = 0
+```
+
+---
+
 ### mistflyErrorSymbol
 
 The `mistflyErrorSymbol` option specifies which character symbol to use when
@@ -476,35 +498,6 @@ let g:mistflyWithCocStatus = 1
 ```lua
 -- Lua initialization file
 vim.g.mistflyWithCocStatus = 1
-```
-
----
-
-### mistflyWithObessionGeometricCharacters
-
-_mistfly statusline_ supports Tim Pope's
-[Obsession](https://github.com/tpope/vim-obsession) plugin.
-
-The `mistflyWithObessionGeometricCharacters` option specifies whether to
-display obsession details using Unicode geometric characters (`U+25A0` - Black
-Square & `U+25CF` - Black Circle). A modern font, such as
-[Iosevka](https://github.com/be5invis/Iosevka), will contain those Unicode
-geometric characters.
-
-If `mistflyWithObessionGeometricCharacters` is unset the default value from
-the Obsession plugin will be used.
-
-To display Obsession status with geometric characters please add the following
-to your initialization file:
-
-```viml
-" Vimscript initialization file
-let g:mistflyWithObessionGeometricCharacters = 1
-```
-
-```lua
--- Lua initialization file
-vim.g.mistflyWithObessionGeometricCharacters = 1
 ```
 
 Sponsor
