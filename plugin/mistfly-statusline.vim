@@ -91,28 +91,30 @@ endfunction
 
 function! s:UserColors() abort
     " Choose nice defaults for certain specific colorschemes.
-    if g:colors_name == "catppuccin"
-        highlight! link MistflyNormal TSNote
-        highlight! link MistflyInsert TSWarning
-        highlight! link MistflyVisual IncSearch
-        highlight! link MistflyReplace TSDanger
-    elseif g:colors_name == "everforest"
-        highlight! link MistflyNormal Search
-        highlight! link MistflyInsert Substitute
-        highlight! link MistflyVisual DiffText
-        highlight! link MistflyReplace IncSearch
-    elseif g:colors_name == "gruvbox"
-        highlight! link MistflyNormal DiffChange
-    elseif g:colors_name == "nightfox" || g:colors_name == "nordfox" || g:colors_name == "terafox"
-        highlight! link MistflyNormal Todo
-        highlight! link MistflyInsert IncSearch
-        highlight! link MistflyVisual Sneak
-        highlight! link MistflyReplace Substitute
-    elseif g:colors_name == "tokyonight"
-        highlight! link MistflyNormal TablineSel
-        highlight! link MistflyInsert Todo
-        highlight! link MistflyVisual Sneak
-        highlight! link MistflyReplace Substitute
+    if exists('g:colors_name')
+        if g:colors_name == 'catppuccin'
+            highlight! link MistflyNormal TSNote
+            highlight! link MistflyInsert TSWarning
+            highlight! link MistflyVisual IncSearch
+            highlight! link MistflyReplace TSDanger
+        elseif g:colors_name == 'everforest'
+            highlight! link MistflyNormal Search
+            highlight! link MistflyInsert Substitute
+            highlight! link MistflyVisual DiffText
+            highlight! link MistflyReplace IncSearch
+        elseif g:colors_name == 'gruvbox'
+            highlight! link MistflyNormal DiffChange
+        elseif g:colors_name == 'nightfox' || g:colors_name == 'nordfox' || g:colors_name == 'terafox'
+            highlight! link MistflyNormal Todo
+            highlight! link MistflyInsert IncSearch
+            highlight! link MistflyVisual Sneak
+            highlight! link MistflyReplace Substitute
+        elseif g:colors_name == 'tokyonight'
+            highlight! link MistflyNormal TablineSel
+            highlight! link MistflyInsert Todo
+            highlight! link MistflyVisual Sneak
+            highlight! link MistflyReplace Substitute
+        endif
     endif
 
     if !hlexists('MistflyNormal') || synIDattr(synIDtrans(hlID('MistflyNormal')), 'bg') == ''
