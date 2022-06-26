@@ -110,7 +110,7 @@ The *mistfly-statusline* layout contains two segments, the left-side segment:
 And the right-side segment:
 
 ```
-<Line:Column> | <Total Lines *> <% Position> | <% Optional Indentation Status >
+<Line:Column> | <Total Lines *> <% Position> | <Optional Indentation Status >
 ```
 
 Sub-segments marked with a `*` are linked to a highlight group and may be
