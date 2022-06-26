@@ -12,11 +12,12 @@ effect. Colors can also be
 if desired.
 
 Lastly, _mistfly statusline_ is a light _statusline_ plugin clocking in at
-around 300 lines of Vimscript. For comparison, the
-[lightline](https://github.com/itchyny/lightline.vim) and
-[airline](https://github.com/vim-airline/vim-airline) `statusline` plugins
-contain over 3,500 and 6,500 lines of Vimscript respectively. In fairness, the
-latter plugins are also more featureful.
+around 350 lines of Vimscript. For comparison, the
+[lightline](https://github.com/itchyny/lightline.vim),
+[airline](https://github.com/vim-airline/vim-airline) and
+[lualine](https://github.com/nvim-lualine/lualine.nvim) `statusline` plugins
+contain over 3,600, 7,900 and 7,300 lines of code respectively. In fairness, the
+latter plugins are also more featureful and configurable.
 
 Screenshots
 -----------
@@ -109,7 +110,7 @@ The *mistfly-statusline* layout contains two segments, the left-side segment:
 And the right-side segment:
 
 ```
-<Line:Column> | <Total Lines *> | <% Position> | <% Optional Indentation Status >
+<Line:Column> | <Total Lines *> <% Position> | <% Optional Indentation Status >
 ```
 
 Sub-segments marked with a `*` are linked to a highlight group and may be

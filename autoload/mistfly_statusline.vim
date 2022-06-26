@@ -179,6 +179,14 @@ function! mistfly_statusline#Divider() abort
     endif
 endfunction
 
+function! mistfly_statusline#Arrow() abort
+    if g:mistflyUnicodeShapes
+        return '↓'
+    else
+        return ''
+    endif
+endfunction
+
 function! mistfly_statusline#ActiveStatusLine() abort
     let l:mode = mode()
     let l:divider = mistfly_statusline#Divider()
@@ -190,9 +198,8 @@ function! mistfly_statusline#ActiveStatusLine() abort
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     let l:statusline .= '%#MistflyEmphasis#%{mistfly_statusline#GitBranch()}'
     let l:statusline .= '%#MistflyNotification#%{mistfly_statusline#PluginsStatus()}'
-    let l:statusline .= '%*%='
-    let l:statusline .= '%l:%c ' . l:divider . ' %#MistflyEmphasis#%L%* '
-    let l:statusline .= l:divider . ' %P '
+    let l:statusline .= '%*%=%l:%c ' . l:divider
+    let l:statusline .= ' %#MistflyEmphasis#%L%* %{mistfly_statusline#Arrow()}%P '
     if g:mistflyWithIndentStatus
         let l:statusline .= l:divider . ' %{mistfly_statusline#IndentStatus()} '
     endif
@@ -205,7 +212,8 @@ function! mistfly_statusline#InactiveStatusLine() abort
     let l:statusline = ' %*%<%{mistfly_statusline#File()}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
-    let l:statusline .= '%*%=%l:%c ' . l:divider . ' %L ' . l:divider . ' %P '
+    let l:statusline .= '%*%=%l:%c '
+    let l:statusline .= l:divider . ' %L %{mistfly_statusline#Arrow()}%P '
     if g:mistflyWithIndentStatus
         let l:statusline .= l:divider . ' %{mistfly_statusline#IndentStatus()} '
     endif
