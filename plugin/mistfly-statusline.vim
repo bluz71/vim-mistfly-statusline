@@ -97,6 +97,7 @@ function! s:UserColors() abort
             highlight! link MistflyInsert TSWarning
             highlight! link MistflyVisual IncSearch
             highlight! link MistflyReplace TSDanger
+            highlight! link MistflyDiscreet StatuslineNC
         elseif g:colors_name == 'everforest'
             highlight! link MistflyNormal Search
             highlight! link MistflyInsert Substitute
@@ -109,11 +110,13 @@ function! s:UserColors() abort
             highlight! link MistflyInsert IncSearch
             highlight! link MistflyVisual Sneak
             highlight! link MistflyReplace Substitute
+            highlight! link MistflyDiscreet StatuslineNC
         elseif g:colors_name == 'tokyonight'
             highlight! link MistflyNormal TablineSel
             highlight! link MistflyInsert Todo
             highlight! link MistflyVisual Sneak
             highlight! link MistflyReplace Substitute
+            highlight! link MistflyDiscreet StatuslineNC
         endif
     endif
 
@@ -131,6 +134,9 @@ function! s:UserColors() abort
     endif
     if !hlexists('MistflyEmphasis') || synIDattr(synIDtrans(hlID('MistflyEmphasis')), 'bg') == ''
         highlight! link MistflyEmphasis StatusLine
+    endif
+    if !hlexists('MistflyDiscreet') || synIDattr(synIDtrans(hlID('MistflyDiscreet')), 'bg') == ''
+        highlight! link MistflyDiscreet StatusLine
     endif
     if !hlexists('MistflyNotification') || synIDattr(synIDtrans(hlID('MistflyNotification')), 'bg') == ''
         highlight! link MistflyNotification StatusLine

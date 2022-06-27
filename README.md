@@ -149,6 +149,7 @@ will be the case for most colorschemes).
 | Replace Mode             | `MistflyReplace`       | `DiffDelete`
 | Git Branch & Total Lines | `MistflyEmphasis`      | `Statusline`
 | Plugins Notification     | `MistflyNotification`  | `StatusLine`
+| Dividers                 | `MistflyDiscreet`      | `StatusLine`
 
 The above fallbacks should work well for most colorschemes.
 
