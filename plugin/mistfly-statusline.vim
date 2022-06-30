@@ -19,7 +19,10 @@ let g:mistflyErrorSymbol = get(g:, 'mistflyErrorSymbol', '✕')
 " default the exclamation symbol will be used.
 let g:mistflyWarningSymbol = get(g:, 'mistflyWarningSymbol', '!')
 
-" By default do not enable Neovim's window bar.
+" By default do not enable tabline support.
+let g:mistflyTabLine = get(g:, 'mistflyTabLine', 0)
+
+" By default do not enable Neovim's winbar support.
 let g:mistflyWinBar = get(g:, 'mistflyWinBar', 0)
 
 " By default display Git branches.
@@ -89,6 +92,12 @@ function! s:UpdateInactiveWindows() abort
     endfor
 endfunction
 
+function! s:TabLine() abort
+    if g:mistflyTabLine
+        set tabline=%!mistfly_statusline#TabLine()
+    endif
+endfunction
+
 function! s:UserColors() abort
     " Choose nice defaults for certain specific colorschemes.
     if exists('g:colors_name')
@@ -146,6 +155,7 @@ endfunction
 augroup mistflyStatuslineEvents
     autocmd!
     autocmd VimEnter              * call s:UpdateInactiveWindows()
+    autocmd VimEnter              * call s:TabLine()
     autocmd ColorScheme,SourcePre * call s:UserColors()
     autocmd WinEnter,BufWinEnter  * call s:StatusLine(v:true)
     autocmd WinLeave              * call s:StatusLine(v:false)

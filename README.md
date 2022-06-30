@@ -2,9 +2,11 @@ mistfly statusline
 ==================
 
 _mistfly statusline_ is a simple, yet informative, `statusline` for Vim and
-Neovim. _mistfly statusline_ also supports Neovim's `winbar` feature when the
-[appropriate option is
-enabled](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar).
+Neovim. _mistfly statusline_ also provides optional `tabline` and Neovim
+`winbar` support when the appropriate settings are enabled; refer to
+[`mistflyTabLine`](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)
+and
+[`mistflyWinBar`](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar).
 
 _mistfly statusline_ will adapt it's colors to the colorscheme currently in
 effect. Colors can also be
@@ -12,12 +14,12 @@ effect. Colors can also be
 if desired.
 
 Lastly, _mistfly statusline_ is a light _statusline_ plugin clocking in at
-around 350 lines of Vimscript. For comparison, the
+around 400 lines of Vimscript. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim),
 [airline](https://github.com/vim-airline/vim-airline) and
 [lualine](https://github.com/nvim-lualine/lualine.nvim) `statusline` plugins
 contain over 3,600, 7,900 and 7,300 lines of code respectively. In fairness, the
-latter plugins are also more featureful and configurable.
+latter plugins are also far more featureful and configurable.
 
 Screenshots
 -----------
@@ -243,6 +245,31 @@ let g:mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```lua
 -- Lua initialization file
 vim.g.mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+```
+
+---
+
+### mistflyTabLine
+
+The `mistflyTabLine` option specifies whether to let this plugin manage the
+`tabline` in addition to the `statusline`. By default `tabline` management will
+not be undertaken.
+
+If enabled, _mistfly statusline_ will render a very simple numbered workspace
+layout in the `tabline`; note, no buffers will be displayed in the `tabline`
+(there are many plugins that provide that capability).
+
+To enable _mistfly statusline_'s `tabline` support please add the following to
+your initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyTabLine = 1
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyTabLine = 1
 ```
 
 ---
