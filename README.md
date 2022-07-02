@@ -2,7 +2,9 @@ mistfly statusline
 ==================
 
 _mistfly statusline_ is a simple, yet informative, `statusline` for Vim and
-Neovim. _mistfly statusline_ also provides optional `tabline` and Neovim
+Neovim.
+
+_mistfly statusline_ also provides optional `tabline` and Neovim
 `winbar` support when the appropriate settings are enabled; refer to
 [`mistflyTabLine`](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)
 and
