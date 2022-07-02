@@ -255,9 +255,9 @@ The `mistflyTabLine` option specifies whether to let this plugin manage the
 `tabline` in addition to the `statusline`. By default `tabline` management will
 not be undertaken.
 
-If enabled, _mistfly statusline_ will render a very simple numbered workspace
+If enabled, _mistfly statusline_ will render a simple numbered window-space
 layout in the `tabline`; note, no buffers will be displayed in the `tabline`
-(there are many plugins that provide that capability).
+since there are many plugins that already provide that capability.
 
 To enable _mistfly statusline_'s `tabline` support please add the following to
 your initialization file:
@@ -270,6 +270,21 @@ let g:mistflyTabLine = 1
 ```lua
 -- Lua initialization file
 vim.g.mistflyTabLine = 1
+```
+
+:bulb: Mappings, such as the following, may be useful to quickly switch between
+the numbered window-spaces:
+
+```viml
+nnoremap <Leader>1 1gt
+nnoremap <Leader>2 2gt
+nnoremap <Leader>3 3gt
+nnoremap <Leader>4 4gt
+nnoremap <Leader>5 5gt
+nnoremap <Leader>6 6gt
+nnoremap <Leader>7 7gt
+nnoremap <Leader>8 8gt
+nnoremap <Leader>9 9gt
 ```
 
 ---

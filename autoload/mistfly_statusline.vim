@@ -199,18 +199,6 @@ function! mistfly_statusline#TabDivider(active) abort
     endif
 endfunction
 
-function! mistfly_statusline#TabPrefix(active) abort
-    if g:mistflyUnicodeShapes
-        if a:active
-            return '■ '
-        else
-            return '□ '
-        endif
-    else
-        return 'Tab:'
-    endif
-endfunction
-
 function! mistfly_statusline#ActiveStatusLine() abort
     let l:mode = mode()
     let l:divider = mistfly_statusline#Divider()
@@ -277,13 +265,11 @@ function! mistfly_statusline#TabLine() abort
     for i in range(tabpagenr('$'))
         let l:counter = l:counter + 1
         if tabpagenr() == counter
-            let l:tabline .= '%#TablineSel#%{mistfly_statusline#TabDivider(v:true)}  '
-            let l:tabline .= '%{mistfly_statusline#TabPrefix(v:true)}'
+            let l:tabline .= '%#TablineSel#%{mistfly_statusline#TabDivider(v:true)} Tab:'
         else
-            let l:tabline .= '%#TabLine#%{mistfly_statusline#TabDivider(v:false)}  '
-            let l:tabline .= '%{mistfly_statusline#TabPrefix(v:false)}'
+            let l:tabline .= '%#TabLine#%{mistfly_statusline#TabDivider(v:false)} Tab:'
         endif
-        let l:tabline .= l:counter . '   %#TabLineFill#'
+        let l:tabline .= l:counter . '  %#TabLineFill#'
     endfor
 
     return l:tabline
