@@ -37,7 +37,10 @@ Screenshots
 The above screenshots are using the
 [moonfly](https://github.com/bluz71/vim-moonfly-colors) colorscheme with the
 [Iosevka](https://github.com/be5invis/Iosevka) font. Also, the
-`mistflyWithGitBranchCharacter` option is set to `1`.
+[`mistflyWithGitBranchCharacter`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)
+and
+[`mistflyWithIndentStatus`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)
+options are set to `1`.
 
 Plugins, Linters and Diagnostics supported
 ------------------------------------------
@@ -108,7 +111,7 @@ Layout And Default Colors
 The *mistfly-statusline* layout contains two segments, the left-side segment:
 
 ```
-<Mode *> <Filename & Flags> <Git Branch *> <Plugins Notification *>
+<Mode *> <Filename & Flags> | <Git Branch *> <Plugins Notification *>
 ```
 
 And the right-side segment:
