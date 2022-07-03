@@ -85,9 +85,9 @@ function! mistfly_statusline#GitBranch() abort
     endif
 
     if g:mistflyWithGitBranchCharacter
-        return '[ ' . l:git_branch_name . ']  '
+        return '  ' . l:git_branch_name . '  '
     else
-        return '[' . l:git_branch_name . ']  '
+        return ' ' . l:git_branch_name . '  '
     endif
 endfunction
 
@@ -171,22 +171,6 @@ function! mistfly_statusline#IndentStatus() abort
     endif
 endfunction
 
-function! mistfly_statusline#Divider() abort
-    if g:mistflyUnicodeShapes
-        return '│'
-    else
-        return '|'
-    endif
-endfunction
-
-function! mistfly_statusline#Arrow() abort
-    if g:mistflyUnicodeShapes
-        return '↓'
-    else
-        return ''
-    endif
-endfunction
-
 function! mistfly_statusline#TabDivider(active) abort
     if g:mistflyUnicodeShapes
         if a:active
@@ -201,17 +185,22 @@ endfunction
 
 function! mistfly_statusline#ActiveStatusLine() abort
     let l:mode = mode()
-    let l:divider = mistfly_statusline#Divider()
+    let l:divider = g:mistflyUnicodeShapes ? '│' : '|'
+    let l:arrow =  g:mistflyUnicodeShapes ? '↓' : ''
+    let l:git_branch = mistfly_statusline#GitBranch()
     let l:statusline = ''
     let l:statusline = mistfly_statusline#ModeColor(l:mode)
     let l:statusline .= mistfly_statusline#ModeText(l:mode)
     let l:statusline .= '%* %<%{mistfly_statusline#File()}'
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
-    let l:statusline .= '%#MistflyEmphasis#%{mistfly_statusline#GitBranch()}'
+    if len(l:git_branch) > 0
+        let l:statusline .= '%#MistflyDiscreet#' . l:divider
+        let l:statusline .= '%#MistflyEmphasis#' . l:git_branch
+    endif
     let l:statusline .= '%#MistflyNotification#%{mistfly_statusline#PluginsStatus()}'
     let l:statusline .= '%*%=%l:%c %#MistflyDiscreet#' . l:divider
-    let l:statusline .= '%* %#MistflyEmphasis#%L%* %{mistfly_statusline#Arrow()}%P '
+    let l:statusline .= '%* %#MistflyEmphasis#%L%* ' . l:arrow . '%P '
     if g:mistflyWithIndentStatus
         let l:statusline .= '%#MistflyDiscreet#' . l:divider . '%* %{mistfly_statusline#IndentStatus()} '
     endif
@@ -220,14 +209,16 @@ function! mistfly_statusline#ActiveStatusLine() abort
 endfunction
 
 function! mistfly_statusline#InactiveStatusLine() abort
-    let l:divider = mistfly_statusline#Divider()
+    let l:divider = g:mistflyUnicodeShapes ? '│' : '|'
+    let l:arrow =  g:mistflyUnicodeShapes ? '↓' : ''
     let l:statusline = ' %*%<%{mistfly_statusline#File()}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
-    let l:statusline .= '%*%=%l:%c ' . l:divider
-    let l:statusline .= ' %L %{mistfly_statusline#Arrow()}%P '
+    let l:statusline .= '%*%=%l:%c %#MistflyDiscreet#' . l:divider
+    let l:statusline .= '%* %L ' . l:arrow . '%P '
     if g:mistflyWithIndentStatus
-        let l:statusline .= l:divider . ' %{mistfly_statusline#IndentStatus()} '
+        let l:statusline .= '%#MistflyDiscreet#' . l:divider
+        let l:statusline .= '%* %{mistfly_statusline#IndentStatus()} '
     endif
 
     return l:statusline
@@ -261,13 +252,15 @@ endfunction
 function! mistfly_statusline#TabLine() abort
     let l:tabline = ''
     let l:counter = 0
+    let l:tab_divider = mistfly_statusline#TabDivider(v:false)
+    let l:tab_divider_active = mistfly_statusline#TabDivider(v:true)
 
     for i in range(tabpagenr('$'))
         let l:counter = l:counter + 1
         if tabpagenr() == counter
-            let l:tabline .= '%#TablineSel#%{mistfly_statusline#TabDivider(v:true)} Tab:'
+            let l:tabline .= '%#TablineSel#' . l:tab_divider_active . ' Tab:'
         else
-            let l:tabline .= '%#TabLine#%{mistfly_statusline#TabDivider(v:false)} Tab:'
+            let l:tabline .= '%#TabLine#' . l:tab_divider . ' Tab:'
         endif
         let l:tabline .= l:counter . '  %#TabLineFill#'
     endfor
