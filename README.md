@@ -16,7 +16,7 @@ effect. Colors can also be
 if desired.
 
 Lastly, _mistfly statusline_ is a light _statusline_ plugin clocking in at
-around 400 lines of Vimscript. For comparison, the
+under 400 lines of Vimscript. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim),
 [airline](https://github.com/vim-airline/vim-airline) and
 [lualine](https://github.com/nvim-lualine/lualine.nvim) `statusline` plugins
