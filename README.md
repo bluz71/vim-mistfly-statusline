@@ -36,11 +36,7 @@ Screenshots
 
 The above screenshots are using the
 [moonfly](https://github.com/bluz71/vim-moonfly-colors) colorscheme with the
-[Iosevka](https://github.com/be5invis/Iosevka) font. Also, the
-[`mistflyWithGitBranchCharacter`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)
-and
-[`mistflyWithIndentStatus`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)
-options are set to `1`.
+[Iosevka](https://github.com/be5invis/Iosevka) font.
 
 Plugins, Linters and Diagnostics supported
 ------------------------------------------
