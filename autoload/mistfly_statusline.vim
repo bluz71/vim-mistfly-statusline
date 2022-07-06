@@ -255,6 +255,13 @@ function! mistfly_statusline#TabLine() abort
     return l:tabline
 endfunction
 
+function! mistfly_statusline#SynthesizeHighlight(target, source) abort
+    let l:sl_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
+    let l:source_fg = synIDattr(synIDtrans(hlID(a:source)), 'fg', 'gui')
+
+    return 'highlight ' . a:target . ' guibg=' . l:sl_bg . ' guifg=' . l:source_fg
+endfunction
+
 " The following Git branch functionality derives from:
 "   https://github.com/itchyny/vim-gitbranch
 "

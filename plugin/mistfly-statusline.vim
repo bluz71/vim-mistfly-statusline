@@ -101,12 +101,17 @@ endfunction
 function! s:UserColors() abort
     " Choose nice defaults for certain specific colorschemes.
     if exists('g:colors_name')
-        if g:colors_name == 'catppuccin'
+        if g:colors_name == "moonfly" || g:colors_name == "nightfly"
+            " Early exit for colorschemes with known mistfly support.
+            return
+        elseif g:colors_name == 'catppuccin'
             highlight! link MistflyNormal TSNote
-            highlight! link MistflyInsert TSWarning
+            highlight! link MistflyInsert CursorIM
             highlight! link MistflyVisual IncSearch
             highlight! link MistflyReplace TSDanger
             highlight! link MistflyDiscreet StatuslineNC
+            exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
+            exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'everforest'
             highlight! link MistflyNormal Search
             highlight! link MistflyInsert Substitute
@@ -120,12 +125,16 @@ function! s:UserColors() abort
             highlight! link MistflyVisual Sneak
             highlight! link MistflyReplace Substitute
             highlight! link MistflyDiscreet StatuslineNC
+            exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
+            exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'tokyonight'
             highlight! link MistflyNormal TablineSel
-            highlight! link MistflyInsert Todo
+            highlight! link MistflyInsert Cursor
             highlight! link MistflyVisual Sneak
             highlight! link MistflyReplace Substitute
             highlight! link MistflyDiscreet StatuslineNC
+            exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
+            exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         endif
     endif
 
