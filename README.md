@@ -1,7 +1,7 @@
 mistfly statusline
 ==================
 
-_mistfly statusline_ is a simple, yet informative, `statusline` for Vim and
+_mistfly statusline_ is a simple, fast and informative `statusline` for Vim and
 Neovim.
 
 _mistfly statusline_ also provides optional `tabline` and Neovim
