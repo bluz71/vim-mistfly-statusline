@@ -274,9 +274,9 @@ The `mistflyTabLine` option specifies whether to let this plugin manage the
 `tabline` in addition to the `statusline`. By default `tabline` management will
 not be undertaken.
 
-If enabled, _mistfly statusline_ will render a simple numbered window-space
-layout in the `tabline`; note, no buffers will be displayed in the `tabline`
-since there are many plugins that already provide that capability.
+If enabled, _mistfly statusline_ will render a simple numbered, and clickable,
+window-space layout in the `tabline`; note, no buffers will be displayed in the
+`tabline` since there are many plugins that already provide that capability.
 
 To enable _mistfly statusline_'s `tabline` support please add the following to
 your initialization file:

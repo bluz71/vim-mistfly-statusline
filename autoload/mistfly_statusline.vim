@@ -244,12 +244,19 @@ function! mistfly_statusline#TabLine() abort
 
     for i in range(tabpagenr('$'))
         let l:counter = l:counter + 1
+        if has('tablineat')
+            let l:tabline .= '%' . l:counter . 'T'
+        endif
         if tabpagenr() == counter
             let l:tabline .= '%#TablineSel#' . l:divider . ' Tab:'
         else
             let l:tabline .= '%#TabLine#' . l:divider . ' Tab:'
         endif
-        let l:tabline .= l:counter . '  %#TabLineFill#'
+        let l:tabline .= l:counter
+        if has('tablineat')
+            let l:tabline .= '%T'
+        endif
+        let l:tabline .= '  %#TabLineFill#'
     endfor
 
     return l:tabline
