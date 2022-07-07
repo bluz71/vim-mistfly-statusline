@@ -42,8 +42,8 @@ Statusline Performance Comparison
 ---------------------------------
 
 A performance comparison of _mistfly stautusline_ against various popular
-`statusline` plugins on a clean and minimal Neovim setup. The startup times in
-the table below are provived by the
+`statusline` plugins, with their out-of-the-box defaults, on a clean and minimal
+Neovim setup. The Neovim startup times in the table below are provived by the
 [dstein64/vim-startuptime](https://github.com/dstein64/vim-startuptime) plugin.
 
 Startup times are the average of five consecutive runs. Note, `native` is run
