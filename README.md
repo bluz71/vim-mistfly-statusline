@@ -38,6 +38,24 @@ The above screenshots are using the
 [moonfly](https://github.com/bluz71/vim-moonfly-colors) colorscheme with the
 [Iosevka](https://github.com/be5invis/Iosevka) font.
 
+Statusline Performance Comparison
+---------------------------------
+
+A performance comparison of _mistfly stautusline_ against various popular
+`statusline` plugins on a clean and minimal Neovim setup. The startup times in
+the table below are provived by the
+[dstein64/vim-startuptime](https://github.com/dstein64/vim-startuptime) plugin.
+
+Startup times are the average of five consecutive runs. Note, `native` is run
+without any `statusline` plugin.
+
+| native  | mistfly | lightline | airline | lualine
+|---------|---------|-----------|---------|--------
+| 20.4ms  | 22.3ms  | 26.7ms    | 76.6ms  | 29.5ms
+
+Startup times as of July 2022 on my system; performance on other systems will
+vary.
+
 Plugins, Linters and Diagnostics supported
 ------------------------------------------
 
