@@ -117,6 +117,8 @@ function! s:UserColors() abort
             highlight! link MistflyInsert Substitute
             highlight! link MistflyVisual DiffText
             highlight! link MistflyReplace IncSearch
+            exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
+            exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'gruvbox'
             highlight! link MistflyNormal DiffChange
         elseif g:colors_name == 'nightfox' || g:colors_name == 'nordfox' || g:colors_name == 'terafox'
