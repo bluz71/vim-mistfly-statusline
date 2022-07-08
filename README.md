@@ -26,13 +26,10 @@ latter plugins are also far more featureful and configurable.
 Screenshots
 -----------
 
-<img width="900" alt="normal" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly_normal.png">
-
-<img width="900" alt="insert" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly_insert.png">
-
-<img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly_visual.png">
-
-<img width="900" alt="visual" src="https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly_replace.png">
+![normal](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-normal.png)
+![insert](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-insert.png)
+![visual](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-visual.png)
+![replace](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-replace.png)
 
 The above screenshots are using the
 [moonfly](https://github.com/bluz71/vim-moonfly-colors) colorscheme with the
@@ -305,6 +302,10 @@ nnoremap <Leader>7 7gt
 nnoremap <Leader>8 8gt
 nnoremap <Leader>9 9gt
 ```
+
+A screenshot of the `tabline`:
+
+![tabline](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-tabline.png)
 
 ---
 
