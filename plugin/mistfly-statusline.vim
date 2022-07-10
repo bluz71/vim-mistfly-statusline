@@ -112,11 +112,17 @@ function! s:UserColors() abort
             highlight! link MistflyDiscreet StatuslineNC
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
+        elseif g:colors_name == 'edge'
+            highlight! link MistflyNormal MiniStatuslineModeCommand
+            highlight! link MistflyInsert MiniStatuslineModeInsert
+            highlight! link MistflyVisual MiniStatuslineModeVisual
+            highlight! link MistflyReplace MiniStatuslineModeReplace
+            highlight! link MistflyDiscreet StatuslineNC
         elseif g:colors_name == 'everforest'
-            highlight! link MistflyNormal Search
-            highlight! link MistflyInsert Substitute
-            highlight! link MistflyVisual DiffText
-            highlight! link MistflyReplace IncSearch
+            highlight! link MistflyNormal MiniStatuslineModeNormal
+            highlight! link MistflyInsert MiniStatuslineModeInsert
+            highlight! link MistflyVisual MiniStatuslineModeVisual
+            highlight! link MistflyReplace MiniStatuslineModeReplace
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'gruvbox'
@@ -129,6 +135,12 @@ function! s:UserColors() abort
             highlight! link MistflyDiscreet StatuslineNC
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
+        elseif g:colors_name == 'sonokai'
+            highlight! link MistflyNormal MiniStatuslineModeNormal
+            highlight! link MistflyInsert MiniStatuslineModeInsert
+            highlight! link MistflyVisual MiniStatuslineModeOther
+            highlight! link MistflyReplace MiniStatuslineModeReplace
+            highlight! link MistflyDiscreet StatuslineNC
         elseif g:colors_name == 'tokyonight'
             highlight! link MistflyNormal TablineSel
             highlight! link MistflyInsert Cursor

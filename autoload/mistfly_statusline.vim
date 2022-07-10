@@ -202,8 +202,7 @@ function! mistfly_statusline#InactiveStatusLine() abort
     let l:statusline = ' %*%<%{mistfly_statusline#File()}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
-    let l:statusline .= '%*%=%l:%c %#MistflyDiscreet#' . l:divider
-    let l:statusline .= '%* %L ' . l:arrow . '%P '
+    let l:statusline .= '%*%=%l:%c ' . l:divider . ' %L ' . l:arrow . '%P '
     if g:mistflyWithIndentStatus
         let l:statusline .= '%#MistflyDiscreet#' . l:divider
         let l:statusline .= '%* %{mistfly_statusline#IndentStatus()} '
