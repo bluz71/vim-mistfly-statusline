@@ -164,6 +164,7 @@ will be the case for most colorschemes).
 | Normal Mode              | `MistflyNormal`        | `DiffText`
 | Insert Mode              | `MistflyInsert`        | `DiffAdd`
 | Visual Mode              | `MistflyVisual`        | `Search`
+| Command Mode             | `MistflyCommand`       | `DiffText`
 | Replace Mode             | `MistflyReplace`       | `DiffDelete`
 | Git Branch & Total Lines | `MistflyEmphasis`      | `Statusline`
 | Plugins Notification     | `MistflyNotification`  | `StatusLine`

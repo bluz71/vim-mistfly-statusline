@@ -108,6 +108,7 @@ function! s:UserColors() abort
             highlight! link MistflyNormal TSNote
             highlight! link MistflyInsert CursorIM
             highlight! link MistflyVisual IncSearch
+            highlight! link MistflyCommand TSWarning
             highlight! link MistflyReplace TSDanger
             highlight! link MistflyDiscreet StatuslineNC
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
@@ -116,12 +117,14 @@ function! s:UserColors() abort
             highlight! link MistflyNormal MiniStatuslineModeCommand
             highlight! link MistflyInsert MiniStatuslineModeInsert
             highlight! link MistflyVisual MiniStatuslineModeVisual
+            highlight! link MistflyCommand MiniStatuslineModeCommand
             highlight! link MistflyReplace MiniStatuslineModeReplace
             highlight! link MistflyDiscreet StatuslineNC
         elseif g:colors_name == 'everforest'
             highlight! link MistflyNormal MiniStatuslineModeNormal
             highlight! link MistflyInsert MiniStatuslineModeInsert
             highlight! link MistflyVisual MiniStatuslineModeVisual
+            highlight! link MistflyCommand MiniStatuslineModeCommand
             highlight! link MistflyReplace MiniStatuslineModeReplace
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
@@ -132,6 +135,7 @@ function! s:UserColors() abort
             highlight! link MistflyInsert IncSearch
             highlight! link MistflyVisual Sneak
             highlight! link MistflyReplace Substitute
+            highlight! link MistflyCommand MiniStatuslineModeCommand
             highlight! link MistflyDiscreet StatuslineNC
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
@@ -139,6 +143,7 @@ function! s:UserColors() abort
             highlight! link MistflyNormal MiniStatuslineModeNormal
             highlight! link MistflyInsert MiniStatuslineModeInsert
             highlight! link MistflyVisual MiniStatuslineModeOther
+            highlight! link MistflyCommand MiniStatuslineModeCommand
             highlight! link MistflyReplace MiniStatuslineModeReplace
             highlight! link MistflyDiscreet StatuslineNC
         elseif g:colors_name == 'tokyonight'
@@ -146,6 +151,7 @@ function! s:UserColors() abort
             highlight! link MistflyInsert Cursor
             highlight! link MistflyVisual Sneak
             highlight! link MistflyReplace Substitute
+            highlight! link MistflyCommand Todo
             highlight! link MistflyDiscreet StatuslineNC
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
@@ -160,6 +166,9 @@ function! s:UserColors() abort
     endif
     if !hlexists('MistflyVisual') || synIDattr(synIDtrans(hlID('MistflyVisual')), 'bg') == ''
         highlight! link MistflyVisual Search
+    endif
+    if !hlexists('MistflyCommand') || synIDattr(synIDtrans(hlID('MistflyCommand')), 'bg') == ''
+        highlight! link MistflyCommand DiffText
     endif
     if !hlexists('MistflyReplace') || synIDattr(synIDtrans(hlID('MistflyReplace')), 'bg') == ''
         highlight! link MistflyReplace DiffDelete

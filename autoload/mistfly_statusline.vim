@@ -5,7 +5,7 @@ let s:modes = {
   \  'v':      ['%#MistflyVisual#', ' visual '],
   \  'V':      ['%#MistflyVisual#', ' v-line '],
   \  "\<C-v>": ['%#MistflyVisual#', ' v-rect '],
-  \  'c':      ['%#MistflyNormal#', ' c-mode '],
+  \  'c':      ['%#MistflyCommand#', ' c-mode '],
   \  's':      ['%#MistflyVisual#', ' select '],
   \  'S':      ['%#MistflyVisual#', ' s-line '],
   \  "\<C-s>": ['%#MistflyVisual#', ' s-rect '],
