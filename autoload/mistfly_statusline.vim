@@ -142,7 +142,7 @@ function! mistfly_statusline#PluginsStatus() abort
     if l:errors > 0 && l:warnings > 0
         let l:status .= g:mistflyErrorSymbol . l:errors . g:mistflyWarningSymbol . l:warnings . '  '
     elseif l:errors > 0
-        let l:status .= g:mistflyErrorSymbol .  ' . l:errors . '  '
+        let l:status .= g:mistflyErrorSymbol . l:errors . '  '
     elseif l:warnings > 0
         let l:status .= g:mistflyWarningSymbol . l:warnings . '  '
     endif
