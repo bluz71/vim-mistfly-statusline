@@ -8,12 +8,12 @@ if exists('g:loaded_mistfly_statusline')
 endif
 let g:loaded_mistfly_statusline = 1
 
-" By default use Unicode character shapes for dividers and symbols.
-let g:mistflyUnicodeShapes = get(g:, 'mistflyUnicodeShapes', 1)
+" By default do not use Ascii character shapes for dividers and symbols.
+let g:mistflyAsciiShapes = get(g:, 'mistflyAsciiShapes', 0)
 
 " The symbol used to indicate the presence of errors in the current buffer. By
-" default the U+2715 multiplication symbol will be used.
-let g:mistflyErrorSymbol = get(g:, 'mistflyErrorSymbol', '✕')
+" default the x character will be used.
+let g:mistflyErrorSymbol = get(g:, 'mistflyErrorSymbol', 'x')
 
 " The symbol used to indicate the presence of warnings in the current buffer. By
 " default the exclamation symbol will be used.
@@ -27,9 +27,6 @@ let g:mistflyWinBar = get(g:, 'mistflyWinBar', 0)
 
 " By default display Git branches.
 let g:mistflyWithGitBranch = get(g:, 'mistflyWithGitBranch', 1)
-
-" By default don't display Git branches with the U+E0A0 branch character.
-let g:mistflyWithGitBranchCharacter = get(g:, 'mistflyWithGitBranchCharacter', 0)
 
 " By default don't display Gitsigns status.
 let g:mistflyWithGitsignsStatus = get(g:, 'mistflyWithGitsignsStatus', 0)
@@ -110,7 +107,6 @@ function! s:UserColors() abort
             highlight! link MistflyVisual IncSearch
             highlight! link MistflyCommand TSWarning
             highlight! link MistflyReplace TSDanger
-            highlight! link MistflyDiscreet StatuslineNC
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'edge'
@@ -119,7 +115,6 @@ function! s:UserColors() abort
             highlight! link MistflyVisual MiniStatuslineModeVisual
             highlight! link MistflyCommand MiniStatuslineModeCommand
             highlight! link MistflyReplace MiniStatuslineModeReplace
-            highlight! link MistflyDiscreet StatuslineNC
         elseif g:colors_name == 'everforest'
             highlight! link MistflyNormal MiniStatuslineModeNormal
             highlight! link MistflyInsert MiniStatuslineModeInsert
@@ -136,7 +131,6 @@ function! s:UserColors() abort
             highlight! link MistflyVisual Sneak
             highlight! link MistflyReplace Substitute
             highlight! link MistflyCommand MiniStatuslineModeCommand
-            highlight! link MistflyDiscreet StatuslineNC
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'sonokai'
@@ -145,14 +139,12 @@ function! s:UserColors() abort
             highlight! link MistflyVisual MiniStatuslineModeOther
             highlight! link MistflyCommand MiniStatuslineModeCommand
             highlight! link MistflyReplace MiniStatuslineModeReplace
-            highlight! link MistflyDiscreet StatuslineNC
         elseif g:colors_name == 'tokyonight'
             highlight! link MistflyNormal TablineSel
             highlight! link MistflyInsert Cursor
             highlight! link MistflyVisual Sneak
             highlight! link MistflyReplace Substitute
             highlight! link MistflyCommand Todo
-            highlight! link MistflyDiscreet StatuslineNC
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         endif
@@ -175,9 +167,6 @@ function! s:UserColors() abort
     endif
     if !hlexists('MistflyEmphasis') || synIDattr(synIDtrans(hlID('MistflyEmphasis')), 'bg') == ''
         highlight! link MistflyEmphasis StatusLine
-    endif
-    if !hlexists('MistflyDiscreet') || synIDattr(synIDtrans(hlID('MistflyDiscreet')), 'bg') == ''
-        highlight! link MistflyDiscreet StatusLine
     endif
     if !hlexists('MistflyNotification') || synIDattr(synIDtrans(hlID('MistflyNotification')), 'bg') == ''
         highlight! link MistflyNotification StatusLine

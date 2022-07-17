@@ -168,7 +168,6 @@ will be the case for most colorschemes).
 | Replace Mode             | `MistflyReplace`       | `DiffDelete`
 | Git Branch & Total Lines | `MistflyEmphasis`      | `Statusline`
 | Plugins Notification     | `MistflyNotification`  | `StatusLine`
-| Dividers                 | `MistflyDiscreet`      | `StatusLine`
 
 The above fallbacks should work well for most colorschemes.
 
@@ -196,24 +195,29 @@ highlight! link MistflyNotification TabLine
 :wrench: Options
 ----------------
 
-### mistflyUnicodeShapes
+### mistflyAsciiShapes
 
-The `mistflyUnicodeShapes` option specifies whether to use Unicode characters
-for dividers and symbols. Modern fonts will often provide these shapes,
-legacy fonts however may not.
+The `mistflyAsciiShapes` option specifies whether to only use Ascii characters
+for certain dividers and symbols.
 
-By default, the Unicode shapes option will be enabled.
+_mistfly statusline_ by default **will use** Unicode Symbols and Powerline
+Glyphs for certain shapes such as: Git branch, dividers and active tabs. Note,
+many modern fonts, such as: [Hack](https://sourcefoundry.org/hack),
+[Iosevka](https://typeof.net/Iosevk), [Fira
+Code](https://github.com/tonsky/FiraCode) and [Jetbrains
+Mono](https://www.jetbrains.com/lp/mono), will provide these shapes.
 
-To disable Unicode shapes please add the following to your initialization file:
+To limit use only to Ascii shapes please add the following to your
+initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyUnicodeShapes = 0
+let g:mistflyAsciiShapes = 1
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyUnicodeShapes = 0
+vim.g.mistflyAsciiShapes = 1
 ```
 
 ---
@@ -225,7 +229,7 @@ displaying [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) or
 [Coc](https://github.com/neoclide/coc.nvim) errors.
 
-By default, the Unicode multiplication (`U+2715`), `✕`, will be displayed.
+By default, the `x` character, will be displayed.
 
 To specify your own error symbol please add the following to your initialization
 file:
@@ -402,36 +406,6 @@ require('gitsigns').setup({
   end
 })
 ```
-
----
-
-### mistflyWithGitBranchCharacter
-
-The `mistflyWithGitBranchCharacter` option specifies whether to display Git
-branch details with the Unicode Git branch character `U+E0A0`. By default Git
-branches displayed in the `statusline` will not use that character since many
-monospace fonts will not contain it. However, some modern fonts, such as [Fira
-Code](https://github.com/tonsky/FiraCode) and
-[Iosevka](https://github.com/be5invis/Iosevka), do contain that Git branch
-character.
-
-If `mistflyWithGitBranchCharacter` is unset or set to zero then the current
-Git branch will be displayed inside square brackets.
-
-To display with the Unicode Git branch character please add the following to
-your initialization file:
-
-```viml
-" Vimscript initialization file
-let g:mistflyWithGitBranchCharacter = 1
-```
-
-```Lua
--- Lua initialization file
-vim.g.mistflyWithGitBranchCharacter = 1
-```
-
-The above screenshots are displayed with the Git branch character.
 
 ---
 

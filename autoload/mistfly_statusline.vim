@@ -84,10 +84,10 @@ function! mistfly_statusline#GitBranch() abort
         return ''
     endif
 
-    if g:mistflyWithGitBranchCharacter
-        return '  ' . l:git_branch_name . '  '
-    else
+    if g:mistflyAsciiShapes
         return ' ' . l:git_branch_name . '  '
+    else
+        return '  ' . l:git_branch_name . '  '
     endif
 endfunction
 
@@ -140,19 +140,19 @@ function! mistfly_statusline#PluginsStatus() abort
     " Display errors and warnings from any of the previous diagnostic or linting
     " systems.
     if l:errors > 0 && l:warnings > 0
-        let l:status .= g:mistflyErrorSymbol . ' ' . l:errors . ' ' . g:mistflyWarningSymbol . ' ' . l:warnings . '  '
+        let l:status .= g:mistflyErrorSymbol . l:errors . g:mistflyWarningSymbol . l:warnings . '  '
     elseif l:errors > 0
-        let l:status .= g:mistflyErrorSymbol . ' ' . l:errors . '  '
+        let l:status .= g:mistflyErrorSymbol .  ' . l:errors . '  '
     elseif l:warnings > 0
-        let l:status .= g:mistflyWarningSymbol . ' ' . l:warnings . '  '
+        let l:status .= g:mistflyWarningSymbol . l:warnings . '  '
     endif
 
     " Obsession plugin status.
     if exists('g:loaded_obsession')
-        if g:mistflyUnicodeShapes
-            let l:status .= ObsessionStatus('●', '■')
-        else
+        if g:mistflyAsciiShapes
             let l:status .= ObsessionStatus('$', 'S')
+        else
+            let l:status .= ObsessionStatus('●', '■')
         endif
     endif
 
@@ -173,8 +173,9 @@ endfunction
 
 function! mistfly_statusline#ActiveStatusLine() abort
     let l:mode = mode()
-    let l:divider = g:mistflyUnicodeShapes ? '│' : '|'
-    let l:arrow =  g:mistflyUnicodeShapes ? '↓' : ''
+    let l:left_divider = g:mistflyAsciiShapes ? '|' : ''
+    let l:right_divider = g:mistflyAsciiShapes ? '|' : ''
+    let l:arrow =  g:mistflyAsciiShapes ?  '' : '↓'
     let l:git_branch = mistfly_statusline#GitBranch()
     let l:statusline = ''
     let l:statusline = mistfly_statusline#ModeColor(l:mode)
@@ -183,29 +184,29 @@ function! mistfly_statusline#ActiveStatusLine() abort
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     if len(l:git_branch) > 0
-        let l:statusline .= '%#MistflyDiscreet#' . l:divider
+        let l:statusline .= '%*' . l:left_divider
         let l:statusline .= '%#MistflyEmphasis#' . l:git_branch
     endif
     let l:statusline .= '%#MistflyNotification#%{mistfly_statusline#PluginsStatus()}'
-    let l:statusline .= '%*%=%l:%c %#MistflyDiscreet#' . l:divider
+    let l:statusline .= '%*%=%l:%c %*' . l:right_divider
     let l:statusline .= '%* %#MistflyEmphasis#%L%* ' . l:arrow . '%P '
     if g:mistflyWithIndentStatus
-        let l:statusline .= '%#MistflyDiscreet#' . l:divider . '%* %{mistfly_statusline#IndentStatus()} '
+        let l:statusline .= '%*' . l:right_divider
+        let l:statusline .= '%* %{mistfly_statusline#IndentStatus()} '
     endif
 
     return l:statusline
 endfunction
 
 function! mistfly_statusline#InactiveStatusLine() abort
-    let l:divider = g:mistflyUnicodeShapes ? '│' : '|'
-    let l:arrow =  g:mistflyUnicodeShapes ? '↓' : ''
+    let l:divider = g:mistflyAsciiShapes ? '|' : ''
+    let l:arrow =  g:mistflyAsciiShapes ? '' : '↓'
     let l:statusline = ' %*%<%{mistfly_statusline#File()}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
     let l:statusline .= '%*%=%l:%c ' . l:divider . ' %L ' . l:arrow . '%P '
     if g:mistflyWithIndentStatus
-        let l:statusline .= '%#MistflyDiscreet#' . l:divider
-        let l:statusline .= '%* %{mistfly_statusline#IndentStatus()} '
+        let l:statusline .= l:divider . ' %{mistfly_statusline#IndentStatus()} '
     endif
 
     return l:statusline
@@ -237,7 +238,7 @@ function! mistfly_statusline#InactiveWinBar() abort
 endfunction
 
 function! mistfly_statusline#TabLine() abort
-    let l:divider = g:mistflyUnicodeShapes ? '▏' : '|'
+    let l:divider = g:mistflyAsciiShapes ? '|' : '▎'
     let l:tabline = ''
     let l:counter = 0
 
@@ -249,7 +250,7 @@ function! mistfly_statusline#TabLine() abort
         if tabpagenr() == counter
             let l:tabline .= '%#TablineSel#' . l:divider . ' Tab:'
         else
-            let l:tabline .= '%#TabLine#' . l:divider . ' Tab:'
+            let l:tabline .= '%#TabLine#  Tab:'
         endif
         let l:tabline .= l:counter
         if has('tablineat')
