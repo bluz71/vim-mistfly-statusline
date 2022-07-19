@@ -173,8 +173,7 @@ endfunction
 
 function! mistfly_statusline#ActiveStatusLine() abort
     let l:mode = mode()
-    let l:left_divider = g:mistflyAsciiShapes ? '|' : ''
-    let l:right_divider = g:mistflyAsciiShapes ? '|' : ''
+    let l:divider = g:mistflyAsciiShapes ? '|' : '⎪'
     let l:arrow =  g:mistflyAsciiShapes ?  '' : '↓'
     let l:git_branch = mistfly_statusline#GitBranch()
     let l:statusline = ''
@@ -184,14 +183,14 @@ function! mistfly_statusline#ActiveStatusLine() abort
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     if len(l:git_branch) > 0
-        let l:statusline .= '%*' . l:left_divider
+        let l:statusline .= '%*' . l:divider
         let l:statusline .= '%#MistflyEmphasis#' . l:git_branch
     endif
     let l:statusline .= '%#MistflyNotification#%{mistfly_statusline#PluginsStatus()}'
     let l:statusline .= '%*%=%l:%c %*' . l:right_divider
     let l:statusline .= '%* %#MistflyEmphasis#%L%* ' . l:arrow . '%P '
     if g:mistflyWithIndentStatus
-        let l:statusline .= '%*' . l:right_divider
+        let l:statusline .= '%*' . l:divider
         let l:statusline .= '%* %{mistfly_statusline#IndentStatus()} '
     endif
 
@@ -199,7 +198,7 @@ function! mistfly_statusline#ActiveStatusLine() abort
 endfunction
 
 function! mistfly_statusline#InactiveStatusLine() abort
-    let l:divider = g:mistflyAsciiShapes ? '|' : ''
+    let l:divider = g:mistflyAsciiShapes ? '|' : '⎪'
     let l:arrow =  g:mistflyAsciiShapes ? '' : '↓'
     let l:statusline = ' %*%<%{mistfly_statusline#File()}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
