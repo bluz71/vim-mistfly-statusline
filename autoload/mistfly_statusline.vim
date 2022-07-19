@@ -71,7 +71,7 @@ function! mistfly_statusline#GitBranch() abort
     endif
 
     let l:git_branch_name = ''
-    if has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
+    if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
         " Gitsigns is available, let's use it to get the branch name since it
         " will already be in memory.
         let l:git_branch_name = get(b:, 'gitsigns_head', '')
@@ -85,9 +85,9 @@ function! mistfly_statusline#GitBranch() abort
     endif
 
     if g:mistflyAsciiShapes
-        return ' ' . l:git_branch_name . '  '
+        return ' ' . l:git_branch_name . ' '
     else
-        return '  ' . l:git_branch_name . '  '
+        return '  ' . l:git_branch_name . ' '
     endif
 endfunction
 
@@ -95,12 +95,21 @@ function! mistfly_statusline#PluginsStatus() abort
     let l:status = ''
     let l:errors = 0
     let l:warnings = 0
+    let l:divider = g:mistflyAsciiShapes ? '| ' : '⎪ '
 
     " Gitsigns status.
-    if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
-        let l:status .= get(b:, 'gitsigns_status', '')
-        if len(l:status) > 0
-            let l:status .= '  '
+    if g:mistflyWithGitsignsStatus && has('nvim-0.5')
+        let l:counts = get(b:, 'gitsigns_status_dict', {})
+        if has_key(l:counts, 'added')
+            if l:counts['added'] > 0
+                let l:status .= '%#MistflyGitsignsAdd#+' . l:counts['added'] . '%* '
+            endif
+            if l:counts['changed'] > 0
+                let l:status .= '%#MistflyGitsignsChange#~' . l:counts['changed'] . '%* '
+            endif
+            if l:counts['removed'] > 0
+                let l:status .= '%#MistflyGitsignsDelete#-' . l:counts['removed'] . '%* '
+            endif
         endif
     endif
 
@@ -140,19 +149,27 @@ function! mistfly_statusline#PluginsStatus() abort
     " Display errors and warnings from any of the previous diagnostic or linting
     " systems.
     if l:errors > 0 && l:warnings > 0
-        let l:status .= g:mistflyErrorSymbol . l:errors . g:mistflyWarningSymbol . l:warnings . '  '
+        let l:status .= divider . '%#MistflyDiagnosticError#' . g:mistflyErrorSymbol
+        let l:status .= ' ' . l:errors . '%* %#MistflyDiagnosticWarning#'
+        let l:status .= g:mistflyWarningSymbol . ' ' . l:warnings . '%* '
     elseif l:errors > 0
-        let l:status .= g:mistflyErrorSymbol . l:errors . '  '
+        let l:status .= divider . '%#MistflyDiagnosticError#' . g:mistflyErrorSymbol
+        let l:status .= ' ' . l:errors . '%* '
     elseif l:warnings > 0
-        let l:status .= g:mistflyWarningSymbol . l:warnings . '  '
+        let l:status .= divider . '%#MistflyDiagnosticWarning#' . g:mistflyWarningSymbol
+        let l:status .= ' ' . l:warnings . '%* '
     endif
 
     " Obsession plugin status.
     if exists('g:loaded_obsession')
+        let l:obsession_status = ''
         if g:mistflyAsciiShapes
-            let l:status .= ObsessionStatus('$', 'S')
+            let l:obsession_status = ObsessionStatus('$', 'S')
         else
-            let l:status .= ObsessionStatus('●', '■')
+            let l:obsession_status = ObsessionStatus('●', '■')
+        endif
+        if len(l:obsession_status) > 0
+            let l:status .= divider . '%#MistflyNotification#' . l:obsession_status . '%*'
         endif
     endif
 
@@ -176,7 +193,7 @@ function! mistfly_statusline#ActiveStatusLine() abort
     let l:divider = g:mistflyAsciiShapes ? '|' : '⎪'
     let l:arrow =  g:mistflyAsciiShapes ?  '' : '↓'
     let l:git_branch = mistfly_statusline#GitBranch()
-    let l:statusline = ''
+
     let l:statusline = mistfly_statusline#ModeColor(l:mode)
     let l:statusline .= mistfly_statusline#ModeText(l:mode)
     let l:statusline .= '%* %<%{mistfly_statusline#File()}'
@@ -186,8 +203,8 @@ function! mistfly_statusline#ActiveStatusLine() abort
         let l:statusline .= '%*' . l:divider
         let l:statusline .= '%#MistflyEmphasis#' . l:git_branch
     endif
-    let l:statusline .= '%#MistflyNotification#%{mistfly_statusline#PluginsStatus()}'
-    let l:statusline .= '%*%=%l:%c %*' . l:right_divider
+    let l:statusline .= mistfly_statusline#PluginsStatus()
+    let l:statusline .= '%*%=%l:%c %*' . l:divider
     let l:statusline .= '%* %#MistflyEmphasis#%L%* ' . l:arrow . '%P '
     if g:mistflyWithIndentStatus
         let l:statusline .= '%*' . l:divider
@@ -200,6 +217,7 @@ endfunction
 function! mistfly_statusline#InactiveStatusLine() abort
     let l:divider = g:mistflyAsciiShapes ? '|' : '⎪'
     let l:arrow =  g:mistflyAsciiShapes ? '' : '↓'
+
     let l:statusline = ' %*%<%{mistfly_statusline#File()}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
@@ -262,10 +280,19 @@ function! mistfly_statusline#TabLine() abort
 endfunction
 
 function! mistfly_statusline#SynthesizeHighlight(target, source) abort
-    let l:sl_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
     let l:source_fg = synIDattr(synIDtrans(hlID(a:source)), 'fg', 'gui')
+    if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'gui') == 1
+        let l:sl_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
+    else
+        let l:sl_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
+    endif
 
-    return 'highlight ' . a:target . ' guibg=' . l:sl_bg . ' guifg=' . l:source_fg
+    if len(l:sl_bg) > 0 && len(l:source_fg) > 0
+        exec 'highlight ' . a:target . ' guibg=' . l:sl_bg . ' guifg=' . l:source_fg
+    else
+        " Fallback to notification highlighting.
+        exec 'highlight! link ' . a:target . ' MistflyNotification'
+    endif
 endfunction
 
 " The following Git branch functionality derives from:

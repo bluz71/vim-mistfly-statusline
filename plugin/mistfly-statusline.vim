@@ -98,10 +98,7 @@ endfunction
 function! s:UserColors() abort
     " Choose nice defaults for certain specific colorschemes.
     if exists('g:colors_name')
-        if g:colors_name == "moonfly" || g:colors_name == "nightfly"
-            " Early exit for colorschemes with known mistfly support.
-            return
-        elseif g:colors_name == 'catppuccin'
+        if g:colors_name == 'catppuccin'
             highlight! link MistflyNormal TSNote
             highlight! link MistflyInsert CursorIM
             highlight! link MistflyVisual IncSearch
@@ -170,6 +167,23 @@ function! s:UserColors() abort
     endif
     if !hlexists('MistflyNotification') || synIDattr(synIDtrans(hlID('MistflyNotification')), 'bg') == ''
         highlight! link MistflyNotification StatusLine
+    endif
+    if g:mistflyWithGitsignsStatus
+        call mistfly_statusline#SynthesizeHighlight('MistflyGitsignsAdd', 'GitSignsAdd')
+        call mistfly_statusline#SynthesizeHighlight('MistflyGitsignsChange', 'GitSignsChange')
+        call mistfly_statusline#SynthesizeHighlight('MistflyGitsignsDelete', 'GitSignsDelete')
+    endif
+    if g:mistflyWithNvimDiagnosticStatus
+        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'DiagnosticError')
+        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'DiagnosticWarn')
+    endif
+    if g:mistflyWithALEStatus
+        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'ALEErrorSign')
+        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'ALEWarningSign')
+    endif
+    if g:mistflyWithCocStatus
+        highlight! link MistflyDiagnosticError MistflyNotification
+        highlight! link MistflyDiagnosticWarning MistflyNotification
     endif
 endfunction
 
