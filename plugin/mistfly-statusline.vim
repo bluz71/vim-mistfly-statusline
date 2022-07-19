@@ -124,10 +124,10 @@ function! s:UserColors() abort
             highlight! link MistflyNormal DiffChange
         elseif g:colors_name == 'nightfox' || g:colors_name == 'nordfox' || g:colors_name == 'terafox'
             highlight! link MistflyNormal Todo
-            highlight! link MistflyInsert IncSearch
-            highlight! link MistflyVisual Sneak
-            highlight! link MistflyReplace Substitute
+            highlight! link MistflyInsert MiniStatuslineModeInsert
+            highlight! link MistflyVisual MiniStatuslineModeVisual
             highlight! link MistflyCommand MiniStatuslineModeCommand
+            highlight! link MistflyReplace MiniStatuslineModeReplace
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'sonokai'
