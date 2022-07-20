@@ -99,26 +99,20 @@ function! s:UserColors() abort
     " Choose nice defaults for certain specific colorschemes.
     if exists('g:colors_name')
         if g:colors_name == 'catppuccin'
-            highlight! link MistflyNormal TSNote
-            highlight! link MistflyInsert CursorIM
-            highlight! link MistflyVisual IncSearch
-            highlight! link MistflyCommand TSWarning
-            highlight! link MistflyReplace TSDanger
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'DiffText', 'VertSplit')
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'DiffAdd', 'VertSplit')
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit')
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit')
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'DiffDelete', 'VertSplit')
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
-        elseif g:colors_name == 'edge'
-            highlight! link MistflyNormal MiniStatuslineModeCommand
-            highlight! link MistflyInsert MiniStatuslineModeInsert
-            highlight! link MistflyVisual MiniStatuslineModeVisual
-            highlight! link MistflyCommand MiniStatuslineModeCommand
-            highlight! link MistflyReplace MiniStatuslineModeReplace
-        elseif g:colors_name == 'everforest'
+        elseif g:colors_name == 'edge' || g:colors_name == 'everforest' ||  g:colors_name == 'sonokai'
             highlight! link MistflyNormal MiniStatuslineModeNormal
             highlight! link MistflyInsert MiniStatuslineModeInsert
             highlight! link MistflyVisual MiniStatuslineModeVisual
             highlight! link MistflyCommand MiniStatuslineModeCommand
             highlight! link MistflyReplace MiniStatuslineModeReplace
-            exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
+            exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Identifier')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'gruvbox'
             highlight! link MistflyNormal DiffChange
@@ -130,15 +124,9 @@ function! s:UserColors() abort
             highlight! link MistflyReplace MiniStatuslineModeReplace
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
-        elseif g:colors_name == 'sonokai'
-            highlight! link MistflyNormal MiniStatuslineModeNormal
-            highlight! link MistflyInsert MiniStatuslineModeInsert
-            highlight! link MistflyVisual MiniStatuslineModeOther
-            highlight! link MistflyCommand MiniStatuslineModeCommand
-            highlight! link MistflyReplace MiniStatuslineModeReplace
         elseif g:colors_name == 'tokyonight'
             highlight! link MistflyNormal TablineSel
-            highlight! link MistflyInsert Cursor
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit')
             highlight! link MistflyVisual Sneak
             highlight! link MistflyReplace Substitute
             highlight! link MistflyCommand Todo
@@ -168,10 +156,11 @@ function! s:UserColors() abort
     if !hlexists('MistflyNotification') || synIDattr(synIDtrans(hlID('MistflyNotification')), 'bg') == ''
         highlight! link MistflyNotification StatusLine
     endif
+
     if g:mistflyWithGitsignsStatus
-        call mistfly_statusline#SynthesizeHighlight('MistflyGitsignsAdd', 'GitSignsAdd')
-        call mistfly_statusline#SynthesizeHighlight('MistflyGitsignsChange', 'GitSignsChange')
-        call mistfly_statusline#SynthesizeHighlight('MistflyGitsignsDelete', 'GitSignsDelete')
+        call mistfly_statusline#SynthesizeHighlight('MistflyGitAdd', 'GitSignsAdd')
+        call mistfly_statusline#SynthesizeHighlight('MistflyGitChange', 'GitSignsChange')
+        call mistfly_statusline#SynthesizeHighlight('MistflyGitDelete', 'GitSignsDelete')
     endif
     if g:mistflyWithNvimDiagnosticStatus
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'DiagnosticError')

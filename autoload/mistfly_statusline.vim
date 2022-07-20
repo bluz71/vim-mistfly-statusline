@@ -85,9 +85,9 @@ function! mistfly_statusline#GitBranch() abort
     endif
 
     if g:mistflyAsciiShapes
-        return ' ' . l:git_branch_name . ' '
+        return ' ' . l:git_branch_name
     else
-        return '  ' . l:git_branch_name . ' '
+        return '  ' . l:git_branch_name
     endif
 endfunction
 
@@ -102,14 +102,17 @@ function! mistfly_statusline#PluginsStatus() abort
         let l:counts = get(b:, 'gitsigns_status_dict', {})
         if has_key(l:counts, 'added')
             if l:counts['added'] > 0
-                let l:status .= '%#MistflyGitsignsAdd#+' . l:counts['added'] . '%* '
+                let l:status .= ' %#MistflyGitAdd#+' . l:counts['added'] . '%*'
             endif
             if l:counts['changed'] > 0
-                let l:status .= '%#MistflyGitsignsChange#~' . l:counts['changed'] . '%* '
+                let l:status .= ' %#MistflyGitChange#~' . l:counts['changed'] . '%*'
             endif
             if l:counts['removed'] > 0
-                let l:status .= '%#MistflyGitsignsDelete#-' . l:counts['removed'] . '%* '
+                let l:status .= ' %#MistflyGitDelete#-' . l:counts['removed'] . '%*'
             endif
+        endif
+        if len(l:status) > 0
+            let l:status .= ' '
         endif
     endif
 
@@ -149,14 +152,14 @@ function! mistfly_statusline#PluginsStatus() abort
     " Display errors and warnings from any of the previous diagnostic or linting
     " systems.
     if l:errors > 0 && l:warnings > 0
-        let l:status .= divider . '%#MistflyDiagnosticError#' . g:mistflyErrorSymbol
+        let l:status .= ' %#MistflyDiagnosticError#' . g:mistflyErrorSymbol
         let l:status .= ' ' . l:errors . '%* %#MistflyDiagnosticWarning#'
         let l:status .= g:mistflyWarningSymbol . ' ' . l:warnings . '%* '
     elseif l:errors > 0
-        let l:status .= divider . '%#MistflyDiagnosticError#' . g:mistflyErrorSymbol
+        let l:status .= ' %#MistflyDiagnosticError#' . g:mistflyErrorSymbol
         let l:status .= ' ' . l:errors . '%* '
     elseif l:warnings > 0
-        let l:status .= divider . '%#MistflyDiagnosticWarning#' . g:mistflyWarningSymbol
+        let l:status .= ' %#MistflyDiagnosticWarning#' . g:mistflyWarningSymbol
         let l:status .= ' ' . l:warnings . '%* '
     endif
 
@@ -169,7 +172,7 @@ function! mistfly_statusline#PluginsStatus() abort
             let l:obsession_status = ObsessionStatus('●', '■')
         endif
         if len(l:obsession_status) > 0
-            let l:status .= divider . '%#MistflyNotification#' . l:obsession_status . '%*'
+            let l:status .= ' %#MistflyNotification#' . l:obsession_status . '%*'
         endif
     endif
 
@@ -200,8 +203,8 @@ function! mistfly_statusline#ActiveStatusLine() abort
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     if len(l:git_branch) > 0
-        let l:statusline .= '%*' . l:divider
-        let l:statusline .= '%#MistflyEmphasis#' . l:git_branch
+        let l:statusline .= '%*' . l:divider . '%#MistflyEmphasis#'
+        let l:statusline .= l:git_branch . '%* '
     endif
     let l:statusline .= mistfly_statusline#PluginsStatus()
     let l:statusline .= '%*%=%l:%c %*' . l:divider
@@ -290,8 +293,19 @@ function! mistfly_statusline#SynthesizeHighlight(target, source) abort
     if len(l:sl_bg) > 0 && len(l:source_fg) > 0
         exec 'highlight ' . a:target . ' guibg=' . l:sl_bg . ' guifg=' . l:source_fg
     else
-        " Fallback to notification highlighting.
-        exec 'highlight! link ' . a:target . ' MistflyNotification'
+        " Fallback to statusline highlighting.
+        exec 'highlight! link ' . a:target . ' StatusLine'
+    endif
+endfunction
+
+function! mistfly_statusline#SynthesizeModeHighlight(target, background, foreground) abort
+    let l:mode_bg = synIDattr(synIDtrans(hlID(a:background)), 'fg', 'gui')
+    let l:mode_fg = synIDattr(synIDtrans(hlID(a:foreground)), 'fg', 'gui')
+    if len(l:mode_bg) > 0 && len(l:mode_fg) > 0
+        exec 'highlight ' . a:target . ' guibg=' . l:mode_bg . ' guifg=' . l:mode_fg
+    else
+        " Fallback to statusline highlighting.
+        exec 'highlight! link ' . a:target . ' StatusLine'
     endif
 endfunction
 
