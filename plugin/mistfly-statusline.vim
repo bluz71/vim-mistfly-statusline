@@ -106,13 +106,13 @@ function! s:UserColors() abort
             exec mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'DiffDelete', 'VertSplit')
             exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
-        elseif g:colors_name == 'edge' || g:colors_name == 'everforest' ||  g:colors_name == 'sonokai'
+        elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'sonokai' || (g:colors_name == 'onedark' && exists('g:onedark_config'))
             highlight! link MistflyNormal MiniStatuslineModeNormal
             highlight! link MistflyInsert MiniStatuslineModeInsert
             highlight! link MistflyVisual MiniStatuslineModeVisual
             highlight! link MistflyCommand MiniStatuslineModeCommand
             highlight! link MistflyReplace MiniStatuslineModeReplace
-            exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Identifier')
+            exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'StatusLin')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'gruvbox'
             highlight! link MistflyNormal DiffChange
