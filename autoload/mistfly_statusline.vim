@@ -157,14 +157,13 @@ function! mistfly_statusline#PluginsStatus() abort
 
     " Obsession plugin status.
     if exists('g:loaded_obsession')
-        let l:obsession_status = ''
         if g:mistflyAsciiShapes
             let l:obsession_status = ObsessionStatus('$', 'S')
         else
             let l:obsession_status = ObsessionStatus('●', '■')
         endif
         if len(l:obsession_status) > 0
-            let l:status .= ' %#MistflyNotification#' . l:obsession_status . '%*'
+            let l:status .= ' %#MistflyObsession#' . l:obsession_status . '%*'
         endif
     endif
 
@@ -277,11 +276,7 @@ endfunction
 
 function! mistfly_statusline#SynthesizeHighlight(target, source) abort
     let l:source_fg = synIDattr(synIDtrans(hlID(a:source)), 'fg', 'gui')
-    if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'gui') == 1
-        let l:sl_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
-    else
-        let l:sl_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
-    endif
+    let l:sl_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
 
     if len(l:sl_bg) > 0 && len(l:source_fg) > 0
         exec 'highlight ' . a:target . ' guibg=' . l:sl_bg . ' guifg=' . l:source_fg
@@ -292,12 +287,13 @@ function! mistfly_statusline#SynthesizeHighlight(target, source) abort
 endfunction
 
 function! mistfly_statusline#SynthesizeModeHighlight(target, background, foreground, emphasis) abort
-    if a:emphasis
+    if a:emphasis == v:true
         let l:mode_bg = synIDattr(synIDtrans(hlID(a:background)), 'bg', 'gui')
+        let l:mode_fg = synIDattr(synIDtrans(hlID(a:foreground)), 'bg', 'gui')
     else
         let l:mode_bg = synIDattr(synIDtrans(hlID(a:background)), 'fg', 'gui')
+        let l:mode_fg = synIDattr(synIDtrans(hlID(a:foreground)), 'fg', 'gui')
     endif
-    let l:mode_fg = synIDattr(synIDtrans(hlID(a:foreground)), 'bg', 'gui')
     if len(l:mode_bg) > 0 && len(l:mode_fg) > 0
         exec 'highlight ' . a:target . ' guibg=' . l:mode_bg . ' guifg=' . l:mode_fg
     else

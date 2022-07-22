@@ -104,30 +104,24 @@ function! s:UserColors() abort
             exec mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit', v:false)
             exec mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit', v:false)
             exec mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'DiffDelete', 'VertSplit', v:false)
-            exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
-        elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'sonokai' || (g:colors_name == 'onedark' && exists('g:onedark_config'))
+        elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'gruvbox-material' || g:colors_name == 'sonokai' || (g:colors_name == 'onedark' && exists('g:onedark_config'))
             highlight! link MistflyNormal MiniStatuslineModeNormal
             highlight! link MistflyInsert MiniStatuslineModeInsert
             highlight! link MistflyVisual MiniStatuslineModeVisual
             highlight! link MistflyCommand MiniStatuslineModeCommand
             highlight! link MistflyReplace MiniStatuslineModeReplace
-            exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
-        elseif g:colors_name == 'gruvbox'
-            highlight! link MistflyNormal DiffChange
         elseif g:colors_name == 'nightfox' || g:colors_name == 'nordfox' || g:colors_name == 'terafox'
             highlight! link MistflyNormal Todo
             highlight! link MistflyInsert MiniStatuslineModeInsert
             highlight! link MistflyVisual MiniStatuslineModeVisual
             highlight! link MistflyCommand MiniStatuslineModeCommand
             highlight! link MistflyReplace MiniStatuslineModeReplace
-            exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'tokyonight'
             highlight! link MistflyNormal TablineSel
             exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit', v:false)
             highlight! link MistflyVisual Sneak
             highlight! link MistflyReplace Substitute
             highlight! link MistflyCommand Todo
-            exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         endif
     endif
 
@@ -145,9 +139,6 @@ function! s:UserColors() abort
     endif
     if !hlexists('MistflyReplace') || synIDattr(synIDtrans(hlID('MistflyReplace')), 'bg') == ''
         highlight! link MistflyReplace DiffDelete
-    endif
-    if !hlexists('MistflyNotification') || synIDattr(synIDtrans(hlID('MistflyNotification')), 'bg') == ''
-        highlight! link MistflyNotification StatusLine
     endif
 
     " Synthesize emphasis colors from the existing mode colors.
@@ -173,6 +164,9 @@ function! s:UserColors() abort
     if g:mistflyWithCocStatus
         highlight! link MistflyDiagnosticError MistflyNotification
         highlight! link MistflyDiagnosticWarning MistflyNotification
+    endif
+    if exists('g:loaded_obsession')
+        exec mistfly_statusline#SynthesizeHighlight('MistflyObsession', 'Error')
     endif
 endfunction
 
