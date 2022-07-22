@@ -99,12 +99,11 @@ function! s:UserColors() abort
     " Choose nice defaults for certain specific colorschemes.
     if exists('g:colors_name')
         if g:colors_name == 'catppuccin'
-            exec mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'DiffText', 'VertSplit')
-            exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'DiffAdd', 'VertSplit')
-            exec mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit')
-            exec mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit')
-            exec mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'DiffDelete', 'VertSplit')
-            exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'DiffText', 'VertSplit', v:false)
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'DiffAdd', 'VertSplit', v:false)
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit', v:false)
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit', v:false)
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'DiffDelete', 'VertSplit', v:false)
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'sonokai' || (g:colors_name == 'onedark' && exists('g:onedark_config'))
             highlight! link MistflyNormal MiniStatuslineModeNormal
@@ -112,7 +111,6 @@ function! s:UserColors() abort
             highlight! link MistflyVisual MiniStatuslineModeVisual
             highlight! link MistflyCommand MiniStatuslineModeCommand
             highlight! link MistflyReplace MiniStatuslineModeReplace
-            exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'StatusLin')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'gruvbox'
             highlight! link MistflyNormal DiffChange
@@ -122,15 +120,13 @@ function! s:UserColors() abort
             highlight! link MistflyVisual MiniStatuslineModeVisual
             highlight! link MistflyCommand MiniStatuslineModeCommand
             highlight! link MistflyReplace MiniStatuslineModeReplace
-            exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         elseif g:colors_name == 'tokyonight'
             highlight! link MistflyNormal TablineSel
-            exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit')
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit', v:false)
             highlight! link MistflyVisual Sneak
             highlight! link MistflyReplace Substitute
             highlight! link MistflyCommand Todo
-            exec mistfly_statusline#SynthesizeHighlight('MistflyEmphasis', 'Directory')
             exec mistfly_statusline#SynthesizeHighlight('MistflyNotification', 'Error')
         endif
     endif
@@ -150,12 +146,16 @@ function! s:UserColors() abort
     if !hlexists('MistflyReplace') || synIDattr(synIDtrans(hlID('MistflyReplace')), 'bg') == ''
         highlight! link MistflyReplace DiffDelete
     endif
-    if !hlexists('MistflyEmphasis') || synIDattr(synIDtrans(hlID('MistflyEmphasis')), 'bg') == ''
-        highlight! link MistflyEmphasis StatusLine
-    endif
     if !hlexists('MistflyNotification') || synIDattr(synIDtrans(hlID('MistflyNotification')), 'bg') == ''
         highlight! link MistflyNotification StatusLine
     endif
+
+    " Synthesize emphasis colors from the existing mode colors.
+    call mistfly_statusline#SynthesizeModeHighlight('MistflyNormalEmphasis', 'StatusLine', 'MistflyNormal', v:true)
+    call mistfly_statusline#SynthesizeModeHighlight('MistflyInsertEmphasis', 'StatusLine', 'MistflyInsert', v:true)
+    call mistfly_statusline#SynthesizeModeHighlight('MistflyVisualEmphasis', 'StatusLine', 'MistflyVisual', v:true)
+    call mistfly_statusline#SynthesizeModeHighlight('MistflyCommandEmphasis', 'StatusLine', 'MistflyCommand', v:true)
+    call mistfly_statusline#SynthesizeModeHighlight('MistflyReplaceEmphasis', 'StatusLine', 'MistflyReplace', v:true)
 
     if g:mistflyWithGitsignsStatus
         call mistfly_statusline#SynthesizeHighlight('MistflyGitAdd', 'GitSignsAdd')

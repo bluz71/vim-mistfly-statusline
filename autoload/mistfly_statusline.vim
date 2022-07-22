@@ -1,24 +1,16 @@
 let s:modes = {
-  \  'n':      ['%#MistflyNormal#', ' normal '],
-  \  'i':      ['%#MistflyInsert#', ' insert '],
-  \  'R':      ['%#MistflyReplace#', ' r-mode '],
-  \  'v':      ['%#MistflyVisual#', ' visual '],
-  \  'V':      ['%#MistflyVisual#', ' v-line '],
-  \  "\<C-v>": ['%#MistflyVisual#', ' v-rect '],
-  \  'c':      ['%#MistflyCommand#', ' c-mode '],
-  \  's':      ['%#MistflyVisual#', ' select '],
-  \  'S':      ['%#MistflyVisual#', ' s-line '],
-  \  "\<C-s>": ['%#MistflyVisual#', ' s-rect '],
-  \  't':      ['%#MistflyInsert#', ' term '],
+  \  'n':      ['%#MistflyNormal#', ' normal ', '%#MistflyNormalEmphasis#'],
+  \  'i':      ['%#MistflyInsert#', ' insert ', '%#MistflyInsertEmphasis#'],
+  \  'R':      ['%#MistflyReplace#', ' r-mode ', '%#MistflyReplaceEmphasis#'],
+  \  'v':      ['%#MistflyVisual#', ' visual ', '%#MistflyVisualEmphasis#'],
+  \  'V':      ['%#MistflyVisual#', ' v-line ', '%#MistflyVisualEmphasis#'],
+  \  "\<C-v>": ['%#MistflyVisual#', ' v-rect ', '%#MistflyVisualEmphasis#'],
+  \  'c':      ['%#MistflyCommand#', ' c-mode ', '%#MistflyCommandEmphasis#'],
+  \  's':      ['%#MistflyVisual#', ' select ', '%#MistflyVisualEmphasis#'],
+  \  'S':      ['%#MistflyVisual#', ' s-line ', '%#MistflyVisualEmphasis#'],
+  \  "\<C-s>": ['%#MistflyVisual#', ' s-rect ', '%#MistflyVisualEmphasis#'],
+  \  't':      ['%#MistflyInsert#', ' term ', '%#MistflyInsertEmphasis#'],
   \}
-
-function! mistfly_statusline#ModeColor(mode) abort
-    return get(s:modes, a:mode, '%*1')[0]
-endfunction
-
-function! mistfly_statusline#ModeText(mode) abort
-    return get(s:modes, a:mode, ' normal ')[1]
-endfunction
 
 function! mistfly_statusline#File() abort
     return s:FileIcon() . s:ShortFilePath()
@@ -196,19 +188,20 @@ function! mistfly_statusline#ActiveStatusLine() abort
     let l:divider = g:mistflyAsciiShapes ? '|' : '⎪'
     let l:arrow =  g:mistflyAsciiShapes ?  '' : '↓'
     let l:git_branch = mistfly_statusline#GitBranch()
+    let l:mode_emphasis = get(s:modes, l:mode, '%#MistflyNormalEmphasis#')[2]
 
-    let l:statusline = mistfly_statusline#ModeColor(l:mode)
-    let l:statusline .= mistfly_statusline#ModeText(l:mode)
+    let l:statusline = get(s:modes, l:mode, '%#MistflyNormal#')[0]
+    let l:statusline .= get(s:modes, l:mode, ' normal ')[1]
     let l:statusline .= '%* %<%{mistfly_statusline#File()}'
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     if len(l:git_branch) > 0
-        let l:statusline .= '%*' . l:divider . '%#MistflyEmphasis#'
+        let l:statusline .= '%*' . l:divider . l:mode_emphasis
         let l:statusline .= l:git_branch . '%* '
     endif
     let l:statusline .= mistfly_statusline#PluginsStatus()
     let l:statusline .= '%*%=%l:%c %*' . l:divider
-    let l:statusline .= '%* %#MistflyEmphasis#%L%* ' . l:arrow . '%P '
+    let l:statusline .= '%* ' . l:mode_emphasis . '%L%* ' . l:arrow . '%P '
     if g:mistflyWithIndentStatus
         let l:statusline .= '%*' . l:divider
         let l:statusline .= '%* %{mistfly_statusline#IndentStatus()} '
@@ -238,7 +231,7 @@ endfunction
 
 function! mistfly_statusline#ActiveWinBar() abort
     let l:mode = mode()
-    let l:winbar = mistfly_statusline#ModeColor(l:mode)
+    let l:winbar = get(s:modes, l:mode, '%#MistflyNormal#')[0]
     let l:winbar .= ' '
     let l:winbar .= '%* %<%{mistfly_statusline#File()}'
     let l:winbar .= "%{&modified ? '+\ ' : ' \ \ '}"
@@ -298,9 +291,13 @@ function! mistfly_statusline#SynthesizeHighlight(target, source) abort
     endif
 endfunction
 
-function! mistfly_statusline#SynthesizeModeHighlight(target, background, foreground) abort
-    let l:mode_bg = synIDattr(synIDtrans(hlID(a:background)), 'fg', 'gui')
-    let l:mode_fg = synIDattr(synIDtrans(hlID(a:foreground)), 'fg', 'gui')
+function! mistfly_statusline#SynthesizeModeHighlight(target, background, foreground, emphasis) abort
+    if a:emphasis
+        let l:mode_bg = synIDattr(synIDtrans(hlID(a:background)), 'bg', 'gui')
+    else
+        let l:mode_bg = synIDattr(synIDtrans(hlID(a:background)), 'fg', 'gui')
+    endif
+    let l:mode_fg = synIDattr(synIDtrans(hlID(a:foreground)), 'bg', 'gui')
     if len(l:mode_bg) > 0 && len(l:mode_fg) > 0
         exec 'highlight ' . a:target . ' guibg=' . l:mode_bg . ' guifg=' . l:mode_fg
     else

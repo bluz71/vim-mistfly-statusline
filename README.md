@@ -166,7 +166,6 @@ will be the case for most colorschemes).
 | Visual Mode              | `MistflyVisual`        | `Search`
 | Command Mode             | `MistflyCommand`       | `DiffText`
 | Replace Mode             | `MistflyReplace`       | `DiffDelete`
-| Git Branch & Total Lines | `MistflyEmphasis`      | `Statusline`
 | Plugins Notification     | `MistflyNotification`  | `StatusLine`
 
 The above fallbacks should work well for most colorschemes.
@@ -188,7 +187,6 @@ highlight! link MistflyNormal DiffChange
 highlight! link MistflyInsert WildMenu
 highlight! link MistflyVisual IncSearch
 highlight! link MistflyReplace ErrorMsg
-highlight! link MistflyEmphasis TabLineSel
 highlight! link MistflyNotification TabLine
 ```
 
