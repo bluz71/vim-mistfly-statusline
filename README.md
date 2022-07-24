@@ -190,8 +190,6 @@ colorscheme itself or within this plugin:
 
 - [nightfox](https://github.com/EdenEast/nightfox.nvim)
 
-- [onedark](https://github.com/navarasu/onedark.nvim)
-
 - [sonokai](https://github.com/sainnhe/sonokai)
 
 - [tokyonight](https://github.com/folke/tokyonight.nvim)

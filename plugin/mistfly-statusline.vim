@@ -108,7 +108,7 @@ function! s:ThemeColors() abort
         exec mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit', v:false)
         exec mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit', v:false)
         exec mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'DiffDelete', 'VertSplit', v:false)
-    elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'gruvbox-material' || g:colors_name == 'sonokai' || (g:colors_name == 'onedark' && exists('g:onedark_config'))
+    elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'gruvbox-material' || g:colors_name == 'sonokai'
         highlight! link MistflyNormal MiniStatuslineModeNormal
         highlight! link MistflyInsert MiniStatuslineModeInsert
         highlight! link MistflyVisual MiniStatuslineModeVisual
