@@ -48,7 +48,7 @@ without any `statusline` plugin.
 
 | native  | mistfly | lightline | airline | lualine
 |---------|---------|-----------|---------|--------
-| 20.4ms  | 22.3ms  | 26.7ms    | 76.6ms  | 29.5ms
+| 20.4ms  | 24.7ms  | 24.0ms    | 75.8ms  | 27.6ms
 
 Startup times as of July 2022 on my system; performance on other systems will
 vary.
