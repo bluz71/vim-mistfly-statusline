@@ -162,9 +162,8 @@ Highlight Groups And Colors
 ---------------------------
 
 Sections marked with `*` in the previous section are linked to the following
-custom highlight groups and their associated fallbacks if the current
-colorscheme does not directly support _mistfly statusline_ (which will be the
-case for most colorschemes).
+custom highlight groups with their associated fallbacks if the current
+colorscheme does not support _mistfly statusline_.
 
 | Segment                  | Custom Highlight Group | Synthesized Highlight Fallback
 |--------------------------|------------------------|-------------------------------
@@ -174,17 +173,34 @@ case for most colorschemes).
 | Command Mode             | `MistflyCommand`       | `WarningMsg`
 | Replace Mode             | `MistflyReplace`       | `Error`
 
-The above fallbacks should work well for most colorschemes.
+Note, the following colorschemes support _mistfly statusline_, either within the
+colorscheme itself or within this plugin:
 
-Note, the [moonfly](https://github.com/bluz71/vim-moonfly-colors)
-and [nightfly](https://github.com/bluz71/vim-nightfly-guicolors) colorschemes do
-directly support _mistfly statusline_.
+- [moonfly](https://github.com/bluz71/vim-moonfly-colors)
 
-If the fallback colors do not suit then it is very easy to override with your
-own highlights.
+- [nightfly](https://github.com/bluz71/vim-nightfly-guicolors)
 
-:gift: Here is an example of customized _mistfly statusline_ colors. Save the
-following either at the end of your initialization file, after setting your
+- [catppuccin](https://github.com/catppuccin/nvim)
+
+- [edge](https://github.com/sainnhe/edge)
+
+- [everforest](https://github.com/sainnhe/everforest)
+
+- [gruvbox-material](https://github.com/sainnhe/gruvbox-material)
+
+- [nightfox](https://github.com/EdenEast/nightfox.nvim)
+
+- [onedark](https://github.com/navarasu/onedark.nvim)
+
+- [sonokai](https://github.com/sainnhe/sonokai)
+
+- [tokyonight](https://github.com/folke/tokyonight.nvim)
+
+Lastly, if the fallback colors do not suit then it is very easy to override with
+your own highlights.
+
+:gift: Here is a simple example of customized _mistfly statusline_ colors. Save
+the following either at the end of your initialization file, after setting your
 `colorscheme`, or in an appropriate `after` file such as
 `after/plugin/mistfly-statusline.vim`.
 

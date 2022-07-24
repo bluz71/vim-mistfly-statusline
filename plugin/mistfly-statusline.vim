@@ -101,7 +101,7 @@ function! s:ThemeColors() abort
     endif
 
     if g:colors_name == 'moonfly' || g:colors_name == 'nightfly'
-        " Do nothing since both themes already set mode colors.
+        " Do nothing since both themes already set mistfly mode colors.
     elseif g:colors_name == 'catppuccin'
         exec mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'DiffText', 'VertSplit', v:false)
         exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'DiffAdd', 'VertSplit', v:false)
