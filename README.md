@@ -119,22 +119,29 @@ windows will **not** be directly styled by this plugin.
 Layout And Default Colors
 -------------------------
 
-The *mistfly-statusline* layout contains two segments, the left-side segment:
+The *mistfly-statusline* layout consists of two main groupings, the left-side
+and right-side groups as follows:
 
 ```
-<Mode *> <Filename & Flags> | <Git Branch *> <Plugins Notification *>
++-------------------------------------------------+
+| A | B | C | D                         X | Y | Z |
++-------------------------------------------------+
 ```
 
-And the right-side segment:
+| Section | Purpose
+|---------|------------------
+| A`*`    | Mode status (normal, insert, visual, command and replace modes)
+| B       | Compacted filename (see below for details)
+| C`*`    | Git repository branch name (if applicable)
+| D`*`    | Plugins notification (git, diagnostic and session status)
+| X       | Current position
+| Y`*`    | Total lines and current location as percentage
+| Z       | Optional indent status (spaces and tabs shift width)
 
-```
-<Line:Column> | <Total Lines *> <% Position> | <Optional Indentation Status >
-```
+Sections marked with a `*` are linked to a highlight group and are colored,
+refer to the next section for details.
 
-Sub-segments marked with a `*` are linked to a highlight group and may be
-colored, refer to the next section for details.
-
-Note also, filenames will be displayed as follows:
+Note, filenames will be compacted as follows:
 
 - Pathless filenames only for files in the current working directory
 
@@ -143,7 +150,7 @@ Note also, filenames will be displayed as follows:
 
 - `~`-style home directory paths in preference to absolute paths
 
-- Compacted, for example `foo/bar/bazz/hello.txt` will be displayed as
+- Truncated, for example `foo/bar/bazz/hello.txt` will be displayed as
   `f/b/b/hello.txt`
 
 - Trimmed, a maximum of four path components will be displayed for a filename,
@@ -154,18 +161,18 @@ Note also, filenames will be displayed as follows:
 Highlight Groups And Colors
 ---------------------------
 
-Sub-segments marked with `*` in the previous section are linked to the following
-custom highlight groups and their associated linked fallback highlight groups if
-the current colorscheme does not directly support _mistfly statusline_ (which
-will be the case for most colorschemes).
+Sections marked with `*` in the previous section are linked to the following
+custom highlight groups and their associated fallbacks if the current
+colorscheme does not directly support _mistfly statusline_ (which will be the
+case for most colorschemes).
 
-| Segment                  | Custom Highlight Group | Fallback Highlight Group
-|--------------------------|------------------------|-------------------------
-| Normal Mode              | `MistflyNormal`        | `DiffText`
-| Insert Mode              | `MistflyInsert`        | `DiffAdd`
-| Visual Mode              | `MistflyVisual`        | `Search`
-| Command Mode             | `MistflyCommand`       | `DiffText`
-| Replace Mode             | `MistflyReplace`       | `DiffDelete`
+| Segment                  | Custom Highlight Group | Synthesized Highlight Fallback
+|--------------------------|------------------------|-------------------------------
+| Normal Mode              | `MistflyNormal`        | `Directory`
+| Insert Mode              | `MistflyInsert`        | `String`
+| Visual Mode              | `MistflyVisual`        | `Statement`
+| Command Mode             | `MistflyCommand`       | `WarningMsg`
+| Replace Mode             | `MistflyReplace`       | `Error`
 
 The above fallbacks should work well for most colorschemes.
 
@@ -179,12 +186,13 @@ own highlights.
 :gift: Here is an example of customized _mistfly statusline_ colors. Save the
 following either at the end of your initialization file, after setting your
 `colorscheme`, or in an appropriate `after` file such as
-`~/.vim/after/plugin/mistfly-statusline.vim`.
+`after/plugin/mistfly-statusline.vim`.
 
 ```viml
 highlight! link MistflyNormal DiffChange
 highlight! link MistflyInsert WildMenu
 highlight! link MistflyVisual IncSearch
+highlight! link MistflyCommand WildMenu
 highlight! link MistflyReplace ErrorMsg
 ```
 

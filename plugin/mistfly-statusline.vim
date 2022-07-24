@@ -129,19 +129,19 @@ function! s:ThemeColors() abort
     else
         " Fallback for all other colorschemes.
         if !hlexists('MistflyNormal') || synIDattr(synIDtrans(hlID('MistflyNormal')), 'bg') == ''
-            highlight! link MistflyNormal DiffText
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'Directory', 'VertSplit', v:false)
         endif
         if !hlexists('MistflyInsert') || synIDattr(synIDtrans(hlID('MistflyInsert')), 'bg') == ''
-            highlight! link MistflyInsert DiffAdd
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit', v:false)
         endif
         if !hlexists('MistflyVisual') || synIDattr(synIDtrans(hlID('MistflyVisual')), 'bg') == ''
-            highlight! link MistflyVisual Search
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit', v:false)
         endif
         if !hlexists('MistflyCommand') || synIDattr(synIDtrans(hlID('MistflyCommand')), 'bg') == ''
-            highlight! link MistflyCommand DiffText
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'WarningMsg', 'VertSplit', v:false)
         endif
         if !hlexists('MistflyReplace') || synIDattr(synIDtrans(hlID('MistflyReplace')), 'bg') == ''
-            highlight! link MistflyReplace DiffDelete
+            exec mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'Error', 'VertSplit', v:false)
         endif
     endif
 
