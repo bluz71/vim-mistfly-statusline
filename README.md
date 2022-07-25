@@ -40,7 +40,8 @@ Statusline Performance Comparison
 
 A performance comparison of _mistfly stautusline_ against various popular
 `statusline` plugins, with their out-of-the-box defaults, on a clean and minimal
-Neovim setup. The Neovim startup times in the table below are provived by the
+Neovim setup with the [moonfly](https://github.com/bluz71/vim-moonfly-colors)
+colorscheme. The Neovim startup times in the following table are provived by the
 [dstein64/vim-startuptime](https://github.com/dstein64/vim-startuptime) plugin.
 
 Startup times are the average of five consecutive runs. Note, `native` is run
@@ -48,7 +49,7 @@ without any `statusline` plugin.
 
 | native  | mistfly | lightline | airline | lualine
 |---------|---------|-----------|---------|--------
-| 20.4ms  | 24.7ms  | 24.0ms    | 75.8ms  | 27.6ms
+| 19.0ms  | 23.6ms  | 24.5ms    | 95.0ms  | 30.8ms
 
 Startup times as of July 2022 on my system; performance on other systems will
 vary.
