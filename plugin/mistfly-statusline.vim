@@ -103,11 +103,11 @@ function! s:ThemeColors() abort
     if g:colors_name == 'moonfly' || g:colors_name == 'nightfly'
         " Do nothing since both themes already set mistfly mode colors.
     elseif g:colors_name == 'catppuccin'
-        exec mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'DiffText', 'VertSplit', v:false)
-        exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'DiffAdd', 'VertSplit', v:false)
-        exec mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit', v:false)
-        exec mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit', v:false)
-        exec mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'DiffDelete', 'VertSplit', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'DiffText', 'VertSplit', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'DiffAdd', 'VertSplit', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'DiffDelete', 'VertSplit', v:false)
     elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'gruvbox-material' || g:colors_name == 'sonokai'
         highlight! link MistflyNormal MiniStatuslineModeNormal
         highlight! link MistflyInsert MiniStatuslineModeInsert
@@ -115,11 +115,11 @@ function! s:ThemeColors() abort
         highlight! link MistflyCommand MiniStatuslineModeCommand
         highlight! link MistflyReplace MiniStatuslineModeReplace
     elseif g:colors_name == 'gruvbox'
-        exec mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'GruvboxFg4', 'GruvboxBg0', v:false)
-        exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'GruvboxBlue', 'GruvboxBg0', v:false)
-        exec mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'GruvboxOrange', 'GruvboxBg0', v:false)
-        exec mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'GruvboxGreen', 'GruvboxBg0', v:false)
-        exec mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'GruvboxRed', 'GruvboxBg0', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'GruvboxFg4', 'GruvboxBg0', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'GruvboxBlue', 'GruvboxBg0', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'GruvboxOrange', 'GruvboxBg0', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'GruvboxGreen', 'GruvboxBg0', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'GruvboxRed', 'GruvboxBg0', v:false)
     elseif g:colors_name == 'nightfox' || g:colors_name == 'nordfox' || g:colors_name == 'terafox'
         highlight! link MistflyNormal Todo
         highlight! link MistflyInsert MiniStatuslineModeInsert
@@ -128,26 +128,26 @@ function! s:ThemeColors() abort
         highlight! link MistflyReplace MiniStatuslineModeReplace
     elseif g:colors_name == 'tokyonight'
         highlight! link MistflyNormal TablineSel
-        exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit', v:false)
         highlight! link MistflyVisual Sneak
         highlight! link MistflyReplace Substitute
         highlight! link MistflyCommand Todo
     else
         " Fallback for all other colorschemes.
         if !hlexists('MistflyNormal') || synIDattr(synIDtrans(hlID('MistflyNormal')), 'bg') == ''
-            exec mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'Directory', 'VertSplit', v:false)
+            call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'Directory', 'VertSplit', v:false)
         endif
         if !hlexists('MistflyInsert') || synIDattr(synIDtrans(hlID('MistflyInsert')), 'bg') == ''
-            exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit', v:false)
+            call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit', v:false)
         endif
         if !hlexists('MistflyVisual') || synIDattr(synIDtrans(hlID('MistflyVisual')), 'bg') == ''
-            exec mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit', v:false)
+            call mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit', v:false)
         endif
         if !hlexists('MistflyCommand') || synIDattr(synIDtrans(hlID('MistflyCommand')), 'bg') == ''
-            exec mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'WarningMsg', 'VertSplit', v:false)
+            call mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'WarningMsg', 'VertSplit', v:false)
         endif
         if !hlexists('MistflyReplace') || synIDattr(synIDtrans(hlID('MistflyReplace')), 'bg') == ''
-            exec mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'Error', 'VertSplit', v:false)
+            call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'Error', 'VertSplit', v:false)
         endif
     endif
 

@@ -276,10 +276,11 @@ endfunction
 
 function! mistfly_statusline#SynthesizeHighlight(target, source) abort
     let l:source_fg = synIDattr(synIDtrans(hlID(a:source)), 'fg', 'gui')
-    " Need to handle reversed highlights, such as Gruvbox StatusLine.
     if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'gui') == 1
+        " Need to handle reversed highlights, such as gruvbox StatusLine.
         let l:sl_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
     else
+        " Most colorschemes fall through to here.
         let l:sl_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
     endif
 
@@ -293,10 +294,11 @@ endfunction
 
 function! mistfly_statusline#SynthesizeModeHighlight(target, background, foreground, emphasis) abort
     if a:emphasis == v:true
-        " Need to handle reversed highlights, such as Gruvbox StatusLine.
         if synIDattr(synIDtrans(hlID(a:background)), 'reverse', 'gui') == 1
+            " Need to handle reversed highlights, such as gruvbox StatusLine.
             let l:mode_bg = synIDattr(synIDtrans(hlID(a:background)), 'fg', 'gui')
         else
+            " Most colorschemes fall through to here.
             let l:mode_bg = synIDattr(synIDtrans(hlID(a:background)), 'bg', 'gui')
         endif
         let l:mode_fg = synIDattr(synIDtrans(hlID(a:foreground)), 'bg', 'gui')

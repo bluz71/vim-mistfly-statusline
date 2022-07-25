@@ -175,7 +175,7 @@ colorscheme does not support _mistfly statusline_.
 | Replace Mode             | `MistflyReplace`       | `Error`
 
 Note, the following colorschemes support _mistfly statusline_, either within the
-colorscheme itself or within this plugin:
+colorscheme (moonfly & nightfly) or within this plugin (all others):
 
 - [moonfly](https://github.com/bluz71/vim-moonfly-colors)
 
