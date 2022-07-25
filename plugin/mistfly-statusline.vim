@@ -171,7 +171,7 @@ function! s:ThemeColors() abort
         highlight! link MistflyDiagnosticWarning MistflyNotification
     endif
     if exists('g:loaded_obsession')
-        exec mistfly_statusline#SynthesizeHighlight('MistflyObsession', 'Error')
+        call mistfly_statusline#SynthesizeHighlight('MistflyObsession', 'Error')
     endif
 endfunction
 
