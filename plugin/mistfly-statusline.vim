@@ -114,6 +114,12 @@ function! s:ThemeColors() abort
         highlight! link MistflyVisual MiniStatuslineModeVisual
         highlight! link MistflyCommand MiniStatuslineModeCommand
         highlight! link MistflyReplace MiniStatuslineModeReplace
+    elseif g:colors_name == 'gruvbox'
+        exec mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'GruvboxFg4', 'GruvboxBg0', v:false)
+        exec mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'GruvboxBlue', 'GruvboxBg0', v:false)
+        exec mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'GruvboxOrange', 'GruvboxBg0', v:false)
+        exec mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'GruvboxGreen', 'GruvboxBg0', v:false)
+        exec mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'GruvboxRed', 'GruvboxBg0', v:false)
     elseif g:colors_name == 'nightfox' || g:colors_name == 'nordfox' || g:colors_name == 'terafox'
         highlight! link MistflyNormal Todo
         highlight! link MistflyInsert MiniStatuslineModeInsert

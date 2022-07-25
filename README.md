@@ -187,6 +187,8 @@ colorscheme itself or within this plugin:
 
 - [everforest](https://github.com/sainnhe/everforest)
 
+- [gruvbox](https://github.com/gruvbox-community/gruvbox)
+
 - [gruvbox-material](https://github.com/sainnhe/gruvbox-material)
 
 - [nightfox](https://github.com/EdenEast/nightfox.nvim)
