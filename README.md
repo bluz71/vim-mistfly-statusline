@@ -201,6 +201,8 @@ colorscheme (moonfly & nightfly) or within this plugin (all others):
 
 - [edge](https://github.com/sainnhe/edge)
 
+- [embark](https://github.com/embark-theme/vim)
+
 - [everforest](https://github.com/sainnhe/everforest)
 
 - [gruvbox](https://github.com/gruvbox-community/gruvbox)

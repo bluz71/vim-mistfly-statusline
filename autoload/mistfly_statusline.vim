@@ -313,6 +313,12 @@ function! mistfly_statusline#GenerateHighlightGroups() abort
         call mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit')
         call mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit')
         call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'DiffDelete', 'VertSplit')
+    elseif g:colors_name == 'embark'
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'Title', 'VertSplit')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'SpellLocal', 'VertSplit')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Identifier', 'VertSplit')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'SpellRare', 'VertSplit')
     elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'gruvbox-material' || g:colors_name == 'sonokai'
         highlight! link MistflyNormal MiniStatuslineModeNormal
         highlight! link MistflyInsert MiniStatuslineModeInsert
