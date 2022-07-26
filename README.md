@@ -16,7 +16,7 @@ effect. Colors can also be
 if desired.
 
 Lastly, _mistfly statusline_ is a light _statusline_ plugin clocking in at
-about 400 lines of Vimscript. For comparison, the
+about 500 lines of Vimscript. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim),
 [airline](https://github.com/vim-airline/vim-airline) and
 [lualine](https://github.com/nvim-lualine/lualine.nvim) `statusline` plugins
@@ -74,6 +74,22 @@ Plugins, Linters and Diagnostics supported
   `mistflyWithCocStatus` option
 
 - [Obsession](https://github.com/tpope/vim-obsession)
+
+:zap: Requirements
+------------------
+
+_mistfly statusline_ requires a **GUI** capable version of Vim or Neovim with an
+appropriate `colorscheme` set.
+
+A GUI client, such as Gvim, or a modern terminal version of Vim or Neovim with
+`termguicolors` enabled in a true-color terminal, is required.
+
+I encourage terminal users to use a true-color terminal, such as:
+[iTerm2](https://iterm2.com),
+[Alacritty](https://github.com/alacritty/alacritty)
+[Windows Terminal](https://github.com/microsoft/terminal), or
+[kitty](https://sw.kovidgoyal.net/kitty/index.html) and enable the
+`termguicolors` option.
 
 Installation
 ------------
