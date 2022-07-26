@@ -69,7 +69,7 @@ function! mistfly_statusline#GitBranch() abort
     endif
 
     let l:git_branch_name = ''
-    if has('nvim-0.5') && &rtp =~ 'gitsigns'
+    if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
         " Gitsigns is available, let's use it to get the branch name since it
         " will already be in memory.
         let l:git_branch_name = get(b:, 'gitsigns_head', '')
@@ -364,22 +364,22 @@ function! mistfly_statusline#GenerateHighlightGroups() abort
     call mistfly_statusline#SynthesizeHighlight('MistflyReplaceEmphasis', 'MistflyReplace', v:true)
 
     " Synthesize plugin colors from existing highlight groups.
-    if g:mistflyWithGitsignsStatus
+    if g:mistflyWithGitsignsStatus " has('nvim-0.5') && luaeval('pcall(require, 'gitsigns')')
         call mistfly_statusline#SynthesizeHighlight('MistflyGitAdd', 'GitSignsAdd', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyGitChange', 'GitSignsChange', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyGitDelete', 'GitSignsDelete', v:false)
     endif
-    if g:mistflyWithNvimDiagnosticStatus
+    if g:mistflyWithNvimDiagnosticStatus " if exists('g:lspconfig')
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'DiagnosticError', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'DiagnosticWarn', v:false)
     endif
-    if g:mistflyWithALEStatus
+    if g:mistflyWithALEStatus " if exists('g:loaded_ale')
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'ALEErrorSign', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'ALEWarningSign', v:false)
     endif
-    if g:mistflyWithCocStatus
-        highlight! link MistflyDiagnosticError MistflyNotification
-        highlight! link MistflyDiagnosticWarning MistflyNotification
+    if g:mistflyWithCocStatus " if exists('g:did_coc_loaded')
+        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'CocErrorSign', v:false)
+        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'CocWarningSign', v:false)
     endif
     if exists('g:loaded_obsession')
         call mistfly_statusline#SynthesizeHighlight('MistflyObsession', 'Error', v:false)
