@@ -49,7 +49,7 @@ without any `statusline` plugin.
 
 | native  | mistfly | lightline | airline | lualine
 |---------|---------|-----------|---------|--------
-| 19.0ms  | 23.6ms  | 24.5ms    | 95.0ms  | 30.8ms
+| 19.0ms  | 21.8ms  | 24.5ms    | 95.0ms  | 30.8ms
 
 Startup times as of July 2022 on my system; performance on other systems will
 vary.
