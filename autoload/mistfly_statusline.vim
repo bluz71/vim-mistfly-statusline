@@ -12,7 +12,11 @@ let s:modes = {
   \  't':      ['%#MistflyInsert#', ' term ', '%#MistflyInsertEmphasis#'],
   \}
 
+" Cache current colorscheme and the associated statusline background for
+" performance reasons; that being to avoid needless highlight extraction and
+" generation.
 let s:current_colorscheme = ''
+let s:statusline_bg = ''
 
 function! mistfly_statusline#File() abort
     return s:FileIcon() . s:ShortFilePath()
@@ -65,7 +69,7 @@ function! mistfly_statusline#GitBranch() abort
     endif
 
     let l:git_branch_name = ''
-    if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
+    if has('nvim-0.5') && &rtp =~ 'gitsigns'
         " Gitsigns is available, let's use it to get the branch name since it
         " will already be in memory.
         let l:git_branch_name = get(b:, 'gitsigns_head', '')
@@ -276,7 +280,7 @@ function! mistfly_statusline#TabLine() abort
     return l:tabline
 endfunction
 
-function! mistfly_statusline#generateHighlightGroups() abort
+function! mistfly_statusline#GenerateHighlightGroups() abort
     if !exists('g:colors_name')
         echomsg 'mistfly-statusline requires a colorscheme that sets g:colors_name'
         return
@@ -287,17 +291,28 @@ function! mistfly_statusline#generateHighlightGroups() abort
     if g:colors_name == s:current_colorscheme
         return
     else
+        " New colorscheme detected, let's cache its name.
         let s:current_colorscheme = g:colors_name
+        " Also, extract current StatusLine background color, we will likely need
+        " it.
+        if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'gui') == 1
+            " Need to handle reversed highlights, such as gruvbox StatusLine.
+            let s:statusline_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
+        else
+            " Most colorschemes fall through to here.
+            let s:statusline_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
+        endif
     endif
 
+    " Mode highlights.
     if g:colors_name == 'moonfly' || g:colors_name == 'nightfly'
         " Do nothing since both themes already set mistfly mode colors.
     elseif g:colors_name == 'catppuccin'
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'DiffText', 'VertSplit', v:false)
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'DiffAdd', 'VertSplit', v:false)
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit', v:false)
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit', v:false)
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'DiffDelete', 'VertSplit', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'DiffText', 'VertSplit')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'DiffAdd', 'VertSplit')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'DiffDelete', 'VertSplit')
     elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'gruvbox-material' || g:colors_name == 'sonokai'
         highlight! link MistflyNormal MiniStatuslineModeNormal
         highlight! link MistflyInsert MiniStatuslineModeInsert
@@ -305,11 +320,11 @@ function! mistfly_statusline#generateHighlightGroups() abort
         highlight! link MistflyCommand MiniStatuslineModeCommand
         highlight! link MistflyReplace MiniStatuslineModeReplace
     elseif g:colors_name == 'gruvbox'
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'GruvboxFg4', 'GruvboxBg0', v:false)
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'GruvboxBlue', 'GruvboxBg0', v:false)
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'GruvboxOrange', 'GruvboxBg0', v:false)
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'GruvboxGreen', 'GruvboxBg0', v:false)
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'GruvboxRed', 'GruvboxBg0', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'GruvboxFg4', 'GruvboxBg0')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'GruvboxBlue', 'GruvboxBg0')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'GruvboxOrange', 'GruvboxBg0')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'GruvboxGreen', 'GruvboxBg0')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'GruvboxRed', 'GruvboxBg0')
     elseif g:colors_name == 'nightfox' || g:colors_name == 'nordfox' || g:colors_name == 'terafox'
         highlight! link MistflyNormal Todo
         highlight! link MistflyInsert MiniStatuslineModeInsert
@@ -318,93 +333,80 @@ function! mistfly_statusline#generateHighlightGroups() abort
         highlight! link MistflyReplace MiniStatuslineModeReplace
     elseif g:colors_name == 'tokyonight'
         highlight! link MistflyNormal TablineSel
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit', v:false)
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit')
         highlight! link MistflyVisual Sneak
         highlight! link MistflyReplace Substitute
         highlight! link MistflyCommand Todo
     else
         " Fallback for all other colorschemes.
         if !hlexists('MistflyNormal') || synIDattr(synIDtrans(hlID('MistflyNormal')), 'bg') == ''
-            call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'Directory', 'VertSplit', v:false)
+            call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'Directory', 'VertSplit')
         endif
         if !hlexists('MistflyInsert') || synIDattr(synIDtrans(hlID('MistflyInsert')), 'bg') == ''
-            call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit', v:false)
+            call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit')
         endif
         if !hlexists('MistflyVisual') || synIDattr(synIDtrans(hlID('MistflyVisual')), 'bg') == ''
-            call mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit', v:false)
+            call mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit')
         endif
         if !hlexists('MistflyCommand') || synIDattr(synIDtrans(hlID('MistflyCommand')), 'bg') == ''
-            call mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'WarningMsg', 'VertSplit', v:false)
+            call mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'WarningMsg', 'VertSplit')
         endif
         if !hlexists('MistflyReplace') || synIDattr(synIDtrans(hlID('MistflyReplace')), 'bg') == ''
-            call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'Error', 'VertSplit', v:false)
+            call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'Error', 'VertSplit')
         endif
     endif
 
     " Synthesize emphasis colors from the existing mode colors.
-    call mistfly_statusline#SynthesizeModeHighlight('MistflyNormalEmphasis', 'StatusLine', 'MistflyNormal', v:true)
-    call mistfly_statusline#SynthesizeModeHighlight('MistflyInsertEmphasis', 'StatusLine', 'MistflyInsert', v:true)
-    call mistfly_statusline#SynthesizeModeHighlight('MistflyVisualEmphasis', 'StatusLine', 'MistflyVisual', v:true)
-    call mistfly_statusline#SynthesizeModeHighlight('MistflyCommandEmphasis', 'StatusLine', 'MistflyCommand', v:true)
-    call mistfly_statusline#SynthesizeModeHighlight('MistflyReplaceEmphasis', 'StatusLine', 'MistflyReplace', v:true)
+    call mistfly_statusline#SynthesizeHighlight('MistflyNormalEmphasis', 'MistflyNormal', v:true)
+    call mistfly_statusline#SynthesizeHighlight('MistflyInsertEmphasis', 'MistflyInsert', v:true)
+    call mistfly_statusline#SynthesizeHighlight('MistflyVisualEmphasis', 'MistflyVisual', v:true)
+    call mistfly_statusline#SynthesizeHighlight('MistflyCommandEmphasis', 'MistflyCommand', v:true)
+    call mistfly_statusline#SynthesizeHighlight('MistflyReplaceEmphasis', 'MistflyReplace', v:true)
 
     " Synthesize plugin colors from existing highlight groups.
     if g:mistflyWithGitsignsStatus
-        call mistfly_statusline#SynthesizeHighlight('MistflyGitAdd', 'GitSignsAdd')
-        call mistfly_statusline#SynthesizeHighlight('MistflyGitChange', 'GitSignsChange')
-        call mistfly_statusline#SynthesizeHighlight('MistflyGitDelete', 'GitSignsDelete')
+        call mistfly_statusline#SynthesizeHighlight('MistflyGitAdd', 'GitSignsAdd', v:false)
+        call mistfly_statusline#SynthesizeHighlight('MistflyGitChange', 'GitSignsChange', v:false)
+        call mistfly_statusline#SynthesizeHighlight('MistflyGitDelete', 'GitSignsDelete', v:false)
     endif
     if g:mistflyWithNvimDiagnosticStatus
-        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'DiagnosticError')
-        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'DiagnosticWarn')
+        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'DiagnosticError', v:false)
+        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'DiagnosticWarn', v:false)
     endif
     if g:mistflyWithALEStatus
-        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'ALEErrorSign')
-        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'ALEWarningSign')
+        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'ALEErrorSign', v:false)
+        call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'ALEWarningSign', v:false)
     endif
     if g:mistflyWithCocStatus
         highlight! link MistflyDiagnosticError MistflyNotification
         highlight! link MistflyDiagnosticWarning MistflyNotification
     endif
     if exists('g:loaded_obsession')
-        call mistfly_statusline#SynthesizeHighlight('MistflyObsession', 'Error')
+        call mistfly_statusline#SynthesizeHighlight('MistflyObsession', 'Error', v:false)
     endif
 endfunction
 
-function! mistfly_statusline#SynthesizeHighlight(target, source) abort
-    let l:source_fg = synIDattr(synIDtrans(hlID(a:source)), 'fg', 'gui')
-    if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'gui') == 1
-        " Need to handle reversed highlights, such as gruvbox StatusLine.
-        let l:sl_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
-    else
-        " Most colorschemes fall through to here.
-        let l:sl_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
-    endif
+function! mistfly_statusline#SynthesizeModeHighlight(target, background, foreground) abort
+    let l:mode_bg = synIDattr(synIDtrans(hlID(a:background)), 'fg', 'gui')
+    let l:mode_fg = synIDattr(synIDtrans(hlID(a:foreground)), 'fg', 'gui')
 
-    if len(l:sl_bg) > 0 && len(l:source_fg) > 0
-        exec 'highlight ' . a:target . ' guibg=' . l:sl_bg . ' guifg=' . l:source_fg
+    if len(l:mode_bg) > 0 && len(l:mode_fg) > 0
+        exec 'highlight ' . a:target . ' guibg=' . l:mode_bg . ' guifg=' . l:mode_fg
     else
         " Fallback to statusline highlighting.
         exec 'highlight! link ' . a:target . ' StatusLine'
     endif
 endfunction
 
-function! mistfly_statusline#SynthesizeModeHighlight(target, background, foreground, emphasis) abort
-    if a:emphasis == v:true
-        if synIDattr(synIDtrans(hlID(a:background)), 'reverse', 'gui') == 1
-            " Need to handle reversed highlights, such as gruvbox StatusLine.
-            let l:mode_bg = synIDattr(synIDtrans(hlID(a:background)), 'fg', 'gui')
-        else
-            " Most colorschemes fall through to here.
-            let l:mode_bg = synIDattr(synIDtrans(hlID(a:background)), 'bg', 'gui')
-        endif
-        let l:mode_fg = synIDattr(synIDtrans(hlID(a:foreground)), 'bg', 'gui')
+function! mistfly_statusline#SynthesizeHighlight(target, source, reverse) abort
+    if a:reverse
+        let l:source_fg = synIDattr(synIDtrans(hlID(a:source)), 'bg', 'gui')
     else
-        let l:mode_bg = synIDattr(synIDtrans(hlID(a:background)), 'fg', 'gui')
-        let l:mode_fg = synIDattr(synIDtrans(hlID(a:foreground)), 'fg', 'gui')
+        let l:source_fg = synIDattr(synIDtrans(hlID(a:source)), 'fg', 'gui')
     endif
-    if len(l:mode_bg) > 0 && len(l:mode_fg) > 0
-        exec 'highlight ' . a:target . ' guibg=' . l:mode_bg . ' guifg=' . l:mode_fg
+
+    if len(s:statusline_bg) > 0 && len(l:source_fg) > 0
+        exec 'highlight ' . a:target . ' guibg=' . s:statusline_bg . ' guifg=' . l:source_fg
     else
         " Fallback to statusline highlighting.
         exec 'highlight! link ' . a:target . ' StatusLine'

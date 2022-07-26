@@ -119,7 +119,7 @@ augroup mistflyStatuslineEvents
     autocmd!
     autocmd VimEnter              * call s:UpdateInactiveWindows()
     autocmd VimEnter              * call s:TabLine()
-    autocmd ColorScheme,SourcePre * call mistfly_statusline#generateHighlightGroups()
+    autocmd ColorScheme,SourcePre * call mistfly_statusline#GenerateHighlightGroups()
     autocmd WinEnter,BufWinEnter  * call s:StatusLine(v:true)
     autocmd WinLeave              * call s:StatusLine(v:false)
     if exists('##CmdlineEnter')
