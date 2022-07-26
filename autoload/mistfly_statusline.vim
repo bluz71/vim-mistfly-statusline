@@ -115,7 +115,7 @@ function! mistfly_statusline#PluginsStatus() abort
     endif
 
     " Neovim Diagnostic status.
-    if g:mistflyWithNvimDiagnosticStatus
+    if g:mistflyWithNvimDiagnosticStatus && exists('g:lspconfig')
         if has('nvim-0.6')
             let l:errors = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.ERROR})')
             let l:warnings = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.WARN})')
