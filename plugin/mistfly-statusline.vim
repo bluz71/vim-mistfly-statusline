@@ -69,29 +69,6 @@ let g:mistflyWithALEStatus = get(g:, 'mistflyWithALEStatus', 1)
 " By default do indicate Coc diagnostic status, if the plugin is loaded.
 let g:mistflyWithCocStatus = get(g:, 'mistflyWithCocStatus', 1)
 
-function! s:StatusLine(active) abort
-    if &buftype ==# 'nofile' || &filetype ==# 'netrw'
-        " Likely a file explorer.
-        setlocal statusline=%!mistfly_statusline#NoFileStatusLine()
-        if exists('&winbar')
-            setlocal winbar=
-        endif
-    elseif &buftype ==# 'nowrite'
-        " Don't set a custom status line for certain special windows.
-        return
-    elseif a:active == v:true
-        setlocal statusline=%!mistfly_statusline#ActiveStatusLine()
-        if g:mistflyWinBar && exists('&winbar')
-            setlocal winbar=%!mistfly_statusline#ActiveWinBar()
-        endif
-    elseif a:active == v:false
-        setlocal statusline=%!mistfly_statusline#InactiveStatusLine()
-        if g:mistflyWinBar && exists('&winbar') && winheight(0) > 1
-            setlocal winbar=%!mistfly_statusline#InactiveWinBar()
-        endif
-    endif
-endfunction
-
 " Iterate though the windows and update the statusline and winbar for all
 " inactive windows.
 "
@@ -112,20 +89,14 @@ function! s:UpdateInactiveWindows() abort
     endfor
 endfunction
 
-function! s:TabLine() abort
-    if g:mistflyTabLine
-        set tabline=%!mistfly_statusline#TabLine()
-    endif
-endfunction
-
 augroup mistflyStatuslineEvents
     autocmd!
     autocmd VimEnter              * call s:UpdateInactiveWindows()
-    autocmd VimEnter              * call s:TabLine()
+    autocmd VimEnter              * call mistfly_statusline#TabLine()
     autocmd ColorScheme,SourcePre * call mistfly_statusline#GenerateHighlightGroups()
-    autocmd WinEnter,BufWinEnter  * call s:StatusLine(v:true)
-    autocmd WinLeave              * call s:StatusLine(v:false)
+    autocmd WinEnter,BufWinEnter  * call mistfly_statusline#StatusLine(v:true)
+    autocmd WinLeave              * call mistfly_statusline#StatusLine(v:false)
     if exists('##CmdlineEnter')
-        autocmd CmdlineEnter      * call s:StatusLine(v:true) | redraw
+        autocmd CmdlineEnter      * call mistfly_statusline#StatusLine(v:true) | redraw
     endif
 augroup END

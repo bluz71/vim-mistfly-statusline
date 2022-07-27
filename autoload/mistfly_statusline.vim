@@ -241,6 +241,29 @@ function! mistfly_statusline#NoFileStatusLine() abort
     return ' %{mistfly_statusline#ShortCurrentPath()}'
 endfunction
 
+function! mistfly_statusline#StatusLine(active) abort
+    if &buftype ==# 'nofile' || &filetype ==# 'netrw'
+        " Likely a file explorer.
+        setlocal statusline=%!mistfly_statusline#NoFileStatusLine()
+        if exists('&winbar')
+            setlocal winbar=
+        endif
+    elseif &buftype ==# 'nowrite'
+        " Don't set a custom status line for certain special windows.
+        return
+    elseif a:active == v:true
+        setlocal statusline=%!mistfly_statusline#ActiveStatusLine()
+        if g:mistflyWinBar && exists('&winbar')
+            setlocal winbar=%!mistfly_statusline#ActiveWinBar()
+        endif
+    elseif a:active == v:false
+        setlocal statusline=%!mistfly_statusline#InactiveStatusLine()
+        if g:mistflyWinBar && exists('&winbar') && winheight(0) > 1
+            setlocal winbar=%!mistfly_statusline#InactiveWinBar()
+        endif
+    endif
+endfunction
+
 function! mistfly_statusline#ActiveWinBar() abort
     let l:mode = mode()
     let l:winbar = get(s:modes, l:mode, '%#MistflyNormal#')[0]
@@ -262,7 +285,7 @@ function! mistfly_statusline#InactiveWinBar() abort
     return l:winbar
 endfunction
 
-function! mistfly_statusline#TabLine() abort
+function! mistfly_statusline#ActiveTabLine() abort
     let l:divider = g:mistflyAsciiShapes ? '|' : '▎'
     let l:tabline = ''
     let l:counter = 0
@@ -285,6 +308,12 @@ function! mistfly_statusline#TabLine() abort
     endfor
 
     return l:tabline
+endfunction
+
+function! mistfly_statusline#TabLine() abort
+    if g:mistflyTabLine
+        set tabline=%!mistfly_statusline#ActiveTabLine()
+    endif
 endfunction
 
 function! mistfly_statusline#GenerateHighlightGroups() abort
