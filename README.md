@@ -233,17 +233,19 @@ highlight! link MistflyReplace ErrorMsg
 
 | Option | Default State
 |--------|--------------
-| [`mistflyAsciiShapes`](https://github.com/bluz71/vim-mistfly-statusline#mistflyasciishapes)                           | Disabled, do display Unicode shapes
-| [`mistflyErrorSymbol`](https://github.com/bluz71/vim-mistfly-statusline#mistflyerrorsymbol)                           | `x`
-| [`mistflyWarningSymbol`](https://github.com/bluz71/vim-mistfly-statusline#mistflywarningsymbol)                       | `!`
-| [`mistflyTabLine`](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)                                   | Disabled
-| [`mistflyWinBar`](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)                                     | Disabled
-| [`mistflyWithGitBranch`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Disabled
-| [`mistflyWithGitsignsStatus`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitsignsstatus)             | Enabled
-| [`mistflyWithIndentStatus`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Enabled if Gitsigns plugin is loaded
-| [`mistflyWithNvimDiagnosticStatus`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithnvimdiagnosticstatus) | Enabled if nvim-lspconfig plugin is loaded
-| [`mistflyWithALEStatus`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithalestatus)                       | Enabled if ALE plugin is loaded
-| [`mistflyWithCocStatus`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithcocstatus)                       | Enabled if Coc plugin is loaded
+| [mistflyAsciiShapes](https://github.com/bluz71/vim-mistfly-statusline#mistflyasciishapes)                           | Disabled, do display Unicode shapes
+| [mistflyErrorSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyerrorsymbol)                           | `x`
+| [mistflyWarningSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflywarningsymbol)                       | `!`
+| [mistflyTabLine](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)                                   | Disabled
+| [mistflyWinBar](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)                                     | Disabled
+| [mistflyWithGitBranch](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Disabled
+| [mistflyWithGitsignsStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitsignsstatus)             | Enabled
+| [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Enabled if Gitsigns plugin is loaded
+| [mistflyWithNvimDiagnosticStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithnvimdiagnosticstatus) | Enabled if nvim-lspconfig plugin is loaded
+| [mistflyWithALEStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithalestatus)                       | Enabled if ALE plugin is loaded
+| [mistflyWithCocStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithcocstatus)                       | Enabled if Coc plugin is loaded
+
+---
 
 ### mistflyAsciiShapes
 
