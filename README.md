@@ -16,12 +16,12 @@ effect. Colors can also be
 if desired.
 
 Lastly, _mistfly statusline_ is a light _statusline_ plugin clocking in at
-about 500 lines of Vimscript. For comparison, the
+about 500 lines of code. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim),
 [airline](https://github.com/vim-airline/vim-airline) and
 [lualine](https://github.com/nvim-lualine/lualine.nvim) `statusline` plugins
 contain over 3,600, 7,900 and 7,300 lines of code respectively. In fairness, the
-latter plugins are also far more featureful and configurable.
+latter plugins are more featureful, configurable and visually pleasing.
 
 Screenshots
 -----------
@@ -61,17 +61,13 @@ Plugins, Linters and Diagnostics supported
   [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) via the
   `mistflyWithNerdIcon` option
 
-- [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) via the
-  `mistflyWithGitsignsStatus` option
+- [Gitsigns](https://github.com/lewis6991/gitsigns.nvim)
 
-- [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html) via the
-  `mistflyWithNvimDiagnosticStatus` option
+- [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html)
 
-- [ALE](https://github.com/dense-analysis/ale) via the
-  `mistflyWithALEStatus` option
+- [ALE](https://github.com/dense-analysis/ale)
 
-- [Coc](https://github.com/neoclide/coc.nvim) via the
-  `mistflyWithCocStatus` option
+- [Coc](https://github.com/neoclide/coc.nvim)
 
 - [Obsession](https://github.com/tpope/vim-obsession)
 
@@ -131,7 +127,8 @@ Notice
 ------
 
 File explorers, such as _NERDTree_ and _netrw_, and certain other special
-windows will **not** be directly styled by this plugin.
+buffers will be minimally styled by this plugin, which often is for the best for
+these special buffer.
 
 Layout And Default Colors
 -------------------------
@@ -233,6 +230,20 @@ highlight! link MistflyReplace ErrorMsg
 
 :wrench: Options
 ----------------
+
+| Option | Default State
+|--------|--------------
+| [`mistflyAsciiShapes`](https://github.com/bluz71/vim-mistfly-statusline#mistflyasciishapes)                           | Disabled, do display Unicode shapes
+| [`mistflyErrorSymbol`](https://github.com/bluz71/vim-mistfly-statusline#mistflyerrorsymbol)                           | `x`
+| [`mistflyWarningSymbol`](https://github.com/bluz71/vim-mistfly-statusline#mistflywarningsymbol)                       | `!`
+| [`mistflyTabLine`](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)                                   | Disabled
+| [`mistflyWinBar`](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)                                     | Disabled
+| [`mistflyWithGitBranch`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Disabled
+| [`mistflyWithGitsignsStatus`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitsignsstatus)             | Enabled
+| [`mistflyWithIndentStatus`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Enabled if Gitsigns plugin is loaded
+| [`mistflyWithNvimDiagnosticStatus`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithnvimdiagnosticstatus) | Enabled if nvim-lspconfig plugin is loaded
+| [`mistflyWithALEStatus`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithalestatus)                       | Enabled if ALE plugin is loaded
+| [`mistflyWithCocStatus`](https://github.com/bluz71/vim-mistfly-statusline#mistflywithcocstatus)                       | Enabled if Coc plugin is loaded
 
 ### mistflyAsciiShapes
 
@@ -403,47 +414,21 @@ vim.g.mistflyWithGitBranch = 0
 
 The `mistflyWithGitsignsStatus` option specifies whether to display
 [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) of the current buffer in
-the _statusline_. If enabled, the Gitsigns will be displayed in the left-side
-section of the _statusline_.
+the _statusline_.
 
-By default, Gitsigns will **not** be displayed.
+By default, Gitsigns will be displayed if the plugin is loaded.
 
-To enable the display of Gitsigns in the _statusline_ please add the following
+To disable the display of Gitsigns in the _statusline_ please add the following
 to your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithGitsignsStatus = 1
+let g:mistflyWithGitsignsStatus = 0
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyWithGitsignsStatus = 1
-```
-
-Note, the `status_formatter` field of the Gitsigns `setup` function sets the
-style output. This can easily be overridden, for example the following
-sample implementation will use Unicode characters to indicate additions, changes
-and deletions. If `status_formatter` is not set, Gitsigns will use a fallback of
-its own.
-
-```lua
-require('gitsigns').setup({
-  status_formatter = function(status)
-    local added, changed, removed = status.added, status.changed, status.removed
-    local status_text = {}
-    if added and added > 0 then
-      table.insert(status_text, '⊞ ' .. added)
-    end
-    if changed and changed > 0 then
-      table.insert(status_text, '⊡ ' .. changed)
-    end
-    if removed and removed > 0 then
-      table.insert(status_text, '⊟ ' .. removed)
-    end
-    return table.concat(status_text, ' ')
-  end
-})
+vim.g.mistflyWithGitsignsStatus = 0
 ```
 
 ---
@@ -508,22 +493,22 @@ _mistfly statusline_ supports [Neovim
 Diagnostics](https://neovim.io/doc/user/diagnostic.html)
 
 The `mistflyWithNvimDiagnosticStatus` option specifies whether to indicate the
-presence of the Neovim Diagnostics in the current buffer. If enabled, the status
-will be displayed in the left-side section of the _statusline_.
+presence of the Neovim Diagnostics in the current buffer.
 
-By default, Neovim Diagnositics will **not** be displayed.
+By default, Neovim Diagnositics will be displayed if the
+[nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) plugin is loaded.
 
-If Neovim Diagnostic display is desired then please add the following to
+If Neovim Diagnostic display is not wanted then please add the following to
 your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithNvimDiagnosticStatus = 1
+let g:mistflyWithNvimDiagnosticStatus = 0
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyWithNvimDiagnosticStatus = 1
+vim.g.mistflyWithNvimDiagnosticStatus = 0
 ```
 
 ---
@@ -534,22 +519,21 @@ _mistfly statusline_ supports the [ALE](https://github.com/dense-analysis/ale)
 plugin.
 
 The `mistflyWithALEStatus` option specifies whether to indicate the presence of
-the ALE errors and warnings in the current buffer. If enabled, the status will
-be displayed in the left-side section of the _statusline_.
+the ALE errors and warnings in the current buffer.
 
-By default, ALE errors and warnings will **not** be displayed.
+By default, ALE errors and warnings will be displayed if the plugin is loaded.
 
-If ALE errors and warning display is desired then please add the following to
+If ALE error and warning display are not wanted then please add the following to
 your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithALEStatus = 1
+let g:mistflyWithALEStatus = 0
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyWithALEStatus = 1
+vim.g.mistflyWithALEStatus = 0
 ```
 
 ---
@@ -560,22 +544,21 @@ _mistfly statusline_ supports the [Coc](https://github.com/neoclide/coc.nvim)
 plugin.
 
 The `mistflyWithCocStatus` option specifies whether to indicate the presence of
-the Coc diagnostics in the current buffer. If enabled, the status will be
-displayed in the left-side section of the _statusline_.
+the Coc diagnostics in the current buffer.
 
-By default, Coc diagnostics will **not** be displayed.
+By default, Coc diagnostics will be displayed if the plugin is loaded.
 
-If Coc diagnostics is desired then please add the following to your
+If Coc diagnostics are not wanted then please add the following to your
 initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithCocStatus = 1
+let g:mistflyWithCocStatus = 0
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyWithCocStatus = 1
+vim.g.mistflyWithCocStatus = 0
 ```
 
 Sponsor

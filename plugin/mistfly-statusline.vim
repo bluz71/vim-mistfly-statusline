@@ -48,8 +48,8 @@ let g:mistflyWinBar = get(g:, 'mistflyWinBar', 0)
 " By default display Git branches.
 let g:mistflyWithGitBranch = get(g:, 'mistflyWithGitBranch', 1)
 
-" By default don't display Gitsigns status.
-let g:mistflyWithGitsignsStatus = get(g:, 'mistflyWithGitsignsStatus', 0)
+" By default display Gitsigns status, if the plugin is loaded.
+let g:mistflyWithGitsignsStatus = get(g:, 'mistflyWithGitsignsStatus', 1)
 
 " By default do not display indentation details.
 let g:mistflyWithIndentStatus = get(g:, 'mistflyWithIndentStatus', 0)
@@ -57,14 +57,14 @@ let g:mistflyWithIndentStatus = get(g:, 'mistflyWithIndentStatus', 0)
 " By default don't display a Nerd Font filetype icon.
 let g:mistflyWithNerdIcon = get(g:, 'mistflyWithNerdIcon', 0)
 
-" By default don't indicate Neovim Diagnostic status.
-let g:mistflyWithNvimDiagnosticStatus = get(g:, 'mistflyWithNvimDiagnosticStatus', 0)
+" By default do indicate Neovim Diagnostic status, if nvim-lsp plugin is loaded.
+let g:mistflyWithNvimDiagnosticStatus = get(g:, 'mistflyWithNvimDiagnosticStatus', 1)
 
-" By default don't indicate ALE lint status.
-let g:mistflyWithALEStatus = get(g:, 'mistflyWithALEStatus', 0)
+" By default do indicate ALE lint status, if the plugin is loaded.
+let g:mistflyWithALEStatus = get(g:, 'mistflyWithALEStatus', 1)
 
-" By default don't indicate Coc lint status.
-let g:mistflyWithCocStatus = get(g:, 'mistflyWithCocStatus', 0)
+" By default do indicate Coc diagnostic status, if the plugin is loaded.
+let g:mistflyWithCocStatus = get(g:, 'mistflyWithCocStatus', 1)
 
 function! s:StatusLine(active) abort
     if &buftype ==# 'nofile' || &filetype ==# 'netrw'

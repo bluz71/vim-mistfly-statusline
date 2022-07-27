@@ -95,8 +95,8 @@ function! mistfly_statusline#PluginsStatus() abort
     let l:warnings = 0
     let l:divider = g:mistflyAsciiShapes ? '| ' : '⎪ '
 
-    " Gitsigns status.
     if g:mistflyWithGitsignsStatus && has('nvim-0.5')
+        " Gitsigns status.
         let l:counts = get(b:, 'gitsigns_status_dict', {})
         if has_key(l:counts, 'added')
             if l:counts['added'] > 0
@@ -114,8 +114,8 @@ function! mistfly_statusline#PluginsStatus() abort
         endif
     endif
 
-    " Neovim Diagnostic status.
     if g:mistflyWithNvimDiagnosticStatus && exists('g:lspconfig')
+        " Neovim Diagnostic status.
         if has('nvim-0.6')
             let l:errors = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.ERROR})')
             let l:warnings = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.WARN})')
@@ -123,10 +123,8 @@ function! mistfly_statusline#PluginsStatus() abort
             let l:errors = luaeval('vim.lsp.diagnostic.get_count(0, [[Error]])')
             let l:warnings = luaeval('vim.lsp.diagnostic.get_count(0, [[Warning]])')
         endif
-    endif
-
-    " ALE status.
-    if g:mistflyWithALEStatus && exists('g:loaded_ale')
+    elseif g:mistflyWithALEStatus && exists('g:loaded_ale')
+        " ALE status.
         let l:counts = ale#statusline#Count(bufnr(''))
         if has_key(l:counts, 'error')
             let l:errors = l:counts['error']
@@ -134,10 +132,8 @@ function! mistfly_statusline#PluginsStatus() abort
         if has_key(l:counts, 'warning')
             let l:warnings = l:counts['warning']
         endif
-    endif
-
-    " Coc status.
-    if g:mistflyWithCocStatus && exists('g:did_coc_loaded')
+    elseif g:mistflyWithCocStatus && exists('g:did_coc_loaded')
+        " Coc status.
         let l:counts = get(b:, 'coc_diagnostic_info', {})
         if has_key(l:counts, 'error')
             let l:errors = l:counts['error']
@@ -169,7 +165,7 @@ function! mistfly_statusline#PluginsStatus() abort
             let l:obsession_status = ObsessionStatus('●', '■')
         endif
         if len(l:obsession_status) > 0
-            let l:status .= ' %#MistflyObsession#' . l:obsession_status . '%*'
+            let l:status .= ' %#MistflySession#' . l:obsession_status . '%*'
         endif
     endif
 
@@ -369,26 +365,30 @@ function! mistfly_statusline#GenerateHighlightGroups() abort
     call mistfly_statusline#SynthesizeHighlight('MistflyCommandEmphasis', 'MistflyCommand', v:true)
     call mistfly_statusline#SynthesizeHighlight('MistflyReplaceEmphasis', 'MistflyReplace', v:true)
 
-    " Synthesize plugin colors from existing highlight groups.
+    " Synthesize plugin colors from relevant existing highlight groups.
+
+    " Git status.
     if g:mistflyWithGitsignsStatus " has('nvim-0.5') && luaeval('pcall(require, 'gitsigns')')
         call mistfly_statusline#SynthesizeHighlight('MistflyGitAdd', 'GitSignsAdd', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyGitChange', 'GitSignsChange', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyGitDelete', 'GitSignsDelete', v:false)
     endif
+
+    " Diagnostics.
     if g:mistflyWithNvimDiagnosticStatus " if exists('g:lspconfig')
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'DiagnosticError', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'DiagnosticWarn', v:false)
-    endif
-    if g:mistflyWithALEStatus " if exists('g:loaded_ale')
+    elseif g:mistflyWithALEStatus " if exists('g:loaded_ale')
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'ALEErrorSign', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'ALEWarningSign', v:false)
-    endif
-    if g:mistflyWithCocStatus " if exists('g:did_coc_loaded')
+    elseif g:mistflyWithCocStatus " if exists('g:did_coc_loaded')
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'CocErrorSign', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'CocWarningSign', v:false)
     endif
+
+    " Session management.
     if exists('g:loaded_obsession')
-        call mistfly_statusline#SynthesizeHighlight('MistflyObsession', 'Error', v:false)
+        call mistfly_statusline#SynthesizeHighlight('MistflySession', 'Error', v:false)
     endif
 endfunction
 
