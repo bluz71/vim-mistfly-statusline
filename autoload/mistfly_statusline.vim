@@ -304,11 +304,11 @@ function! mistfly_statusline#GenerateHighlightGroups() abort
     if g:colors_name == 'moonfly' || g:colors_name == 'nightfly'
         " Do nothing since both themes already set mistfly mode colors.
     elseif g:colors_name == 'catppuccin'
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'DiffText', 'VertSplit')
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'DiffAdd', 'VertSplit')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'Title', 'VertSplit')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit')
         call mistfly_statusline#SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit')
         call mistfly_statusline#SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit')
-        call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'DiffDelete', 'VertSplit')
+        call mistfly_statusline#SynthesizeModeHighlight('MistflyReplace', 'Conditional', 'VertSplit')
     elseif g:colors_name == 'embark'
         call mistfly_statusline#SynthesizeModeHighlight('MistflyNormal', 'Title', 'VertSplit')
         call mistfly_statusline#SynthesizeModeHighlight('MistflyInsert', 'SpellLocal', 'VertSplit')
