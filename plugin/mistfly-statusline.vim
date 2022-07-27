@@ -54,6 +54,9 @@ let g:mistflyWithGitBranch = get(g:, 'mistflyWithGitBranch', 1)
 " By default display Gitsigns status, if the plugin is loaded.
 let g:mistflyWithGitsignsStatus = get(g:, 'mistflyWithGitsignsStatus', 1)
 
+" By default display GitGutter status, if the plugin is loaded.
+let g:mistflyWithGitGutterStatus = get(g:, 'mistflyWithGitGutterStatus', 1)
+
 " By default don't display a Nerd Font filetype icon.
 let g:mistflyWithNerdIcon = get(g:, 'mistflyWithNerdIcon', 0)
 

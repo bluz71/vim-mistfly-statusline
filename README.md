@@ -63,6 +63,8 @@ Plugins, Linters and Diagnostics supported
 
 - [Gitsigns](https://github.com/lewis6991/gitsigns.nvim)
 
+- [GitGutter](https://github.com/airblade/vim-gitgutter)
+
 - [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html)
 
 - [ALE](https://github.com/dense-analysis/ale)
@@ -241,6 +243,7 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Disabled
 | [mistflyWithGitBranch](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Enabled
 | [mistflyWithGitsignsStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitsignsstatus)             | Enabled if Gitsigns plugin is loaded
+| [mistflyWithGitGutterStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitgutterstatus)           | Enabled if GitGutter plugin is loaded
 | [mistflyWithNvimDiagnosticStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithnvimdiagnosticstatus) | Enabled if nvim-lspconfig plugin is loaded
 | [mistflyWithALEStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithalestatus)                       | Enabled if ALE plugin is loaded
 | [mistflyWithCocStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithcocstatus)                       | Enabled if Coc plugin is loaded
@@ -457,6 +460,29 @@ let g:mistflyWithGitsignsStatus = 0
 ```lua
 -- Lua initialization file
 vim.g.mistflyWithGitsignsStatus = 0
+```
+
+---
+
+### mistflyWithGitGutterStatus
+
+The `mistflyWithGitGutterStatus` option specifies whether to display
+[GitGutter](https://github.com/airblade/vim-gitgutter) status of the current
+buffer in the _statusline_.
+
+By default, GitGutter status will be displayed if the plugin is loaded.
+
+To disable the display of GitGutter status in the _statusline_ please add the
+following to your initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWithGitGutterStatus = 0
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyWithGitGutterStatus = 0
 ```
 
 ---

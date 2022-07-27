@@ -95,7 +95,7 @@ function! mistfly_statusline#PluginsStatus() abort
     let l:warnings = 0
     let l:divider = g:mistflyAsciiShapes ? '| ' : '⎪ '
 
-    if g:mistflyWithGitsignsStatus && has('nvim-0.5')
+    if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
         " Gitsigns status.
         let l:counts = get(b:, 'gitsigns_status_dict', {})
         if has_key(l:counts, 'added')
@@ -111,6 +111,17 @@ function! mistfly_statusline#PluginsStatus() abort
         endif
         if len(l:status) > 0
             let l:status .= ' '
+        endif
+    elseif g:mistflyWithGitGutterStatus && exists('g:loaded_gitgutter')
+        let [added, changed, removed] = GitGutterGetHunkSummary()
+        if added > 0
+            let l:status .= ' %#MistflyGitAdd#+' . added . '%*'
+        endif
+        if changed > 0
+            let l:status .= ' %#MistflyGitChange#~' . changed . '%*'
+        endif
+        if removed > 0
+            let l:status .= ' %#MistflyGitDelete#-' . removed . '%*'
         endif
     endif
 
@@ -368,20 +379,24 @@ function! mistfly_statusline#GenerateHighlightGroups() abort
     " Synthesize plugin colors from relevant existing highlight groups.
 
     " Git status.
-    if g:mistflyWithGitsignsStatus " has('nvim-0.5') && luaeval('pcall(require, 'gitsigns')')
+    if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
         call mistfly_statusline#SynthesizeHighlight('MistflyGitAdd', 'GitSignsAdd', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyGitChange', 'GitSignsChange', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyGitDelete', 'GitSignsDelete', v:false)
+    elseif g:mistflyWithGitGutterStatus && exists('g:loaded_gitgutter')
+        call mistfly_statusline#SynthesizeHighlight('MistflyGitAdd', 'GitGutterAdd', v:false)
+        call mistfly_statusline#SynthesizeHighlight('MistflyGitChange', 'GitGutterChange', v:false)
+        call mistfly_statusline#SynthesizeHighlight('MistflyGitDelete', 'GitGutterDelete', v:false)
     endif
 
     " Diagnostics.
-    if g:mistflyWithNvimDiagnosticStatus " if exists('g:lspconfig')
+    if g:mistflyWithNvimDiagnosticStatus && exists('g:lspconfig')
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'DiagnosticError', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'DiagnosticWarn', v:false)
-    elseif g:mistflyWithALEStatus " if exists('g:loaded_ale')
+    elseif g:mistflyWithALEStatus && exists('g:loaded_ale')
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'ALEErrorSign', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'ALEWarningSign', v:false)
-    elseif g:mistflyWithCocStatus " if exists('g:did_coc_loaded')
+    elseif g:mistflyWithCocStatus && exists('g:did_coc_loaded')
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticError', 'CocErrorSign', v:false)
         call mistfly_statusline#SynthesizeHighlight('MistflyDiagnosticWarning', 'CocWarningSign', v:false)
     endif
