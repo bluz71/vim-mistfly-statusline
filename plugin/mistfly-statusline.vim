@@ -81,9 +81,9 @@ let g:mistflyWithCocStatus = get(g:, 'mistflyWithCocStatus', 1)
 function! s:UpdateInactiveWindows() abort
     for winnum in range(1, winnr('$'))
         if winnum != winnr()
-            call setwinvar(winnum, '&statusline', '%!mistfly_statusline#InactiveStatusLine()')
+            call setwinvar(winnum, '&statusline', '%!mistfly#InactiveStatusLine()')
             if g:mistflyWinBar && exists('&winbar') && winheight(0) > 1
-                call setwinvar(winnum, '&winbar', '%!mistfly_statusline#InactiveWinBar()')
+                call setwinvar(winnum, '&winbar', '%!mistfly#InactiveWinBar()')
             endif
         endif
     endfor
