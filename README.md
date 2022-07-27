@@ -238,9 +238,9 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyWarningSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflywarningsymbol)                       | `!`
 | [mistflyTabLine](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)                                   | Disabled
 | [mistflyWinBar](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)                                     | Disabled
-| [mistflyWithGitBranch](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Disabled
-| [mistflyWithGitsignsStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitsignsstatus)             | Enabled
-| [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Enabled if Gitsigns plugin is loaded
+| [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Disabled
+| [mistflyWithGitBranch](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Enabled
+| [mistflyWithGitsignsStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitsignsstatus)             | Enabled if Gitsigns plugin is loaded
 | [mistflyWithNvimDiagnosticStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithnvimdiagnosticstatus) | Enabled if nvim-lspconfig plugin is loaded
 | [mistflyWithALEStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithalestatus)                       | Enabled if ALE plugin is loaded
 | [mistflyWithCocStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithcocstatus)                       | Enabled if Coc plugin is loaded
@@ -391,6 +391,32 @@ vim.g.mistflyWinBar = 1
 
 ---
 
+### mistflyWithIndentStatus
+
+The `mistflyWithIndentStatus` option specifies whether to display the
+indentation status as the last component in the statusline. By default
+indentation status will not be displayed.
+
+Note, if the `expandtab` option is set, for the current buffer, then tab stop
+will be displayed, for example `Tab:4` (tab equals four spaces); if on the other
+hand `noexpandtab` option is set then shift width will be displayed instead, for
+example `Spc:2` ('spc' short for 'space').
+
+To enable indentation status please add the following to your initialization
+file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWithIndentStatus = 1
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyWithIndentStatus = 1
+```
+
+---
+
 ### mistflyWithGitBranch
 
 The `mistflyWithGitBranch` option specifies whether to display Git branch
@@ -431,32 +457,6 @@ let g:mistflyWithGitsignsStatus = 0
 ```lua
 -- Lua initialization file
 vim.g.mistflyWithGitsignsStatus = 0
-```
-
----
-
-### mistflyWithIndentStatus
-
-The `mistflyWithIndentStatus` option specifies whether to display the
-indentation status as the last component in the statusline. By default
-indentation status will not be displayed.
-
-Note, if the `expandtab` option is set, for the current buffer, then tab stop
-will be displayed, for example `Tab:4` (tab equals four spaces); if on the other
-hand `noexpandtab` option is set then shift width will be displayed instead, for
-example `Spc:2` ('spc' short for 'space').
-
-To enable indentation status please add the following to your initialization
-file:
-
-```viml
-" Vimscript initialization file
-let g:mistflyWithIndentStatus = 1
-```
-
-```lua
--- Lua initialization file
-vim.g.mistflyWithIndentStatus = 1
 ```
 
 ---

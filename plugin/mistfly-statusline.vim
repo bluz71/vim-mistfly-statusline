@@ -45,14 +45,14 @@ let g:mistflyTabLine = get(g:, 'mistflyTabLine', 0)
 " By default do not enable Neovim's winbar support.
 let g:mistflyWinBar = get(g:, 'mistflyWinBar', 0)
 
+" By default do not display indentation details.
+let g:mistflyWithIndentStatus = get(g:, 'mistflyWithIndentStatus', 0)
+
 " By default display Git branches.
 let g:mistflyWithGitBranch = get(g:, 'mistflyWithGitBranch', 1)
 
 " By default display Gitsigns status, if the plugin is loaded.
 let g:mistflyWithGitsignsStatus = get(g:, 'mistflyWithGitsignsStatus', 1)
-
-" By default do not display indentation details.
-let g:mistflyWithIndentStatus = get(g:, 'mistflyWithIndentStatus', 0)
 
 " By default don't display a Nerd Font filetype icon.
 let g:mistflyWithNerdIcon = get(g:, 'mistflyWithNerdIcon', 0)
