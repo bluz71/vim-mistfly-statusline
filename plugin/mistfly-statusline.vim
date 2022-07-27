@@ -92,11 +92,11 @@ endfunction
 augroup mistflyStatuslineEvents
     autocmd!
     autocmd VimEnter              * call s:UpdateInactiveWindows()
-    autocmd VimEnter              * call mistfly_statusline#TabLine()
-    autocmd ColorScheme,SourcePre * call mistfly_statusline#GenerateHighlightGroups()
-    autocmd WinEnter,BufWinEnter  * call mistfly_statusline#StatusLine(v:true)
-    autocmd WinLeave              * call mistfly_statusline#StatusLine(v:false)
+    autocmd VimEnter              * call mistfly#TabLine()
+    autocmd ColorScheme,SourcePre * call mistfly#GenerateHighlightGroups()
+    autocmd WinEnter,BufWinEnter  * call mistfly#StatusLine(v:true)
+    autocmd WinLeave              * call mistfly#StatusLine(v:false)
     if exists('##CmdlineEnter')
-        autocmd CmdlineEnter      * call mistfly_statusline#StatusLine(v:true) | redraw
+        autocmd CmdlineEnter      * call mistfly#StatusLine(v:true) | redraw
     endif
 augroup END
