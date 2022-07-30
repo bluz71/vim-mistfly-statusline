@@ -29,7 +29,7 @@ else " Vim
 endif
 
 " By default do not use Ascii character shapes for dividers and symbols.
-let g:mistflyAsciiShapes = get(g:, 'mistflyAsciiShapes', 0)
+let g:mistflyAsciiShapes = get(g:, 'mistflyAsciiShapes', v:false)
 
 " The symbol used to indicate the presence of errors in the current buffer. By
 " default the x character will be used.
@@ -40,34 +40,34 @@ let g:mistflyErrorSymbol = get(g:, 'mistflyErrorSymbol', 'x')
 let g:mistflyWarningSymbol = get(g:, 'mistflyWarningSymbol', '!')
 
 " By default do not enable tabline support.
-let g:mistflyTabLine = get(g:, 'mistflyTabLine', 0)
+let g:mistflyTabLine = get(g:, 'mistflyTabLine', v:false)
 
 " By default do not enable Neovim's winbar support.
-let g:mistflyWinBar = get(g:, 'mistflyWinBar', 0)
+let g:mistflyWinBar = get(g:, 'mistflyWinBar', v:false)
 
 " By default do not display indentation details.
-let g:mistflyWithIndentStatus = get(g:, 'mistflyWithIndentStatus', 0)
+let g:mistflyWithIndentStatus = get(g:, 'mistflyWithIndentStatus', v:false)
 
 " By default display Git branches.
-let g:mistflyWithGitBranch = get(g:, 'mistflyWithGitBranch', 1)
+let g:mistflyWithGitBranch = get(g:, 'mistflyWithGitBranch', v:true)
 
 " By default display Gitsigns status, if the plugin is loaded.
-let g:mistflyWithGitsignsStatus = get(g:, 'mistflyWithGitsignsStatus', 1)
+let g:mistflyWithGitsignsStatus = get(g:, 'mistflyWithGitsignsStatus', v:true)
 
 " By default display GitGutter status, if the plugin is loaded.
-let g:mistflyWithGitGutterStatus = get(g:, 'mistflyWithGitGutterStatus', 1)
+let g:mistflyWithGitGutterStatus = get(g:, 'mistflyWithGitGutterStatus', v:true)
 
 " By default don't display a Nerd Font filetype icon.
-let g:mistflyWithNerdIcon = get(g:, 'mistflyWithNerdIcon', 0)
+let g:mistflyWithNerdIcon = get(g:, 'mistflyWithNerdIcon', v:false)
 
 " By default do indicate Neovim Diagnostic status, if nvim-lsp plugin is loaded.
-let g:mistflyWithNvimDiagnosticStatus = get(g:, 'mistflyWithNvimDiagnosticStatus', 1)
+let g:mistflyWithNvimDiagnosticStatus = get(g:, 'mistflyWithNvimDiagnosticStatus', v:true)
 
 " By default do indicate ALE lint status, if the plugin is loaded.
-let g:mistflyWithALEStatus = get(g:, 'mistflyWithALEStatus', 1)
+let g:mistflyWithALEStatus = get(g:, 'mistflyWithALEStatus', v:true)
 
 " By default do indicate Coc diagnostic status, if the plugin is loaded.
-let g:mistflyWithCocStatus = get(g:, 'mistflyWithCocStatus', 1)
+let g:mistflyWithCocStatus = get(g:, 'mistflyWithCocStatus', v:true)
 
 " Iterate though the windows and update the statusline and winbar for all
 " inactive windows.

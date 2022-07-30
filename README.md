@@ -269,12 +269,12 @@ initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyAsciiShapes = 1
+let g:mistflyAsciiShapes = v:true
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyAsciiShapes = 1
+vim.g.mistflyAsciiShapes = true
 ```
 
 ---
@@ -342,12 +342,12 @@ your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyTabLine = 1
+let g:mistflyTabLine = v:true
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyTabLine = 1
+vim.g.mistflyTabLine = true
 ```
 
 :bulb: Mappings, such as the following, may be useful to quickly switch between
@@ -386,12 +386,12 @@ initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWinBar = 1
+let g:mistflyWinBar = v:true
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyWinBar = 1
+vim.g.mistflyWinBar = true
 ```
 
 ---
@@ -412,12 +412,12 @@ file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithIndentStatus = 1
+let g:mistflyWithIndentStatus = v:true
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyWithIndentStatus = 1
+vim.g.mistflyWithIndentStatus = true
 ```
 
 ---
@@ -433,12 +433,12 @@ following to your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithGitBranch = 0
+let g:mistflyWithGitBranch = v:false
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyWithGitBranch = 0
+vim.g.mistflyWithGitBranch = false
 ```
 
 ---
@@ -456,12 +456,12 @@ to your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithGitsignsStatus = 0
+let g:mistflyWithGitsignsStatus = v:false
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyWithGitsignsStatus = 0
+vim.g.mistflyWithGitsignsStatus = false
 ```
 
 ---
@@ -479,12 +479,12 @@ following to your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithGitGutterStatus = 0
+let g:mistflyWithGitGutterStatus = v:false
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyWithGitGutterStatus = 0
+vim.g.mistflyWithGitGutterStatus = false
 ```
 
 ---
@@ -507,12 +507,12 @@ initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithNerdIcon = 1
+let g:mistflyWithNerdIcon = v:true
 ```
 
 ```lua
 -- lua initialization file
-vim.g.mistflyWithNerdIcon = 1
+vim.g.mistflyWithNerdIcon = true
 ```
 
 ---
@@ -533,12 +533,12 @@ your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithNvimDiagnosticStatus = 0
+let g:mistflyWithNvimDiagnosticStatus = v:false
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyWithNvimDiagnosticStatus = 0
+vim.g.mistflyWithNvimDiagnosticStatus = false
 ```
 
 ---
@@ -558,12 +558,12 @@ your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithALEStatus = 0
+let g:mistflyWithALEStatus = v:false
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyWithALEStatus = 0
+vim.g.mistflyWithALEStatus = false
 ```
 
 ---
@@ -583,12 +583,12 @@ initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithCocStatus = 0
+let g:mistflyWithCocStatus = v:false
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyWithCocStatus = 0
+vim.g.mistflyWithCocStatus = false
 ```
 
 Sponsor
