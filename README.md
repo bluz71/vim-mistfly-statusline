@@ -198,6 +198,8 @@ colorscheme (moonfly & nightfly) or within this plugin (all others):
 
 - [catppuccin](https://github.com/catppuccin/nvim)
 
+- [dracula](https://github.com/dracula/vim)
+
 - [edge](https://github.com/sainnhe/edge)
 
 - [embark](https://github.com/embark-theme/vim)

@@ -380,6 +380,12 @@ function! mistfly#GenerateHighlightGroups() abort
         highlight! link MistflyVisual MiniStatuslineModeVisual
         highlight! link MistflyCommand MiniStatuslineModeCommand
         highlight! link MistflyReplace MiniStatuslineModeReplace
+    elseif g:colors_name == 'dracula'
+        highlight! link MistflyNormal WildMenu
+        highlight! link MistflyInsert Search
+        call s:SynthesizeModeHighlight('MistflyVisual', 'String', 'WildMenu')
+        highlight! link MistflyCommand WildMenu
+        highlight! link MistflyReplace IncSearch
     elseif g:colors_name == 'gruvbox'
         call s:SynthesizeModeHighlight('MistflyNormal', 'GruvboxFg4', 'GruvboxBg0')
         call s:SynthesizeModeHighlight('MistflyInsert', 'GruvboxBlue', 'GruvboxBg0')
