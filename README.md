@@ -34,7 +34,8 @@ Screenshots
 
 The above screenshots are using the
 [nightfly](https://github.com/bluz71/vim-nightfly-colors) colorscheme with the
-[Iosevka](https://github.com/be5invis/Iosevka) font.
+[Iosevka](https://github.com/be5invis/Iosevka) font and a couple Git changes and
+and a single Diagnostic warning.
 
 Statusline Performance Comparison
 ---------------------------------
