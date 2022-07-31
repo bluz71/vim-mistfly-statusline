@@ -29,10 +29,11 @@ Screenshots
 ![normal](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-normal.png)
 ![insert](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-insert.png)
 ![visual](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-visual.png)
+![command](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-command.png)
 ![replace](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-replace.png)
 
 The above screenshots are using the
-[moonfly](https://github.com/bluz71/vim-moonfly-colors) colorscheme with the
+[nightfly](https://github.com/bluz71/vim-nightfly-colors) colorscheme with the
 [Iosevka](https://github.com/be5invis/Iosevka) font.
 
 Statusline Performance Comparison
