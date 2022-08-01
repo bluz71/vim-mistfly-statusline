@@ -33,9 +33,9 @@ Screenshots
 ![replace](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-replace.png)
 
 The above screenshots are using the
-[nightfly](https://github.com/bluz71/vim-nightfly-colors) colorscheme with the
-[Iosevka](https://github.com/be5invis/Iosevka) font and a couple Git changes and
-and a single Diagnostic warning.
+[nightfly](https://github.com/bluz71/vim-nightfly-colors) colorscheme and the
+[Iosevka](https://github.com/be5invis/Iosevka) font with a couple Git changes,
+a single Diagnostic warning and indent-status enabled.
 
 Statusline Performance Comparison
 ---------------------------------
