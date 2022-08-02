@@ -9,7 +9,7 @@ let s:modes = {
   \  's':      ['%#MistflyVisual#', ' select ', '%#MistflyVisualEmphasis#'],
   \  'S':      ['%#MistflyVisual#', ' s-line ', '%#MistflyVisualEmphasis#'],
   \  "\<C-s>": ['%#MistflyVisual#', ' s-rect ', '%#MistflyVisualEmphasis#'],
-  \  't':      ['%#MistflyInsert#', ' term ', '%#MistflyInsertEmphasis#'],
+  \  't':      ['%#MistflyInsert#', ' t-mode ', '%#MistflyInsertEmphasis#'],
   \}
 
 " Cache current colorscheme and the associated statusline background for
@@ -279,8 +279,8 @@ endfunction
 function! mistfly#ActiveWinBar() abort
     let l:mode = mode()
     let l:winbar = get(s:modes, l:mode, '%#MistflyNormal#')[0]
-    let l:winbar .= ' '
-    let l:winbar .= '%* %<%{mistfly#File()}'
+    let l:winbar .= strpart(get(s:modes, l:mode, 'n')[1], 0, 2)
+    let l:winbar .= ' %* %<%{mistfly#File()}'
     let l:winbar .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:winbar .= "%{&readonly ? 'RO\ ' : ''}"
     let l:winbar .= '%#Normal#'
