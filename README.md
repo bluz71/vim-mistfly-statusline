@@ -378,10 +378,12 @@ A screenshot of the `tabline`:
 The `mistflyWinBar` option specifies whether to display Neovim's window bar at
 the top of each window. By default window bars will not be displayed.
 
-Displaying a window bar is reasonable when Neovim's global statusline is
-enabled via `set laststatus=3`; the `winbar` will then display the file name at
-the top of each window to disambiguate splits. Note, Neovim 0.8 is required for
-this feature.
+Note, Neovim 0.8 (or later) is required for this feature.
+
+Displaying a window bar is reasonable when Neovim's global statusline is enabled
+via `set laststatus=3`; the `winbar` will then display the file name at the top
+of each window to disambiguate splits. Also, if there only one window in the
+current tab then a `winbar` will not be displayed (it won't be needed).
 
 To enable Neovim's `winbar` feature please add the following to your
 initialization file:

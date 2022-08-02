@@ -262,12 +262,20 @@ function! mistfly#StatusLine(active) abort
     elseif a:active == v:true
         setlocal statusline=%!mistfly#ActiveStatusLine()
         if g:mistflyWinBar && exists('&winbar')
-            setlocal winbar=%!mistfly#ActiveWinBar()
+            if tabpagewinnr(tabpagenr(), '$') > 1
+                setlocal winbar=%!mistfly#ActiveWinBar()
+            else
+                setlocal winbar=
+            endif
         endif
     elseif a:active == v:false
         setlocal statusline=%!mistfly#InactiveStatusLine()
         if g:mistflyWinBar && exists('&winbar') && winheight(0) > 1
-            setlocal winbar=%!mistfly#InactiveWinBar()
+            if tabpagewinnr(tabpagenr(), '$') > 1
+                setlocal winbar=%!mistfly#InactiveWinBar()
+            else
+                setlocal winbar=
+            endif
         endif
     endif
 endfunction
