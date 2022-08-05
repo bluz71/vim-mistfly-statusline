@@ -480,9 +480,7 @@ function! mistfly#GenerateHighlightGroups() abort
     endif
 
     " Session management.
-    if exists('g:loaded_obsession')
-        call s:SynthesizeHighlight('MistflySession', 'Error', v:false)
-    endif
+    call s:SynthesizeHighlight('MistflySession', 'Error', v:false)
 endfunction
 
 function! s:SynthesizeModeHighlight(target, background, foreground) abort
