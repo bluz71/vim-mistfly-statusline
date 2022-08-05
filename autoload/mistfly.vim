@@ -384,6 +384,57 @@ function! mistfly#GenerateHighlightGroups() abort
     endif
 
     " Mode highlights.
+    call s:ColorSchemeModeHighlights()
+
+    " Synthesize emphasis colors from the existing mode colors.
+    call s:SynthesizeHighlight('MistflyNormalEmphasis', 'MistflyNormal', v:true)
+    call s:SynthesizeHighlight('MistflyInsertEmphasis', 'MistflyInsert', v:true)
+    call s:SynthesizeHighlight('MistflyVisualEmphasis', 'MistflyVisual', v:true)
+    call s:SynthesizeHighlight('MistflyCommandEmphasis', 'MistflyCommand', v:true)
+    call s:SynthesizeHighlight('MistflyReplaceEmphasis', 'MistflyReplace', v:true)
+
+    " Synthesize plugin colors from relevant existing highlight groups.
+
+    " Git status.
+    if hlexists('GitSignsAdd')
+        call s:SynthesizeHighlight('MistflyGitAdd', 'GitSignsAdd', v:false)
+        call s:SynthesizeHighlight('MistflyGitChange', 'GitSignsChange', v:false)
+        call s:SynthesizeHighlight('MistflyGitDelete', 'GitSignsDelete', v:false)
+    elseif hlexists('GitGutterAdd')
+        call s:SynthesizeHighlight('MistflyGitAdd', 'GitGutterAdd', v:false)
+        call s:SynthesizeHighlight('MistflyGitChange', 'GitGutterChange', v:false)
+        call s:SynthesizeHighlight('MistflyGitDelete', 'GitGutterDelete', v:false)
+    else
+        highlight! link MistflyGitAdd StatusLine
+        highlight! link MistflyGitChange StatusLine
+        highlight! link MistflyGitDelete StatusLine
+    endif
+
+    " Diagnostics.
+    if hlexists('DiagnosticError')
+        call s:SynthesizeHighlight('MistflyDiagnosticError', 'DiagnosticError', v:false)
+    elseif hlexists('ALEErrorSign')
+        call s:SynthesizeHighlight('MistflyDiagnosticError', 'ALEErrorSign', v:false)
+    elseif hlexists('CocErrorSign')
+        call s:SynthesizeHighlight('MistflyDiagnosticError', 'CocErrorSign', v:false)
+    else
+        call s:SynthesizeHighlight('MistflyDiagnosticError', 'Error', v:false)
+    endif
+    if hlexists('DiagnosticWarn')
+        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'DiagnosticWarn', v:false)
+    elseif hlexists('ALEWarningSign')
+        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'ALEWarningSign', v:false)
+    elseif hlexists('CocWarningSign')
+        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'CocWarningSign', v:false)
+    else
+        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'WarningMsg', v:false)
+    endif
+
+    " Session management.
+    call s:SynthesizeHighlight('MistflySession', 'Error', v:false)
+endfunction
+
+function! s:ColorSchemeModeHighlights() abort
     if g:colors_name == 'moonfly' || g:colors_name == 'nightfly'
         " Do nothing since both themes already set mistfly mode colors.
     elseif g:colors_name == 'catppuccin'
@@ -446,41 +497,6 @@ function! mistfly#GenerateHighlightGroups() abort
             call s:SynthesizeModeHighlight('MistflyReplace', 'Error', 'VertSplit')
         endif
     endif
-
-    " Synthesize emphasis colors from the existing mode colors.
-    call s:SynthesizeHighlight('MistflyNormalEmphasis', 'MistflyNormal', v:true)
-    call s:SynthesizeHighlight('MistflyInsertEmphasis', 'MistflyInsert', v:true)
-    call s:SynthesizeHighlight('MistflyVisualEmphasis', 'MistflyVisual', v:true)
-    call s:SynthesizeHighlight('MistflyCommandEmphasis', 'MistflyCommand', v:true)
-    call s:SynthesizeHighlight('MistflyReplaceEmphasis', 'MistflyReplace', v:true)
-
-    " Synthesize plugin colors from relevant existing highlight groups.
-
-    " Git status.
-    if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
-        call s:SynthesizeHighlight('MistflyGitAdd', 'GitSignsAdd', v:false)
-        call s:SynthesizeHighlight('MistflyGitChange', 'GitSignsChange', v:false)
-        call s:SynthesizeHighlight('MistflyGitDelete', 'GitSignsDelete', v:false)
-    elseif g:mistflyWithGitGutterStatus && exists('g:loaded_gitgutter')
-        call s:SynthesizeHighlight('MistflyGitAdd', 'GitGutterAdd', v:false)
-        call s:SynthesizeHighlight('MistflyGitChange', 'GitGutterChange', v:false)
-        call s:SynthesizeHighlight('MistflyGitDelete', 'GitGutterDelete', v:false)
-    endif
-
-    " Diagnostics.
-    if g:mistflyWithNvimDiagnosticStatus && exists('g:lspconfig')
-        call s:SynthesizeHighlight('MistflyDiagnosticError', 'DiagnosticError', v:false)
-        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'DiagnosticWarn', v:false)
-    elseif g:mistflyWithALEStatus && exists('g:loaded_ale')
-        call s:SynthesizeHighlight('MistflyDiagnosticError', 'ALEErrorSign', v:false)
-        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'ALEWarningSign', v:false)
-    elseif g:mistflyWithCocStatus && exists('g:did_coc_loaded')
-        call s:SynthesizeHighlight('MistflyDiagnosticError', 'CocErrorSign', v:false)
-        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'CocWarningSign', v:false)
-    endif
-
-    " Session management.
-    call s:SynthesizeHighlight('MistflySession', 'Error', v:false)
 endfunction
 
 function! s:SynthesizeModeHighlight(target, background, foreground) abort
