@@ -473,6 +473,10 @@ function s:ColorSchemeGitHighlights() abort
         call s:SynthesizeHighlight('MistflyGitAdd', 'GitGutterAdd', v:false)
         call s:SynthesizeHighlight('MistflyGitChange', 'GitGutterChange', v:false)
         call s:SynthesizeHighlight('MistflyGitDelete', 'GitGutterDelete', v:false)
+    elseif hlexists('diffAdded')
+        call s:SynthesizeHighlight('MistflyGitAdd', 'diffAdded', v:false)
+        call s:SynthesizeHighlight('MistflyGitChange', 'diffChanged', v:false)
+        call s:SynthesizeHighlight('MistflyGitDelete', 'diffRemoved', v:false)
     else
         highlight! link MistflyGitAdd StatusLine
         highlight! link MistflyGitChange StatusLine
@@ -488,7 +492,7 @@ function s:ColorSchemeDiagnosticHighlights() abort
     elseif hlexists('CocErrorSign')
         call s:SynthesizeHighlight('MistflyDiagnosticError', 'CocErrorSign', v:false)
     else
-        call s:SynthesizeHighlight('MistflyDiagnosticError', 'Error', v:false)
+        highlight! link MistflyDiagnosticError StatusLine
     endif
     if hlexists('DiagnosticWarn')
         call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'DiagnosticWarn', v:false)
@@ -497,7 +501,7 @@ function s:ColorSchemeDiagnosticHighlights() abort
     elseif hlexists('CocWarningSign')
         call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'CocWarningSign', v:false)
     else
-        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'WarningMsg', v:false)
+        highlight! link MistflyDiagnosticWarning StatusLine
     endif
 endfunction
 
