@@ -394,43 +394,8 @@ function! mistfly#GenerateHighlightGroups() abort
     call s:SynthesizeHighlight('MistflyReplaceEmphasis', 'MistflyReplace', v:true)
 
     " Synthesize plugin colors from relevant existing highlight groups.
-
-    " Git status.
-    if hlexists('GitSignsAdd')
-        call s:SynthesizeHighlight('MistflyGitAdd', 'GitSignsAdd', v:false)
-        call s:SynthesizeHighlight('MistflyGitChange', 'GitSignsChange', v:false)
-        call s:SynthesizeHighlight('MistflyGitDelete', 'GitSignsDelete', v:false)
-    elseif hlexists('GitGutterAdd')
-        call s:SynthesizeHighlight('MistflyGitAdd', 'GitGutterAdd', v:false)
-        call s:SynthesizeHighlight('MistflyGitChange', 'GitGutterChange', v:false)
-        call s:SynthesizeHighlight('MistflyGitDelete', 'GitGutterDelete', v:false)
-    else
-        highlight! link MistflyGitAdd StatusLine
-        highlight! link MistflyGitChange StatusLine
-        highlight! link MistflyGitDelete StatusLine
-    endif
-
-    " Diagnostics.
-    if hlexists('DiagnosticError')
-        call s:SynthesizeHighlight('MistflyDiagnosticError', 'DiagnosticError', v:false)
-    elseif hlexists('ALEErrorSign')
-        call s:SynthesizeHighlight('MistflyDiagnosticError', 'ALEErrorSign', v:false)
-    elseif hlexists('CocErrorSign')
-        call s:SynthesizeHighlight('MistflyDiagnosticError', 'CocErrorSign', v:false)
-    else
-        call s:SynthesizeHighlight('MistflyDiagnosticError', 'Error', v:false)
-    endif
-    if hlexists('DiagnosticWarn')
-        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'DiagnosticWarn', v:false)
-    elseif hlexists('ALEWarningSign')
-        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'ALEWarningSign', v:false)
-    elseif hlexists('CocWarningSign')
-        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'CocWarningSign', v:false)
-    else
-        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'WarningMsg', v:false)
-    endif
-
-    " Session management.
+    call s:ColorSchemeGitHighlights()
+    call s:ColorSchemeDiagnosticHighlights()
     call s:SynthesizeHighlight('MistflySession', 'Error', v:false)
 endfunction
 
@@ -496,6 +461,43 @@ function! s:ColorSchemeModeHighlights() abort
         if !hlexists('MistflyReplace') || synIDattr(synIDtrans(hlID('MistflyReplace')), 'bg') == ''
             call s:SynthesizeModeHighlight('MistflyReplace', 'Error', 'VertSplit')
         endif
+    endif
+endfunction
+
+function s:ColorSchemeGitHighlights() abort
+    if hlexists('GitSignsAdd')
+        call s:SynthesizeHighlight('MistflyGitAdd', 'GitSignsAdd', v:false)
+        call s:SynthesizeHighlight('MistflyGitChange', 'GitSignsChange', v:false)
+        call s:SynthesizeHighlight('MistflyGitDelete', 'GitSignsDelete', v:false)
+    elseif hlexists('GitGutterAdd')
+        call s:SynthesizeHighlight('MistflyGitAdd', 'GitGutterAdd', v:false)
+        call s:SynthesizeHighlight('MistflyGitChange', 'GitGutterChange', v:false)
+        call s:SynthesizeHighlight('MistflyGitDelete', 'GitGutterDelete', v:false)
+    else
+        highlight! link MistflyGitAdd StatusLine
+        highlight! link MistflyGitChange StatusLine
+        highlight! link MistflyGitDelete StatusLine
+    endif
+endfunction
+
+function s:ColorSchemeDiagnosticHighlights() abort
+    if hlexists('DiagnosticError')
+        call s:SynthesizeHighlight('MistflyDiagnosticError', 'DiagnosticError', v:false)
+    elseif hlexists('ALEErrorSign')
+        call s:SynthesizeHighlight('MistflyDiagnosticError', 'ALEErrorSign', v:false)
+    elseif hlexists('CocErrorSign')
+        call s:SynthesizeHighlight('MistflyDiagnosticError', 'CocErrorSign', v:false)
+    else
+        call s:SynthesizeHighlight('MistflyDiagnosticError', 'Error', v:false)
+    endif
+    if hlexists('DiagnosticWarn')
+        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'DiagnosticWarn', v:false)
+    elseif hlexists('ALEWarningSign')
+        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'ALEWarningSign', v:false)
+    elseif hlexists('CocWarningSign')
+        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'CocWarningSign', v:false)
+    else
+        call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'WarningMsg', v:false)
     endif
 endfunction
 
