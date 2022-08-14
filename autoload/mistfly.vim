@@ -440,7 +440,7 @@ function! s:ColorSchemeModeHighlights() abort
         highlight! link MistflyReplace MiniStatuslineModeReplace
     elseif g:colors_name == 'tokyonight'
         highlight! link MistflyNormal TablineSel
-        call mistfly#SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit')
+        call s:SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit')
         highlight! link MistflyVisual Sneak
         highlight! link MistflyReplace Substitute
         highlight! link MistflyCommand Todo
