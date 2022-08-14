@@ -408,12 +408,6 @@ function! s:ColorSchemeModeHighlights() abort
         call s:SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit')
         call s:SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit')
         call s:SynthesizeModeHighlight('MistflyReplace', 'Conditional', 'VertSplit')
-    elseif g:colors_name == 'embark'
-        call s:SynthesizeModeHighlight('MistflyNormal', 'Title', 'VertSplit')
-        call s:SynthesizeModeHighlight('MistflyInsert', 'SpellLocal', 'VertSplit')
-        call s:SynthesizeModeHighlight('MistflyVisual', 'Identifier', 'VertSplit')
-        call s:SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit')
-        call s:SynthesizeModeHighlight('MistflyReplace', 'SpellRare', 'VertSplit')
     elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'gruvbox-material' || g:colors_name == 'sonokai'
         highlight! link MistflyNormal MiniStatuslineModeNormal
         highlight! link MistflyInsert MiniStatuslineModeInsert
