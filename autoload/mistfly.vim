@@ -326,7 +326,7 @@ endfunction
 "===========================================================
 
 function! mistfly#ActiveTabLine() abort
-    let l:divider = g:mistflyAsciiShapes ? '|' : '▎'
+    let l:symbol = g:mistflyAsciiShapes ? '*' : '●'
     let l:tabline = ''
     let l:counter = 0
 
@@ -336,7 +336,8 @@ function! mistfly#ActiveTabLine() abort
             let l:tabline .= '%' . l:counter . 'T'
         endif
         if tabpagenr() == counter
-            let l:tabline .= '%#TablineSel#' . l:divider . ' Tab:'
+            let l:tabline .= '%#TablineSelSymbol#' . l:symbol
+            let l:tabline .= '%#TablineSel# Tab:'
         else
             let l:tabline .= '%#TabLine#  Tab:'
         endif
@@ -397,6 +398,12 @@ function! mistfly#GenerateHighlightGroups() abort
     call s:ColorSchemeGitHighlights()
     call s:ColorSchemeDiagnosticHighlights()
     call s:SynthesizeHighlight('MistflySession', 'Error', v:false)
+
+    if g:mistflyTabLine
+        if !hlexists('TablineSelSymbol') || synIDattr(synIDtrans(hlID('TablineSelSymbol')), 'bg') == ''
+            highlight! link TablineSelSymbol TablineSel
+        endif
+    endif
 endfunction
 
 function! s:ColorSchemeModeHighlights() abort
