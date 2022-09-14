@@ -276,7 +276,7 @@ function! mistfly#StatusLine(active) abort
             "       end
             "   end
             "   if window_count > 1
-            if len(filter(nvim_tabpage_list_wins(0), {k,v->nvim_win_get_config(v).relative == ''})) > 1
+            if len(filter(nvim_tabpage_list_wins(0), {k,v->nvim_win_get_config(v).relative == ''})) > 1 && &buftype !=# 'terminal'
                 setlocal winbar=%!mistfly#ActiveWinBar()
             else
                 setlocal winbar=
