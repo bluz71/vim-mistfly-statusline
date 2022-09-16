@@ -326,7 +326,7 @@ endfunction
 "===========================================================
 
 function! mistfly#ActiveTabLine() abort
-    let l:symbol = g:mistflyAsciiShapes ? '*' : '●'
+    let l:symbol = g:mistflyAsciiShapes ? '*' : '▪'
     let l:tabline = ''
     let l:counter = 0
 
