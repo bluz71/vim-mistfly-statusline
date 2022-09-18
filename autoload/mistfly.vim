@@ -415,7 +415,7 @@ function! s:ColorSchemeModeHighlights() abort
         call s:SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit')
         call s:SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit')
         call s:SynthesizeModeHighlight('MistflyReplace', 'Conditional', 'VertSplit')
-    elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'gruvbox-material' || g:colors_name == 'sonokai'
+    elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'gruvbox-material' || g:colors_name == 'sonokai' || g:colors_name == 'tokyonight'
         highlight! link MistflyNormal MiniStatuslineModeNormal
         highlight! link MistflyInsert MiniStatuslineModeInsert
         highlight! link MistflyVisual MiniStatuslineModeVisual
@@ -439,12 +439,6 @@ function! s:ColorSchemeModeHighlights() abort
         highlight! link MistflyVisual MiniStatuslineModeVisual
         highlight! link MistflyCommand MiniStatuslineModeCommand
         highlight! link MistflyReplace MiniStatuslineModeReplace
-    elseif g:colors_name == 'tokyonight'
-        highlight! link MistflyNormal TablineSel
-        call s:SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit')
-        highlight! link MistflyVisual Sneak
-        highlight! link MistflyReplace Substitute
-        highlight! link MistflyCommand Todo
     else
         " Fallback for all other colorschemes.
         if !hlexists('MistflyNormal') || synIDattr(synIDtrans(hlID('MistflyNormal')), 'bg') == ''
