@@ -363,13 +363,12 @@ endfunction
 
 function! mistfly#GenerateHighlightGroups() abort
     if !exists('g:colors_name')
-        echomsg 'mistfly-statusline requires a colorscheme that sets g:colors_name'
         return
     endif
 
     " Early exit if we have already generated highlight groups for the current
-    " colorscheme.
-    if g:colors_name == s:current_colorscheme
+    " colorscheme AND generated highlight groups exist.
+    if g:colors_name == s:current_colorscheme && !hlexists('MistflyNormalEmphasis')
         return
     else
         " New colorscheme detected, let's cache its name.
