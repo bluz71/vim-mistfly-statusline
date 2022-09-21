@@ -12,10 +12,8 @@ let s:modes = {
   \  't':      ['%#MistflyInsert#', ' t-mode ', '%#MistflyInsertEmphasis#'],
   \}
 
-" Cache current colorscheme and the associated statusline background for
-" performance reasons; that being to avoid needless highlight extraction and
-" generation.
-let s:current_colorscheme = ''
+" Cache current statusline background for performance reasons; that being to
+" avoid needless highlight extraction and generation.
 let s:statusline_bg = ''
 
 "===========================================================
@@ -366,21 +364,13 @@ function! mistfly#GenerateHighlightGroups() abort
         return
     endif
 
-    " Early exit if we have already generated highlight groups for the current
-    " colorscheme AND generated highlight groups exist.
-    if g:colors_name == s:current_colorscheme && !hlexists('MistflyNormalEmphasis')
-        return
+    " Extract current StatusLine background color, we will likely need it.
+    if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'gui') == 1
+        " Need to handle reversed highlights, such as Gruvbox StatusLine.
+        let s:statusline_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
     else
-        " New colorscheme detected, let's cache its name.
-        let s:current_colorscheme = g:colors_name
-        " Extract current StatusLine background color, we will likely need it.
-        if synIDattr(synIDtrans(hlID('StatusLine')), 'reverse', 'gui') == 1
-            " Need to handle reversed highlights, such as Gruvbox StatusLine.
-            let s:statusline_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'fg', 'gui')
-        else
-            " Most colorschemes fall through to here.
-            let s:statusline_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
-        endif
+        " Most colorschemes fall through to here.
+        let s:statusline_bg = synIDattr(synIDtrans(hlID('StatusLine')), 'bg', 'gui')
     endif
 
     " Mode highlights.
@@ -407,7 +397,8 @@ endfunction
 
 function! s:ColorSchemeModeHighlights() abort
     if g:colors_name == 'moonfly' || g:colors_name == 'nightfly'
-        " Do nothing since both themes already set mistfly mode colors.
+        " Do nothing since both colorschemes already set mistfly mode colors.
+        return
     elseif g:colors_name == 'catppuccin'
         call s:SynthesizeModeHighlight('MistflyNormal', 'Title', 'VertSplit')
         call s:SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit')
