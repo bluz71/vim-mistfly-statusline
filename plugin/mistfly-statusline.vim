@@ -98,6 +98,6 @@ augroup mistflyStatuslineEvents
     autocmd WinEnter,BufWinEnter  * call mistfly#StatusLine(v:true)
     autocmd WinLeave              * call mistfly#StatusLine(v:false)
     if exists('##CmdlineEnter')
-        autocmd CmdlineEnter      * call mistfly#StatusLine(v:true) | redraw
+        autocmd CmdlineEnter      * call mistfly#StatusLine(v:true) | redrawstatus
     endif
 augroup END
