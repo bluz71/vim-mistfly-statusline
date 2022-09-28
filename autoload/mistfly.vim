@@ -21,7 +21,7 @@ let s:statusline_bg = ''
 "===========================================================
 
 function! mistfly#File() abort
-    return s:FileIcon() . s:ShortFilePath()
+    return s:FileIcon() . s:FilePath()
 endfunction
 
 function! s:FileIcon() abort
@@ -38,7 +38,7 @@ function! s:FileIcon() abort
     endif
 endfunction
 
-function! s:ShortFilePath() abort
+function! s:FilePath() abort
     if &buftype ==# 'terminal'
         return expand('%:t')
     else
@@ -49,7 +49,11 @@ function! s:ShortFilePath() abort
             if has('win32') || has('win64')
                 let l:separator = '\'
             endif
-            let l:path = pathshorten(fnamemodify(expand('%:f'), ':~:.'))
+            if &laststatus == 3
+                let l:path = fnamemodify(expand('%:f'), ':~:.')
+            else
+                let l:path = pathshorten(fnamemodify(expand('%:f'), ':~:.'))
+            endif
             let l:pathComponents = split(l:path, l:separator)
             let l:numPathComponents = len(l:pathComponents)
             if l:numPathComponents > 4

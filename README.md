@@ -167,8 +167,9 @@ Note, filenames will be compacted as follows:
 
 - `~`-style home directory paths in preference to absolute paths
 
-- Truncated, for example `foo/bar/bazz/hello.txt` will be displayed as
-  `f/b/b/hello.txt`
+- Shortened, for example `foo/bar/bazz/hello.txt` will be displayed as
+  `f/b/b/hello.txt`, but not when Neovim's global statusline (`set
+  statusline=3`) is not in effect.
 
 - Trimmed, a maximum of four path components will be displayed for a filename,
   if a filename is more deeply nested then only the four most significant
