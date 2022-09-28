@@ -130,9 +130,8 @@ use { 'bluz71/vim-mistfly-statusline', branch = 'moonfly-compat' }
 Notice
 ------
 
-File explorers, such as _NERDTree_ and _netrw_, and certain other special
-buffers will be minimally styled by this plugin, which often is for the best for
-these special buffer.
+File explorers, such as _NERDTree_, _netrw_ and certain other special buffers,
+will have their statusline blanked out by this plugin.
 
 Layout And Default Colors
 -------------------------

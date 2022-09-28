@@ -61,10 +61,6 @@ function! s:ShortFilePath() abort
     endif
 endfunction
 
-function! mistfly#ShortCurrentPath() abort
-    return pathshorten(fnamemodify(getcwd(), ':~:.'))
-endfunction
-
 function! mistfly#GitBranch() abort
     if !g:mistflyWithGitBranch || bufname('%') == ''
         return ''
@@ -244,14 +240,15 @@ function! mistfly#InactiveStatusLine() abort
 endfunction
 
 function! mistfly#NoFileStatusLine() abort
-    return ' %{mistfly#ShortCurrentPath()}'
+    return ' '
 endfunction
 
 function! mistfly#StatusLine(active) abort
     if &buftype ==# 'nofile' || &filetype ==# 'netrw'
-        " Likely a file explorer.
+        " Likely a file explorer or some other special type of buffer. Set a
+        " blank statusline for these types of buffers.
         setlocal statusline=%!mistfly#NoFileStatusLine()
-        if exists('&winbar')
+        if g:mistflyWinBar && exists('&winbar')
             setlocal winbar=
         endif
     elseif &buftype ==# 'nowrite'
