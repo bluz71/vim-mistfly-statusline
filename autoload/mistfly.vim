@@ -25,12 +25,12 @@ function! mistfly#File() abort
 endfunction
 
 function! s:FileIcon() abort
-    if !g:mistflyWithNerdIcon || bufname('%') == ''
+    if !g:mistflyWithFileIcon || bufname('%') == ''
         return ''
     endif
 
     if exists('g:nvim_web_devicons')
-        return luaeval("require'nvim-web-devicons'.get_icon(vim.fn.expand('%'), vim.fn.expand('%:e'))") . ' '
+        return luaeval("require'nvim-web-devicons'.get_icon(vim.fn.expand('%'), nil, { default = true })") . ' '
     elseif exists('g:loaded_webdevicons')
         return WebDevIconsGetFileTypeSymbol() . ' '
     else

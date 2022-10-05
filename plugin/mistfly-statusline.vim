@@ -57,8 +57,8 @@ let g:mistflyWithGitsignsStatus = get(g:, 'mistflyWithGitsignsStatus', v:true)
 " By default display GitGutter status, if the plugin is loaded.
 let g:mistflyWithGitGutterStatus = get(g:, 'mistflyWithGitGutterStatus', v:true)
 
-" By default don't display a Nerd Font filetype icon.
-let g:mistflyWithNerdIcon = get(g:, 'mistflyWithNerdIcon', v:false)
+" By default don't display a filetype icon.
+let g:mistflyWithFileIcon = get(g:, 'mistflyWithFileIcon', v:false)
 
 " By default do indicate Neovim Diagnostic status, if nvim-lsp plugin is loaded.
 let g:mistflyWithNvimDiagnosticStatus = get(g:, 'mistflyWithNvimDiagnosticStatus', v:true)

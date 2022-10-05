@@ -61,7 +61,7 @@ Plugins, Linters and Diagnostics supported
 
 - [vim-devicons](https://github.com/ryanoasis/vim-devicons) and
   [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) via the
-  `mistflyWithNerdIcon` option
+  `mistflyWithFileIcon` option
 
 - [Gitsigns](https://github.com/lewis6991/gitsigns.nvim)
 
@@ -493,30 +493,29 @@ vim.g.mistflyWithGitGutterStatus = false
 
 ---
 
-### mistflyWithNerdIcon
+### mistflyWithFileIcon
 
-The `mistflyWithNerdIcon` option specifies whether a filetype icon, from the
-current Nerd Font, will be displayed next to the filename in the `statusline`.
+The `mistflyWithFileIcon` option specifies whether a filetype icon, from a Nerd
+Font, will be displayed prior to the filename in the `statusline` (and optional
+`winbar`).
 
-Note, a [Nerd Font](https://www.nerdfonts.com) must be in-use **and** the
+Note, a [Nerd Font](https://www.nerdfonts.com) must be active **and** the
 [vim-devicons](https://github.com/ryanoasis/vim-devicons) or
 [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) plugin must
 be installed and active.
 
-By default a Nerd Font filetype icon will not be displayed in the
-`statusline`.
+By default a filetype icon will not be displayed in the `statusline`.
 
-To display a Nerd Font filetype icon please add the following to your
-initialization file:
+To display a filetype icon please add the following to your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithNerdIcon = v:true
+let g:mistflyWithFileIcon = v:true
 ```
 
 ```lua
 -- lua initialization file
-vim.g.mistflyWithNerdIcon = true
+vim.g.mistflyWithFileIcon = true
 ```
 
 ---
