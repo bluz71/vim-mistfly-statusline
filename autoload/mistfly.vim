@@ -244,7 +244,7 @@ function! mistfly#InactiveStatusLine() abort
 endfunction
 
 function! mistfly#NoFileStatusLine() abort
-    return ' '
+    return pathshorten(fnamemodify(getcwd(), ':~:.'))
 endfunction
 
 function! mistfly#StatusLine(active) abort
