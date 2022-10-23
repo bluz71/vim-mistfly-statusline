@@ -424,7 +424,7 @@ function! s:ColorSchemeModeHighlights() abort
         call s:SynthesizeModeHighlight('MistflyVisual', 'GruvboxOrange', 'GruvboxBg0')
         call s:SynthesizeModeHighlight('MistflyCommand', 'GruvboxGreen', 'GruvboxBg0')
         call s:SynthesizeModeHighlight('MistflyReplace', 'GruvboxRed', 'GruvboxBg0')
-    elseif g:colors_name == 'nightfox' || g:colors_name == 'nordfox' || g:colors_name == 'terafox'
+    elseif g:colors_name == 'carbonfox' || g:colors_name == 'nightfox' || g:colors_name == 'nordfox' || g:colors_name == 'terafox'
         highlight! link MistflyNormal Todo
         highlight! link MistflyInsert MiniStatuslineModeInsert
         highlight! link MistflyVisual MiniStatuslineModeVisual
