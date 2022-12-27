@@ -108,6 +108,12 @@ Plug 'bluz71/vim-mistfly-statusline'
 use 'bluz71/vim-mistfly-statusline'
 ```
 
+[lazy.nvim](https://github.com/folke/lazy.nvim):
+
+```lua
+{ 'bluz71/vim-mistfly-statusline' },
+```
+
 Legacy Installation
 -------------------
 
