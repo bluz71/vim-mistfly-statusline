@@ -248,6 +248,7 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyAsciiShapes](https://github.com/bluz71/vim-mistfly-statusline#mistflyasciishapes)                           | Disabled, do display Unicode shapes
 | [mistflyErrorSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyerrorsymbol)                           | `x`
 | [mistflyWarningSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflywarningsymbol)                       | `!`
+| [mistflyInformationSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyinformationsymbol)               | `i`
 | [mistflyTabLine](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)                                   | Disabled
 | [mistflyWinBar](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)                                     | Disabled
 | [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Disabled
@@ -331,6 +332,30 @@ let g:mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```lua
 -- Lua initialization file
 vim.g.mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+```
+
+---
+
+### mistflyInformationSymbol
+
+The `mistflyInformationSymbol` option specifies which character symbol to use
+when displaying [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html),
+[ALE](https://github.com/dense-analysis/ale) or
+[Coc](https://github.com/neoclide/coc.nvim) information.
+
+By default, the exclamation symbol, `i`, will be displayed.
+
+To specify your own information symbol please add the following to your
+initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
 
 ---
@@ -558,12 +583,12 @@ _mistfly statusline_ supports the [ALE](https://github.com/dense-analysis/ale)
 plugin.
 
 The `mistflyWithALEStatus` option specifies whether to indicate the presence of
-the ALE errors and warnings in the current buffer.
+the ALE problems in the current buffer.
 
-By default, ALE errors and warnings will be displayed if the plugin is loaded.
+By default, ALE problems will be displayed if the plugin is loaded.
 
-If ALE error and warning display are not wanted then please add the following to
-your initialization file:
+If ALE problems display is not wanted then please add the following to your
+initialization file:
 
 ```viml
 " Vimscript initialization file

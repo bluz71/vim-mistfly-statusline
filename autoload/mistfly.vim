@@ -95,6 +95,7 @@ function! mistfly#PluginsStatus() abort
     let l:status = ''
     let l:errors = 0
     let l:warnings = 0
+    let l:information = 0
     let l:divider = g:mistflyAsciiShapes ? '| ' : '⎪ '
 
     if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
@@ -132,6 +133,7 @@ function! mistfly#PluginsStatus() abort
         if has('nvim-0.6')
             let l:errors = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.ERROR})')
             let l:warnings = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.WARN})')
+            let l:information = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.INFO})')
         elseif has('nvim-0.5')
             let l:errors = luaeval('vim.lsp.diagnostic.get_count(0, [[Error]])')
             let l:warnings = luaeval('vim.lsp.diagnostic.get_count(0, [[Warning]])')
@@ -145,6 +147,9 @@ function! mistfly#PluginsStatus() abort
         if has_key(l:counts, 'warning')
             let l:warnings = l:counts['warning']
         endif
+        if has_key(l:counts, 'info')
+            let l:information = l:counts['info']
+        endif
     elseif g:mistflyWithCocStatus && exists('g:did_coc_loaded')
         " Coc status.
         let l:counts = get(b:, 'coc_diagnostic_info', {})
@@ -154,20 +159,24 @@ function! mistfly#PluginsStatus() abort
         if has_key(l:counts, 'warning')
             let l:warnings = l:counts['warning']
         endif
+        if has_key(l:counts, 'information')
+            let l:information = l:counts['information']
+        endif
     endif
 
     " Display errors and warnings from any of the previous diagnostic or linting
     " systems.
-    if l:errors > 0 && l:warnings > 0
-        let l:status .= ' %#MistflyDiagnosticError#' . g:mistflyErrorSymbol
-        let l:status .= ' ' . l:errors . '%* %#MistflyDiagnosticWarning#'
-        let l:status .= g:mistflyWarningSymbol . ' ' . l:warnings . '%* '
-    elseif l:errors > 0
+    if l:errors > 0
         let l:status .= ' %#MistflyDiagnosticError#' . g:mistflyErrorSymbol
         let l:status .= ' ' . l:errors . '%* '
-    elseif l:warnings > 0
+    endif
+    if l:warnings > 0
         let l:status .= ' %#MistflyDiagnosticWarning#' . g:mistflyWarningSymbol
         let l:status .= ' ' . l:warnings . '%* '
+    endif
+    if l:information > 0
+        let l:status .= ' %#MistflyDiagnosticInformation#' . g:mistflyInformationSymbol
+        let l:status .= ' ' . l:information . '%* '
     endif
 
     " Obsession plugin status.
@@ -488,6 +497,15 @@ function s:ColorSchemeDiagnosticHighlights() abort
         call s:SynthesizeHighlight('MistflyDiagnosticWarning', 'CocWarningSign', v:false)
     else
         highlight! link MistflyDiagnosticWarning StatusLine
+    endif
+    if hlexists('DiagnosticInfo')
+        call s:SynthesizeHighlight('MistflyDiagnosticInformation', 'DiagnosticInfo', v:false)
+    elseif hlexists('ALEInfoSign')
+        call s:SynthesizeHighlight('MistflyDiagnosticInformation', 'ALEInfoSign', v:false)
+    elseif hlexists('CocInfoSign')
+        call s:SynthesizeHighlight('MistflyDiagnosticInformation', 'CocInfoSign', v:false)
+    else
+        highlight! link MistflyDiagnosticInformation StatusLine
     endif
 endfunction
 

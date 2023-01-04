@@ -39,6 +39,10 @@ let g:mistflyErrorSymbol = get(g:, 'mistflyErrorSymbol', 'x')
 " default the exclamation symbol will be used.
 let g:mistflyWarningSymbol = get(g:, 'mistflyWarningSymbol', '!')
 
+" The symbol used to indicate the presence of information in the current buffer.
+" By default the 'i' character will be used.
+let g:mistflyInformationSymbol = get(g:, 'mistflyWarningSymbol', 'i')
+
 " By default do not enable tabline support.
 let g:mistflyTabLine = get(g:, 'mistflyTabLine', v:false)
 
