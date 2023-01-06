@@ -61,6 +61,9 @@ let g:mistflyWithGitsignsStatus = get(g:, 'mistflyWithGitsignsStatus', v:true)
 " By default display GitGutter status, if the plugin is loaded.
 let g:mistflyWithGitGutterStatus = get(g:, 'mistflyWithGitGutterStatus', v:true)
 
+" By default display Signify status, if the plugin is loaded.
+let g:mistflyWithSignifyStatus = get(g:, 'mistflyWithSignifyStatus', v:true)
+
 " By default don't display a filetype icon.
 let g:mistflyWithFileIcon = get(g:, 'mistflyWithFileIcon', v:false)
 

@@ -112,10 +112,8 @@ function! mistfly#PluginsStatus() abort
                 let l:status .= ' %#MistflyGitDelete#-' . l:counts['removed'] . '%*'
             endif
         endif
-        if len(l:status) > 0
-            let l:status .= ' '
-        endif
     elseif g:mistflyWithGitGutterStatus && exists('g:loaded_gitgutter')
+        " GitGutter status.
         let [added, changed, removed] = GitGutterGetHunkSummary()
         if added > 0
             let l:status .= ' %#MistflyGitAdd#+' . added . '%*'
@@ -126,6 +124,21 @@ function! mistfly#PluginsStatus() abort
         if removed > 0
             let l:status .= ' %#MistflyGitDelete#-' . removed . '%*'
         endif
+    elseif g:mistflyWithSignifyStatus && exists('g:loaded_signify') && sy#buffer_is_active()
+        " Signify status.
+        let [added, changed, removed] = sy#repo#get_stats()
+        if added > 0
+            let l:status .= ' %#MistflyGitAdd#+' . added . '%*'
+        endif
+        if changed > 0
+            let l:status .= ' %#MistflyGitChange#~' . changed . '%*'
+        endif
+        if removed > 0
+            let l:status .= ' %#MistflyGitDelete#-' . removed . '%*'
+        endif
+    endif
+    if len(l:status) > 0
+        let l:status .= ' '
     endif
 
     if g:mistflyWithNvimDiagnosticStatus && exists('g:lspconfig')
@@ -468,6 +481,10 @@ function s:ColorSchemeGitHighlights() abort
         call s:SynthesizeHighlight('MistflyGitAdd', 'GitGutterAdd', v:false)
         call s:SynthesizeHighlight('MistflyGitChange', 'GitGutterChange', v:false)
         call s:SynthesizeHighlight('MistflyGitDelete', 'GitGutterDelete', v:false)
+    elseif hlexists('SignifySignAdd')
+        call s:SynthesizeHighlight('MistflyGitAdd', 'SignifySignAdd', v:false)
+        call s:SynthesizeHighlight('MistflyGitChange', 'SignifySignChange', v:false)
+        call s:SynthesizeHighlight('MistflyGitDelete', 'SignifySignDelete', v:false)
     elseif hlexists('diffAdded')
         call s:SynthesizeHighlight('MistflyGitAdd', 'diffAdded', v:false)
         call s:SynthesizeHighlight('MistflyGitChange', 'diffChanged', v:false)
