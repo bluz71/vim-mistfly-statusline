@@ -93,6 +93,9 @@ endfunction
 
 function! mistfly#PluginsStatus() abort
     let l:status = ''
+    let l:added = 0
+    let l:changed = 0
+    let l:removed = 0
     let l:errors = 0
     let l:warnings = 0
     let l:information = 0
@@ -104,39 +107,23 @@ function! mistfly#PluginsStatus() abort
         let l:added = get(l:counts, 'added', 0)
         let l:changed = get(l:counts, 'changed', 0)
         let l:removed = get(l:counts, 'removed', 0)
-        if l:added > 0
-            let l:status .= ' %#MistflyGitAdd#+' . l:added . '%*'
-        endif
-        if l:changed > 0
-            let l:status .= ' %#MistflyGitChange#~' . l:changed . '%*'
-        endif
-        if l:removed > 0
-            let l:status .= ' %#MistflyGitDelete#-' . l:removed . '%*'
-        endif
     elseif g:mistflyWithGitGutterStatus && exists('g:loaded_gitgutter')
         " GitGutter status.
-        let [added, changed, removed] = GitGutterGetHunkSummary()
-        if added > 0
-            let l:status .= ' %#MistflyGitAdd#+' . added . '%*'
-        endif
-        if changed > 0
-            let l:status .= ' %#MistflyGitChange#~' . changed . '%*'
-        endif
-        if removed > 0
-            let l:status .= ' %#MistflyGitDelete#-' . removed . '%*'
-        endif
+        let [l:added, l:changed, l:removed] = GitGutterGetHunkSummary()
     elseif g:mistflyWithSignifyStatus && exists('g:loaded_signify') && sy#buffer_is_active()
         " Signify status.
-        let [added, changed, removed] = sy#repo#get_stats()
-        if added > 0
-            let l:status .= ' %#MistflyGitAdd#+' . added . '%*'
-        endif
-        if changed > 0
-            let l:status .= ' %#MistflyGitChange#~' . changed . '%*'
-        endif
-        if removed > 0
-            let l:status .= ' %#MistflyGitDelete#-' . removed . '%*'
-        endif
+        let [l:added, l:changed, l:removed] = sy#repo#get_stats()
+    endif
+
+    " Git plugin status.
+    if l:added > 0
+        let l:status .= ' %#MistflyGitAdd#+' . l:added . '%*'
+    endif
+    if l:changed > 0
+        let l:status .= ' %#MistflyGitChange#~' . l:changed . '%*'
+    endif
+    if l:removed > 0
+        let l:status .= ' %#MistflyGitDelete#-' . l:removed . '%*'
     endif
     if len(l:status) > 0
         let l:status .= ' '
