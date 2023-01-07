@@ -101,16 +101,14 @@ function! mistfly#PluginsStatus() abort
     if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
         " Gitsigns status.
         let l:counts = get(b:, 'gitsigns_status_dict', {})
-        if has_key(l:counts, 'added')
-            if l:counts['added'] > 0
-                let l:status .= ' %#MistflyGitAdd#+' . l:counts['added'] . '%*'
-            endif
-            if l:counts['changed'] > 0
-                let l:status .= ' %#MistflyGitChange#~' . l:counts['changed'] . '%*'
-            endif
-            if l:counts['removed'] > 0
-                let l:status .= ' %#MistflyGitDelete#-' . l:counts['removed'] . '%*'
-            endif
+        if has_key(l:counts, 'added') && l:counts['added'] > 0
+            let l:status .= ' %#MistflyGitAdd#+' . l:counts['added'] . '%*'
+        endif
+        if has_key(l:counts, 'changed') && l:counts['changed'] > 0
+            let l:status .= ' %#MistflyGitChange#~' . l:counts['changed'] . '%*'
+        endif
+        if has_key(l:counts, 'removed') && l:counts['removed'] > 0
+            let l:status .= ' %#MistflyGitDelete#-' . l:counts['removed'] . '%*'
         endif
     elseif g:mistflyWithGitGutterStatus && exists('g:loaded_gitgutter')
         " GitGutter status.
