@@ -76,30 +76,10 @@ let g:mistflyWithALEStatus = get(g:, 'mistflyWithALEStatus', v:true)
 " By default do indicate Coc diagnostic status, if the plugin is loaded.
 let g:mistflyWithCocStatus = get(g:, 'mistflyWithCocStatus', v:true)
 
-" Iterate though the windows and update the statusline and winbar for all
-" inactive windows.
-"
-" This is needed when starting Vim with multiple splits, for example 'vim -O
-" file1 file2', otherwise all statuslines/winbars will be rendered as if they
-" are active. Inactive statuslines/winbar are usually rendered via the WinLeave
-" and BufLeave events, but those events are not triggered when starting Vim.
-"
-" Note - https://jip.dev/posts/a-simpler-vim-statusline/#inactive-statuslines
-function! s:UpdateInactiveWindows() abort
-    for winnum in range(1, winnr('$'))
-        if winnum != winnr()
-            call setwinvar(winnum, '&statusline', '%!mistfly#InactiveStatusLine()')
-            if g:mistflyWinBar && exists('&winbar') && winheight(0) > 1
-                call setwinvar(winnum, '&winbar', '%!mistfly#InactiveWinBar()')
-            endif
-        endif
-    endfor
-endfunction
-
 augroup mistflyStatuslineEvents
     autocmd!
     autocmd VimEnter,ColorScheme * call mistfly#GenerateHighlightGroups()
-    autocmd VimEnter             * call s:UpdateInactiveWindows()
+    autocmd VimEnter             * call mistfly#UpdateInactiveWindows()
     autocmd VimEnter             * call mistfly#TabLine()
     autocmd WinEnter,BufWinEnter * call mistfly#StatusLine(v:true)
     autocmd WinLeave             * call mistfly#StatusLine(v:false)
