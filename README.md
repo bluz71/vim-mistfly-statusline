@@ -67,6 +67,8 @@ Plugins, Linters and Diagnostics supported
 
 - [GitGutter](https://github.com/airblade/vim-gitgutter)
 
+- [Signify](https://github.com/mhinz/vim-signify)
+
 - [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html)
 
 - [ALE](https://github.com/dense-analysis/ale)
@@ -255,6 +257,7 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyWithGitBranch](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Enabled
 | [mistflyWithGitsignsStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitsignsstatus)             | Enabled if Gitsigns plugin is loaded
 | [mistflyWithGitGutterStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitgutterstatus)           | Enabled if GitGutter plugin is loaded
+| [mistflyWithSignifyStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithsignifystatus)               | Enabled if Signify plugin is loaded
 | [mistflyWithNvimDiagnosticStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithnvimdiagnosticstatus) | Enabled if nvim-lspconfig plugin is loaded
 | [mistflyWithALEStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithalestatus)                       | Enabled if ALE plugin is loaded
 | [mistflyWithCocStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithcocstatus)                       | Enabled if Coc plugin is loaded
@@ -520,6 +523,29 @@ let g:mistflyWithGitGutterStatus = v:false
 ```lua
 -- Lua initialization file
 vim.g.mistflyWithGitGutterStatus = false
+```
+
+---
+
+### mistflyWithSignifyStatus
+
+The `mistflyWithSignifyStatus` option specifies whether to display
+[Signify](https://github.com/mhinz/vim-signify) status of the current
+buffer in the _statusline_.
+
+By default, Signify status will be displayed if the plugin is loaded.
+
+To disable the display of Signify status in the _statusline_ please add the
+following to your initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWithSignifyStatus = v:false
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyWithSignifyStatus = false
 ```
 
 ---

@@ -93,6 +93,9 @@ endfunction
 
 function! mistfly#PluginsStatus() abort
     let l:status = ''
+    let l:added = 0
+    let l:changed = 0
+    let l:removed = 0
     let l:errors = 0
     let l:warnings = 0
     let l:information = 0
@@ -101,31 +104,29 @@ function! mistfly#PluginsStatus() abort
     if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
         " Gitsigns status.
         let l:counts = get(b:, 'gitsigns_status_dict', {})
-        if has_key(l:counts, 'added')
-            if l:counts['added'] > 0
-                let l:status .= ' %#MistflyGitAdd#+' . l:counts['added'] . '%*'
-            endif
-            if l:counts['changed'] > 0
-                let l:status .= ' %#MistflyGitChange#~' . l:counts['changed'] . '%*'
-            endif
-            if l:counts['removed'] > 0
-                let l:status .= ' %#MistflyGitDelete#-' . l:counts['removed'] . '%*'
-            endif
-        endif
-        if len(l:status) > 0
-            let l:status .= ' '
-        endif
+        let l:added = get(l:counts, 'added', 0)
+        let l:changed = get(l:counts, 'changed', 0)
+        let l:removed = get(l:counts, 'removed', 0)
     elseif g:mistflyWithGitGutterStatus && exists('g:loaded_gitgutter')
-        let [added, changed, removed] = GitGutterGetHunkSummary()
-        if added > 0
-            let l:status .= ' %#MistflyGitAdd#+' . added . '%*'
-        endif
-        if changed > 0
-            let l:status .= ' %#MistflyGitChange#~' . changed . '%*'
-        endif
-        if removed > 0
-            let l:status .= ' %#MistflyGitDelete#-' . removed . '%*'
-        endif
+        " GitGutter status.
+        let [l:added, l:changed, l:removed] = GitGutterGetHunkSummary()
+    elseif g:mistflyWithSignifyStatus && exists('g:loaded_signify') && sy#buffer_is_active()
+        " Signify status.
+        let [l:added, l:changed, l:removed] = sy#repo#get_stats()
+    endif
+
+    " Git plugin status.
+    if l:added > 0
+        let l:status .= ' %#MistflyGitAdd#+' . l:added . '%*'
+    endif
+    if l:changed > 0
+        let l:status .= ' %#MistflyGitChange#~' . l:changed . '%*'
+    endif
+    if l:removed > 0
+        let l:status .= ' %#MistflyGitDelete#-' . l:removed . '%*'
+    endif
+    if len(l:status) > 0
+        let l:status .= ' '
     endif
 
     if g:mistflyWithNvimDiagnosticStatus && exists('g:lspconfig')
@@ -468,6 +469,10 @@ function s:ColorSchemeGitHighlights() abort
         call s:SynthesizeHighlight('MistflyGitAdd', 'GitGutterAdd', v:false)
         call s:SynthesizeHighlight('MistflyGitChange', 'GitGutterChange', v:false)
         call s:SynthesizeHighlight('MistflyGitDelete', 'GitGutterDelete', v:false)
+    elseif hlexists('SignifySignAdd')
+        call s:SynthesizeHighlight('MistflyGitAdd', 'SignifySignAdd', v:false)
+        call s:SynthesizeHighlight('MistflyGitChange', 'SignifySignChange', v:false)
+        call s:SynthesizeHighlight('MistflyGitDelete', 'SignifySignDelete', v:false)
     elseif hlexists('diffAdded')
         call s:SynthesizeHighlight('MistflyGitAdd', 'diffAdded', v:false)
         call s:SynthesizeHighlight('MistflyGitChange', 'diffChanged', v:false)
