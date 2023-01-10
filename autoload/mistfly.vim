@@ -1,15 +1,31 @@
+" Refer to ':help mode()' for the full list of available modes. For now only
+" handle the most common modes.
 let s:modes = {
   \  'n':      ['%#MistflyNormal#', ' normal ', '%#MistflyNormalEmphasis#'],
+  \  'no':     ['%#MistflyNormal#', ' o-pend ', '%#MistflyNormalEmphasis#'],
+  \  'niI':    ['%#MistflyNormal#', ' i-pend ', '%#MistflyNormalEmphasis#'],
+  \  'niR':    ['%#MistflyNormal#', ' r-pend ', '%#MistflyNormalEmphasis#'],
   \  'i':      ['%#MistflyInsert#', ' insert ', '%#MistflyInsertEmphasis#'],
-  \  'R':      ['%#MistflyReplace#', ' r-mode ', '%#MistflyReplaceEmphasis#'],
+  \  'ic':      ['%#MistflyInsert#', ' i-comp ', '%#MistflyInsertEmphasis#'],
+  \  'ix':      ['%#MistflyInsert#', ' i-comp ', '%#MistflyInsertEmphasis#'],
   \  'v':      ['%#MistflyVisual#', ' visual ', '%#MistflyVisualEmphasis#'],
+  \  'vs':      ['%#MistflyVisual#', ' visual ', '%#MistflyVisualEmphasis#'],
   \  'V':      ['%#MistflyVisual#', ' v-line ', '%#MistflyVisualEmphasis#'],
-  \  "\<C-v>": ['%#MistflyVisual#', ' v-rect ', '%#MistflyVisualEmphasis#'],
-  \  'c':      ['%#MistflyCommand#', ' c-mode ', '%#MistflyCommandEmphasis#'],
+  \  'Vs':      ['%#MistflyVisual#', ' v-line ', '%#MistflyVisualEmphasis#'],
+  \  "\<C-v>": ['%#MistflyVisual#', ' v-bloc ', '%#MistflyVisualEmphasis#'],
   \  's':      ['%#MistflyVisual#', ' select ', '%#MistflyVisualEmphasis#'],
   \  'S':      ['%#MistflyVisual#', ' s-line ', '%#MistflyVisualEmphasis#'],
-  \  "\<C-s>": ['%#MistflyVisual#', ' s-rect ', '%#MistflyVisualEmphasis#'],
+  \  "\<C-s>": ['%#MistflyVisual#', ' s-bloc ', '%#MistflyVisualEmphasis#'],
+  \  'c':      ['%#MistflyCommand#', ' c-mode ', '%#MistflyCommandEmphasis#'],
+  \  'r':      ['%#MistflyCommand#', ' prompt ', '%#MistflyCommandEmphasis#'],
+  \  'rm':      ['%#MistflyCommand#', ' prompt ', '%#MistflyCommandEmphasis#'],
+  \  'r?':      ['%#MistflyCommand#', ' prompt ', '%#MistflyCommandEmphasis#'],
+  \  '!':      ['%#MistflyCommand#', ' !-mode ', '%#MistflyCommandEmphasis#'],
+  \  'R':      ['%#MistflyReplace#', ' r-mode ', '%#MistflyReplaceEmphasis#'],
+  \  'Rc':      ['%#MistflyReplace#', ' r-comp ', '%#MistflyReplaceEmphasis#'],
+  \  'Rx':      ['%#MistflyReplace#', ' r-comp ', '%#MistflyReplaceEmphasis#'],
   \  't':      ['%#MistflyInsert#', ' t-mode ', '%#MistflyInsertEmphasis#'],
+  \  'nt':      ['%#MistflyInsert#', ' normal ', '%#MistflyInsertEmphasis#'],
   \}
 
 " Cache current statusline background for performance reasons; that being to
@@ -85,7 +101,7 @@ function! mistfly#UpdateInactiveWindows() abort
     endfor
 endfunction
 
-function! mistfly#GitBranch() abort
+function! mistfly#GitBranchName() abort
     if !g:mistflyWithGitBranch || bufname('%') == ''
         return ''
     endif
@@ -228,14 +244,14 @@ function! mistfly#IndentStatus() abort
 endfunction
 
 "===========================================================
-" Status-line
+" Status line
 "===========================================================
 
 function! mistfly#ActiveStatusLine() abort
     let l:mode = mode()
     let l:divider = g:mistflyAsciiShapes ? '|' : '⎪'
     let l:arrow =  g:mistflyAsciiShapes ?  '' : '↓'
-    let l:git_branch = mistfly#GitBranch()
+    let l:branch_name = mistfly#GitBranchName()
     let l:mode_emphasis = get(s:modes, l:mode, '%#MistflyNormalEmphasis#')[2]
 
     let l:statusline = get(s:modes, l:mode, '%#MistflyNormal#')[0]
@@ -243,9 +259,9 @@ function! mistfly#ActiveStatusLine() abort
     let l:statusline .= '%* %<%{mistfly#File()}'
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
-    if len(l:git_branch) > 0
+    if len(l:branch_name) > 0
         let l:statusline .= '%*' . l:divider . l:mode_emphasis
-        let l:statusline .= l:git_branch . '%* '
+        let l:statusline .= l:branch_name . '%* '
     endif
     let l:statusline .= mistfly#PluginsStatus()
     let l:statusline .= '%*%=%l:%c %*' . l:divider
@@ -326,7 +342,7 @@ function! mistfly#StatusLine(active) abort
 endfunction
 
 "===========================================================
-" Window-bar
+" Window bar
 "===========================================================
 
 function! mistfly#ActiveWinBar() abort
@@ -351,7 +367,7 @@ function! mistfly#InactiveWinBar() abort
 endfunction
 
 "===========================================================
-" Tab-line
+" Tab line
 "===========================================================
 
 function! mistfly#ActiveTabLine() abort
