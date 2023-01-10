@@ -296,13 +296,13 @@ endfunction
 function! mistfly#StatusLine(active) abort
     if &buftype ==# 'nofile' || &filetype ==# 'netrw'
         " Likely a file explorer or some other special type of buffer. Set a
-        " blank statusline for these types of buffers.
+        " short path statusline for these types of buffers.
         setlocal statusline=%!mistfly#NoFileStatusLine()
         if g:mistflyWinBar && exists('&winbar')
             setlocal winbar=
         endif
     elseif &buftype ==# 'nowrite'
-        " Don't set a custom status line for certain special windows.
+        " Don't set a custom statusline for certain special windows.
         return
     elseif a:active == v:true
         setlocal statusline=%!mistfly#ActiveStatusLine()
