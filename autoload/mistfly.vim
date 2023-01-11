@@ -110,11 +110,13 @@ function! mistfly#GitBranchName() abort
 
     let l:git_branch_name = ''
     if has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
-        " Gitsigns is available, let's use it to get the branch name since it is
-        " readily accessible.
+        " Gitsigns is available, let's use it to access the branch name.
         let l:git_branch_name = get(b:, 'gitsigns_head', '')
+    elseif exists('g:loaded_fugitive')
+        " Fugitive is available, let's use it to access the branch name.
+        let l:git_branch_name = FugitiveHead()
     else
-        " Else use the fallback detection path.
+        " Else use fallback detection.
         let l:git_branch_name = b:git_branch_name
     endif
 
@@ -588,8 +590,10 @@ endfunction
 " invoking that system call every time the statusline is redrawn.
 function! mistfly#DetectBranchName() abort
     if has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
-        " Gitsigns is available, no need to compute the branch name using a
-        " system call.
+        " Gitsigns is available, it will provide us the current branch name.
+        return
+    elseif exists('g:loaded_fugitive')
+        " Fugitive is available, it will provide us the current branch name.
         return
     endif
 
