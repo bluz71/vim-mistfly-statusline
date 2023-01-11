@@ -55,29 +55,31 @@ function! s:FileIcon() abort
 endfunction
 
 function! s:FilePath() abort
+    if len(expand('%:f')) == 0
+        return ''
+    end
+
     if &buftype ==# 'terminal'
         return expand('%:t')
+    endif
+
+    let l:separator = '/'
+    if has('win64')
+        let l:separator = '\'
+    endif
+
+    if &laststatus == 3
+        " Global statusline is active, no path shortening.
+        let l:path = fnamemodify(expand('%:f'), ':~:.')
     else
-        if len(expand('%:f')) == 0
-            return ''
-        else
-            let l:separator = '/'
-            if has('win32') || has('win64')
-                let l:separator = '\'
-            endif
-            if &laststatus == 3
-                let l:path = fnamemodify(expand('%:f'), ':~:.')
-            else
-                let l:path = pathshorten(fnamemodify(expand('%:f'), ':~:.'))
-            endif
-            let l:pathComponents = split(l:path, l:separator)
-            let l:numPathComponents = len(l:pathComponents)
-            if l:numPathComponents > 4
-                return '.../' . join(l:pathComponents[l:numPathComponents - 4:], l:separator)
-            else
-                return l:path
-            endif
-        endif
+        let l:path = pathshorten(fnamemodify(expand('%:f'), ':~:.'))
+    endif
+    let l:pathComponents = split(l:path, l:separator)
+    let l:numPathComponents = len(l:pathComponents)
+    if l:numPathComponents > 4
+        return '.../' . join(l:pathComponents[l:numPathComponents - 4:], l:separator)
+    else
+        return l:path
     endif
 endfunction
 
