@@ -311,20 +311,6 @@ function! mistfly#StatusLine(active) abort
     elseif a:active == v:true
         setlocal statusline=%!mistfly#ActiveStatusLine()
         if g:mistflyWinBar && exists('&winbar')
-            " Pure Lua version which excludes floating windows and quickfix
-            " list:
-            "   local window_count = 0
-            "   local windows = vim.api.nvim_tabpage_list_wins(0)
-
-            "   for _, v in pairs(windows) do
-            "       local cfg = vim.api.nvim_win_get_config(v)
-            "       local ft = vim.api.nvim_buf_get_option(vim.api.nvim_win_get_buf(v), "filetype")
-
-            "       if (cfg.relative == "" or cfg.external == false) and ft ~= "qf" then
-            "           window_count = window_count + 1
-            "       end
-            "   end
-            "   if window_count > 1
             if len(filter(nvim_tabpage_list_wins(0), {k,v->nvim_win_get_config(v).relative == ''})) > 1 && &buftype !=# 'terminal'
                 setlocal winbar=%!mistfly#ActiveWinBar()
             else
@@ -334,9 +320,7 @@ function! mistfly#StatusLine(active) abort
     elseif a:active == v:false
         setlocal statusline=%!mistfly#InactiveStatusLine()
         if g:mistflyWinBar && exists('&winbar') && winheight(0) > 1
-            " Please repeat the window-counting from the previous if-clause
-            " here when converting to Lua.
-            if len(filter(nvim_tabpage_list_wins(0), {k,v->nvim_win_get_config(v).relative == ''})) > 1
+            if len(filter(nvim_tabpage_list_wins(0), {k,v->nvim_win_get_config(v).relative == ''})) > 1 && &buftype !=# 'terminal'
                 setlocal winbar=%!mistfly#InactiveWinBar()
             else
                 setlocal winbar=
