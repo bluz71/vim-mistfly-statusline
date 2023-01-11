@@ -83,4 +83,5 @@ augroup mistflyStatuslineEvents
     autocmd VimEnter             * call mistfly#TabLine()
     autocmd WinEnter,BufWinEnter * call mistfly#StatusLine(v:true)
     autocmd WinLeave             * call mistfly#StatusLine(v:false)
+    autocmd BufEnter,FocusGained * call mistfly#DetectBranchName()
 augroup END
