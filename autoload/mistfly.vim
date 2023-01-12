@@ -139,7 +139,6 @@ function! mistfly#PluginsStatus() abort
     let l:errors = 0
     let l:warnings = 0
     let l:information = 0
-    let l:divider = g:mistflyAsciiShapes ? '| ' : '⎪ '
 
     if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
         " Gitsigns status.
