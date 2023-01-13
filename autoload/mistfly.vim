@@ -310,7 +310,7 @@ function! mistfly#StatusLine(active) abort
     elseif a:active == v:true
         setlocal statusline=%!mistfly#ActiveStatusLine()
         if g:mistflyWinBar && exists('&winbar')
-            if len(filter(nvim_tabpage_list_wins(0), {k,v->nvim_win_get_config(v).relative == ''})) > 1 && &buftype !=# 'terminal'
+            if len(filter(nvim_tabpage_list_wins(0), {k,v->nvim_win_get_config(v).relative == ''})) > 1 && &ft !=# 'qf'
                 setlocal winbar=%!mistfly#ActiveWinBar()
             else
                 setlocal winbar=
@@ -319,7 +319,7 @@ function! mistfly#StatusLine(active) abort
     elseif a:active == v:false
         setlocal statusline=%!mistfly#InactiveStatusLine()
         if g:mistflyWinBar && exists('&winbar') && winheight(0) > 1
-            if len(filter(nvim_tabpage_list_wins(0), {k,v->nvim_win_get_config(v).relative == ''})) > 1 && &buftype !=# 'terminal'
+            if len(filter(nvim_tabpage_list_wins(0), {k,v->nvim_win_get_config(v).relative == ''})) > 1 && &ft !=# 'qf'
                 setlocal winbar=%!mistfly#InactiveWinBar()
             else
                 setlocal winbar=
