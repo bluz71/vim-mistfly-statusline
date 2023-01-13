@@ -580,5 +580,6 @@ function! mistfly#DetectBranchName() abort
         return
     endif
 
+    " Use fallback Git branch name detection.
     let b:git_branch_name = trim(system("git branch --show-current 2>/dev/null"))
 endfunction
