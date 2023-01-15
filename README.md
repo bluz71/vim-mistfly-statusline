@@ -4,23 +4,23 @@ mistfly statusline
 _mistfly statusline_ is a simple, fast and informative `statusline` for Vim and
 Neovim.
 
-_mistfly statusline_ also provides optional `tabline` and Neovim
-`winbar` support when the appropriate settings are enabled; refer to
+_mistfly_ also provides optional `tabline` and Neovim `winbar` support when the
+appropriate settings are enabled; refer to
 [`mistflyTabLine`](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)
 and
 [`mistflyWinBar`](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar).
 
-_mistfly statusline_ will adapt it's colors to the colorscheme currently in
-effect. Colors can also be
+_mistfly_ will adapt it's colors to the colorscheme currently in effect. Colors
+can also be
 [customized](https://github.com/bluz71/vim-mistfly-statusline#highlight-groups-and-colors)
 if desired.
 
-Lastly, _mistfly statusline_ is a light _statusline_ plugin clocking in at
-about 500 lines of code. For comparison, the
+Lastly, _mistfly_ is a light _statusline_ plugin clocking in at about 500 lines
+of code. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim),
 [airline](https://github.com/vim-airline/vim-airline) and
 [lualine](https://github.com/nvim-lualine/lualine.nvim) `statusline` plugins
-contain over 3,600, 7,900 and 7,300 lines of code respectively. In fairness, the
+contain over 3,600, 7,300 and 8,000 lines of code respectively. In fairness, the
 latter plugins are more featureful, configurable and visually pleasing.
 
 Screenshots
@@ -46,14 +46,14 @@ Neovim setup with the [moonfly](https://github.com/bluz71/vim-moonfly-colors)
 colorscheme. The Neovim startup times in the following table are provived by the
 [dstein64/vim-startuptime](https://github.com/dstein64/vim-startuptime) plugin.
 
-Startup times are the average of five consecutive runs. Note, `native` is run
+Startup times are the average of five consecutive runs. Note, `stock` is run
 without any `statusline` plugin.
 
-| native  | mistfly | lightline | airline | lualine
-|---------|---------|-----------|---------|--------
-| 19.0ms  | 21.8ms  | 24.5ms    | 95.0ms  | 30.8ms
+| stock  | mistfly | lightline | airline | lualine
+|--------|---------|-----------|---------|--------
+| 20.2ms | 22.9ms  | 32.3ms    | 117.6ms | 26.9ms
 
-Startup times as of July 2022 on my system; performance on other systems will
+Startup times as of January 2023 on my system; performance on other systems will
 vary.
 
 Plugins, Linters and Diagnostics supported
@@ -80,7 +80,7 @@ Plugins, Linters and Diagnostics supported
 :zap: Requirements
 ------------------
 
-_mistfly statusline_ requires a **GUI** capable version of Vim or Neovim with an
+_mistfly_ requires a **GUI** capable version of Vim or Neovim with an
 appropriate `colorscheme` set.
 
 A GUI client, such as Gvim, or a modern terminal version of Vim or Neovim with
@@ -119,9 +119,9 @@ use 'bluz71/vim-mistfly-statusline'
 Legacy Installation
 -------------------
 
-_mistfly statusline_ still supports the legacy version of this plugin,
-previously named _moonfly statusline_, via the `moonfly-compat` branch. That
-legacy version can be installed with your preferred plugin manager.
+_mistfly_ still supports the legacy version of this plugin, previously named
+_moonfly statusline_, via the `moonfly-compat` branch. That legacy version can
+be installed with your preferred plugin manager.
 
 [vim-plug](https://github.com/junegunn/vim-plug):
 
@@ -189,7 +189,7 @@ Highlight Groups And Colors
 
 Sections marked with `*` in the previous section are linked to the following
 custom highlight groups with their associated fallbacks if the current
-colorscheme does not support _mistfly statusline_.
+colorscheme does not support _mistfly_.
 
 | Segment                  | Custom Highlight Group | Synthesized Highlight Fallback
 |--------------------------|------------------------|-------------------------------
@@ -199,7 +199,7 @@ colorscheme does not support _mistfly statusline_.
 | Command Mode             | `MistflyCommand`       | `WarningMsg`
 | Replace Mode             | `MistflyReplace`       | `Error`
 
-Note, the following colorschemes support _mistfly statusline_, either within the
+Note, the following colorschemes support _mistfly_, either within the
 colorscheme (moonfly & nightfly) or within this plugin (all others):
 
 - [moonfly](https://github.com/bluz71/vim-moonfly-colors)
@@ -229,8 +229,8 @@ colorscheme (moonfly & nightfly) or within this plugin (all others):
 Lastly, if the fallback colors do not suit then it is very easy to override with
 your own highlights.
 
-:gift: Here is a simple example of customized _mistfly statusline_ colors. Save
-the following either at the end of your initialization file, after setting your
+:gift: Here is a simple example of customized _mistfly_ colors. Save the
+following either at the end of your initialization file, after setting your
 `colorscheme`, or in an appropriate `after` file such as
 `after/plugin/mistfly-statusline.vim`.
 
@@ -269,9 +269,9 @@ highlight! link MistflyReplace ErrorMsg
 The `mistflyAsciiShapes` option specifies whether to only use Ascii characters
 for certain dividers and symbols.
 
-_mistfly statusline_ by default **will use** Unicode Symbols and Powerline
-Glyphs for certain shapes such as: Git branch, dividers and active tabs. Note,
-many modern fonts, such as: [Hack](https://sourcefoundry.org/hack),
+_mistfly_ by default **will use** Unicode Symbols and Powerline Glyphs for
+certain shapes such as: Git branch, dividers and active tabs. Note, many modern
+fonts, such as: [Hack](https://sourcefoundry.org/hack),
 [Iosevka](https://typeof.net/Iosevk), [Fira
 Code](https://github.com/tonsky/FiraCode) and [Jetbrains
 Mono](https://www.jetbrains.com/lp/mono), will provide these shapes.
@@ -369,12 +369,12 @@ The `mistflyTabLine` option specifies whether to let this plugin manage the
 `tabline` in addition to the `statusline`. By default `tabline` management will
 not be undertaken.
 
-If enabled, _mistfly statusline_ will render a simple numbered, and clickable,
-window-space layout in the `tabline`; note, no buffers will be displayed in the
-`tabline` since there are many plugins that already provide that capability.
+If enabled, _mistfly_ will render a simple numbered, and clickable, window-space
+layout in the `tabline`; note, no buffers will be displayed in the `tabline`
+since there are many plugins that already provide that capability.
 
-To enable _mistfly statusline_'s `tabline` support please add the following to
-your initialization file:
+To enable _mistfly_'s `tabline` support please add the following to your
+initialization file:
 
 ```viml
 " Vimscript initialization file
@@ -579,7 +579,7 @@ vim.g.mistflyWithFileIcon = true
 
 ### mistflyWithNvimDiagnosticStatus
 
-_mistfly statusline_ supports [Neovim
+_mistfly_ supports [Neovim
 Diagnostics](https://neovim.io/doc/user/diagnostic.html)
 
 The `mistflyWithNvimDiagnosticStatus` option specifies whether to indicate the
@@ -605,8 +605,7 @@ vim.g.mistflyWithNvimDiagnosticStatus = false
 
 ### mistflyWithALEStatus
 
-_mistfly statusline_ supports the [ALE](https://github.com/dense-analysis/ale)
-plugin.
+_mistfly_ supports the [ALE](https://github.com/dense-analysis/ale) plugin.
 
 The `mistflyWithALEStatus` option specifies whether to indicate the presence of
 the ALE problems in the current buffer.
@@ -630,8 +629,7 @@ vim.g.mistflyWithALEStatus = false
 
 ### mistflyWithCocStatus
 
-_mistfly statusline_ supports the [Coc](https://github.com/neoclide/coc.nvim)
-plugin.
+_mistfly_ supports the [Coc](https://github.com/neoclide/coc.nvim) plugin.
 
 The `mistflyWithCocStatus` option specifies whether to indicate the presence of
 the Coc diagnostics in the current buffer.
