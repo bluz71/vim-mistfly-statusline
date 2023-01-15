@@ -572,6 +572,13 @@ endfunction
 " only be called upon BufEnter and FocusGained events to avoid needlessly
 " invoking that system call every time the statusline is redrawn.
 function! mistfly#DetectBranchName() abort
+    if !g:mistflyWithGitBranch || bufname('%') == ''
+        " Don't calculate the expensive to compute branch name if it isn't
+        " wanted or the buffer is empty.
+        let b:git_branch_name = ''
+        return
+    endif
+
     if has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
         " Gitsigns is available, it will provide us the current branch name.
         return
