@@ -4,9 +4,9 @@ mistfly statusline
 _mistfly statusline_ is a simple, fast and informative `statusline` for Vim and
 Neovim.
 
-_mistfly_ also provides optional `tabline` and Neovim `winbar` support when the
+_mistfly_ provides optional `tabline` and Neovim `winbar` support when the
 appropriate settings are enabled; refer to
-[`mistflyTabLine`](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)
+[`mistflyTabLine`](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)
 and
 [`mistflyWinBar`](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar).
 
@@ -40,10 +40,10 @@ a single Diagnostic warning and indent-status enabled.
 Statusline Performance Comparison
 ---------------------------------
 
-A performance comparison of _mistfly stautusline_ against various popular
-`statusline` plugins, with their out-of-the-box defaults, on a clean and minimal
-Neovim setup with the [moonfly](https://github.com/bluz71/vim-moonfly-colors)
-colorscheme. The Neovim startup times in the following table are provived by the
+A performance comparison of _mistfly_ against various popular `statusline`
+plugins, with their out-of-the-box defaults, on a clean and minimal Neovim setup
+with the [moonfly](https://github.com/bluz71/vim-moonfly-colors) colorscheme.
+The Neovim startup times in the following table are provived by the
 [dstein64/vim-startuptime](https://github.com/dstein64/vim-startuptime) plugin.
 
 Startup times are the average of five consecutive runs. Note, `stock` is run
@@ -60,8 +60,7 @@ Plugins, Linters and Diagnostics supported
 ------------------------------------------
 
 - [vim-devicons](https://github.com/ryanoasis/vim-devicons) and
-  [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) via the
-  `mistflyWithFileIcon` option
+  [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons)
 
 - [Gitsigns](https://github.com/lewis6991/gitsigns.nvim)
 
@@ -81,17 +80,9 @@ Plugins, Linters and Diagnostics supported
 ------------------
 
 _mistfly_ requires a **GUI** capable version of Vim or Neovim with an
-appropriate `colorscheme` set.
-
-A GUI client, such as Gvim, or a modern terminal version of Vim or Neovim with
-`termguicolors` enabled in a true-color terminal, is required.
-
-I encourage terminal users to use a true-color terminal, such as:
-[iTerm2](https://iterm2.com),
-[Alacritty](https://github.com/alacritty/alacritty)
-[Windows Terminal](https://github.com/microsoft/terminal), or
-[kitty](https://sw.kovidgoyal.net/kitty/index.html) and enable the
-`termguicolors` option.
+appropriate `colorscheme` set. A GUI client, or a modern version of Vim or
+Neovim with the `termguicolors` option enabled in a true-color terminal, is
+required.
 
 Installation
 ------------
@@ -135,12 +126,6 @@ Plug 'bluz71/vim-mistfly-statusline', { 'branch': 'moonfly-compat' }
 use { 'bluz71/vim-mistfly-statusline', branch = 'moonfly-compat' }
 ```
 
-Notice
-------
-
-File explorers, such as _NERDTree_, _netrw_ and certain other special buffers,
-will have their statusline blanked out by this plugin.
-
 Layout And Default Colors
 -------------------------
 
@@ -156,8 +141,8 @@ and right-side groups as follows:
 | Section | Purpose
 |---------|------------------
 | A`*`    | Mode status (normal, insert, visual, command and replace modes)
-| B       | Compacted filename (see below for details)
-| C`*`    | Git repository branch name (if applicable)
+| B       | Filename (see below for details)
+| C`*`    | Git branch name (if applicable)
 | D`*`    | Plugins notification (git, diagnostic and session status)
 | X       | Current position
 | Y`*`    | Total lines and current location as percentage
@@ -166,7 +151,7 @@ and right-side groups as follows:
 Sections marked with a `*` are linked to a highlight group and are colored,
 refer to the next section for details.
 
-Note, filenames will be compacted as follows:
+Note, filenames will be displayed as follows:
 
 - Pathless filenames only for files in the current working directory
 
@@ -230,9 +215,8 @@ Lastly, if the fallback colors do not suit then it is very easy to override with
 your own highlights.
 
 :gift: Here is a simple example of customized _mistfly_ colors. Save the
-following either at the end of your initialization file, after setting your
-`colorscheme`, or in an appropriate `after` file such as
-`after/plugin/mistfly-statusline.vim`.
+following either at the end of your initialization file after setting your
+`colorscheme`.
 
 ```viml
 highlight! link MistflyNormal DiffChange
@@ -254,6 +238,7 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyTabLine](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)                                   | Disabled
 | [mistflyWinBar](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)                                     | Disabled
 | [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Disabled
+| [mistflyWithFileIcon](https://github.com/bluz71/vim-mistfly-statusline#mistflywithfileicon)                         | Disabled
 | [mistflyWithGitBranch](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Enabled
 | [mistflyWithGitsignsStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitsignsstatus)             | Enabled if Gitsigns plugin is loaded
 | [mistflyWithGitGutterStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitgutterstatus)           | Enabled if GitGutter plugin is loaded
@@ -414,10 +399,10 @@ the top of each window. By default window bars will not be displayed.
 
 Note, Neovim 0.8 (or later) is required for this feature.
 
-Displaying a window bar is reasonable when Neovim's global statusline is enabled
-via `set laststatus=3`; the `winbar` will then display the file name at the top
-of each window to disambiguate splits. Also, if there only one window in the
-current tab then a `winbar` will not be displayed (it won't be needed).
+Displaying a window bar is recommended when Neovim's global statusline is
+enabled via `set laststatus=3`; the `winbar` will then display the file name at
+the top of each window to disambiguate splits. Also, if there only one window in
+the current tab then a `winbar` will not be displayed (it won't be needed).
 
 To enable Neovim's `winbar` feature please add the following to your
 initialization file:

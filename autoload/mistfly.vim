@@ -422,10 +422,8 @@ function! mistfly#GenerateHighlightGroups() abort
     call s:ColorSchemeDiagnosticHighlights()
     call s:SynthesizeHighlight('MistflySession', 'Error', v:false)
 
-    if g:mistflyTabLine
-        if !hlexists('TablineSelSymbol') || synIDattr(synIDtrans(hlID('TablineSelSymbol')), 'bg') == ''
-            highlight! link TablineSelSymbol TablineSel
-        endif
+    if g:mistflyTabLine && (!hlexists('TablineSelSymbol') || synIDattr(synIDtrans(hlID('TablineSelSymbol')), 'bg') == '')
+        highlight! link TablineSelSymbol TablineSel
     endif
 endfunction
 
