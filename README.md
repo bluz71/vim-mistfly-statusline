@@ -232,9 +232,9 @@ highlight! link MistflyReplace ErrorMsg
 | Option | Default State
 |--------|--------------
 | [mistflyAsciiShapes](https://github.com/bluz71/vim-mistfly-statusline#mistflyasciishapes)                           | Disabled, do display Unicode shapes
-| [mistflyErrorSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyerrorsymbol)                           | `x`
-| [mistflyWarningSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflywarningsymbol)                       | `!`
-| [mistflyInformationSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyinformationsymbol)               | `i`
+| [mistflyErrorSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyerrorsymbol)                           | `E`
+| [mistflyWarningSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflywarningsymbol)                       | `W`
+| [mistflyInformationSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyinformationsymbol)               | `I`
 | [mistflyTabLine](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)                                   | Disabled
 | [mistflyWinBar](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)                                     | Disabled
 | [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Disabled
@@ -283,7 +283,7 @@ displaying [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) or
 [Coc](https://github.com/neoclide/coc.nvim) errors.
 
-By default, the `x` character, will be displayed.
+By default, the `E` character, will be displayed.
 
 To specify your own error symbol please add the following to your initialization
 file:
@@ -307,7 +307,7 @@ displaying [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) or
 [Coc](https://github.com/neoclide/coc.nvim) warnings.
 
-By default, the exclamation symbol, `!`, will be displayed.
+By default, the `W` character, will be displayed.
 
 To specify your own warning symbol please add the following to your
 initialization file:
@@ -331,7 +331,7 @@ when displaying [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) or
 [Coc](https://github.com/neoclide/coc.nvim) information.
 
-By default, the exclamation symbol, `i`, will be displayed.
+By default, the `I` character, will be displayed.
 
 To specify your own information symbol please add the following to your
 initialization file:
