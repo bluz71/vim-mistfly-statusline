@@ -238,7 +238,7 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyTabLine](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)                                   | Disabled
 | [mistflyWinBar](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)                                     | Disabled
 | [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Disabled
-| [mistflyWithFileIcon](https://github.com/bluz71/vim-mistfly-statusline#mistflywithfileicon)                         | Disabled
+| [mistflyWithFileIcon](https://github.com/bluz71/vim-mistfly-statusline#mistflywithfileicon)                         | Enabled
 | [mistflyWithGitBranch](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Enabled
 | [mistflyWithGitsignsStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitsignsstatus)             | Enabled if Gitsigns plugin is loaded
 | [mistflyWithGitGutterStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitgutterstatus)           | Enabled if GitGutter plugin is loaded
@@ -544,20 +544,21 @@ Font, will be displayed prior to the filename in the `statusline` (and optional
 Note, a [Nerd Font](https://www.nerdfonts.com) must be active **and** the
 [vim-devicons](https://github.com/ryanoasis/vim-devicons) or
 [nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) plugin must
-be installed and active.
+also be installed and active.
 
-By default a filetype icon will not be displayed in the `statusline`.
+By default a filetype icon will be displayed if possible.
 
-To display a filetype icon please add the following to your initialization file:
+To disable the display of a filetype icon please add the following to your
+initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyWithFileIcon = v:true
+let g:mistflyWithFileIcon = v:false
 ```
 
 ```lua
 -- lua initialization file
-vim.g.mistflyWithFileIcon = true
+vim.g.mistflyWithFileIcon = false
 ```
 
 ---
