@@ -1,6 +1,6 @@
 " Refer to ':help mode()' for the full list of available modes. For now only
 " handle the most common modes.
-let s:modes = {
+let s:modes_map = {
   \  'n':      ['%#MistflyNormal#', ' normal ', '%#MistflyNormalEmphasis#'],
   \  'no':     ['%#MistflyNormal#', ' o-pend ', '%#MistflyNormalEmphasis#'],
   \  'niI':    ['%#MistflyNormal#', ' i-pend ', '%#MistflyNormalEmphasis#'],
@@ -255,10 +255,10 @@ function! mistfly#ActiveStatusLine() abort
     let l:divider = g:mistflyAsciiShapes ? '|' : '⎪'
     let l:arrow =  g:mistflyAsciiShapes ?  '' : '↓'
     let l:branch_name = mistfly#GitBranchName()
-    let l:mode_emphasis = get(s:modes, l:mode, '%#MistflyNormalEmphasis#')[2]
+    let l:mode_emphasis = get(s:modes_map, l:mode, '%#MistflyNormalEmphasis#')[2]
 
-    let l:statusline = get(s:modes, l:mode, '%#MistflyNormal#')[0]
-    let l:statusline .= get(s:modes, l:mode, ' normal ')[1]
+    let l:statusline = get(s:modes_map, l:mode, '%#MistflyNormal#')[0]
+    let l:statusline .= get(s:modes_map, l:mode, ' normal ')[1]
     let l:statusline .= '%* %<%{mistfly#File()}'
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
@@ -334,8 +334,8 @@ endfunction
 
 function! mistfly#ActiveWinBar() abort
     let l:mode = mode()
-    let l:winbar = get(s:modes, l:mode, '%#MistflyNormal#')[0]
-    let l:winbar .= strpart(get(s:modes, l:mode, 'n')[1], 0, 2)
+    let l:winbar = get(s:modes_map, l:mode, '%#MistflyNormal#')[0]
+    let l:winbar .= strpart(get(s:modes_map, l:mode, 'n')[1], 0, 2)
     let l:winbar .= ' %* %<%{mistfly#File()}'
     let l:winbar .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:winbar .= "%{&readonly ? 'RO\ ' : ''}"
