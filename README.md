@@ -231,7 +231,10 @@ highlight! link MistflyReplace ErrorMsg
 
 | Option | Default State
 |--------|--------------
-| [mistflyAsciiShapes](https://github.com/bluz71/vim-mistfly-statusline#mistflyasciishapes)                           | Disabled, do display Unicode shapes
+| [mistflySeparatorSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyseparatorsymbol)                   | `⎪`
+| [mistflyArrowSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyarrowsymbol)                           | `↓`
+| [mistflyActiveTabSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyactivetabsymbol)                   | `▪`
+| [mistflyGitBranchSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflygitbranchsymbol)                   | ``
 | [mistflyErrorSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyerrorsymbol)                           | `E`
 | [mistflyWarningSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflywarningsymbol)                       | `W`
 | [mistflyInformationSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyinformationsymbol)               | `I`
@@ -249,29 +252,91 @@ highlight! link MistflyReplace ErrorMsg
 
 ---
 
-### mistflyAsciiShapes
+### mistflySeparatorSymbol
 
-The `mistflyAsciiShapes` option specifies whether to only use Ascii characters
-for certain dividers and symbols.
+The `mistflySeparatorSymbol` option specifies which character symbol to use for
+segment separators in the `statusline`.
 
-_mistfly_ by default **will use** Unicode Symbols and Powerline Glyphs for
-certain shapes such as: Git branch, dividers and active tabs. Note, many modern
-fonts, such as: [Hack](https://sourcefoundry.org/hack),
-[Iosevka](https://typeof.net/Iosevk), [Fira
-Code](https://github.com/tonsky/FiraCode) and [Jetbrains
-Mono](https://www.jetbrains.com/lp/mono), will provide these shapes.
+By default, the `⎪` character (Unicode `U+23AA`) will be displayed.
 
-To limit use only to Ascii shapes please add the following to your
+To specify your own separator symbol please add the following to your
 initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyAsciiShapes = v:true
+let g:mistflySeparatorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyAsciiShapes = true
+vim.g.mistflySeparatorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+```
+
+---
+
+### mistflyArrowSymbol
+
+The `mistflyArrowSymbol` option specifies which character symbol to use to
+indicate percentage scroll progress in the `statusline`.
+
+By default, the `↓` character (Unicode `U+2193`) will be displayed.
+
+To specify your own arrow symbol, or no symbol at all, please add the following
+to your initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyArrowSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyArrowSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
+```
+
+---
+
+### mistflyActiveTabSymbol
+
+The `mistflyActiveTabSymbol` option specifies which character symbol to use to
+signify the active tab in the `tabline`.
+
+By default, the `▪` character (Unicode `U+25AA`) will be displayed.
+
+To specify your own active tab symbol please add the following to your
+initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyActiveTabSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyActiveTabSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+```
+
+---
+
+### mistflyGitBranchSymbol
+
+The `mistflyGitBranchSymbol` option specifies which character symbol to use to
+signify the active tab in the `tabline`.
+
+By default, the `` character (Powerline `U+E0A0`) will be displayed. Many
+modern monospace fonts will contain that character.
+
+To specify your own active tab symbol, or no symbol at all, please add the
+following to your initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyGitBranchSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyGitBranchSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
 ```
 
 ---

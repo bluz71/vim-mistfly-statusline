@@ -124,10 +124,10 @@ function! mistfly#GitBranchName() abort
         return ''
     endif
 
-    if g:mistflyAsciiShapes
+    if len(g:mistflyGitBranchSymbol) == 0
         return ' ' . l:git_branch_name
     else
-        return '  ' . l:git_branch_name
+        return ' ' . g:mistflyGitBranchSymbol . ' ' . l:git_branch_name
     endif
 endfunction
 
@@ -221,11 +221,7 @@ function! mistfly#PluginsStatus() abort
 
     " Obsession plugin status.
     if exists('g:loaded_obsession')
-        if g:mistflyAsciiShapes
-            let l:obsession_status = ObsessionStatus('$', 'S')
-        else
-            let l:obsession_status = ObsessionStatus('●', '■')
-        endif
+        let l:obsession_status = ObsessionStatus('obsession', '!obsession')
         if len(l:obsession_status) > 0
             let l:status .= ' %#MistflySession#' . l:obsession_status . '%*'
         endif
@@ -252,8 +248,8 @@ endfunction
 
 function! mistfly#ActiveStatusLine() abort
     let l:mode = mode()
-    let l:divider = g:mistflyAsciiShapes ? '|' : '⎪'
-    let l:arrow =  g:mistflyAsciiShapes ?  '' : '↓'
+    let l:separator = g:mistflySeparatorSymbol
+    let l:arrow =  g:mistflyArrowSymbol
     let l:branch_name = mistfly#GitBranchName()
     let l:mode_emphasis = get(s:modes_map, l:mode, '%#MistflyNormalEmphasis#')[2]
 
@@ -263,14 +259,14 @@ function! mistfly#ActiveStatusLine() abort
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     if len(l:branch_name) > 0
-        let l:statusline .= '%*' . l:divider . l:mode_emphasis
+        let l:statusline .= '%*' . l:separator . l:mode_emphasis
         let l:statusline .= l:branch_name . '%* '
     endif
     let l:statusline .= mistfly#PluginsStatus()
-    let l:statusline .= '%*%=%l:%c %*' . l:divider
+    let l:statusline .= '%*%=%l:%c %*' . l:separator
     let l:statusline .= '%* ' . l:mode_emphasis . '%L%* ' . l:arrow . '%P '
     if g:mistflyWithIndentStatus
-        let l:statusline .= '%*' . l:divider
+        let l:statusline .= '%*' . l:separator
         let l:statusline .= '%* %{mistfly#IndentStatus()} '
     endif
 
@@ -278,15 +274,15 @@ function! mistfly#ActiveStatusLine() abort
 endfunction
 
 function! mistfly#InactiveStatusLine() abort
-    let l:divider = g:mistflyAsciiShapes ? '|' : '⎪'
-    let l:arrow =  g:mistflyAsciiShapes ? '' : '↓'
+    let l:separator = g:mistflySeparatorSymbol
+    let l:arrow =  g:mistflyArrowSymbol
 
     let l:statusline = ' %*%<%{mistfly#File()}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
-    let l:statusline .= '%*%=%l:%c ' . l:divider . ' %L ' . l:arrow . '%P '
+    let l:statusline .= '%*%=%l:%c ' . l:separator . ' %L ' . l:arrow . '%P '
     if g:mistflyWithIndentStatus
-        let l:statusline .= l:divider . ' %{mistfly#IndentStatus()} '
+        let l:statusline .= l:separator . ' %{mistfly#IndentStatus()} '
     endif
 
     return l:statusline
@@ -358,7 +354,7 @@ endfunction
 "===========================================================
 
 function! mistfly#ActiveTabLine() abort
-    let l:symbol = g:mistflyAsciiShapes ? '*' : '▪'
+    let l:symbol = g:mistflyActiveTabSymbol
     let l:tabline = ''
     let l:counter = 0
 
@@ -420,7 +416,7 @@ function! mistfly#GenerateHighlightGroups() abort
     " Synthesize plugin colors from relevant existing highlight groups.
     call s:ColorSchemeGitHighlights()
     call s:ColorSchemeDiagnosticHighlights()
-    call s:SynthesizeHighlight('MistflySession', 'Error', v:false)
+    highlight! link LineflySession LineflyGitAdd
 
     if g:mistflyTabLine && (!hlexists('TablineSelSymbol') || synIDattr(synIDtrans(hlID('TablineSelSymbol')), 'bg') == '')
         highlight! link TablineSelSymbol TablineSel

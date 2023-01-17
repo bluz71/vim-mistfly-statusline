@@ -14,7 +14,10 @@ endif
 let g:loaded_mistfly_statusline = 1
 
 " Options.
-let g:mistflyAsciiShapes = get(g:, 'mistflyAsciiShapes', v:false)
+let g:mistflySeparatorSymbol = get(g:, 'mistflySeparatorSymbol', "⎪")
+let g:mistflyArrowSymbol = get(g:, 'mistflyArrowSymbol', "↓")
+let g:mistflyActiveTabSymbol = get(g:, 'mistflyActiveTabSymbol', "▪")
+let g:mistflyGitBranchSymbol = get(g:, 'mistflyGitBranchSymbol', "")
 let g:mistflyErrorSymbol = get(g:, 'mistflyErrorSymbol', 'E')
 let g:mistflyWarningSymbol = get(g:, 'mistflyWarningSymbol', 'W')
 let g:mistflyInformationSymbol = get(g:, 'mistflyWarningSymbol', 'I')
