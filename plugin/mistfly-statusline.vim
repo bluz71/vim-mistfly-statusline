@@ -33,9 +33,9 @@ let g:mistflyWithCocStatus = get(g:, 'mistflyWithCocStatus', v:true)
 augroup mistflyStatuslineEvents
     autocmd!
     autocmd VimEnter,ColorScheme * call mistfly#GenerateHighlightGroups()
-    autocmd VimEnter             * call mistfly#UpdateInactiveWindows()
-    autocmd VimEnter             * call mistfly#TabLine()
+    autocmd VimEnter * call mistfly#UpdateInactiveWindows()
+    autocmd VimEnter * call mistfly#TabLine()
     autocmd WinEnter,BufWinEnter * call mistfly#StatusLine(v:true)
-    autocmd WinLeave             * call mistfly#StatusLine(v:false)
-    autocmd BufEnter,FocusGained * call mistfly#DetectBranchName()
+    autocmd WinLeave * call mistfly#StatusLine(v:false)
+    autocmd BufEnter,BufWrite,FocusGained * call mistfly#DetectBranchName()
 augroup END
