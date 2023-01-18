@@ -23,6 +23,9 @@ of code. For comparison, the
 contain over 3,600, 7,300 and 8,000 lines of code respectively. In fairness, the
 latter plugins are more featureful, configurable and visually pleasing.
 
+:warning: _mistfly_ has a predominantly fixed layout, this will **not** be an
+appropriate `statusline` plugin if layout flexibility is desired.
+
 Screenshots
 -----------
 
