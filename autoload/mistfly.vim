@@ -131,7 +131,7 @@ function! mistfly#GitBranchName() abort
 endfunction
 
 function! mistfly#PluginsStatus() abort
-    let l:status = ''
+    let l:segments = ''
     let l:added = 0
     let l:changed = 0
     let l:removed = 0
@@ -155,16 +155,16 @@ function! mistfly#PluginsStatus() abort
 
     " Git plugin status.
     if l:added > 0
-        let l:status .= ' %#MistflyGitAdd#+' . l:added . '%*'
+        let l:segments .= ' %#MistflyGitAdd#+' . l:added . '%*'
     endif
     if l:changed > 0
-        let l:status .= ' %#MistflyGitChange#~' . l:changed . '%*'
+        let l:segments .= ' %#MistflyGitChange#~' . l:changed . '%*'
     endif
     if l:removed > 0
-        let l:status .= ' %#MistflyGitDelete#-' . l:removed . '%*'
+        let l:segments .= ' %#MistflyGitDelete#-' . l:removed . '%*'
     endif
-    if len(l:status) > 0
-        let l:status .= ' '
+    if len(l:segments) > 0
+        let l:segments .= ' '
     endif
 
     if g:mistflyWithNvimDiagnosticStatus && exists('g:lspconfig')
@@ -206,27 +206,30 @@ function! mistfly#PluginsStatus() abort
     " Display errors and warnings from any of the previous diagnostic or linting
     " systems.
     if l:errors > 0
-        let l:status .= ' %#MistflyDiagnosticError#' . g:mistflyErrorSymbol
-        let l:status .= ' ' . l:errors . '%* '
+        let l:segments .= ' %#MistflyDiagnosticError#' . g:mistflyErrorSymbol
+        let l:segments .= ' ' . l:errors . '%*'
     endif
     if l:warnings > 0
-        let l:status .= ' %#MistflyDiagnosticWarning#' . g:mistflyWarningSymbol
-        let l:status .= ' ' . l:warnings . '%* '
+        let l:segments .= ' %#MistflyDiagnosticWarning#' . g:mistflyWarningSymbol
+        let l:segments .= ' ' . l:warnings . '%*'
     endif
     if l:information > 0
-        let l:status .= ' %#MistflyDiagnosticInformation#' . g:mistflyInformationSymbol
-        let l:status .= ' ' . l:information . '%* '
+        let l:segments .= ' %#MistflyDiagnosticInformation#' . g:mistflyInformationSymbol
+        let l:segments .= ' ' . l:information . '%*'
+    endif
+    if l:errors > 0 || l:warnings > 0 || l:information > 0
+        let l:segments .= ' '
     endif
 
     " Obsession plugin status.
     if exists('g:loaded_obsession')
         let l:obsession_status = ObsessionStatus('obsession', '!obsession')
         if len(l:obsession_status) > 0
-            let l:status .= ' %#MistflySession#' . l:obsession_status . '%*'
+            let l:segments .= ' %#MistflySession#' . l:obsession_status . '%*'
         endif
     endif
 
-    return l:status
+    return l:segments
 endfunction
 
 function! mistfly#IndentStatus() abort
