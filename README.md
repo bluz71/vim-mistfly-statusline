@@ -2,7 +2,7 @@ mistfly statusline
 ==================
 
 _mistfly statusline_ is a simple, fast and informative `statusline` for Vim and
-(legacy) Neovim written in Vimscript.
+(legacy) Neovim coded in Vimscript.
 
 :point_right: Contemporary Neovim users should use the pure-Lua
 [linefly](https://github.com/bluz71/nvim-linefly) plugin instead of _mistfly_.
