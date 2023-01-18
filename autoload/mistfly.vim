@@ -36,8 +36,8 @@ let s:statusline_bg = ''
 " Utilities
 "===========================================================
 
-function! mistfly#File() abort
-    return s:FileIcon() . s:FilePath()
+function! mistfly#File(short_path) abort
+    return s:FileIcon() . s:FilePath(a:short_path)
 endfunction
 
 function! s:FileIcon() abort
@@ -54,7 +54,7 @@ function! s:FileIcon() abort
     endif
 endfunction
 
-function! s:FilePath() abort
+function! s:FilePath(short_path) abort
     if len(expand('%:f')) == 0
         return ''
     end
@@ -68,11 +68,10 @@ function! s:FilePath() abort
         let l:separator = '\'
     endif
 
-    if &laststatus == 3
-        " Global statusline is active, no path shortening.
-        let l:path = fnamemodify(expand('%:f'), ':~:.')
-    else
+    if a:short_path
         let l:path = pathshorten(fnamemodify(expand('%:f'), ':~:.'))
+    else
+        let l:path = fnamemodify(expand('%:f'), ':~:.')
     endif
     let l:pathComponents = split(l:path, l:separator)
     let l:numPathComponents = len(l:pathComponents)
@@ -255,7 +254,7 @@ function! mistfly#ActiveStatusLine() abort
 
     let l:statusline = get(s:modes_map, l:mode, '%#MistflyNormal#')[0]
     let l:statusline .= get(s:modes_map, l:mode, ' normal ')[1]
-    let l:statusline .= '%* %<%{mistfly#File()}'
+    let l:statusline .= '%* %<%{mistfly#File(&laststatus != 3)}'
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     if len(l:branch_name) > 0
@@ -277,7 +276,7 @@ function! mistfly#InactiveStatusLine() abort
     let l:separator = g:mistflySeparatorSymbol
     let l:arrow =  g:mistflyArrowSymbol
 
-    let l:statusline = ' %*%<%{mistfly#File()}'
+    let l:statusline = ' %*%<%{mistfly#File(&laststatus != 3)}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
     let l:statusline .= '%*%=%l:%c ' . l:separator . ' %L ' . l:arrow . '%P '
@@ -332,7 +331,7 @@ function! mistfly#ActiveWinBar() abort
     let l:mode = mode()
     let l:winbar = get(s:modes_map, l:mode, '%#MistflyNormal#')[0]
     let l:winbar .= strpart(get(s:modes_map, l:mode, 'n')[1], 0, 2)
-    let l:winbar .= ' %* %<%{mistfly#File()}'
+    let l:winbar .= ' %* %<%{mistfly#File(v:true)}'
     let l:winbar .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:winbar .= "%{&readonly ? 'RO\ ' : ''}"
     let l:winbar .= '%#Normal#'
@@ -341,7 +340,7 @@ function! mistfly#ActiveWinBar() abort
 endfunction
 
 function! mistfly#InactiveWinBar() abort
-    let l:winbar = ' %*%<%{mistfly#File()}'
+    let l:winbar = ' %*%<%{mistfly#File(v:true)}'
     let l:winbar .= "%{&modified?'+\ ':' \ \ '}"
     let l:winbar .= "%{&readonly?'RO\ ':''}"
     let l:winbar .= '%#NonText#'

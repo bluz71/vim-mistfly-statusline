@@ -84,6 +84,9 @@ appropriate `colorscheme` set. A GUI client, or a modern version of Vim or
 Neovim with the `termguicolors` option enabled in a true-color terminal, is
 required.
 
+Please also make sure that the `laststatus` option is set to either: `1`, `2`
+or `3`.
+
 Installation
 ------------
 
@@ -107,24 +110,7 @@ use 'bluz71/vim-mistfly-statusline'
 { 'bluz71/vim-mistfly-statusline' },
 ```
 
-Legacy Installation
--------------------
-
-_mistfly_ still supports the legacy version of this plugin, previously named
-_moonfly statusline_, via the `moonfly-compat` branch. That legacy version can
-be installed with your preferred plugin manager.
-
-[vim-plug](https://github.com/junegunn/vim-plug):
-
-```viml
-Plug 'bluz71/vim-mistfly-statusline', { 'branch': 'moonfly-compat' }
-```
-
-[packer.nvim](https://github.com/wbthomason/packer.nvim):
-
-```lua
-use { 'bluz71/vim-mistfly-statusline', branch = 'moonfly-compat' }
-```
+Please do **not** lazy-load _mistfly_.
 
 Layout And Default Colors
 -------------------------

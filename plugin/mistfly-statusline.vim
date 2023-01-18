@@ -3,11 +3,6 @@
 " URL:          github.com/bluz71/vim-mistfly-statusline
 " License:      MIT (https://opensource.org/licenses/MIT)
 
-" if has('nvim-0.8')
-"     setlocal statusline=Please\ migrate\ to\ the\ pure\ Lua\ nvim-linefly\ plugin\ (https://github.com/bluz71/nvim-linefly)
-"     finish
-" endif
-
 if exists('g:loaded_mistfly_statusline')
   finish
 endif
