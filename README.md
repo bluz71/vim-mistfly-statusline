@@ -502,6 +502,34 @@ vim.g.mistflyWithIndentStatus = true
 
 ---
 
+### mistflyWithFileIcon
+
+The `mistflyWithFileIcon` option specifies whether a filetype icon, from a Nerd
+Font, will be displayed prior to the filename in the `statusline` (and optional
+`winbar`).
+
+Note, a [Nerd Font](https://www.nerdfonts.com) must be active **and** the
+[vim-devicons](https://github.com/ryanoasis/vim-devicons) or
+[nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) plugin must
+also be installed and active.
+
+By default a filetype icon will be displayed if possible.
+
+To disable the display of a filetype icon please add the following to your
+initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWithFileIcon = v:false
+```
+
+```lua
+-- lua initialization file
+vim.g.mistflyWithFileIcon = false
+```
+
+---
+
 ### mistflyWithGitBranch
 
 The `mistflyWithGitBranch` option specifies whether to display Git branch
@@ -527,7 +555,7 @@ vim.g.mistflyWithGitBranch = false
 
 The `mistflyWithGitsignsStatus` option specifies whether to display
 [Gitsigns](https://github.com/lewis6991/gitsigns.nvim) of the current buffer in
-the _statusline_.
+the `statusline`.
 
 By default, Gitsigns will be displayed if the plugin is loaded.
 
@@ -588,34 +616,6 @@ let g:mistflyWithSignifyStatus = v:false
 ```lua
 -- Lua initialization file
 vim.g.mistflyWithSignifyStatus = false
-```
-
----
-
-### mistflyWithFileIcon
-
-The `mistflyWithFileIcon` option specifies whether a filetype icon, from a Nerd
-Font, will be displayed prior to the filename in the `statusline` (and optional
-`winbar`).
-
-Note, a [Nerd Font](https://www.nerdfonts.com) must be active **and** the
-[vim-devicons](https://github.com/ryanoasis/vim-devicons) or
-[nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) plugin must
-also be installed and active.
-
-By default a filetype icon will be displayed if possible.
-
-To disable the display of a filetype icon please add the following to your
-initialization file:
-
-```viml
-" Vimscript initialization file
-let g:mistflyWithFileIcon = v:false
-```
-
-```lua
--- lua initialization file
-vim.g.mistflyWithFileIcon = false
 ```
 
 ---

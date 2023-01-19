@@ -1,0 +1,374 @@
+*mistfly* A simple, fast and informative statusline for Vim and (legacy) Neovim
+
+OPTIONS                                                       *mistfly-options*
+
+Default option values:
+>
+  g:mistflySeparatorSymbol = '⎪'
+  g:mistflyArrowSymbol = '↓'
+  g:mistflyActiveTabSymbol = '▪'
+  g:mistflyGitBranchSymbol = ''
+  g:mistflyErrorSymbol = 'E'
+  g:mistflyWarningSymbol = 'W'
+  g:mistflyInformationSymbol = 'I'
+  g:mistflyTabLine = v:false
+  g:mistflyWinBar = v:false
+  g:mistflyWithIndentStatus = v:false
+  g:mistflyWithFileIcon = v:true
+  g:mistflyWithGitBranch = v:true
+  g:mistflyWithGitsignsStatus = v:true
+  g:mistflyWithGitGutterStatus = v:true
+  g:mistflyWithSignifyStatus = v:true
+  g:mistflyWithNvimDiagnosticStatus = v:true
+  g:mistflyWithALEStatus = v:true
+  g:mistflyWithCocStatus = v:true
+<
+------------------------------------------------------------------------------
+mistflySeparatorSymbol~                             *g:mistflySeparatorSymbol*
+
+The `mistflySeparatorSymbol` option specifies which character symbol to use for
+segment separators in the `statusline`.
+
+By default, the `⎪` character (Unicode `U+23AA`) will be displayed.
+
+To specify your own separator symbol please add the following to your
+initialization file:
+>
+  " Vimscript initialization file
+  let g:mistflySeparatorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+
+  -- Lua initialization file
+  vim.g.mistflySeparatorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+<
+------------------------------------------------------------------------------
+mistflyArrowSymbol~                                     *g:mistflyArrowSymbol*
+
+The `mistflyArrowSymbol` option specifies which character symbol to use to
+indicate location-as-percentage in the `statusline`.
+
+By default, the `↓` character (Unicode `U+2193`) will be displayed.
+
+To specify your own arrow symbol, or no symbol at all, please add the following
+to your initialization file:
+>
+  " Vimscript initialization file
+  let g:mistflyArrowSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
+
+  -- Lua initialization file
+  vim.g.mistflyArrowSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
+<
+------------------------------------------------------------------------------
+mistflyActiveTabSymbol~                             *g:mistflyActiveTabSymbol*
+
+The `mistflyActiveTabSymbol` option specifies which character symbol to use to
+signify the active tab in the `tabline`.
+
+By default, the `▪` character (Unicode `U+25AA`) will be displayed.
+
+To specify your own active tab symbol please add the following to your
+initialization file:
+>
+  " Vimscript initialization file
+  let g:mistflyActiveTabSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+
+  -- Lua initialization file
+  vim.g.mistflyActiveTabSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+<
+------------------------------------------------------------------------------
+mistflyGitBranchSymbol~                             *g:mistflyGitBranchSymbol*
+
+The `mistflyGitBranchSymbol` option specifies which character symbol to use to
+signify the active tab in the `tabline`.
+
+By default, the `` character (Powerline `U+E0A0`) will be displayed. Many
+modern monospace fonts will contain that character.
+
+To specify your own active tab symbol, or no symbol at all, please add the
+following to your initialization file:
+>
+  " Vimscript initialization file
+  let g:mistflyGitBranchSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
+
+  -- Lua initialization file
+  vim.g.mistflyGitBranchSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
+<
+------------------------------------------------------------------------------
+mistflyErrorSymbol~                                     *g:mistflyErrorSymbol*
+
+The `mistflyErrorSymbol` option specifies which character symbol to use when
+displaying Neovim Diagnostic (https://neovim.io/doc/user/diagnostic.html), ALE
+(https://github.com/dense-analysis/ale) or Coc
+(https://github.com/neoclide/coc.nvim) errors.
+
+By default, the `E` character, will be displayed.
+
+To specify your own error symbol please add the following to your initialization
+file:
+>
+  " Vimscript initialization file
+  let g:mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+
+  -- Lua initialization file
+  vim.g.mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+<
+------------------------------------------------------------------------------
+mistflyWarningSymbol~                                 *g:mistflyWarningSymbol*
+
+The `mistflyWarningSymbol` option specifies which character symbol to use when
+displaying Neovim Diagnostic (https://neovim.io/doc/user/diagnostic.html), ALE
+(https://github.com/dense-analysis/ale) or Coc
+(https://github.com/neoclide/coc.nvim) warnings.
+
+By default, the `W` character, will be displayed.
+
+To specify your own warning symbol please add the following to your
+initialization file:
+>
+  " Vimscript initialization file
+  let g:mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+
+  -- Lua initialization file
+  vim.g.mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+<
+------------------------------------------------------------------------------
+mistflyInformationSymbol~                         *g:mistflyInformationSymbol*
+
+The `mistflyInformationSymbol` option specifies which character symbol to use
+when displaying Neovim Diagnostic
+(https://neovim.io/doc/user/diagnostic.html), ALE
+(https://github.com/dense-analysis/ale) or Coc
+(https://github.com/neoclide/coc.nvim) information.
+
+By default, the `I` character, will be displayed.
+
+To specify your own information symbol please add the following to your
+initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+
+  -- Lua initialization file
+  vim.g.mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+<
+------------------------------------------------------------------------------
+mistflyTabLine~                                             *g:mistflyTabLine*
+
+The `mistflyTabLine` option specifies whether to let this plugin manage the
+`tabline` in addition to the `statusline`. By default `tabline` management will
+not be undertaken.
+
+If enabled, `mistfly` will render a simple numbered, and clickable,
+window-space layout in the `tabline`; note, no buffers will be displayed in
+the `tabline` since there are many plugins that already provide that
+capability.
+
+To enable `tabline` support please add the following to your initialization
+file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyTabLine = v:true
+  -- Lua initialization file
+  vim.g.mistflyTabLine = true
+<
+------------------------------------------------------------------------------
+mistflyWinBar~                                               *g:mistflyWinBar*
+
+The `mistflyWinBar` option specifies whether to display Neovim's window bar at
+the top of each window. By default window bars will not be displayed.
+
+Note, Neovim 0.8 (or later) is required for this feature.
+
+Displaying a window bar is recommended when Neovim's global statusline is
+enabled via `set laststatus=3`; the `winbar` will then display the file name at
+the top of each window to disambiguate splits. Also, if there only one window in
+the current tab then a `winbar` will not be displayed (it won't be needed).
+
+To enable Neovim's `winbar` feature please add the following to your
+initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWinBar = v:true
+
+  -- Lua initialization file
+  vim.g.mistflyWinBar = true
+<
+------------------------------------------------------------------------------
+mistflyWithIndentStatus~                           *g:mistflyWithIndentStatus*
+
+The `mistflyWithIndentStatus` option specifies whether to display the
+indentation status as the last component in the statusline. By default
+indentation status will not be displayed.
+
+Note, if the `expandtab` option is set, for the current buffer, then tab stop
+will be displayed, for example `Tab:4` (tab equals four spaces); if on the
+other hand `noexpandtab` option is set then shift width will be displayed
+instead, for example `Spc:2` ('spc' short for 'space').
+
+To enable indentation status please add the following to your initialization
+file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithIndentStatus = v:true
+
+  -- Lua initialization file
+  vim.g.mistflyWithIndentStatus = true
+<
+------------------------------------------------------------------------------
+mistflyWithFileIcon~                                   *g:mistflyWithFileIcon*
+
+The `mistflyWithFileIcon` option specifies whether a filetype icon, from a
+Nerd Font, will be displayed prior to the filename in the `statusline` (and
+optional `winbar`).
+
+Note, a Nerd Font (https://www.nerdfonts.com) must be active and the
+vim-devicons (https://github.com/ryanoasis/vim-devicons) or nvim-web-devicons
+(https://github.com/kyazdani42/nvim-web-devicons) plugin must also be
+installed and active.
+
+By default a filetype icon will be displayed if possible.
+
+To disable the display of a filetype icon please add the following to your
+initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithFileIcon = v:false
+
+  -- lua initialization file
+  vim.g.mistflyWithFileIcon = false
+<
+------------------------------------------------------------------------------
+mistflyWithGitBranch~                                 *g:mistflyWithGitBranch*
+
+The `mistflyWithGitBranch` option specifies whether to display Git branch
+details in the _statusline_. By default Git branches will be displayed in the
+`statusline`.
+
+To disable the display of Git branches in the _statusline_ please add the
+following to your initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithGitBranch = v:false
+
+  -- Lua initialization file
+  vim.g.mistflyWithGitBranch = false
+<
+------------------------------------------------------------------------------
+mistflyWithGitsignsStatus~                       *g:mistflyWithGitsignsStatus*
+
+The `mistflyWithGitsignsStatus` option specifies whether to display Gitsigns
+(https://github.com/lewis6991/gitsigns.nvim) of the current buffer in the
+`statusline`.
+
+By default, Gitsigns will be displayed if the plugin is loaded.
+
+To disable the display of Gitsigns in the _statusline_ please add the following
+to your initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithGitsignsStatus = v:false
+
+  -- Lua initialization file
+  vim.g.mistflyWithGitsignsStatus = false
+<
+------------------------------------------------------------------------------
+mistflyWithGitGutterStatus~                     *g:mistflyWithGitGutterStatus*
+
+The `mistflyWithGitGutterStatus` option specifies whether to display GitGutter
+(https://github.com/airblade/vim-gitgutter) status of the current buffer in
+the _statusline_.
+
+By default, GitGutter status will be displayed if the plugin is loaded.
+
+To disable the display of GitGutter status in the _statusline_ please add the
+following to your initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithGitGutterStatus = v:false
+
+  -- Lua initialization file
+  vim.g.mistflyWithGitGutterStatus = false
+<
+------------------------------------------------------------------------------
+mistflyWithSignifyStatus~                         *g:mistflyWithSignifyStatus*
+
+The `mistflyWithSignifyStatus` option specifies whether to display Signify
+(https://github.com/mhinz/vim-signify) status of the current buffer in the
+_statusline_.
+
+By default, Signify status will be displayed if the plugin is loaded.
+
+To disable the display of Signify status in the _statusline_ please add the
+following to your initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithSignifyStatus = v:false
+
+  -- Lua initialization file
+  vim.g.mistflyWithSignifyStatus = false
+<
+------------------------------------------------------------------------------
+mistflyWithNvimDiagnosticStatus~           *g:mistflyWithNvimDiagnosticStatus*
+
+The `mistflyWithNvimDiagnosticStatus` option specifies whether to indicate the
+presence of the Neovim Diagnostics in the current buffer.
+
+By default, Neovim Diagnositics will be displayed if the
+nvim-lspconfig (https://github.com/neovim/nvim-lspconfig) plugin is loaded.
+
+If Neovim Diagnostic display is not wanted then please add the following to
+your initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithNvimDiagnosticStatus = v:false
+
+  -- Lua initialization file
+  vim.g.mistflyWithNvimDiagnosticStatus = false
+<
+------------------------------------------------------------------------------
+mistflyWithALEStatus~                                 *g:mistflyWithALEStatus*
+
+The `mistflyWithALEStatus` option specifies whether to indicate the presence of
+the ALE problems in the current buffer.
+
+By default, ALE problems will be displayed if the plugin is loaded.
+
+If ALE problems display is not wanted then please add the following to your
+initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithALEStatus = v:false
+
+  -- Lua initialization file
+  vim.g.mistflyWithALEStatus = false
+<
+------------------------------------------------------------------------------
+mistflyWithCocStatus~                                 *g:mistflyWithCocStatus*
+
+The `mistflyWithCocStatus` option specifies whether to indicate the presence
+of the Coc diagnostics in the current buffer.
+
+By default, Coc diagnostics will be displayed if the plugin is loaded.
+
+If Coc diagnostics are not wanted then please add the following to your
+initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithCocStatus = v:false
+
+  -- Lua initialization file
+  vim.g.mistflyWithCocStatus = false
+<
+
+vim:tw=78:ts=8:noet:ft=help:norl:
