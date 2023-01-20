@@ -32,21 +32,21 @@ appropriate `statusline` plugin if layout flexibility is desired.
 Screenshots
 -----------
 
-![normal](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-normal.png)
-![insert](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-insert.png)
-![visual](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-visual.png)
-![command](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-command.png)
-![replace](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-replace.png)
+![normal](https://raw.githubusercontent.com/bluz71/misc-binaries/master/statusline/statusline-normal.png)
+![insert](https://raw.githubusercontent.com/bluz71/misc-binaries/master/statusline/statusline-insert.png)
+![visual](https://raw.githubusercontent.com/bluz71/misc-binaries/master/statusline/statusline-visual.png)
+![command](https://raw.githubusercontent.com/bluz71/misc-binaries/master/statusline/statusline-command.png)
+![replace](https://raw.githubusercontent.com/bluz71/misc-binaries/master/statusline/statusline-replace.png)
 
 The above screenshots are using the
-[nightfly](https://github.com/bluz71/vim-nightfly-colors) colorscheme and the
-[Iosevka](https://github.com/be5invis/Iosevka) font with a couple Git changes,
-a single Diagnostic warning and indent-status enabled.
+[nightfly](https://github.com/bluz71/vim-moonfly-colors) colorscheme and the
+[Iosevka](https://github.com/be5invis/Iosevka) font with Git changes,
+Diagnostics and indent-status enabled.
 
-Statusline Performance Comparison
----------------------------------
+Statusline Startup Comparison
+-----------------------------
 
-A performance comparison of _mistfly_ against various popular `statusline`
+A startup comparison of _mistfly_ against various popular `statusline`
 plugins, with their out-of-the-box defaults, on a clean and minimal Neovim setup
 with the [moonfly](https://github.com/bluz71/vim-moonfly-colors) colorscheme.
 The Neovim startup times in the following table are provived by the
@@ -207,7 +207,7 @@ Lastly, if the fallback colors do not suit then it is very easy to override with
 your own highlights.
 
 :gift: Here is a simple example of customized _mistfly_ colors. Save the
-following either at the end of your initialization file after setting your
+following at the end of your initialization file after setting your
 `colorscheme`.
 
 ```viml
@@ -436,7 +436,7 @@ nnoremap <Leader>9 9gt
 
 A screenshot of the `tabline`:
 
-![tabline](https://raw.githubusercontent.com/bluz71/misc-binaries/master/mistfly/mistfly-tabline.png)
+![tabline](https://raw.githubusercontent.com/bluz71/misc-binaries/master/statusline/tabline.png)
 
 ---
 
