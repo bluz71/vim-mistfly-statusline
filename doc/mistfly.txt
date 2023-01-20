@@ -4,21 +4,21 @@ OPTIONS                                                       *mistfly-options*
 
 Default option values:
 >
-  g:mistflySeparatorSymbol = '⎪'
-  g:mistflyProgressSymbol = '↓'
-  g:mistflyActiveTabSymbol = '▪'
-  g:mistflyGitBranchSymbol = ''
-  g:mistflyErrorSymbol = 'E'
-  g:mistflyWarningSymbol = 'W'
-  g:mistflyInformationSymbol = 'I'
-  g:mistflyTabLine = v:false
-  g:mistflyWinBar = v:false
-  g:mistflyWithFileIcon = v:true
-  g:mistflyWithGitBranch = v:true
-  g:mistflyWithGitStatus = v:true
-  g:mistflyWithDiagnosticStatus = v:true
-  g:mistflyWithSessionStatus = v:true
-  g:mistflyWithIndentStatus = v:false
+  let g:mistflySeparatorSymbol = '⎪'
+  let g:mistflyProgressSymbol = '↓'
+  let g:mistflyActiveTabSymbol = '▪'
+  let g:mistflyGitBranchSymbol = ''
+  let g:mistflyErrorSymbol = 'E'
+  let g:mistflyWarningSymbol = 'W'
+  let g:mistflyInformationSymbol = 'I'
+  let g:mistflyTabLine = v:false
+  let g:mistflyWinBar = v:false
+  let g:mistflyWithFileIcon = v:true
+  let g:mistflyWithGitBranch = v:true
+  let g:mistflyWithGitStatus = v:true
+  let g:mistflyWithDiagnosticStatus = v:true
+  let g:mistflyWithSessionStatus = v:true
+  let g:mistflyWithIndentStatus = v:false
 <
 ------------------------------------------------------------------------------
 mistflySeparatorSymbol~                             *g:mistflySeparatorSymbol*
