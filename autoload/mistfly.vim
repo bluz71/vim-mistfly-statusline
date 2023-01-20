@@ -139,16 +139,16 @@ function! mistfly#PluginsStatus() abort
     let l:warnings = 0
     let l:information = 0
 
-    if g:mistflyWithGitsignsStatus && has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
+    if g:mistflyWithGitStatus && has('nvim-0.5') && luaeval("package.loaded.gitsigns ~= nil")
         " Gitsigns status.
         let l:counts = get(b:, 'gitsigns_status_dict', {})
         let l:added = get(l:counts, 'added', 0)
         let l:changed = get(l:counts, 'changed', 0)
         let l:removed = get(l:counts, 'removed', 0)
-    elseif g:mistflyWithGitGutterStatus && exists('g:loaded_gitgutter')
+    elseif g:mistflyWithGitStatus && exists('g:loaded_gitgutter')
         " GitGutter status.
         let [l:added, l:changed, l:removed] = GitGutterGetHunkSummary()
-    elseif g:mistflyWithSignifyStatus && exists('g:loaded_signify') && sy#buffer_is_active()
+    elseif g:mistflyWithGitStatus && exists('g:loaded_signify') && sy#buffer_is_active()
         " Signify status.
         let [l:added, l:changed, l:removed] = sy#repo#get_stats()
     endif
@@ -167,7 +167,7 @@ function! mistfly#PluginsStatus() abort
         let l:segments .= ' '
     endif
 
-    if g:mistflyWithNvimDiagnosticStatus && exists('g:lspconfig')
+    if g:mistflyWithDiagnosticStatus && exists('g:lspconfig')
         " Neovim Diagnostic status.
         if has('nvim-0.6')
             let l:errors = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.ERROR})')
@@ -177,7 +177,7 @@ function! mistfly#PluginsStatus() abort
             let l:errors = luaeval('vim.lsp.diagnostic.get_count(0, [[Error]])')
             let l:warnings = luaeval('vim.lsp.diagnostic.get_count(0, [[Warning]])')
         endif
-    elseif g:mistflyWithALEStatus && exists('g:loaded_ale')
+    elseif g:mistflyWithDiagnosticStatus && exists('g:loaded_ale')
         " ALE status.
         let l:counts = ale#statusline#Count(bufnr(''))
         if has_key(l:counts, 'error')
@@ -189,7 +189,7 @@ function! mistfly#PluginsStatus() abort
         if has_key(l:counts, 'info')
             let l:information = l:counts['info']
         endif
-    elseif g:mistflyWithCocStatus && exists('g:did_coc_loaded')
+    elseif g:mistflyWithDiagnosticStatus && exists('g:did_coc_loaded')
         " Coc status.
         let l:counts = get(b:, 'coc_diagnostic_info', {})
         if has_key(l:counts, 'error')
@@ -222,7 +222,7 @@ function! mistfly#PluginsStatus() abort
     endif
 
     " Obsession plugin status.
-    if exists('g:loaded_obsession')
+    if g:mistflyWithSessionStatus &&  exists('g:loaded_obsession')
         let l:obsession_status = ObsessionStatus('obsession', '!obsession')
         if len(l:obsession_status) > 0
             let l:segments .= ' %#MistflySession#' . l:obsession_status . '%*'

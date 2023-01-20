@@ -13,15 +13,12 @@ Default option values:
   g:mistflyInformationSymbol = 'I'
   g:mistflyTabLine = v:false
   g:mistflyWinBar = v:false
-  g:mistflyWithIndentStatus = v:false
   g:mistflyWithFileIcon = v:true
   g:mistflyWithGitBranch = v:true
-  g:mistflyWithGitsignsStatus = v:true
-  g:mistflyWithGitGutterStatus = v:true
-  g:mistflyWithSignifyStatus = v:true
-  g:mistflyWithNvimDiagnosticStatus = v:true
-  g:mistflyWithALEStatus = v:true
-  g:mistflyWithCocStatus = v:true
+  g:mistflyWithGitStatus = v:true
+  g:mistflyWithDiagnosticStatus = v:true
+  g:mistflyWithSessionStatus = v:true
+  g:mistflyWithIndentStatus = v:false
 <
 ------------------------------------------------------------------------------
 mistflySeparatorSymbol~                             *g:mistflySeparatorSymbol*
@@ -83,7 +80,7 @@ signify the active tab in the `tabline`.
 By default, the `` character (Powerline `U+E0A0`) will be displayed. Many
 modern monospace fonts will contain that character.
 
-To specify your own active tab symbol, or no symbol at all, please add the
+To specify your own Git Branch symbol, or no symbol at all, please add the
 following to your initialization file:
 >
   " Vimscript initialization file
@@ -196,28 +193,6 @@ initialization file:
   vim.g.mistflyWinBar = true
 <
 ------------------------------------------------------------------------------
-mistflyWithIndentStatus~                           *g:mistflyWithIndentStatus*
-
-The `mistflyWithIndentStatus` option specifies whether to display the
-indentation status as the last component in the statusline. By default
-indentation status will not be displayed.
-
-Note, if the `expandtab` option is set, for the current buffer, then tab stop
-will be displayed, for example `Tab:4` (tab equals four spaces); if on the
-other hand `noexpandtab` option is set then shift width will be displayed
-instead, for example `Spc:2` ('spc' short for 'space').
-
-To enable indentation status please add the following to your initialization
-file:
-
->
-  " Vimscript initialization file
-  let g:mistflyWithIndentStatus = v:true
-
-  -- Lua initialization file
-  vim.g.mistflyWithIndentStatus = true
-<
-------------------------------------------------------------------------------
 mistflyWithFileIcon~                                   *g:mistflyWithFileIcon*
 
 The `mistflyWithFileIcon` option specifies whether a filetype icon, from a
@@ -259,116 +234,87 @@ following to your initialization file:
   vim.g.mistflyWithGitBranch = false
 <
 ------------------------------------------------------------------------------
-mistflyWithGitsignsStatus~                       *g:mistflyWithGitsignsStatus*
+mistflyWithGitStatus~                                 *g:mistflyWithGitStatus*
 
-The `mistflyWithGitsignsStatus` option specifies whether to display Gitsigns
-(https://github.com/lewis6991/gitsigns.nvim) of the current buffer in the
-`statusline`.
+The `mistflyWithGitStatus` option specifies whether to display the Git status
+of the current buffer in the `statusline`.
 
-By default, Gitsigns will be displayed if the plugin is loaded.
+The Gitsigns (https://github.com/lewis6991/gitsigns.nvim), GitGutter
+(https://github.com/airblade/vim-gitgutter) and Signify
+(https://github.com/mhinz/vim-signify) plugins are supported.
 
-To disable the display of Gitsigns in the _statusline_ please add the following
-to your initialization file:
+By default, the Git status will be displayed if one of the above plugins are
+loaded.
 
->
-  " Vimscript initialization file
-  let g:mistflyWithGitsignsStatus = v:false
-
-  -- Lua initialization file
-  vim.g.mistflyWithGitsignsStatus = false
-<
-------------------------------------------------------------------------------
-mistflyWithGitGutterStatus~                     *g:mistflyWithGitGutterStatus*
-
-The `mistflyWithGitGutterStatus` option specifies whether to display GitGutter
-(https://github.com/airblade/vim-gitgutter) status of the current buffer in
-the _statusline_.
-
-By default, GitGutter status will be displayed if the plugin is loaded.
-
-To disable the display of GitGutter status in the _statusline_ please add the
+To disable the display of Git status in the _statusline_ please add the
 following to your initialization file:
 
 >
   " Vimscript initialization file
-  let g:mistflyWithGitGutterStatus = v:false
+  let g:mistflyWithGitStatus = v:false
 
   -- Lua initialization file
-  vim.g.mistflyWithGitGutterStatus = false
+  vim.g.mistflyWithGitStatus = false
 <
 ------------------------------------------------------------------------------
-mistflyWithSignifyStatus~                         *g:mistflyWithSignifyStatus*
-
-The `mistflyWithSignifyStatus` option specifies whether to display Signify
-(https://github.com/mhinz/vim-signify) status of the current buffer in the
-_statusline_.
-
-By default, Signify status will be displayed if the plugin is loaded.
-
-To disable the display of Signify status in the _statusline_ please add the
-following to your initialization file:
-
->
-  " Vimscript initialization file
-  let g:mistflyWithSignifyStatus = v:false
-
-  -- Lua initialization file
-  vim.g.mistflyWithSignifyStatus = false
-<
-------------------------------------------------------------------------------
-mistflyWithNvimDiagnosticStatus~           *g:mistflyWithNvimDiagnosticStatus*
+mistflyWithDiagnosticStatus~                   *g:mistflyWithDiagnosticStatus*
 
 The `mistflyWithNvimDiagnosticStatus` option specifies whether to indicate the
-presence of the Neovim Diagnostics in the current buffer.
+presence of the Diagnostics in the current buffer.
 
-By default, Neovim Diagnositics will be displayed if the
-nvim-lspconfig (https://github.com/neovim/nvim-lspconfig) plugin is loaded.
+Neovim Diagnositics (https://neovim.io/doc/user/diagnostic.html) ALE
+(https://github.com/dense-analysis/ale) and Coc
+(https://github.com/neoclide/coc.nvim) are supported.
 
-If Neovim Diagnostic display is not wanted then please add the following to
-your initialization file:
-
->
-  " Vimscript initialization file
-  let g:mistflyWithNvimDiagnosticStatus = v:false
-
-  -- Lua initialization file
-  vim.g.mistflyWithNvimDiagnosticStatus = false
-<
-------------------------------------------------------------------------------
-mistflyWithALEStatus~                                 *g:mistflyWithALEStatus*
-
-The `mistflyWithALEStatus` option specifies whether to indicate the presence of
-the ALE problems in the current buffer.
-
-By default, ALE problems will be displayed if the plugin is loaded.
-
-If ALE problems display is not wanted then please add the following to your
+If Diagnostic display is not wanted then please add the following to your
 initialization file:
 
 >
   " Vimscript initialization file
-  let g:mistflyWithALEStatus = v:false
+  let g:mistflyWithDiagnosticStatus = v:false
 
   -- Lua initialization file
-  vim.g.mistflyWithALEStatus = false
+  vim.g.mistflyWithDiagnosticStatus = false
 <
 ------------------------------------------------------------------------------
-mistflyWithCocStatus~                                 *g:mistflyWithCocStatus*
+mistflyWithSessionStatus~                         *g:mistflyWithSessionStatus*
 
-The `mistflyWithCocStatus` option specifies whether to indicate the presence
-of the Coc diagnostics in the current buffer.
+The `mistflyWithSessionStatus` option specifies whether to display Obsession
+(https://github.com/tpope/vim-obsession) session details in the `statusline`.
 
-By default, Coc diagnostics will be displayed if the plugin is loaded.
+By default, session details will be displayed if the plugin is loaded.
 
-If Coc diagnostics are not wanted then please add the following to your
-initialization file:
+To disable the display of session details in the _statusline_ please add the
+following to your initialization file:
 
 >
   " Vimscript initialization file
-  let g:mistflyWithCocStatus = v:false
+  let g:mistflyWithSessionStatus = v:false
 
   -- Lua initialization file
-  vim.g.mistflyWithCocStatus = false
+  vim.g.mistflyWithSessionStatus = false
+<
+------------------------------------------------------------------------------
+mistflyWithIndentStatus~                           *g:mistflyWithIndentStatus*
+
+The `mistflyWithIndentStatus` option specifies whether to display the
+indentation status as the last component in the statusline. By default
+indentation status will not be displayed.
+
+Note, if the `expandtab` option is set, for the current buffer, then tab stop
+will be displayed, for example `Tab:4` (tab equals four spaces); if on the
+other hand `noexpandtab` option is set then shift width will be displayed
+instead, for example `Spc:2` ('spc' short for 'space').
+
+To enable indentation status please add the following to your initialization
+file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithIndentStatus = v:true
+
+  -- Lua initialization file
+  vim.g.mistflyWithIndentStatus = true
 <
 
 vim:tw=78:ts=8:noet:ft=help:norl:
