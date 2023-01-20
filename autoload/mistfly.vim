@@ -251,7 +251,7 @@ endfunction
 function! mistfly#ActiveStatusLine() abort
     let l:mode = mode()
     let l:separator = g:mistflySeparatorSymbol
-    let l:arrow =  g:mistflyArrowSymbol
+    let l:progress =  g:mistflyProgressSymbol
     let l:branch_name = mistfly#GitBranchName()
     let l:mode_emphasis = get(s:modes_map, l:mode, '%#MistflyNormalEmphasis#')[2]
 
@@ -266,7 +266,7 @@ function! mistfly#ActiveStatusLine() abort
     endif
     let l:statusline .= mistfly#PluginsStatus()
     let l:statusline .= '%*%=%l:%c %*' . l:separator
-    let l:statusline .= '%* ' . l:mode_emphasis . '%L%* ' . l:arrow . '%P '
+    let l:statusline .= '%* ' . l:mode_emphasis . '%L%* ' . l:progress . '%P '
     if g:mistflyWithIndentStatus
         let l:statusline .= '%*' . l:separator
         let l:statusline .= '%* %{mistfly#IndentStatus()} '
@@ -277,12 +277,12 @@ endfunction
 
 function! mistfly#InactiveStatusLine() abort
     let l:separator = g:mistflySeparatorSymbol
-    let l:arrow =  g:mistflyArrowSymbol
+    let l:progress =  g:mistflyProgressSymbol
 
     let l:statusline = ' %*%<%{mistfly#File(&laststatus != 3)}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
-    let l:statusline .= '%*%=%l:%c ' . l:separator . ' %L ' . l:arrow . '%P '
+    let l:statusline .= '%*%=%l:%c ' . l:separator . ' %L ' . l:progress . '%P '
     if g:mistflyWithIndentStatus
         let l:statusline .= l:separator . ' %{mistfly#IndentStatus()} '
     endif

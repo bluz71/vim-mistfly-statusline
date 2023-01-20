@@ -224,7 +224,7 @@ highlight! link MistflyReplace ErrorMsg
 | Option | Default State
 |--------|--------------
 | [mistflySeparatorSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyseparatorsymbol)                   | `⎪`
-| [mistflyArrowSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyarrowsymbol)                           | `↓`
+| [mistflyProgressSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyprogresssymbol)                     | `↓`
 | [mistflyActiveTabSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyactivetabsymbol)                   | `▪`
 | [mistflyGitBranchSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflygitbranchsymbol)                   | ``
 | [mistflyErrorSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyerrorsymbol)                           | `E`
@@ -263,24 +263,24 @@ vim.g.mistflySeparatorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 
 ---
 
-### mistflyArrowSymbol
+### mistflyProgressSymbol
 
-The `mistflyArrowSymbol` option specifies which character symbol to use to
+The `mistflyProgressSymbol` option specifies which character symbol to use to
 indicate location-as-percentage in the `statusline`.
 
 By default, the `↓` character (Unicode `U+2193`) will be displayed.
 
-To specify your own arrow symbol, or no symbol at all, please add the following
-to your initialization file:
+To specify your own progress symbol, or no symbol at all, please add the
+following to your initialization file:
 
 ```viml
 " Vimscript initialization file
-let g:mistflyArrowSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
+let g:mistflyProgressSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
 ```
 
 ```lua
 -- Lua initialization file
-vim.g.mistflyArrowSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
+vim.g.mistflyProgressSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
 ```
 
 ---

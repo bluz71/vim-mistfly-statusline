@@ -5,7 +5,7 @@ OPTIONS                                                       *mistfly-options*
 Default option values:
 >
   g:mistflySeparatorSymbol = '⎪'
-  g:mistflyArrowSymbol = '↓'
+  g:mistflyProgressSymbol = '↓'
   g:mistflyActiveTabSymbol = '▪'
   g:mistflyGitBranchSymbol = ''
   g:mistflyErrorSymbol = 'E'
@@ -38,21 +38,21 @@ initialization file:
   vim.g.mistflySeparatorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 <
 ------------------------------------------------------------------------------
-mistflyArrowSymbol~                                     *g:mistflyArrowSymbol*
+mistflyProgressSymbol~                               *g:mistflyProgressSymbol*
 
-The `mistflyArrowSymbol` option specifies which character symbol to use to
+The `mistflyProgressSymbol` option specifies which character symbol to use to
 indicate location-as-percentage in the `statusline`.
 
 By default, the `↓` character (Unicode `U+2193`) will be displayed.
 
-To specify your own arrow symbol, or no symbol at all, please add the following
-to your initialization file:
+To specify your own progress symbol, or no symbol at all, please add the
+following to your initialization file:
 >
   " Vimscript initialization file
-  let g:mistflyArrowSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
+  let g:mistflyProgressSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
 
   -- Lua initialization file
-  vim.g.mistflyArrowSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
+  vim.g.mistflyProgressSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
 <
 ------------------------------------------------------------------------------
 mistflyActiveTabSymbol~                             *g:mistflyActiveTabSymbol*
