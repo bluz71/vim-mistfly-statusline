@@ -18,7 +18,7 @@ can also be
 [customized](https://github.com/bluz71/vim-mistfly-statusline#highlight-groups-and-colors)
 if desired.
 
-Lastly, _mistfly_ is a light _statusline_ plugin clocking in at about 500 lines
+Lastly, _mistfly_ is a light `statusline` plugin clocking in at about 500 lines
 of code. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim),
 [airline](https://github.com/vim-airline/vim-airline) and
@@ -333,9 +333,7 @@ vim.g.mistflyGitBranchSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
 ### mistflyErrorSymbol
 
 The `mistflyErrorSymbol` option specifies which character symbol to use when
-displaying [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html),
-[ALE](https://github.com/dense-analysis/ale) or
-[Coc](https://github.com/neoclide/coc.nvim) errors.
+displaying Diagnostic errors.
 
 By default, the `E` character, will be displayed.
 
@@ -357,9 +355,7 @@ vim.g.mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ### mistflyWarningSymbol
 
 The `mistflyWarningSymbol` option specifies which character symbol to use when
-displaying [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html),
-[ALE](https://github.com/dense-analysis/ale) or
-[Coc](https://github.com/neoclide/coc.nvim) warnings.
+displaying Diagnostic warnings.
 
 By default, the `W` character, will be displayed.
 
@@ -381,9 +377,7 @@ vim.g.mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ### mistflyInformationSymbol
 
 The `mistflyInformationSymbol` option specifies which character symbol to use
-when displaying [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html),
-[ALE](https://github.com/dense-analysis/ale) or
-[Coc](https://github.com/neoclide/coc.nvim) information.
+when displaying Diagnostic information.
 
 By default, the `I` character, will be displayed.
 
@@ -504,10 +498,10 @@ vim.g.mistflyWithFileIcon = false
 ### mistflyWithGitBranch
 
 The `mistflyWithGitBranch` option specifies whether to display Git branch
-details in the _statusline_. By default Git branches will be displayed in the
+details in the `statusline`. By default Git branches will be displayed in the
 `statusline`.
 
-To disable the display of Git branches in the _statusline_ please add the
+To disable the display of Git branches in the `statusline` please add the
 following to your initialization file:
 
 ```viml
@@ -534,7 +528,7 @@ The [Gitsigns](https://github.com/lewis6991/gitsigns.nvim),
 By default, the Git status will be displayed if one of the above plugins are
 loaded.
 
-To disable the display of Git status in the _statusline_ please add the
+To disable the display of Git status in the `statusline` please add the
 following to your initialization file:
 
 ```viml
@@ -581,7 +575,7 @@ The `mistflyWithSessionStatus` option specifies whether to display
 
 By default, session details will be displayed if the plugin is loaded.
 
-To disable the display of session details in the _statusline_ please add the
+To disable the display of session details in the `statusline` please add the
 following to your initialization file:
 
 ```viml
