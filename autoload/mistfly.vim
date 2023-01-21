@@ -114,7 +114,7 @@ function! mistfly#GitBranchName() abort
     elseif exists('g:loaded_fugitive')
         " Fugitive is available, let's use it to access the branch name.
         let l:git_branch_name = FugitiveHead()
-    else
+    elseif exists('b:git_branch_name')
         " Else use fallback detection.
         let l:git_branch_name = b:git_branch_name
     endif
