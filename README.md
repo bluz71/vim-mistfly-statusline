@@ -4,7 +4,7 @@ mistfly statusline
 _mistfly statusline_ is a simple, fast and informative `statusline` for Vim and
 (legacy) Neovim coded in Vimscript.
 
-:point_right: Contemporary Neovim users should use the pure-Lua
+:point_right: Contemporary Neovim users will need to use the pure-Lua
 [linefly](https://github.com/bluz71/nvim-linefly) plugin instead of _mistfly_.
 
 _mistfly_ provides optional `tabline` and Neovim `winbar` support when the
