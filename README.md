@@ -183,8 +183,6 @@ colorscheme (moonfly & nightfly) or within this plugin (all others):
 
 - [nightfly](https://github.com/bluz71/vim-nightfly-guicolors)
 
-- [catppuccin](https://github.com/catppuccin/nvim)
-
 - [dracula](https://github.com/dracula/vim)
 
 - [edge](https://github.com/sainnhe/edge)
@@ -197,11 +195,7 @@ colorscheme (moonfly & nightfly) or within this plugin (all others):
 
 - [gruvbox-material](https://github.com/sainnhe/gruvbox-material)
 
-- [nightfox](https://github.com/EdenEast/nightfox.nvim)
-
 - [sonokai](https://github.com/sainnhe/sonokai)
-
-- [tokyonight](https://github.com/folke/tokyonight.nvim)
 
 Lastly, if the fallback colors do not suit then it is very easy to override with
 your own highlights.

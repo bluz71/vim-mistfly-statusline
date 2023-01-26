@@ -429,13 +429,7 @@ function! s:ColorSchemeModeHighlights() abort
     if g:colors_name == 'moonfly' || g:colors_name == 'nightfly'
         " Do nothing since both colorschemes already set mistfly mode colors.
         return
-    elseif g:colors_name == 'catppuccin'
-        call s:SynthesizeModeHighlight('MistflyNormal', 'Title', 'VertSplit')
-        call s:SynthesizeModeHighlight('MistflyInsert', 'String', 'VertSplit')
-        call s:SynthesizeModeHighlight('MistflyVisual', 'Statement', 'VertSplit')
-        call s:SynthesizeModeHighlight('MistflyCommand', 'Constant', 'VertSplit')
-        call s:SynthesizeModeHighlight('MistflyReplace', 'Conditional', 'VertSplit')
-    elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'gruvbox-material' || g:colors_name == 'sonokai' || g:colors_name == 'tokyonight'
+    elseif g:colors_name == 'edge' || g:colors_name == 'everforest' || g:colors_name == 'gruvbox-material' || g:colors_name == 'sonokai'
         highlight! link MistflyNormal MiniStatuslineModeNormal
         highlight! link MistflyInsert MiniStatuslineModeInsert
         highlight! link MistflyVisual MiniStatuslineModeVisual
@@ -453,12 +447,6 @@ function! s:ColorSchemeModeHighlights() abort
         call s:SynthesizeModeHighlight('MistflyVisual', 'GruvboxOrange', 'GruvboxBg0')
         call s:SynthesizeModeHighlight('MistflyCommand', 'GruvboxGreen', 'GruvboxBg0')
         call s:SynthesizeModeHighlight('MistflyReplace', 'GruvboxRed', 'GruvboxBg0')
-    elseif g:colors_name == 'carbonfox' || g:colors_name == 'nightfox' || g:colors_name == 'nordfox' || g:colors_name == 'terafox'
-        highlight! link MistflyNormal Todo
-        highlight! link MistflyInsert MiniStatuslineModeInsert
-        highlight! link MistflyVisual MiniStatuslineModeVisual
-        highlight! link MistflyCommand MiniStatuslineModeCommand
-        highlight! link MistflyReplace MiniStatuslineModeReplace
     else
         " Fallback for all other colorschemes.
         if !hlexists('MistflyNormal') || synIDattr(synIDtrans(hlID('MistflyNormal')), 'bg') == ''
