@@ -88,7 +88,7 @@ Plugins, Linters and Diagnostics supported
 _mistfly_ requires Vim 8 (or later) or Neovim 0.8 (or earlier); Neovim 0.9 (or
 later) is not supported; the pure-Lua
 [linefly](https://github.com/bluz71/nvim-linefly) plugin should instead be used
-with modern version of Neovim.
+with contemporary versions of Neovim.
 
 _mistfly_ requires a **GUI** capable version of Vim or Neovim with an
 appropriate `colorscheme` set. A GUI client, or a modern version of Vim or
