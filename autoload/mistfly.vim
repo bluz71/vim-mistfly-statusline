@@ -148,7 +148,7 @@ function! mistfly#PluginsStatus() abort
     elseif g:mistflyWithGitStatus && exists('g:loaded_gitgutter') && get(g:, 'gitgutter_enabled')
         " GitGutter status.
         let [l:added, l:changed, l:removed] = GitGutterGetHunkSummary()
-    elseif g:mistflyWithGitStatus && exists('g:loaded_signify') && sy#buffer_is_active()
+    elseif g:mistflyWithGitStatus && exists('g:loaded_signify')
         " Signify status.
         let [l:added, l:changed, l:removed] = sy#repo#get_stats()
     endif
