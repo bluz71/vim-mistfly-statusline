@@ -258,6 +258,7 @@ function! mistfly#ActiveStatusLine() abort
     let l:statusline = get(s:modes_map, l:mode, '%#MistflyNormal#')[0]
     let l:statusline .= get(s:modes_map, l:mode, ' normal ')[1]
     let l:statusline .= '%* %<%{mistfly#File(&laststatus != 3)}'
+    let l:statusline .= "%q%{exists('w:quickfix_title')? ' ' . w:quickfix_title : ''}"
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
     if len(l:branch_name) > 0
