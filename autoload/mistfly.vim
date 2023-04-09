@@ -554,12 +554,12 @@ endfunction
 "===========================================================
 
 " Detect the branch name using an old-school system call. This function will
-" only be called upon BufEnter and FocusGained events to avoid needlessly
-" invoking that system call every time the statusline is redrawn.
+" only be called upon BufEnter, BufWrite and FocusGained events to avoid
+" needlessly invoking that system call every time the statusline is redrawn.
 function! mistfly#DetectBranchName() abort
     if !g:mistflyWithGitBranch || bufname('%') == ''
-        " Don't calculate the expensive to compute branch name if it isn't
-        " wanted or the buffer is empty.
+        " Don't calculate the branch name if it isn't wanted or the buffer is
+        " empty.
         let b:git_branch_name = ''
         return
     endif
