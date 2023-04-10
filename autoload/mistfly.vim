@@ -108,10 +108,7 @@ function! mistfly#GitBranchName() abort
     endif
 
     let l:git_branch_name = ''
-    if has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
-        " Gitsigns is available, let's use it to access the branch name.
-        let l:git_branch_name = get(b:, 'gitsigns_head', '')
-    elseif exists('g:loaded_fugitive')
+    if exists('g:loaded_fugitive')
         " Fugitive is available, let's use it to access the branch name.
         let l:git_branch_name = FugitiveHead()
     elseif exists('b:git_branch_name')
@@ -222,7 +219,7 @@ function! mistfly#PluginsStatus() abort
     endif
 
     " Obsession plugin status.
-    if g:mistflyWithSessionStatus &&  exists('g:loaded_obsession')
+    if g:mistflyWithSessionStatus && exists('g:loaded_obsession')
         let l:obsession_status = ObsessionStatus('obsession', '!obsession')
         if len(l:obsession_status) > 0
             let l:segments .= ' %#MistflySession#' . l:obsession_status . '%*'
@@ -564,10 +561,7 @@ function! mistfly#DetectBranchName() abort
         return
     endif
 
-    if has('nvim-0.5') && luaeval("pcall(require, 'gitsigns')")
-        " Gitsigns is available, it will provide us the current branch name.
-        return
-    elseif exists('g:loaded_fugitive')
+    if exists('g:loaded_fugitive')
         " Fugitive is available, it will provide us the current branch name.
         return
     endif

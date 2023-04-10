@@ -5,9 +5,9 @@
 
 if has('nvim-0.9')
     lua vim.api.nvim_echo({
-                \ { "vim-mistfly-statusline does not support Neovim 0.9 (or later).\n", "WarningMsg" },
-                \ { "Please use pure-Lua nvim-linefly (https://github.com/bluz71/nvim-linefly) instead.\n", "Normal"} },
-                \ false, {})
+        \ { "vim-mistfly-statusline does not support Neovim 0.9 (or later).\n", "WarningMsg" },
+        \ { "Please use pure-Lua nvim-linefly (https://github.com/bluz71/nvim-linefly) instead.\n", "Normal"} },
+        \ false, {})
     finish
 endif
 
