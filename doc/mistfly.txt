@@ -1,6 +1,6 @@
 *mistfly* A simple, fast and informative statusline for Vim and (legacy) Neovim
 
-OPTIONS                                                       *mistfly-options*
+OPTIONS                                                      *mistfly-options*
 
 Default option values:
 >
