@@ -308,8 +308,8 @@ vim.g.mistflyActiveTabSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 
 ### mistflyGitBranchSymbol
 
-The `mistflyGitBranchSymbol` option specifies which character symbol to use to
-signify the active tab in the `tabline`.
+The `mistflyGitBranchSymbol` option specifies which character symbol to use
+when displaying Git branch details.
 
 By default, the `` character (Powerline `U+E0A0`) will be displayed. Many
 modern monospace fonts will contain that character.
@@ -448,8 +448,9 @@ Note, Neovim 0.8 (or later) is required for this feature.
 
 Displaying a window bar is recommended when Neovim's global statusline is
 enabled via `set laststatus=3`; the `winbar` will then display the file name at
-the top of each window to disambiguate splits. Also, if there only one window in
-the current tab then a `winbar` will not be displayed (it won't be needed).
+the top of each window to disambiguate splits. Also, if there is only one
+window in the current tab then a `winbar` will not be displayed (it won't be
+needed).
 
 To enable Neovim's `winbar` feature please add the following to your
 initialization file:
@@ -544,12 +545,15 @@ vim.g.mistflyWithGitStatus = false
 
 ### mistflyWithDiagnosticStatus
 
-The `mistflyWithNvimDiagnosticStatus` option specifies whether to indicate the
+The `mistflyWithDiagnosticStatus` option specifies whether to indicate the
 presence of the Diagnostics in the current buffer.
 
-[Neovim Diagnositics](https://neovim.io/doc/user/diagnostic.html)
+[Neovim Diagnositics](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) and
 [Coc](https://github.com/neoclide/coc.nvim) are supported.
+
+By default, Diagnostics will be displayed if one of the above plugins are
+loaded.
 
 If Diagnostic display is not wanted then please add the following to your
 initialization file:
@@ -592,7 +596,7 @@ vim.g.mistflyWithSessionStatus = false
 ### mistflyWithIndentStatus
 
 The `mistflyWithIndentStatus` option specifies whether to display the
-indentation status as the last component in the statusline. By default
+indentation status as the last component in the `statusline`. By default
 indentation status will not be displayed.
 
 Note, if the `expandtab` option is set, for the current buffer, then tab stop
