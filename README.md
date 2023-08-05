@@ -552,10 +552,10 @@ presence of the Diagnostics in the current buffer.
 [ALE](https://github.com/dense-analysis/ale) and
 [Coc](https://github.com/neoclide/coc.nvim) are supported.
 
-By default, Diagnostics will be displayed if one of the above plugins are
+By default, diagnostics will be displayed if one of the above plugins is
 loaded.
 
-If Diagnostic display is not wanted then please add the following to your
+If diagnostic display is not wanted then please add the following to your
 initialization file:
 
 ```viml
