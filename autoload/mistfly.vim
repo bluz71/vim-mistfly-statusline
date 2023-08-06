@@ -263,7 +263,8 @@ function! mistfly#ActiveStatusLine() abort
         let l:statusline .= l:branch_name . '%* '
     endif
     let l:statusline .= mistfly#PluginsStatus()
-    let l:statusline .= '%*%=%l:%c %*' . l:separator
+    let l:statusline .= '%*%='
+    let l:statusline .= '%l:%c %*' . l:separator
     let l:statusline .= '%* ' . l:mode_emphasis . '%L%* ' . l:progress . '%P '
     if g:mistflyWithIndentStatus
         let l:statusline .= '%*' . l:separator
