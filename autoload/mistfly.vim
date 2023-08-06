@@ -229,6 +229,29 @@ function! mistfly#PluginsStatus() abort
     return l:segments
 endfunction
 
+function! mistfly#SearchCount() abort
+    if !exists('*searchcount')
+        return ''
+    endif
+    let l:result = searchcount(#{recompute: 1, maxcount: 0})
+    if empty(l:result)
+        return ''
+    endif
+    if l:result.incomplete ==# 1 " timed out
+        return printf('[?/??]')
+    elseif l:result.incomplete ==# 2 " max count exceeded
+        if l:result.total > l:result.maxcount && l:result.current > l:result.maxcount
+            return printf('[>%d/>%d]', l:result.current, l:result.total)
+        elseif l:result.total > l:result.maxcount
+            return printf('[%d/>%d]', l:result.current, l:result.total)
+        endif
+    endif
+    if l:result.total ==# 0
+        return ''
+    endif
+    return printf('[%d/%d]', l:result.current, l:result.total)
+endfunction
+
 function! mistfly#IndentStatus() abort
     if !&expandtab
         return 'Tab:' . &tabstop
@@ -264,6 +287,13 @@ function! mistfly#ActiveStatusLine() abort
     endif
     let l:statusline .= mistfly#PluginsStatus()
     let l:statusline .= '%*%='
+    if g:mistflyWithSearchCount && v:hlsearch
+        let l:search_count = mistfly#SearchCount()
+        if len(l:search_count) > 0
+            let l:statusline .= l:search_count . '%* '
+            let l:statusline .= '%*' . l:separator . '%* '
+        endif
+    endif
     if g:mistflyWithSpellStatus && &spell
         let l:statusline .= 'Spell '
         let l:statusline .= '%*' . l:separator . '%* '

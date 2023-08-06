@@ -236,6 +236,7 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyWithGitStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitstatus)                       | Enabled
 | [mistflyWithDiagnosticStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithdiagnosticstatus)         | Enabled
 | [mistflyWithSessionStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithsessionstatus)               | Enabled
+| [mistflyWithSearchCount](https://github.com/bluz71/vim-mistfly-statusline#mistflyWithSearchCount)                   | Disabled
 | [mistflyWithSpellStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflyWithSpellStatus)                   | Disabled
 | [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Disabled
 
@@ -590,6 +591,29 @@ let g:mistflyWithSessionStatus = v:false
 ```lua
 -- Lua initialization file
 vim.g.mistflyWithSessionStatus = false
+```
+
+---
+
+### mistflyWithSearchCount
+
+The `mistflyWithSearchCount` option specifies whether to display the search
+count in the `statusline`. By default the search count will not be displayed.
+
+Note, the search count is only displayed when the `hlsearch` option is set and
+the search count result is not zero.
+
+To enable the display of the search count in the `statusline` please add the
+following to your initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWithSearchCount = v:true
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyWithSearchCount = true
 ```
 
 ---
