@@ -236,6 +236,7 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyWithGitStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitstatus)                       | Enabled
 | [mistflyWithDiagnosticStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithdiagnosticstatus)         | Enabled
 | [mistflyWithSessionStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithsessionstatus)               | Enabled
+| [mistflyWithSpellStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflyWithSpellStatus)                   | Disabled
 | [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Disabled
 
 ---
@@ -589,6 +590,26 @@ let g:mistflyWithSessionStatus = v:false
 ```lua
 -- Lua initialization file
 vim.g.mistflyWithSessionStatus = false
+```
+
+---
+
+### mistflyWithSpellStatus
+
+The `mistflyWithSpellStatus` option specifies whether to display the spell
+status in the `statusline`. By default spell status will not be displayed.
+
+To enable spell status in the `statusline` please add the following to your
+initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWithSpellStatus = v:true
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyWithSpellStatus = true
 ```
 
 ---

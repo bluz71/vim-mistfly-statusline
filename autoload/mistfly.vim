@@ -264,6 +264,10 @@ function! mistfly#ActiveStatusLine() abort
     endif
     let l:statusline .= mistfly#PluginsStatus()
     let l:statusline .= '%*%='
+    if g:mistflyWithSpellStatus && &spell
+        let l:statusline .= 'Spell '
+        let l:statusline .= '%*' . l:separator . '%* '
+    endif
     let l:statusline .= '%l:%c %*' . l:separator
     let l:statusline .= '%* ' . l:mode_emphasis . '%L%* ' . l:progress . '%P '
     if g:mistflyWithIndentStatus
