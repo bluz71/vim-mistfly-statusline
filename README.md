@@ -131,7 +131,7 @@ and right-side groups as follows:
 
 ```
 +-------------------------------------------------+
-| A | B | C | D                         X | Y | Z |
+| A | B | C | D                     W | X | Y | Z |
 +-------------------------------------------------+
 ```
 
@@ -141,6 +141,7 @@ and right-side groups as follows:
 | B       | Filename (refer below for details)
 | C`*`    | Git branch name (if applicable)
 | D`*`    | Plugins notification (git, diagnostic and session status)
+| W       | Optional search count and spell status
 | X       | Current position
 | Y`*`    | Total lines and current location as percentage
 | Z       | Optional indent status (spaces and tabs shift width)
