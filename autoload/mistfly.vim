@@ -238,7 +238,7 @@ function! mistfly#SearchCount() abort
         return ''
     endif
     if l:result.incomplete ==# 1 " timed out
-        return printf('[?/??]')
+        return '[?/??]'
     elseif l:result.incomplete ==# 2 " max count exceeded
         if l:result.total > l:result.maxcount && l:result.current > l:result.maxcount
             return printf('[>%d/>%d]', l:result.current, l:result.total)
@@ -294,7 +294,7 @@ function! mistfly#ActiveStatusLine() abort
         endif
     endif
     let l:statusline .= '%='
-    if g:mistflyWithSearchCount && v:hlsearch
+    if g:mistflyWithSearchCount && &hlsearch
         let l:search_count = mistfly#SearchCount()
         if len(l:search_count) > 0
             let l:statusline .= l:search_count . '%* '
