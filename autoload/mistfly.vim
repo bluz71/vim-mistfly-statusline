@@ -237,9 +237,9 @@ function! mistfly#SearchCount() abort
     if empty(l:result)
         return ''
     endif
-    if l:result.incomplete ==# 1 " timed out
+    if l:result.incomplete == 1 " timed out
         return '[?/??]'
-    elseif l:result.incomplete ==# 2 " max count exceeded
+    elseif l:result.incomplete == 2 " max count exceeded
         if l:result.total > l:result.maxcount && l:result.current > l:result.maxcount
             return printf('[>%d/>%d]', l:result.current, l:result.total)
         elseif l:result.total > l:result.maxcount
