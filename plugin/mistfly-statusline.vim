@@ -31,6 +31,8 @@ let g:mistflyWithGitBranch = get(g:, 'mistflyWithGitBranch', v:true)
 let g:mistflyWithGitStatus = get(g:, 'mistflyWithGitStatus', v:true)
 let g:mistflyWithDiagnosticStatus = get(g:, 'mistflyWithDiagnosticStatus', v:true)
 let g:mistflyWithSessionStatus = get(g:, 'mistflyWithSessionStatus', v:true)
+let g:mistflyWithSearchCount = get(g:, 'mistflyWithSearchCount', v:false)
+let g:mistflyWithSpellStatus = get(g:, 'mistflyWithSpellStatus', v:false)
 let g:mistflyWithIndentStatus = get(g:, 'mistflyWithIndentStatus', v:false)
 
 augroup mistflyStatuslineEvents

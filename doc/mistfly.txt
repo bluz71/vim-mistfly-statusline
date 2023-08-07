@@ -18,6 +18,8 @@ Default option values:
   let g:mistflyWithGitStatus = v:true
   let g:mistflyWithDiagnosticStatus = v:true
   let g:mistflyWithSessionStatus = v:true
+  let g:mistflyWithSearchCount = v:false
+  let g:mistflyWithSpellStatus = v:false
   let g:mistflyWithIndentStatus = v:false
 <
 ------------------------------------------------------------------------------
@@ -297,6 +299,41 @@ following to your initialization file:
 
   -- Lua initialization file
   vim.g.mistflyWithSessionStatus = false
+<
+------------------------------------------------------------------------------
+mistflyWithSearchCount~                             *g:mistflyWithSearchCount*
+
+The `mistflyWithSearchCount` option specifies whether to display the search
+count in the `statusline`. By default the search count will not be displayed.
+
+Note, the search count is only displayed when the `hlsearch` option is set and
+the search count result is not zero.
+
+To enable the display of the search count in the `statusline` please add the
+following to your initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithSearchCount = v:true
+
+  -- Lua initialization file
+  vim.g.mistflyWithSearchCount = true
+<
+------------------------------------------------------------------------------
+mistflyWithSpellStatus~                             *g:mistflyWithSpellStatus*
+
+The `mistflyWithSpellStatus` option specifies whether to display the spell
+status in the `statusline`. By default spell status will not be displayed.
+
+To enable spell status in the `statusline` please add the following to your
+initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithSpellStatus = v:true
+
+  -- Lua initialization file
+  vim.g.mistflyWithSpellStatus = true
 <
 ------------------------------------------------------------------------------
 mistflyWithIndentStatus~                           *g:mistflyWithIndentStatus*

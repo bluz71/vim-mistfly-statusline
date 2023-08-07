@@ -131,7 +131,7 @@ and right-side groups as follows:
 
 ```
 +-------------------------------------------------+
-| A | B | C | D                         X | Y | Z |
+| A | B | C | D                     W | X | Y | Z |
 +-------------------------------------------------+
 ```
 
@@ -141,6 +141,7 @@ and right-side groups as follows:
 | B       | Filename (refer below for details)
 | C`*`    | Git branch name (if applicable)
 | D`*`    | Plugins notification (git, diagnostic and session status)
+| W       | Optional search count and spell status
 | X       | Current position
 | Y`*`    | Total lines and current location as percentage
 | Z       | Optional indent status (spaces and tabs shift width)
@@ -236,6 +237,8 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyWithGitStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitstatus)                       | Enabled
 | [mistflyWithDiagnosticStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithdiagnosticstatus)         | Enabled
 | [mistflyWithSessionStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithsessionstatus)               | Enabled
+| [mistflyWithSearchCount](https://github.com/bluz71/vim-mistfly-statusline#mistflyWithSearchCount)                   | Disabled
+| [mistflyWithSpellStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflyWithSpellStatus)                   | Disabled
 | [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Disabled
 
 ---
@@ -589,6 +592,49 @@ let g:mistflyWithSessionStatus = v:false
 ```lua
 -- Lua initialization file
 vim.g.mistflyWithSessionStatus = false
+```
+
+---
+
+### mistflyWithSearchCount
+
+The `mistflyWithSearchCount` option specifies whether to display the search
+count in the `statusline`. By default the search count will not be displayed.
+
+Note, the search count is only displayed when the `hlsearch` option is set and
+the search count result is not zero.
+
+To enable the display of the search count in the `statusline` please add the
+following to your initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWithSearchCount = v:true
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyWithSearchCount = true
+```
+
+---
+
+### mistflyWithSpellStatus
+
+The `mistflyWithSpellStatus` option specifies whether to display the spell
+status in the `statusline`. By default spell status will not be displayed.
+
+To enable spell status in the `statusline` please add the following to your
+initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWithSpellStatus = v:true
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyWithSpellStatus = true
 ```
 
 ---
