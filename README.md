@@ -126,12 +126,12 @@ Please do **not** lazy-load _mistfly_.
 Layout And Default Colors
 -------------------------
 
-The *mistfly-statusline* layout consists of two main groupings, the left-side
-and right-side groups as follows:
+The *mistfly-statusline* layout consists of three groupings, the left-side,
+middle and right-side groups as follows:
 
 ```
 +-------------------------------------------------+
-| A | B | C | D                     W | X | Y | Z |
+| A | B | C | D          M          W | X | Y | Z |
 +-------------------------------------------------+
 ```
 
@@ -141,6 +141,7 @@ and right-side groups as follows:
 | B       | Filename (refer below for details)
 | C`*`    | Git branch name (if applicable)
 | D`*`    | Plugins notification (git, diagnostic and session status)
+| M       | Optional macro-recording status
 | W       | Optional search count and spell status
 | X       | Current position
 | Y`*`    | Total lines and current location as percentage
@@ -236,9 +237,10 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyWithGitBranch](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Enabled
 | [mistflyWithGitStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitstatus)                       | Enabled
 | [mistflyWithDiagnosticStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithdiagnosticstatus)         | Enabled
+| [mistflyWithMacroStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithmacrostatus)                   | Disabled
 | [mistflyWithSessionStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithsessionstatus)               | Enabled
-| [mistflyWithSearchCount](https://github.com/bluz71/vim-mistfly-statusline#mistflyWithSearchCount)                   | Disabled
-| [mistflyWithSpellStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflyWithSpellStatus)                   | Disabled
+| [mistflyWithSearchCount](https://github.com/bluz71/vim-mistfly-statusline#mistflywithsearchcount)                   | Disabled
+| [mistflyWithSpellStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflyWithspellstatus)                   | Disabled
 | [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Disabled
 
 ---
@@ -569,6 +571,28 @@ let g:mistflyWithDiagnosticStatus = v:false
 ```lua
 -- Lua initialization file
 vim.g.mistflyWithDiagnosticStatus = false
+```
+
+---
+
+### mistflyWithMacroStatus
+
+The `mistflyWithMacroStatus` option specifies whether to display macro-recording
+status in the `statusline`.
+
+By default, macro-recording status will not be displayed.
+
+To enable the display of macro-recording status in the `statusline` please add
+the following to your initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWithMacroStatus = v:true
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyWithMacroStatus = true
 ```
 
 ---

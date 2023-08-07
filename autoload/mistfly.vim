@@ -286,7 +286,14 @@ function! mistfly#ActiveStatusLine() abort
         let l:statusline .= l:branch_name . '%* '
     endif
     let l:statusline .= mistfly#PluginsStatus()
-    let l:statusline .= '%*%='
+    let l:statusline .= '%*'
+    if g:mistflyWithMacroStatus
+        let l:recording_register = reg_recording()
+        if len(l:recording_register) > 0
+            let l:statusline .= '%=recording @' . l:recording_register . ' '
+        endif
+    endif
+    let l:statusline .= '%='
     if g:mistflyWithSearchCount && v:hlsearch
         let l:search_count = mistfly#SearchCount()
         if len(l:search_count) > 0
