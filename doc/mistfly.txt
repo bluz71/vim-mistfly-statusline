@@ -100,7 +100,7 @@ following to your initialization file:
 mistflyErrorSymbol~                                     *g:mistflyErrorSymbol*
 
 The `mistflyErrorSymbol` option specifies which character symbol to use when
-displaying Diagnostic errors.
+displaying diagnostic errors.
 
 By default, the `E` character, will be displayed.
 
@@ -118,7 +118,7 @@ file:
 mistflyWarningSymbol~                                 *g:mistflyWarningSymbol*
 
 The `mistflyWarningSymbol` option specifies which character symbol to use when
-displaying Diagnostic warnings.
+displaying diagnostic warnings.
 
 By default, the `W` character, will be displayed.
 
@@ -136,7 +136,7 @@ initialization file:
 mistflyInformationSymbol~                         *g:mistflyInformationSymbol*
 
 The `mistflyInformationSymbol` option specifies which character symbol to use
-when displaying Diagnostic information.
+when displaying diagnostic information.
 
 By default, the `I` character, will be displayed.
 
@@ -264,7 +264,7 @@ following to your initialization file:
 mistflyWithDiagnosticStatus~                   *g:mistflyWithDiagnosticStatus*
 
 The `mistflyWithDiagnosticStatus` option specifies whether to indicate the
-presence of the Diagnostics in the current buffer.
+presence of the diagnostics in the current buffer.
 
 Neovim Diagnositics (https://neovim.io/doc/user/diagnostic.html), ALE
 (https://github.com/dense-analysis/ale) and Coc
@@ -284,26 +284,6 @@ initialization file:
   vim.g.mistflyWithDiagnosticStatus = false
 <
 ------------------------------------------------------------------------------
-mistflyWithMacroStatus~                             *g:mistflyWithMacroStatus*
-
-The `mistflyWithMacroStatus` option specifies whether to display macro-recording
-status in the `statusline`.
-
-By default, macro-recording status will not be displayed.
-
-To enable the display of macro-recording status in the `statusline` please add
-the following to your initialization file:
-
->
-  " Vimscript initialization file
-  let g:mistflyWithMacroStatus = v:true
-  ```
-
-  -- Lua initialization file
-  vim.g.mistflyWithMacroStatus = true
-<
-
-------------------------------------------------------------------------------
 mistflyWithSessionStatus~                         *g:mistflyWithSessionStatus*
 
 The `mistflyWithSessionStatus` option specifies whether to display Obsession
@@ -321,6 +301,25 @@ following to your initialization file:
   -- Lua initialization file
   vim.g.mistflyWithSessionStatus = false
 <
+------------------------------------------------------------------------------
+mistflyWithMacroStatus~                             *g:mistflyWithMacroStatus*
+
+The `mistflyWithMacroStatus` option specifies whether to display macro-recording
+status in the `statusline`.
+
+By default, macro-recording status will not be displayed.
+
+To enable the display of macro-recording status in the `statusline` please add
+the following to your initialization file:
+
+>
+  " Vimscript initialization file
+  let g:mistflyWithMacroStatus = v:true
+  ```
+
+  -- Lua initialization file
+  vim.g.mistflyWithMacroStatus = true
+
 ------------------------------------------------------------------------------
 mistflyWithSearchCount~                             *g:mistflyWithSearchCount*
 

@@ -41,7 +41,7 @@ Screenshots
 The above screenshots are using the
 [nightfly](https://github.com/bluz71/vim-moonfly-colors) colorscheme and the
 [Iosevka](https://github.com/be5invis/Iosevka) font with Git changes,
-Diagnostics and indent-status enabled.
+diagnostics and indent-status enabled.
 
 Statusline Startup Comparison
 -----------------------------
@@ -127,7 +127,7 @@ Layout And Default Colors
 -------------------------
 
 The *mistfly-statusline* layout consists of three groupings, the left-side,
-middle and right-side groups as follows:
+middle and right-side as follows:
 
 ```
 +-------------------------------------------------+
@@ -237,8 +237,8 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyWithGitBranch](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Enabled
 | [mistflyWithGitStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitstatus)                       | Enabled
 | [mistflyWithDiagnosticStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithdiagnosticstatus)         | Enabled
-| [mistflyWithMacroStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithmacrostatus)                   | Disabled
 | [mistflyWithSessionStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithsessionstatus)               | Enabled
+| [mistflyWithMacroStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithmacrostatus)                   | Disabled
 | [mistflyWithSearchCount](https://github.com/bluz71/vim-mistfly-statusline#mistflywithsearchcount)                   | Disabled
 | [mistflyWithSpellStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflyWithspellstatus)                   | Disabled
 | [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Disabled
@@ -337,7 +337,7 @@ vim.g.mistflyGitBranchSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
 ### mistflyErrorSymbol
 
 The `mistflyErrorSymbol` option specifies which character symbol to use when
-displaying Diagnostic errors.
+displaying diagnostic errors.
 
 By default, the `E` character, will be displayed.
 
@@ -359,7 +359,7 @@ vim.g.mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ### mistflyWarningSymbol
 
 The `mistflyWarningSymbol` option specifies which character symbol to use when
-displaying Diagnostic warnings.
+displaying diagnostic warnings.
 
 By default, the `W` character, will be displayed.
 
@@ -381,7 +381,7 @@ vim.g.mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ### mistflyInformationSymbol
 
 The `mistflyInformationSymbol` option specifies which character symbol to use
-when displaying Diagnostic information.
+when displaying diagnostic information.
 
 By default, the `I` character, will be displayed.
 
@@ -551,7 +551,7 @@ vim.g.mistflyWithGitStatus = false
 ### mistflyWithDiagnosticStatus
 
 The `mistflyWithDiagnosticStatus` option specifies whether to indicate the
-presence of the Diagnostics in the current buffer.
+presence of the diagnostics in the current buffer.
 
 [Neovim Diagnositics](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) and
@@ -575,28 +575,6 @@ vim.g.mistflyWithDiagnosticStatus = false
 
 ---
 
-### mistflyWithMacroStatus
-
-The `mistflyWithMacroStatus` option specifies whether to display macro-recording
-status in the `statusline`.
-
-By default, macro-recording status will not be displayed.
-
-To enable the display of macro-recording status in the `statusline` please add
-the following to your initialization file:
-
-```viml
-" Vimscript initialization file
-let g:mistflyWithMacroStatus = v:true
-```
-
-```lua
--- Lua initialization file
-vim.g.mistflyWithMacroStatus = true
-```
-
----
-
 ### mistflyWithSessionStatus
 
 The `mistflyWithSessionStatus` option specifies whether to display
@@ -616,6 +594,28 @@ let g:mistflyWithSessionStatus = v:false
 ```lua
 -- Lua initialization file
 vim.g.mistflyWithSessionStatus = false
+```
+
+---
+
+### mistflyWithMacroStatus
+
+The `mistflyWithMacroStatus` option specifies whether to display macro-recording
+status in the `statusline`.
+
+By default, macro-recording status will not be displayed.
+
+To enable the display of macro-recording status in the `statusline` please add
+the following to your initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyWithMacroStatus = v:true
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyWithMacroStatus = true
 ```
 
 ---
