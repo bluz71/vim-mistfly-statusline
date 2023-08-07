@@ -623,10 +623,11 @@ vim.g.mistflyWithMacroStatus = true
 ### mistflyWithSearchCount
 
 The `mistflyWithSearchCount` option specifies whether to display the search
-count in the `statusline`. By default the search count will not be displayed.
+count in the `statusline`.
 
-Note, the search count is only displayed when the `hlsearch` option is set and
-the search count result is not zero.
+By default the search count will not be displayed. Note, the search count is
+only displayed when the `hlsearch` option is set and the search count result is
+not zero.
 
 To enable the display of the search count in the `statusline` please add the
 following to your initialization file:
