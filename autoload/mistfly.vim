@@ -297,19 +297,16 @@ function! mistfly#ActiveStatusLine() abort
     if g:mistflyWithSearchCount && &hlsearch
         let l:search_count = mistfly#SearchCount()
         if len(l:search_count) > 0
-            let l:statusline .= l:search_count . '%* '
-            let l:statusline .= '%*' . l:separator . '%* '
+            let l:statusline .= l:search_count . ' ' . l:separator . ' '
         endif
     endif
     if g:mistflyWithSpellStatus && &spell
-        let l:statusline .= 'Spell '
-        let l:statusline .= '%*' . l:separator . '%* '
+        let l:statusline .= 'Spell ' . l:separator . ' '
     endif
-    let l:statusline .= '%l:%c %*' . l:separator
-    let l:statusline .= '%* ' . l:mode_emphasis . '%L%* ' . l:progress . '%P '
+    let l:statusline .= '%l:%c ' . l:separator
+    let l:statusline .= ' ' . l:mode_emphasis . '%L%* ' . l:progress . '%P '
     if g:mistflyWithIndentStatus
-        let l:statusline .= '%*' . l:separator
-        let l:statusline .= '%* %{mistfly#IndentStatus()} '
+        let l:statusline .= l:separator . ' %{mistfly#IndentStatus()} '
     endif
 
     return l:statusline
@@ -319,10 +316,10 @@ function! mistfly#InactiveStatusLine() abort
     let l:separator = g:mistflySeparatorSymbol
     let l:progress =  g:mistflyProgressSymbol
 
-    let l:statusline = ' %*%<%{mistfly#File(&laststatus != 3)}'
+    let l:statusline = ' %<%{mistfly#File(&laststatus != 3)}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
-    let l:statusline .= '%*%=%l:%c ' . l:separator . ' %L ' . l:progress . '%P '
+    let l:statusline .= '%=%l:%c ' . l:separator . ' %L ' . l:progress . '%P '
     if g:mistflyWithIndentStatus
         let l:statusline .= l:separator . ' %{mistfly#IndentStatus()} '
     endif
@@ -383,7 +380,7 @@ function! mistfly#ActiveWinBar() abort
 endfunction
 
 function! mistfly#InactiveWinBar() abort
-    let l:winbar = ' %*%<%{mistfly#File(v:true)}'
+    let l:winbar = ' %<%{mistfly#File(v:true)}'
     let l:winbar .= "%{&modified?'+\ ':' \ \ '}"
     let l:winbar .= "%{&readonly?'RO\ ':''}"
     let l:winbar .= '%#NonText#'
