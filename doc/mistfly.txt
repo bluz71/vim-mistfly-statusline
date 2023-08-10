@@ -78,12 +78,12 @@ initialization file:
 mistflyGitBranchSymbol~                             *g:mistflyGitBranchSymbol*
 
 The `mistflyGitBranchSymbol` option specifies which character symbol to use
-when displaying Git branch details
+when displaying Git branch details.
 
 By default, the `` character (Powerline `U+E0A0`) will be displayed. Many
 modern monospace fonts will contain that character.
 
-To specify your own Git Branch symbol, or no symbol at all, please add the
+To specify your own Git branch symbol, or no symbol at all, please add the
 following to your initialization file:
 >
   " Vimscript initialization file
@@ -98,7 +98,7 @@ mistflyErrorSymbol~                                     *g:mistflyErrorSymbol*
 The `mistflyErrorSymbol` option specifies which character symbol to use when
 displaying diagnostic errors.
 
-By default, the `E` character, will be displayed.
+By default, the `E` character will be displayed.
 
 To specify your own error symbol please add the following to your initialization
 file:
@@ -115,7 +115,7 @@ mistflyWarningSymbol~                                 *g:mistflyWarningSymbol*
 The `mistflyWarningSymbol` option specifies which character symbol to use when
 displaying diagnostic warnings.
 
-By default, the `W` character, will be displayed.
+By default, the `W` character will be displayed.
 
 To specify your own warning symbol please add the following to your
 initialization file:
@@ -132,7 +132,7 @@ mistflyInformationSymbol~                         *g:mistflyInformationSymbol*
 The `mistflyInformationSymbol` option specifies which character symbol to use
 when displaying diagnostic information.
 
-By default, the `I` character, will be displayed.
+By default, the `I` character will be displayed.
 
 To specify your own information symbol please add the following to your
 initialization file:
@@ -239,7 +239,7 @@ The Gitsigns (https://github.com/lewis6991/gitsigns.nvim), GitGutter
 (https://github.com/airblade/vim-gitgutter) and Signify
 (https://github.com/mhinz/vim-signify) plugins are supported.
 
-By default, the Git status will be displayed if one of the above plugins are
+By default, the Git status will be displayed if one of the above plugins is
 loaded.
 
 To disable the display of Git status in the `statusline` please add the

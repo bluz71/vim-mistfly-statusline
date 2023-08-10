@@ -339,7 +339,7 @@ vim.g.mistflyGitBranchSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
 The `mistflyErrorSymbol` option specifies which character symbol to use when
 displaying diagnostic errors.
 
-By default, the `E` character, will be displayed.
+By default, the `E` character will be displayed.
 
 To specify your own error symbol please add the following to your initialization
 file:
@@ -361,7 +361,7 @@ vim.g.mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 The `mistflyWarningSymbol` option specifies which character symbol to use when
 displaying diagnostic warnings.
 
-By default, the `W` character, will be displayed.
+By default, the `W` character will be displayed.
 
 To specify your own warning symbol please add the following to your
 initialization file:
@@ -383,7 +383,7 @@ vim.g.mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 The `mistflyInformationSymbol` option specifies which character symbol to use
 when displaying diagnostic information.
 
-By default, the `I` character, will be displayed.
+By default, the `I` character will be displayed.
 
 To specify your own information symbol please add the following to your
 initialization file:
@@ -411,8 +411,8 @@ If enabled, _mistfly_ will render a simple numbered, and clickable, window-space
 layout in the `tabline`; note, no buffers will be displayed in the `tabline`
 since there are many plugins that already provide that capability.
 
-To enable _mistfly_'s `tabline` support please add the following to your
-initialization file:
+To enable `tabline` support please add the following to your initialization
+file:
 
 ```viml
 " Vimscript initialization file
@@ -533,7 +533,7 @@ The [Gitsigns](https://github.com/lewis6991/gitsigns.nvim),
 [GitGutter](https://github.com/airblade/vim-gitgutter) and
 [Signify](https://github.com/mhinz/vim-signify) plugins are supported.
 
-By default, the Git status will be displayed if one of the above plugins are
+By default, the Git status will be displayed if one of the above plugins is
 loaded.
 
 To disable the display of Git status in the `statusline` please add the
