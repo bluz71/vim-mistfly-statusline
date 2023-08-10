@@ -17,8 +17,8 @@ Default option values:
   let g:mistflyWithGitBranch = v:true
   let g:mistflyWithGitStatus = v:true
   let g:mistflyWithDiagnosticStatus = v:true
-  let g:mistflyWithMacroStatus = v:false
   let g:mistflyWithSessionStatus = v:true
+  let g:mistflyWithMacroStatus = v:false
   let g:mistflyWithSearchCount = v:false
   let g:mistflyWithSpellStatus = v:false
   let g:mistflyWithIndentStatus = v:false
