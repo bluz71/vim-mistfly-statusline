@@ -26,8 +26,8 @@ Default option values:
 ------------------------------------------------------------------------------
 mistflySeparatorSymbol~                             *g:mistflySeparatorSymbol*
 
-The `mistflySeparatorSymbol` option specifies which character symbol to use for
-segment separators in the `statusline`.
+The `mistflySeparatorSymbol` option specifies which character symbol to use
+for segment separators in the `statusline`.
 
 By default, the `⎪` character (Unicode `U+23AA`) will be displayed.
 
@@ -100,8 +100,8 @@ displaying diagnostic errors.
 
 By default, the `E` character will be displayed.
 
-To specify your own error symbol please add the following to your initialization
-file:
+To specify your own error symbol please add the following to your
+initialization file:
 >
   " Vimscript initialization file
   let g:mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
@@ -293,8 +293,8 @@ following to your initialization file:
 ------------------------------------------------------------------------------
 mistflyWithMacroStatus~                             *g:mistflyWithMacroStatus*
 
-The `mistflyWithMacroStatus` option specifies whether to display macro-recording
-status in the `statusline`.
+The `mistflyWithMacroStatus` option specifies whether to display
+macro-recording status in the `statusline`.
 
 By default, macro-recording status will not be displayed.
 

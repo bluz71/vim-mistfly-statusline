@@ -247,8 +247,8 @@ highlight! link MistflyReplace ErrorMsg
 
 ### mistflySeparatorSymbol
 
-The `mistflySeparatorSymbol` option specifies which character symbol to use for
-segment separators in the `statusline`.
+The `mistflySeparatorSymbol` option specifies which character symbol to use
+for segment separators in the `statusline`.
 
 By default, the `⎪` character (Unicode `U+23AA`) will be displayed.
 
@@ -341,8 +341,8 @@ displaying diagnostic errors.
 
 By default, the `E` character will be displayed.
 
-To specify your own error symbol please add the following to your initialization
-file:
+To specify your own error symbol please add the following to your
+initialization file:
 
 ```viml
 " Vimscript initialization file
@@ -603,8 +603,8 @@ vim.g.mistflyWithSessionStatus = false
 
 ### mistflyWithMacroStatus
 
-The `mistflyWithMacroStatus` option specifies whether to display macro-recording
-status in the `statusline`.
+The `mistflyWithMacroStatus` option specifies whether to display
+macro-recording status in the `statusline`.
 
 By default, macro-recording status will not be displayed.
 
