@@ -407,9 +407,10 @@ The `mistflyTabLine` option specifies whether to let this plugin manage the
 
 By default, `tabline` management will not be undertaken.
 
-If enabled, _mistfly_ will render a simple numbered, and clickable, window-space
-layout in the `tabline`; note, no buffers will be displayed in the `tabline`
-since there are many plugins that already provide that capability.
+If enabled, _mistfly_ will render a simple numbered, and clickable,
+window-space layout in the `tabline`; note, no buffers will be displayed in
+the `tabline` since there are many plugins that already provide that
+capability.
 
 To enable `tabline` support please add the following to your initialization
 file:
@@ -476,14 +477,14 @@ vim.g.mistflyWinBar = true
 
 ### mistflyWithFileIcon
 
-The `mistflyWithFileIcon` option specifies whether a filetype icon, from a Nerd
-Font, will be displayed prior to the filename in the `statusline` (and optional
-`winbar`).
+The `mistflyWithFileIcon` option specifies whether a filetype icon, from a
+Nerd Font, will be displayed prior to the filename in the `statusline` (and
+optional `winbar`).
 
 Note, a [Nerd Font](https://www.nerdfonts.com) must be active **and** the
 [vim-devicons](https://github.com/ryanoasis/vim-devicons) or
-[nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) plugin must
-also be installed and active.
+[nvim-web-devicons](https://github.com/kyazdani42/nvim-web-devicons) plugin
+must also be installed and active.
 
 By default, a filetype icon will be displayed if possible.
 
@@ -526,8 +527,8 @@ vim.g.mistflyWithGitBranch = false
 
 ### mistflyWithGitStatus
 
-The `mistflyWithGitStatus` option specifies whether to display the Git status of
-the current buffer in the `statusline`.
+The `mistflyWithGitStatus` option specifies whether to display the Git status
+of the current buffer in the `statusline`.
 
 The [Gitsigns](https://github.com/lewis6991/gitsigns.nvim),
 [GitGutter](https://github.com/airblade/vim-gitgutter) and
@@ -678,9 +679,9 @@ indentation status as the last component in the `statusline`.
 By default, indentation status will not be displayed.
 
 Note, if the `expandtab` option is set, for the current buffer, then tab stop
-will be displayed, for example `Tab:4` (tab equals four spaces); if on the other
-hand `noexpandtab` option is set then shift width will be displayed instead, for
-example `Spc:2` ('spc' short for 'space').
+will be displayed, for example `Tab:4` (tab equals four spaces); if on the
+other hand `noexpandtab` option is set then shift width will be displayed
+instead, for example `Spc:2` ('spc' short for 'space').
 
 To enable indentation status please add the following to your initialization
 file:
