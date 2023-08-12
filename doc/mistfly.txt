@@ -17,8 +17,8 @@ Default option values:
   let g:mistflyWithGitBranch = v:true
   let g:mistflyWithGitStatus = v:true
   let g:mistflyWithDiagnosticStatus = v:true
-  let g:mistflyWithMacroStatus = v:false
   let g:mistflyWithSessionStatus = v:true
+  let g:mistflyWithMacroStatus = v:false
   let g:mistflyWithSearchCount = v:false
   let g:mistflyWithSpellStatus = v:false
   let g:mistflyWithIndentStatus = v:false
@@ -26,14 +26,13 @@ Default option values:
 ------------------------------------------------------------------------------
 mistflySeparatorSymbol~                             *g:mistflySeparatorSymbol*
 
-The `mistflySeparatorSymbol` option specifies which character symbol to use for
-segment separators in the `statusline`.
+The `mistflySeparatorSymbol` option specifies which character symbol to use
+for segment separators in the `statusline`.
 
 By default, the `⎪` character (Unicode `U+23AA`) will be displayed.
 
 To specify your own separator symbol please add the following to your
 initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflySeparatorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
@@ -51,7 +50,6 @@ By default, the `↓` character (Unicode `U+2193`) will be displayed.
 
 To specify your own progress symbol, or no symbol at all, please add the
 following to your initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyProgressSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
@@ -69,7 +67,6 @@ By default, the `▪` character (Unicode `U+25AA`) will be displayed.
 
 To specify your own active tab symbol please add the following to your
 initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyActiveTabSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
@@ -81,14 +78,13 @@ initialization file:
 mistflyGitBranchSymbol~                             *g:mistflyGitBranchSymbol*
 
 The `mistflyGitBranchSymbol` option specifies which character symbol to use
-when displaying Git branch details
+when displaying Git branch details.
 
 By default, the `` character (Powerline `U+E0A0`) will be displayed. Many
 modern monospace fonts will contain that character.
 
-To specify your own Git Branch symbol, or no symbol at all, please add the
+To specify your own Git branch symbol, or no symbol at all, please add the
 following to your initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyGitBranchSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
@@ -102,11 +98,10 @@ mistflyErrorSymbol~                                     *g:mistflyErrorSymbol*
 The `mistflyErrorSymbol` option specifies which character symbol to use when
 displaying diagnostic errors.
 
-By default, the `E` character, will be displayed.
+By default, the `E` character will be displayed.
 
-To specify your own error symbol please add the following to your initialization
-file:
-
+To specify your own error symbol please add the following to your
+initialization file:
 >
   " Vimscript initialization file
   let g:mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
@@ -120,11 +115,10 @@ mistflyWarningSymbol~                                 *g:mistflyWarningSymbol*
 The `mistflyWarningSymbol` option specifies which character symbol to use when
 displaying diagnostic warnings.
 
-By default, the `W` character, will be displayed.
+By default, the `W` character will be displayed.
 
 To specify your own warning symbol please add the following to your
 initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
@@ -138,11 +132,10 @@ mistflyInformationSymbol~                         *g:mistflyInformationSymbol*
 The `mistflyInformationSymbol` option specifies which character symbol to use
 when displaying diagnostic information.
 
-By default, the `I` character, will be displayed.
+By default, the `I` character will be displayed.
 
 To specify your own information symbol please add the following to your
 initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
@@ -165,7 +158,6 @@ capability.
 
 To enable `tabline` support please add the following to your initialization
 file:
-
 >
   " Vimscript initialization file
   let g:mistflyTabLine = v:true
@@ -190,7 +182,6 @@ needed).
 
 To enable Neovim's `winbar` feature please add the following to your
 initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyWinBar = v:true
@@ -214,7 +205,6 @@ By default, a filetype icon will be displayed if possible.
 
 To disable the display of a filetype icon please add the following to your
 initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyWithFileIcon = v:false
@@ -232,7 +222,6 @@ By default, Git branches will be displayed in the `statusline`.
 
 To disable the display of Git branches in the `statusline` please add the
 following to your initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyWithGitBranch = v:false
@@ -250,12 +239,11 @@ The Gitsigns (https://github.com/lewis6991/gitsigns.nvim), GitGutter
 (https://github.com/airblade/vim-gitgutter) and Signify
 (https://github.com/mhinz/vim-signify) plugins are supported.
 
-By default, the Git status will be displayed if one of the above plugins are
+By default, the Git status will be displayed if one of the above plugins is
 loaded.
 
 To disable the display of Git status in the `statusline` please add the
 following to your initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyWithGitStatus = v:false
@@ -278,7 +266,6 @@ loaded.
 
 If diagnostic display is not wanted then please add the following to your
 initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyWithDiagnosticStatus = v:false
@@ -296,7 +283,6 @@ By default, session details will be displayed if the plugin is loaded.
 
 To disable the display of session details in the `statusline` please add the
 following to your initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyWithSessionStatus = v:false
@@ -307,14 +293,13 @@ following to your initialization file:
 ------------------------------------------------------------------------------
 mistflyWithMacroStatus~                             *g:mistflyWithMacroStatus*
 
-The `mistflyWithMacroStatus` option specifies whether to display macro-recording
-status in the `statusline`.
+The `mistflyWithMacroStatus` option specifies whether to display
+macro-recording status in the `statusline`.
 
 By default, macro-recording status will not be displayed.
 
 To enable the display of macro-recording status in the `statusline` please add
 the following to your initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyWithMacroStatus = v:true
@@ -333,7 +318,6 @@ By default, search count will not be displayed.
 
 To enable the display of the search count in the `statusline` please add the
 following to your initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyWithSearchCount = v:true
@@ -354,7 +338,6 @@ By default, spell status will not be displayed.
 
 To enable spell status in the `statusline` please add the following to your
 initialization file:
-
 >
   " Vimscript initialization file
   let g:mistflyWithSpellStatus = v:true
@@ -377,7 +360,6 @@ instead, for example `Spc:2` ('spc' short for 'space').
 
 To enable indentation status please add the following to your initialization
 file:
-
 >
   " Vimscript initialization file
   let g:mistflyWithIndentStatus = v:true
