@@ -294,7 +294,7 @@ function! mistfly#ActiveStatusLine() abort
         endif
     endif
     let l:statusline .= '%='
-    if g:mistflyWithSearchCount && &hlsearch
+    if g:mistflyWithSearchCount && &hlsearch && v:hlsearch
         let l:search_count = mistfly#SearchCount()
         if len(l:search_count) > 0
             let l:statusline .= l:search_count . ' ' . l:separator . ' '
