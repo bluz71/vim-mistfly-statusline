@@ -7,18 +7,16 @@ _mistfly statusline_ is a simple, fast and informative `statusline` for Vim and
 :point_right: Contemporary Neovim users will need to use the pure-Lua
 [linefly](https://github.com/bluz71/nvim-linefly) plugin instead of _mistfly_.
 
-_mistfly_ provides optional `tabline` and Neovim `winbar` support when the
-appropriate settings are enabled; refer to
-[`mistflyTabLine`](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)
-and
-[`mistflyWinBar`](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar).
+_mistfly_ provides optional `tabline` support when the appropriate setting is
+enabled; refer to
+[`mistflyTabLine`](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline).
 
 _mistfly_ will adapt it's colors to the colorscheme currently in effect. Colors
 can also be
 [customized](https://github.com/bluz71/vim-mistfly-statusline#highlight-groups-and-colors)
 if desired.
 
-Lastly, _mistfly_ is a light `statusline` plugin clocking in at about 500 lines
+Lastly, _mistfly_ is a lean `statusline` plugin clocking in at about 500 lines
 of code. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim),
 [airline](https://github.com/vim-airline/vim-airline) and
@@ -232,7 +230,6 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyWarningSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflywarningsymbol)                       | `W`
 | [mistflyInformationSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyinformationsymbol)               | `I`
 | [mistflyTabLine](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)                                   | Disabled
-| [mistflyWinBar](https://github.com/bluz71/vim-mistfly-statusline#mistflywinbar)                                     | Disabled
 | [mistflyWithFileIcon](https://github.com/bluz71/vim-mistfly-statusline#mistflywithfileicon)                         | Enabled
 | [mistflyWithGitBranch](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Enabled
 | [mistflyWithGitStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitstatus)                       | Enabled
@@ -446,40 +443,10 @@ A screenshot of the `tabline`:
 
 ---
 
-### mistflyWinBar
-
-The `mistflyWinBar` option specifies whether to display Neovim's window bar at
-the top of each window.
-
-By default, window bars will not be displayed. Note, Neovim 0.8 (or later) is
-required for this feature.
-
-Displaying a window bar is recommended when Neovim's global statusline is
-enabled via `set laststatus=3`; the `winbar` will then display the file name at
-the top of each window to disambiguate splits. Also, if there is only one
-window in the current tab then a `winbar` will not be displayed (it won't be
-needed).
-
-To enable Neovim's `winbar` feature please add the following to your
-initialization file:
-
-```viml
-" Vimscript initialization file
-let g:mistflyWinBar = v:true
-```
-
-```lua
--- Lua initialization file
-vim.g.mistflyWinBar = true
-```
-
----
-
 ### mistflyWithFileIcon
 
 The `mistflyWithFileIcon` option specifies whether a filetype icon, from a
-Nerd Font, will be displayed prior to the filename in the `statusline` (and
-optional `winbar`).
+Nerd Font, will be displayed prior to the filename in the `statusline`.
 
 Note, a [Nerd Font](https://www.nerdfonts.com) must be active **and** the
 [vim-devicons](https://github.com/ryanoasis/vim-devicons) or

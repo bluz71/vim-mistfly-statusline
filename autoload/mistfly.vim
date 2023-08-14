@@ -82,22 +82,18 @@ function! s:FilePath(short_path) abort
     endif
 endfunction
 
-" Iterate though the windows and update the statusline and winbar for all
-" inactive windows.
+" Iterate though the windows and update the statusline for all inactive windows.
 "
 " This is needed when starting Vim with multiple splits, for example 'vim -O
-" file1 file2', otherwise all statuslines/winbars will be rendered as if they
-" are active. Inactive statuslines/winbar are usually rendered via the WinLeave
-" and BufLeave events, but those events are not triggered when starting Vim.
+" file1 file2', otherwise all statuslines will be rendered as if they are
+" active. Inactive statuslines are usually rendered via the WinLeave and
+" BufLeave events, but those events are not triggered when starting Vim.
 "
 " Note - https://jip.dev/posts/a-simpler-vim-statusline/#inactive-statuslines
 function! mistfly#UpdateInactiveWindows() abort
     for winnum in range(1, winnr('$'))
         if winnum != winnr()
             call setwinvar(winnum, '&statusline', '%!mistfly#InactiveStatusLine()')
-            if g:mistflyWinBar && exists('&winbar') && winheight(0) > 1
-                call setwinvar(winnum, '&winbar', '%!mistfly#InactiveWinBar()')
-            endif
         endif
     endfor
 endfunction
@@ -336,56 +332,14 @@ function! mistfly#StatusLine(active) abort
         " Likely a file explorer or some other special type of buffer. Set a
         " short path statusline for these types of buffers.
         setlocal statusline=%!mistfly#NoFileStatusLine()
-        if g:mistflyWinBar && exists('&winbar')
-            setlocal winbar=
-        endif
     elseif &buftype ==# 'nowrite'
         " Don't set a custom statusline for certain special windows.
         return
     elseif a:active == v:true
         setlocal statusline=%!mistfly#ActiveStatusLine()
-        if g:mistflyWinBar && exists('&winbar')
-            if len(filter(nvim_tabpage_list_wins(0), {k,v->nvim_win_get_config(v).relative == ''})) > 1 && &ft !=# 'qf'
-                setlocal winbar=%!mistfly#ActiveWinBar()
-            else
-                setlocal winbar=
-            endif
-        endif
     elseif a:active == v:false
         setlocal statusline=%!mistfly#InactiveStatusLine()
-        if g:mistflyWinBar && exists('&winbar') && winheight(0) > 1
-            if len(filter(nvim_tabpage_list_wins(0), {k,v->nvim_win_get_config(v).relative == ''})) > 1 && &ft !=# 'qf'
-                setlocal winbar=%!mistfly#InactiveWinBar()
-            else
-                setlocal winbar=
-            endif
-        endif
     endif
-endfunction
-
-"===========================================================
-" Window bar
-"===========================================================
-
-function! mistfly#ActiveWinBar() abort
-    let l:mode = mode()
-    let l:winbar = get(s:modes_map, l:mode, '%#MistflyNormal#')[0]
-    let l:winbar .= strpart(get(s:modes_map, l:mode, 'n')[1], 0, 2)
-    let l:winbar .= ' %* %<%{mistfly#File(v:true)}'
-    let l:winbar .= "%{&modified ? '+\ ' : ' \ \ '}"
-    let l:winbar .= "%{&readonly ? 'RO\ ' : ''}"
-    let l:winbar .= '%#Normal#'
-
-    return l:winbar
-endfunction
-
-function! mistfly#InactiveWinBar() abort
-    let l:winbar = ' %<%{mistfly#File(v:true)}'
-    let l:winbar .= "%{&modified?'+\ ':' \ \ '}"
-    let l:winbar .= "%{&readonly?'RO\ ':''}"
-    let l:winbar .= '%#NonText#'
-
-    return l:winbar
 endfunction
 
 "===========================================================
