@@ -114,6 +114,9 @@ function! mistfly#GitBranchName() abort
 
     if len(l:git_branch_name) == 0
         return ''
+    elseif strlen(l:git_branch_name) > 30
+        " Truncate long branch names to 30 characters.
+        let l:git_branch_name = strpart(l:git_branch_name, 0, 29) . '…'
     endif
 
     if len(g:mistflyGitBranchSymbol) == 0
