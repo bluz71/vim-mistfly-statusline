@@ -305,12 +305,6 @@ function! mistfly#ActiveStatusLine() abort
         let l:statusline .= mistfly#PluginsStatus()
         let l:statusline .= '%*'
     endif
-    if g:mistflyWithMacroStatus && l:statusline_width >= 80
-        let l:recording_register = reg_recording()
-        if len(l:recording_register) > 0
-            let l:statusline .= '%=recording @' . l:recording_register . ' '
-        endif
-    endif
     let l:statusline .= '%='
     if g:mistflyWithSearchCount && v:hlsearch && l:statusline_width >= 80
         let l:search_count = mistfly#SearchCount()

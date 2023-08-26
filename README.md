@@ -139,7 +139,6 @@ middle and right-side as follows:
 | B       | Filename (refer below for details)
 | C`*`    | Git branch name (if applicable)
 | D`*`    | Plugins notification (git, diagnostic and session status)
-| M       | Optional macro-recording status
 | W       | Optional search count and spell status
 | X       | Current position
 | Y`*`    | Total lines and current location as percentage
@@ -148,8 +147,8 @@ middle and right-side as follows:
 Sections marked with a `*` are linked to a highlight group and are colored,
 refer to the next section for details.
 
-Sections C, D, M & W will **not** be displayed when the `statusline` width is
-less than 80 columns.
+Sections C, D & W will **not** be displayed when the `statusline` width is less
+than 80 columns.
 
 Note, filenames will be displayed as follows:
 
@@ -237,7 +236,6 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyWithGitStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitstatus)                       | Enabled
 | [mistflyWithDiagnosticStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithdiagnosticstatus)         | Enabled
 | [mistflyWithSessionStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithsessionstatus)               | Enabled
-| [mistflyWithMacroStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithmacrostatus)                   | Disabled
 | [mistflyWithSearchCount](https://github.com/bluz71/vim-mistfly-statusline#mistflywithsearchcount)                   | Disabled
 | [mistflyWithSpellStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflyWithspellstatus)                   | Disabled
 | [mistflyWithIndentStatus](https://github.com/bluz71/vim-mistfly-statusline#mistflywithindentstatus)                 | Disabled
@@ -567,28 +565,6 @@ let g:mistflyWithSessionStatus = v:false
 ```lua
 -- Lua initialization file
 vim.g.mistflyWithSessionStatus = false
-```
-
----
-
-### mistflyWithMacroStatus
-
-The `mistflyWithMacroStatus` option specifies whether to display
-macro-recording status in the `statusline`.
-
-By default, macro-recording status will not be displayed.
-
-To enable the display of macro-recording status in the `statusline` please add
-the following to your initialization file:
-
-```viml
-" Vimscript initialization file
-let g:mistflyWithMacroStatus = v:true
-```
-
-```lua
--- Lua initialization file
-vim.g.mistflyWithMacroStatus = true
 ```
 
 ---
