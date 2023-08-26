@@ -36,8 +36,18 @@ let s:statusline_bg = ''
 " Utilities
 "===========================================================
 
-function! mistfly#File(short_path) abort
-    return s:FileIcon() . s:FilePath(a:short_path)
+function! s:StatuslineWidth() abort
+    if &laststatus == 3
+        return &columns
+    else
+        return winwidth(0)
+    end
+endfunction
+
+function! mistfly#File() abort
+    let l:statusline_width = s:StatuslineWidth()
+
+    return s:FileIcon() . s:FilePath(l:statusline_width < 120)
 endfunction
 
 function! s:FileIcon() abort
@@ -76,10 +86,10 @@ function! s:FilePath(short_path) abort
     let l:pathComponents = split(l:path, l:separator)
     let l:numPathComponents = len(l:pathComponents)
     if l:numPathComponents > 4
-        return '.../' . join(l:pathComponents[l:numPathComponents - 4:], l:separator)
-    else
-        return l:path
+        let l:path = '…/' . join(l:pathComponents[l:numPathComponents - 4:], l:separator)
     endif
+
+    return l:path
 endfunction
 
 " Iterate though the windows and update the statusline for all inactive windows.
@@ -268,38 +278,47 @@ endfunction
 "===========================================================
 
 function! mistfly#ActiveStatusLine() abort
+    let l:statusline_width = s:StatuslineWidth()
+
     let l:mode = mode()
     let l:separator = g:mistflySeparatorSymbol
     let l:progress =  g:mistflyProgressSymbol
     let l:branch_name = mistfly#GitBranchName()
+    let l:plugins_status = mistfly#PluginsStatus()
     let l:mode_emphasis = get(s:modes_map, l:mode, '%#MistflyNormalEmphasis#')[2]
 
     let l:statusline = get(s:modes_map, l:mode, '%#MistflyNormal#')[0]
-    let l:statusline .= get(s:modes_map, l:mode, ' normal ')[1]
-    let l:statusline .= '%* %<%{mistfly#File(&laststatus != 3)}'
+    if l:statusline_width < 80
+        let l:statusline .= strpart(get(s:modes_map, l:mode, 'n')[1], 0, 2) . ' '
+    else
+        let l:statusline .= get(s:modes_map, l:mode, ' normal ')[1]
+    endif
+    let l:statusline .= '%* %<%{mistfly#File()}'
     let l:statusline .= "%q%{exists('w:quickfix_title')? ' ' . w:quickfix_title : ''}"
     let l:statusline .= "%{&modified ? '+\ ' : ' \ \ '}"
     let l:statusline .= "%{&readonly ? 'RO\ ' : ''}"
-    if len(l:branch_name) > 0
+    if len(l:branch_name) > 0 && l:statusline_width >= 80
         let l:statusline .= '%*' . l:separator . l:mode_emphasis
         let l:statusline .= l:branch_name . '%* '
     endif
-    let l:statusline .= mistfly#PluginsStatus()
-    let l:statusline .= '%*'
-    if g:mistflyWithMacroStatus
+    if len(l:plugins_status) > 0 && l:statusline_width >= 80
+        let l:statusline .= mistfly#PluginsStatus()
+        let l:statusline .= '%*'
+    endif
+    if g:mistflyWithMacroStatus && l:statusline_width >= 80
         let l:recording_register = reg_recording()
         if len(l:recording_register) > 0
             let l:statusline .= '%=recording @' . l:recording_register . ' '
         endif
     endif
     let l:statusline .= '%='
-    if g:mistflyWithSearchCount && v:hlsearch
+    if g:mistflyWithSearchCount && v:hlsearch && l:statusline_width >= 80
         let l:search_count = mistfly#SearchCount()
         if len(l:search_count) > 0
             let l:statusline .= l:search_count . ' ' . l:separator . ' '
         endif
     endif
-    if g:mistflyWithSpellStatus && &spell
+    if g:mistflyWithSpellStatus && &spell && l:statusline_width >= 80
         let l:statusline .= 'Spell ' . l:separator . ' '
     endif
     let l:statusline .= '%l:%c ' . l:separator
@@ -315,7 +334,7 @@ function! mistfly#InactiveStatusLine() abort
     let l:separator = g:mistflySeparatorSymbol
     let l:progress =  g:mistflyProgressSymbol
 
-    let l:statusline = ' %<%{mistfly#File(&laststatus != 3)}'
+    let l:statusline = ' %<%{mistfly#File()}'
     let l:statusline .= "%{&modified?'+\ ':' \ \ '}"
     let l:statusline .= "%{&readonly?'RO\ ':''}"
     let l:statusline .= '%=%l:%c ' . l:separator . ' %L ' . l:progress . '%P '
