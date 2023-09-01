@@ -107,12 +107,6 @@ Install **bluz71/vim-mistfly-statusline** with your preferred plugin manager.
 Plug 'bluz71/vim-mistfly-statusline'
 ```
 
-[packer.nvim](https://github.com/wbthomason/packer.nvim):
-
-```lua
-use 'bluz71/vim-mistfly-statusline'
-```
-
 [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
