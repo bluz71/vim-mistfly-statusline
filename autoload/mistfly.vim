@@ -86,7 +86,8 @@ function! s:FilePath(short_path) abort
     let l:pathComponents = split(l:path, l:separator)
     let l:numPathComponents = len(l:pathComponents)
     if l:numPathComponents > 4
-        let l:path = '…/' . join(l:pathComponents[l:numPathComponents - 4:], l:separator)
+        let l:path = g:mistflyEllipsisSymbol . l:separator
+        let l:path .= join(l:pathComponents[l:numPathComponents - 4:], l:separator)
     endif
 
     return l:path
@@ -126,7 +127,7 @@ function! mistfly#GitBranchName() abort
         return ''
     elseif strlen(l:git_branch_name) > 30
         " Truncate long branch names to 30 characters.
-        let l:git_branch_name = strpart(l:git_branch_name, 0, 29) . '…'
+        let l:git_branch_name = strpart(l:git_branch_name, 0, 29) . g:mistflyEllipsisSymbol
     endif
 
     if len(g:mistflyGitBranchSymbol) == 0

@@ -165,7 +165,7 @@ Note, filenames will be displayed as follows:
 - Possibly trimmed. A maximum of four path components will be displayed for a
   filename; if a filename is more deeply nested then only the four most
   significant components, including the filename, will be displayed with an
-  ellipses `…` prefix used to indicate path trimming.
+  ellipsis prefix symbol used to indicate path trimming.
 
 Highlight Groups And Colors
 ---------------------------
@@ -230,6 +230,7 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyErrorSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyerrorsymbol)                           | `E`
 | [mistflyWarningSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflywarningsymbol)                       | `W`
 | [mistflyInformationSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyinformationsymbol)               | `I`
+| [mistflyEllipsisSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyellipsissymbol)                     | `…`
 | [mistflyTabLine](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)                                   | Disabled
 | [mistflyWithFileIcon](https://github.com/bluz71/vim-mistfly-statusline#mistflywithfileicon)                         | Enabled
 | [mistflyWithGitBranch](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Enabled
@@ -393,6 +394,28 @@ let g:mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```lua
 -- Lua initialization file
 vim.g.mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+```
+
+---
+
+### ellipsis_symbol
+
+The `ellipsis_symbol` option specifies which character symbol to use when
+indicating truncation, for example, deeply nested path truncation.
+
+By default, the `…` character will be displayed.
+
+To specify your own ellipsis symbol please add the following to your
+initialization file:
+
+```viml
+" Vimscript initialization file
+let g:mistflyEllipsisSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyEllipsisSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
 
 ---

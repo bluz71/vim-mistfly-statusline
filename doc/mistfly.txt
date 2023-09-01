@@ -11,6 +11,7 @@ Default option values:
   let g:mistflyErrorSymbol = 'E'
   let g:mistflyWarningSymbol = 'W'
   let g:mistflyInformationSymbol = 'I'
+  let g:mistflyEllipsisSymbol = '…'
   let g:mistflyTabLine = v:false
   let g:mistflyWithFileIcon = v:true
   let g:mistflyWithGitBranch = v:true
@@ -140,6 +141,23 @@ initialization file:
 
   -- Lua initialization file
   vim.g.mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+<
+------------------------------------------------------------------------------
+mistflyEllipsisSymbol~                               *g:mistflyEllipsisSymbol*
+
+The `ellipsis_symbol` option specifies which character symbol to use when
+indicating truncation, for example, deeply nested path truncation.
+
+By default, the `…` character will be displayed.
+
+To specify your own ellipsis symbol please add the following to your
+initialization file:
+>
+  " Vimscript initialization file
+  let g:mistflyEllipsisSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+
+  -- Lua initialization file
+  vim.g.mistflyEllipsisSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 <
 ------------------------------------------------------------------------------
 mistflyTabLine~                                             *g:mistflyTabLine*
