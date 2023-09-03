@@ -7,8 +7,17 @@ _mistfly statusline_ is a simple, fast and informative `statusline` for Vim and
 :point_right: Contemporary Neovim users will need to use the pure-Lua
 [linefly](https://github.com/bluz71/nvim-linefly) plugin instead of _mistfly_.
 
-_mistfly_ provides optional `tabline` support when the appropriate setting is
-enabled; refer to
+_mistfly_ provides a number of useful builtin components:
+
+- Git changes
+- Diagnostic status
+- Macro-recording status
+- Current search count
+- Spell status
+- Indent status (tabs or spaces and their associated width)
+
+_mistfly_ also provides optional `tabline` support when the appropriate setting
+is enabled; refer to
 [`mistflyTabLine`](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline).
 
 _mistfly_ will adapt it's colors to the colorscheme currently in effect. Colors
@@ -21,7 +30,7 @@ of code. For comparison, the
 [lightline](https://github.com/itchyny/lightline.vim),
 [airline](https://github.com/vim-airline/vim-airline) and
 [lualine](https://github.com/nvim-lualine/lualine.nvim) `statusline` plugins
-contain over 3,600, 7,300 and 8,000 lines of code respectively. In fairness, the
+contain over 3,600, 7,300 and 8,200 lines of code respectively. In fairness, the
 latter plugins are more featureful, configurable and visually pleasing.
 
 :warning: _mistfly_ has a predominantly fixed layout, this will **not** be an
@@ -55,10 +64,10 @@ without any `statusline` plugin.
 
 | stock  | mistfly | lightline | airline | lualine
 |--------|---------|-----------|---------|--------
-| 20.2ms | 22.9ms  | 32.3ms    | 117.6ms | 26.9ms
+| 19.6ms | 20.7ms  | 25.4ms    | 78.7ms  | 27.3ms
 
-Startup times as of January 2023 on my system; performance on other systems will
-vary.
+Startup times as of September 2023 on my system; performance on other systems
+will vary.
 
 Plugins, Linters and Diagnostics supported
 ------------------------------------------
