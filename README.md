@@ -112,7 +112,7 @@ Install **bluz71/vim-mistfly-statusline** with your preferred plugin manager.
 
 [vim-plug](https://github.com/junegunn/vim-plug):
 
-```viml
+```vim
 Plug 'bluz71/vim-mistfly-statusline'
 ```
 
@@ -213,7 +213,7 @@ your own highlights.
 following at the end of your initialization file after setting your
 `colorscheme`.
 
-```viml
+```vim
 highlight! link MistflyNormal DiffChange
 highlight! link MistflyInsert WildMenu
 highlight! link MistflyVisual IncSearch
@@ -256,7 +256,7 @@ By default, the `⎪` character (Unicode `U+23AA`) will be displayed.
 To specify your own separator symbol please add the following to your
 initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflySeparatorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
@@ -278,7 +278,7 @@ By default, the `↓` character (Unicode `U+2193`) will be displayed.
 To specify your own progress symbol, or no symbol at all, please add the
 following to your initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyProgressSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
 ```
@@ -300,7 +300,7 @@ By default, the `▪` character (Unicode `U+25AA`) will be displayed.
 To specify your own active tab symbol please add the following to your
 initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyActiveTabSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
@@ -323,7 +323,7 @@ modern monospace fonts will contain that character.
 To specify your own Git branch symbol, or no symbol at all, please add the
 following to your initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyGitBranchSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
 ```
@@ -345,7 +345,7 @@ By default, the `E` character will be displayed.
 To specify your own error symbol please add the following to your
 initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
@@ -367,7 +367,7 @@ By default, the `W` character will be displayed.
 To specify your own warning symbol please add the following to your
 initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
@@ -389,7 +389,7 @@ By default, the `I` character will be displayed.
 To specify your own information symbol please add the following to your
 initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
@@ -411,7 +411,7 @@ By default, the `…` character will be displayed.
 To specify your own ellipsis symbol please add the following to your
 initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyEllipsisSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
@@ -438,7 +438,7 @@ capability.
 To enable `tabline` support please add the following to your initialization
 file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyTabLine = v:true
 ```
@@ -451,7 +451,7 @@ vim.g.mistflyTabLine = true
 :bulb: Mappings, such as the following, may be useful to quickly switch between
 the numbered window-spaces:
 
-```viml
+```vim
 nnoremap <Leader>1 1gt
 nnoremap <Leader>2 2gt
 nnoremap <Leader>3 3gt
@@ -484,7 +484,7 @@ By default, a filetype icon will be displayed if possible.
 To disable the display of a filetype icon please add the following to your
 initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyWithFileIcon = v:false
 ```
@@ -506,7 +506,7 @@ By default, Git branches will be displayed in the `statusline`.
 To disable the display of Git branches in the `statusline` please add the
 following to your initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyWithGitBranch = v:false
 ```
@@ -533,7 +533,7 @@ loaded.
 To disable the display of Git status in the `statusline` please add the
 following to your initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyWithGitStatus = v:false
 ```
@@ -560,7 +560,7 @@ loaded.
 If diagnostic display is not wanted then please add the following to your
 initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyWithDiagnosticStatus = v:false
 ```
@@ -583,7 +583,7 @@ By default, session details will be displayed if the plugin is loaded.
 To disable the display of session details in the `statusline` please add the
 following to your initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyWithSessionStatus = v:false
 ```
@@ -605,7 +605,7 @@ By default, search count will not be displayed.
 To enable the display of the search count in the `statusline` please add the
 following to your initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyWithSearchCount = v:true
 ```
@@ -630,7 +630,7 @@ By default, spell status will not be displayed.
 To enable spell status in the `statusline` please add the following to your
 initialization file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyWithSpellStatus = v:true
 ```
@@ -657,7 +657,7 @@ instead, for example `Spc:2` ('spc' short for 'space').
 To enable indentation status please add the following to your initialization
 file:
 
-```viml
+```vim
 " Vimscript initialization file
 let g:mistflyWithIndentStatus = v:true
 ```
