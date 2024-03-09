@@ -455,6 +455,12 @@ function! s:ColorSchemeModeHighlights() abort
         call s:SynthesizeModeHighlight('MistflyVisual', 'GruvboxOrange', 'GruvboxBg0')
         call s:SynthesizeModeHighlight('MistflyCommand', 'GruvboxGreen', 'GruvboxBg0')
         call s:SynthesizeModeHighlight('MistflyReplace', 'GruvboxRed', 'GruvboxBg0')
+    elseif g:colors_name == "retrobox"
+        call s:SynthesizeModeHighlight('MistflyNormal', 'Structure', 'VertSplit')
+        call s:SynthesizeModeHighlight('MistflyInsert', 'Directory', 'VertSplit')
+        highlight! link MistflyVisual Visual
+        call s:SynthesizeModeHighlight('MistflyCommand', 'MoreMsg', 'VertSplit')
+        highlight! link MistflyReplace ErrorMsg
     else
         " Fallback for all other colorschemes.
         if !hlexists('MistflyNormal') || synIDattr(synIDtrans(hlID('MistflyNormal')), 'bg') == ''
