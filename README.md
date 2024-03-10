@@ -64,9 +64,9 @@ without any `statusline` plugin.
 
 | stock  | mistfly | lightline | airline | lualine
 |--------|---------|-----------|---------|--------
-| 19.6ms | 20.7ms  | 25.4ms    | 78.7ms  | 27.3ms
+| 18.0ms | 18.7ms  | 22.0ms    | 76.0ms  | 23.2ms
 
-Startup times as of September 2023 on my system; performance on other systems
+Startup times as of March 2024 on my system; performance on other systems
 will vary.
 
 Plugins, Linters and Diagnostics supported
@@ -203,6 +203,8 @@ colorscheme (moonfly & nightfly) or within this plugin (all others):
 - [gruvbox](https://github.com/gruvbox-community/gruvbox)
 
 - [gruvbox-material](https://github.com/sainnhe/gruvbox-material)
+
+- [retrobox](https://github.com/vim/colorschemes)
 
 - [sonokai](https://github.com/sainnhe/sonokai)
 
