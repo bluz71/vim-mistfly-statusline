@@ -174,17 +174,7 @@ function! mistfly#PluginsStatus() abort
         let l:segments .= ' '
     endif
 
-    if g:mistflyWithDiagnosticStatus && exists('g:lspconfig')
-        " Neovim Diagnostic status.
-        if has('nvim-0.6')
-            let l:errors = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.ERROR})')
-            let l:warnings = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.WARN})')
-            let l:information = luaeval('#vim.diagnostic.get(0, {severity = vim.diagnostic.severity.INFO})')
-        elseif has('nvim-0.5')
-            let l:errors = luaeval('vim.lsp.diagnostic.get_count(0, [[Error]])')
-            let l:warnings = luaeval('vim.lsp.diagnostic.get_count(0, [[Warning]])')
-        endif
-    elseif g:mistflyWithDiagnosticStatus && exists('g:loaded_ale')
+    if g:mistflyWithDiagnosticStatus && exists('g:loaded_ale')
         " ALE status.
         let l:counts = ale#statusline#Count(bufnr(''))
         if has_key(l:counts, 'error')

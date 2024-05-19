@@ -1,10 +1,9 @@
 mistfly statusline
 ==================
 
-_mistfly statusline_ is a simple, fast and informative `statusline` for Vim and
-(legacy) Neovim coded in Vimscript.
+_mistfly statusline_ is a simple, fast and informative `statusline` for Vim.
 
-:point_right: Contemporary Neovim users will need to use the pure-Lua
+:point_right: Neovim users should use the pure-Lua
 [linefly](https://github.com/bluz71/nvim-linefly) plugin instead of _mistfly_.
 
 _mistfly_ provides a number of useful builtin components:
@@ -54,9 +53,9 @@ Statusline Startup Comparison
 -----------------------------
 
 A startup comparison of _mistfly_ against various popular `statusline`
-plugins, with their out-of-the-box defaults, on a clean and minimal Neovim setup
+plugins, with their out-of-the-box defaults, on a clean and minimal Vim setup
 with the [moonfly](https://github.com/bluz71/vim-moonfly-colors) colorscheme.
-The Neovim startup times in the following table are provived by the
+The Vim startup times in the following table are provived by the
 [dstein64/vim-startuptime](https://github.com/dstein64/vim-startuptime) plugin.
 
 Startup times are the average of five consecutive runs. Note, `stock` is run
@@ -81,8 +80,6 @@ Plugins, Linters and Diagnostics supported
 
 - [Signify](https://github.com/mhinz/vim-signify)
 
-- [Neovim Diagnostic](https://neovim.io/doc/user/diagnostic.html)
-
 - [ALE](https://github.com/dense-analysis/ale)
 
 - [Coc](https://github.com/neoclide/coc.nvim)
@@ -92,15 +89,9 @@ Plugins, Linters and Diagnostics supported
 :zap: Requirements
 ------------------
 
-_mistfly_ requires Vim 8 (or later) or Neovim 0.8 (or earlier); Neovim 0.9 (or
-later) is not supported; the pure-Lua
+_mistfly_ requires Vim 8 (or later), Neovim is not supported. The pure-Lua
 [linefly](https://github.com/bluz71/nvim-linefly) plugin should instead be used
-with contemporary versions of Neovim.
-
-_mistfly_ requires a **GUI** capable version of Vim or Neovim with an
-appropriate `colorscheme` set. A GUI client, or a modern version of Vim or
-Neovim with the `termguicolors` option enabled in a true-color terminal, is
-required.
+with Neovim.
 
 Please also make sure that the `laststatus` option is set to either: `1`, `2`
 or `3`.
@@ -552,7 +543,6 @@ vim.g.mistflyWithGitStatus = false
 The `mistflyWithDiagnosticStatus` option specifies whether to indicate the
 presence of the diagnostics in the current buffer.
 
-[Neovim Diagnositics](https://neovim.io/doc/user/diagnostic.html),
 [ALE](https://github.com/dense-analysis/ale) and
 [Coc](https://github.com/neoclide/coc.nvim) are supported.
 

@@ -1,4 +1,4 @@
-*mistfly* A simple, fast and informative statusline for Vim and (legacy) Neovim
+*mistfly* A simple, fast and informative statusline for Vim
 
 OPTIONS                                                      *mistfly-options*
 
@@ -248,8 +248,7 @@ mistflyWithDiagnosticStatus~                   *g:mistflyWithDiagnosticStatus*
 The `mistflyWithDiagnosticStatus` option specifies whether to indicate the
 presence of the diagnostics in the current buffer.
 
-Neovim Diagnositics (https://neovim.io/doc/user/diagnostic.html), ALE
-(https://github.com/dense-analysis/ale) and Coc
+ALE (https://github.com/dense-analysis/ale) and Coc
 (https://github.com/neoclide/coc.nvim) are supported.
 
 By default, diagnostics will be displayed if one of the above plugins is
