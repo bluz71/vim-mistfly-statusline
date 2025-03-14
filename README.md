@@ -118,12 +118,12 @@ Please do **not** lazy-load _mistfly_.
 Layout And Default Colors
 -------------------------
 
-The *mistfly-statusline* layout consists of three groupings, the left-side,
-middle and right-side as follows:
+The *mistfly-statusline* layout consists of two groupings, the left-side and
+right-side as follows:
 
 ```
 +-------------------------------------------------+
-| A | B | C | D          M          W | X | Y | Z |
+| A | B | C | D                     W | X | Y | Z |
 +-------------------------------------------------+
 ```
 
@@ -394,9 +394,9 @@ vim.g.mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 
 ---
 
-### ellipsis_symbol
+### mistflyEllipsisSymbol
 
-The `ellipsis_symbol` option specifies which character symbol to use when
+The `mistflyEllipsisSymbol` option specifies which character symbol to use when
 indicating truncation, for example, deeply nested path truncation.
 
 By default, the `…` character will be displayed.
