@@ -145,7 +145,7 @@ initialization file:
 ------------------------------------------------------------------------------
 mistflyEllipsisSymbol~                               *g:mistflyEllipsisSymbol*
 
-The `ellipsis_symbol` option specifies which character symbol to use when
+The `mistflyEllipsisSymbol` option specifies which character symbol to use when
 indicating truncation, for example, deeply nested path truncation.
 
 By default, the `…` character will be displayed.

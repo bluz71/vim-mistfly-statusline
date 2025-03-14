@@ -394,9 +394,9 @@ vim.g.mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 
 ---
 
-### ellipsis_symbol
+### mistflyEllipsisSymbol
 
-The `ellipsis_symbol` option specifies which character symbol to use when
+The `mistflyEllipsisSymbol` option specifies which character symbol to use when
 indicating truncation, for example, deeply nested path truncation.
 
 By default, the `…` character will be displayed.
