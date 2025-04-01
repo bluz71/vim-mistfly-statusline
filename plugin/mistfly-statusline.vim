@@ -1,7 +1,7 @@
 " A simple Vim / Neovim statusline.
 "
-" URL:          github.com/bluz71/vim-mistfly-statusline
-" License:      MIT (https://opensource.org/licenses/MIT)
+" URL:      github.com/bluz71/vim-mistfly-statusline
+" License:  MIT (https://opensource.org/licenses/MIT)
 
 if has('nvim')
     lua vim.api.nvim_echo({
