@@ -26,11 +26,10 @@ if desired.
 
 Lastly, _mistfly_ is a lean `statusline` plugin clocking in at about 500 lines
 of code. For comparison, the
-[lightline](https://github.com/itchyny/lightline.vim),
-[airline](https://github.com/vim-airline/vim-airline) and
-[lualine](https://github.com/nvim-lualine/lualine.nvim) `statusline` plugins
-contain over 3,600, 7,300 and 8,200 lines of code respectively. In fairness, the
-latter plugins are more featureful, configurable and visually pleasing.
+[lightline](https://github.com/itchyny/lightline.vim) and
+[airline](https://github.com/vim-airline/vim-airline) `statusline` plugins
+contain over 3,700 and 7,400 lines of code respectively. In fairness, the latter
+plugins are more featureful, configurable and visually pleasing.
 
 :warning: _mistfly_ has a predominantly fixed layout, this will **not** be an
 appropriate `statusline` plugin if layout flexibility is desired.
@@ -61,9 +60,9 @@ The Vim startup times in the following table are provived by the
 Startup times are the average of five consecutive runs. Note, `stock` is run
 without any `statusline` plugin.
 
-| stock  | mistfly | lightline | airline | lualine
-|--------|---------|-----------|---------|--------
-| 18.0ms | 18.7ms  | 22.0ms    | 76.0ms  | 23.2ms
+| stock  | mistfly | lightline | airline
+|--------|---------|-----------|--------
+| 18.0ms | 18.7ms  | 22.0ms    | 76.0ms
 
 Startup times as of March 2024 on my system; performance on other systems
 will vary.
