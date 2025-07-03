@@ -12,6 +12,7 @@ Default option values:
   let g:mistflyWarningSymbol = 'W'
   let g:mistflyInformationSymbol = 'I'
   let g:mistflyEllipsisSymbol = '…'
+  let g:mistflyExcludePatterns = []
   let g:mistflyTabLine = v:false
   let g:mistflyWithFileIcon = v:true
   let g:mistflyWithGitBranch = v:true
@@ -158,6 +159,22 @@ initialization file:
 
   -- Lua initialization file
   vim.g.mistflyEllipsisSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
+<
+------------------------------------------------------------------------------
+mistflyExcludePatterns~                             *g:mistflyExcludePatterns*
+
+The `mistflyExcludePatterns` option is a list containing file path patterns
+which will be ignored by the plugin. When the path of the opened buffer
+matches any of the patterns in the list, the plugin will not set the
+`statusline`. The default is an empty list.
+
+Example: Avoid setting the status line for Jqplay buffers
+>
+  " Vimscript initialization file
+  let g:mistflyExcludePatterns = ['jq-filter://.*', 'jq-output://.*']
+
+  -- Lua initialization file
+  vim.g.mistflyExcludePatterns = ['jq-filter://.*', 'jq-output://.*']
 <
 ------------------------------------------------------------------------------
 mistflyTabLine~                                             *g:mistflyTabLine*
