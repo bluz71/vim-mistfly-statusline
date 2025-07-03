@@ -334,7 +334,18 @@ function! mistfly#NoFileStatusLine() abort
     return pathshorten(fnamemodify(getcwd(), ':~:.'))
 endfunction
 
+if !exists('g:mistflyExcludePatterns')
+    let g:mistflyExcludePatterns = []
+endif
+
 function! mistfly#StatusLine(active) abort
+    " Ignore specific patterns
+    for pattern in g:mistflyExcludePatterns
+        if bufname('%') =~ pattern
+            return
+        endif
+    endfor
+
     if &buftype ==# 'nofile' || &filetype ==# 'netrw'
         " Likely a file explorer or some other special type of buffer. Set a
         " short path statusline for these types of buffers.

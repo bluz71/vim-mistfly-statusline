@@ -226,6 +226,7 @@ highlight! link MistflyReplace ErrorMsg
 | [mistflyWarningSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflywarningsymbol)                       | `W`
 | [mistflyInformationSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyinformationsymbol)               | `I`
 | [mistflyEllipsisSymbol](https://github.com/bluz71/vim-mistfly-statusline#mistflyellipsissymbol)                     | `…`
+| [mistflyExcludePatterns](https://github.com/bluz71/vim-mistfly-statusline#mistflyexcludepatterns)                   | `[]`
 | [mistflyTabLine](https://github.com/bluz71/vim-mistfly-statusline#mistflytabline)                                   | Disabled
 | [mistflyWithFileIcon](https://github.com/bluz71/vim-mistfly-statusline#mistflywithfileicon)                         | Enabled
 | [mistflyWithGitBranch](https://github.com/bluz71/vim-mistfly-statusline#mistflywithgitbranch)                       | Enabled
@@ -412,6 +413,28 @@ let g:mistflyEllipsisSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 -- Lua initialization file
 vim.g.mistflyEllipsisSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ```
+
+---
+
+### mistflyExcludePatterns
+
+The `mistflyExcludePatterns` option is a list containing file path patterns
+which will be ignored by the plugin. When the path of the opened buffer
+matches any of the patterns in the list, the plugin will not set the
+`statusline`. The default is an empty list.
+
+Example: Avoid setting the status line for Jqplay buffers
+
+```vim
+" Vimscript initialization file
+let g:mistflyExcludePatterns = ['jq-filter://.*', 'jq-output://.*']
+```
+
+```lua
+-- Lua initialization file
+vim.g.mistflyExcludePatterns = ['jq-filter://.*', 'jq-output://.*']
+```
+
 
 ---
 
