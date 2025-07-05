@@ -334,12 +334,8 @@ function! mistfly#NoFileStatusLine() abort
     return pathshorten(fnamemodify(getcwd(), ':~:.'))
 endfunction
 
-if !exists('g:mistflyExcludePatterns')
-    let g:mistflyExcludePatterns = []
-endif
-
 function! mistfly#StatusLine(active) abort
-    " Ignore specific patterns
+    " Do not set a statusline for user-selected exclude file patterns.
     for pattern in g:mistflyExcludePatterns
         if bufname('%') =~ pattern
             return
