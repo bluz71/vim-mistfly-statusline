@@ -34,11 +34,7 @@ By default, the `⎪` character (Unicode `U+23AA`) will be displayed.
 To specify your own separator symbol please add the following to your
 initialization file:
 >
-  " Vimscript initialization file
   let g:mistflySeparatorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
-
-  -- Lua initialization file
-  vim.g.mistflySeparatorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 <
 ------------------------------------------------------------------------------
 mistflyProgressSymbol~                               *g:mistflyProgressSymbol*
@@ -51,11 +47,7 @@ By default, the `↓` character (Unicode `U+2193`) will be displayed.
 To specify your own progress symbol, or no symbol at all, please add the
 following to your initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyProgressSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
-
-  -- Lua initialization file
-  vim.g.mistflyProgressSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
 <
 ------------------------------------------------------------------------------
 mistflyActiveTabSymbol~                             *g:mistflyActiveTabSymbol*
@@ -68,11 +60,7 @@ By default, the `▪` character (Unicode `U+25AA`) will be displayed.
 To specify your own active tab symbol please add the following to your
 initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyActiveTabSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
-
-  -- Lua initialization file
-  vim.g.mistflyActiveTabSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 <
 ------------------------------------------------------------------------------
 mistflyGitBranchSymbol~                             *g:mistflyGitBranchSymbol*
@@ -86,11 +74,7 @@ modern monospace fonts will contain that character.
 To specify your own Git branch symbol, or no symbol at all, please add the
 following to your initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyGitBranchSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
-
-  -- Lua initialization file
-  vim.g.mistflyGitBranchSymbol = '<<SYMBOL-OF-YOUR-CHOOSING-OR-EMPTY>>'
 <
 ------------------------------------------------------------------------------
 mistflyErrorSymbol~                                     *g:mistflyErrorSymbol*
@@ -103,11 +87,7 @@ By default, the `E` character will be displayed.
 To specify your own error symbol please add the following to your
 initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
-
-  -- Lua initialization file
-  vim.g.mistflyErrorSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 <
 ------------------------------------------------------------------------------
 mistflyWarningSymbol~                                 *g:mistflyWarningSymbol*
@@ -120,11 +100,7 @@ By default, the `W` character will be displayed.
 To specify your own warning symbol please add the following to your
 initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
-
-  -- Lua initialization file
-  vim.g.mistflyWarningSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 <
 ------------------------------------------------------------------------------
 mistflyInformationSymbol~                         *g:mistflyInformationSymbol*
@@ -137,11 +113,7 @@ By default, the `I` character will be displayed.
 To specify your own information symbol please add the following to your
 initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
-
-  -- Lua initialization file
-  vim.g.mistflyInformationSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 <
 ------------------------------------------------------------------------------
 mistflyEllipsisSymbol~                               *g:mistflyEllipsisSymbol*
@@ -154,11 +126,7 @@ By default, the `…` character will be displayed.
 To specify your own ellipsis symbol please add the following to your
 initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyEllipsisSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
-
-  -- Lua initialization file
-  vim.g.mistflyEllipsisSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 <
 ------------------------------------------------------------------------------
 mistflyExcludePatterns~                             *g:mistflyExcludePatterns*
@@ -170,11 +138,7 @@ matches any of the patterns in the list, the plugin will not set the
 
 Example: Avoid setting the status line for Jqplay buffers
 >
-  " Vimscript initialization file
   let g:mistflyExcludePatterns = ['jq-filter://.*', 'jq-output://.*']
-
-  -- Lua initialization file
-  vim.g.mistflyExcludePatterns = ['jq-filter://.*', 'jq-output://.*']
 <
 ------------------------------------------------------------------------------
 mistflyTabLine~                                             *g:mistflyTabLine*
@@ -192,11 +156,7 @@ capability.
 To enable `tabline` support please add the following to your initialization
 file:
 >
-  " Vimscript initialization file
   let g:mistflyTabLine = v:true
-
-  -- Lua initialization file
-  vim.g.mistflyTabLine = true
 <
 ------------------------------------------------------------------------------
 mistflyWithFileIcon~                                   *g:mistflyWithFileIcon*
@@ -214,11 +174,7 @@ By default, a filetype icon will be displayed if possible.
 To disable the display of a filetype icon please add the following to your
 initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyWithFileIcon = v:false
-
-  -- lua initialization file
-  vim.g.mistflyWithFileIcon = false
 <
 ------------------------------------------------------------------------------
 mistflyWithGitBranch~                                 *g:mistflyWithGitBranch*
@@ -231,11 +187,7 @@ By default, Git branches will be displayed in the `statusline`.
 To disable the display of Git branches in the `statusline` please add the
 following to your initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyWithGitBranch = v:false
-
-  -- Lua initialization file
-  vim.g.mistflyWithGitBranch = false
 <
 ------------------------------------------------------------------------------
 mistflyWithGitStatus~                                 *g:mistflyWithGitStatus*
@@ -253,11 +205,7 @@ loaded.
 To disable the display of Git status in the `statusline` please add the
 following to your initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyWithGitStatus = v:false
-
-  -- Lua initialization file
-  vim.g.mistflyWithGitStatus = false
 <
 ------------------------------------------------------------------------------
 mistflyWithDiagnosticStatus~                   *g:mistflyWithDiagnosticStatus*
@@ -274,11 +222,7 @@ loaded.
 If diagnostic display is not wanted then please add the following to your
 initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyWithDiagnosticStatus = v:false
-
-  -- Lua initialization file
-  vim.g.mistflyWithDiagnosticStatus = false
 <
 ------------------------------------------------------------------------------
 mistflyWithSessionStatus~                         *g:mistflyWithSessionStatus*
@@ -291,11 +235,7 @@ By default, session details will be displayed if the plugin is loaded.
 To disable the display of session details in the `statusline` please add the
 following to your initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyWithSessionStatus = v:false
-
-  -- Lua initialization file
-  vim.g.mistflyWithSessionStatus = false
 <
 ------------------------------------------------------------------------------
 mistflyWithSearchCount~                             *g:mistflyWithSearchCount*
@@ -308,11 +248,7 @@ By default, search count will not be displayed.
 To enable the display of the search count in the `statusline` please add the
 following to your initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyWithSearchCount = v:true
-
-  -- Lua initialization file
-  vim.g.mistflyWithSearchCount = true
 <
 
 Note, the search count is only displayed when the `hlsearch` option is set and
@@ -328,11 +264,7 @@ By default, spell status will not be displayed.
 To enable spell status in the `statusline` please add the following to your
 initialization file:
 >
-  " Vimscript initialization file
   let g:mistflyWithSpellStatus = v:true
-
-  -- Lua initialization file
-  vim.g.mistflyWithSpellStatus = true
 <
 ------------------------------------------------------------------------------
 mistflyWithIndentStatus~                           *g:mistflyWithIndentStatus*
@@ -350,11 +282,7 @@ instead, for example `Spc:2` ('spc' short for 'space').
 To enable indentation status please add the following to your initialization
 file:
 >
-  " Vimscript initialization file
   let g:mistflyWithIndentStatus = v:true
-
-  -- Lua initialization file
-  vim.g.mistflyWithIndentStatus = true
 <
 
 vim:tw=78:ts=8:noet:ft=help:norl:
