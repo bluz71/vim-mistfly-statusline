@@ -132,11 +132,12 @@ initialization file:
 mistflyExcludePatterns~                             *g:mistflyExcludePatterns*
 
 The `mistflyExcludePatterns` option is a list containing file path patterns
-which will be ignored when creating a `statusline`.
+which will be ignored when creating a `statusline`, instead the default Vim
+`statusline` will be set.
 
 The default exclude patterns is an empty list.
 
-For example, to avoid setting the `statusline` for Jqplay buffers:
+For example, to avoid setting a `mistfly` `statusline` for `Jqplay` buffers:
 >
   let g:mistflyExcludePatterns = ['jq-filter://.*', 'jq-output://.*']
 <

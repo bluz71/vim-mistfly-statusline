@@ -365,11 +365,12 @@ let g:mistflyEllipsisSymbol = '<<SYMBOL-OF-YOUR-CHOOSING>>'
 ### mistflyExcludePatterns
 
 The `mistflyExcludePatterns` option is a list containing file path patterns
-which will be ignored when creating a `statusline`.
+which will be ignored when creating a `statusline`, instead the default Vim
+`statusline` will instead be set.
 
 The default exclude patterns is an empty list.
 
-For example, to avoid setting the status line for Jqplay buffers:
+For example, to avoid setting a `mistfly` `statusline` for `Jqplay` buffers:
 
 ```vim
 let g:mistflyExcludePatterns = ['jq-filter://.*', 'jq-output://.*']
@@ -379,7 +380,7 @@ let g:mistflyExcludePatterns = ['jq-filter://.*', 'jq-output://.*']
 
 ### mistflyTabLine
 
-The `mistflyTabLine` option specifies whether to let this plugin manage the
+The `mistflyTabLine` option specifies hether to let this plugin manage the
 `tabline` in addition to the `statusline`.
 
 By default, `tabline` management will not be undertaken.

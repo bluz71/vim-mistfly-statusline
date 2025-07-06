@@ -335,7 +335,8 @@ function! mistfly#NoFileStatusLine() abort
 endfunction
 
 function! mistfly#StatusLine(active) abort
-    " Do not set a statusline for user-selected exclude file patterns.
+    " Do not set a statusline for user-selected exclude file patterns, instead
+    " fallback to the Vim default statusline.
     for pattern in g:mistflyExcludePatterns
         if bufname('%') =~ pattern
             return
